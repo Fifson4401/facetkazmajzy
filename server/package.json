@@ -8,8 +8,7 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "deploy": "strapi deploy",
-    "lint": "eslint ."
+    "deploy": "strapi deploy"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -26,8 +25,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
-    "styled-components": "^6.0.0",
-    "eslint": "^8"
+    "styled-components": "^6.0.0"
   },
   "author": {
     "name": "Filip W"
