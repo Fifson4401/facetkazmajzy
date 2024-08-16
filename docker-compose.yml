@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres:15.8-alpine
+    restart: always
+    container_name: facetkazmajzyDB_Conteiner
+    environment:
+      POSTGRES_USER: facetkazmajzy
+      POSTGRES_PASSWORD: facetkazmajzy
+      POSTGRES_DB: facetkazmajzyDB
+    ports:
+      - "5432:5432"
