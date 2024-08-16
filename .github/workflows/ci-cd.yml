@@ -91,11 +91,11 @@ jobs:
 
       - name: Create .env.local file on server
         run: |
-          echo ${{ secrets.CLIENT_ENV }} | base64 -d > /usr/home/domains/${{ env.FRONTEND_DOMAIN }}/public_nodejs/.env.local
+          echo ${{ secrets.CLIENT_ENV }} | base64 -d > /usr/home/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/.env.local
 
       - name: Deploy to MyDevil
         run: |
-          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env.local' ./client/ filip440@s62.mydevil.net:/usr/home/domains/${{ env.FRONTEND_DOMAIN }}/public_nodejs/
+          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env.local' ./client/ filip440@s62.mydevil.net:/usr/home/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/
 
   deploy-server:
     name: Deploy Server (Backend) to MyDevil
@@ -113,8 +113,8 @@ jobs:
 
       - name: Create .env file on server
         run: |
-          echo ${{ secrets.SERVER_ENV }} | base64 -d > /usr/home/domains/${{ env.SERVER_DOMAIN }}/.env
+          echo ${{ secrets.SERVER_ENV }} | base64 -d > /usr/home/domains/${{ vars.SERVER_DOMAIN }}/.env
 
       - name: Deploy to MyDevil
         run: |
-          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env' ./server/ filip440@s62.mydevil.net:/usr/home/domains/${{ env.SERVER_DOMAIN }}/
+          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env' ./server/ filip440@s62.mydevil.net:/usr/home/domains/${{ vars.SERVER_DOMAIN }}/
