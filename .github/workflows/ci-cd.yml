@@ -1,0 +1,150 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  FRONTEND_DOMAIN: "example.com"  # <-- Tutaj podajesz wartość zmiennej, która nie jest sekretem
+
+jobs:
+  lint-client:
+    name: Lint Client (Frontend)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: client/node_modules
+          key: ${{ runner.os }}-client-node-${{ hashFiles('client/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-client-node-
+
+      - name: Install dependencies
+        working-directory: client
+        run: npm install
+
+      - name: Run ESLint
+        working-directory: client
+        run: npm run lint
+
+  lint-server:
+    name: Lint Server (Backend)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: server/node_modules
+          key: ${{ runner.os }}-server-node-${{ hashFiles('server/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-server-node-
+
+      - name: Install dependencies
+        working-directory: server
+        run: npm install
+
+      - name: Run ESLint
+        working-directory: server
+        run: npm run lint
+
+  build-client:
+    name: Build Client (Frontend)
+    runs-on: ubuntu-latest
+    needs: lint-client
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        working-directory: client
+        run: npm install
+
+      - name: Build client
+        working-directory: client
+        run: npm run build
+
+  build-server:
+    name: Build Server (Backend)
+    runs-on: ubuntu-latest
+    needs: lint-server
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        working-directory: server
+        run: npm install
+
+      - name: Build server
+        working-directory: server
+        run: npm run build
+
+  deploy-client:
+    name: Deploy Client (Frontend) to MyDevil
+    runs-on: ubuntu-latest
+    needs: build-client
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Create .env file on server
+        run: |
+          echo ${{ secrets.CLIENT_ENV }} | base64 -d > /usr/home/domains/${{ env.FRONTEND_DOMAIN }}/public_nodejs/.env
+
+      - name: Deploy to MyDevil
+        run: |
+          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env' ./client/ filip440@s62.mydevil.net:/usr/home/domains/${{ env.FRONTEND_DOMAIN }}/public_nodejs/
+
+  deploy-server:
+    name: Deploy Server (Backend) to MyDevil
+    runs-on: ubuntu-latest
+    needs: build-server
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Create .env file on server
+        run: |
+          echo ${{ secrets.SERVER_ENV }} | base64 -d > /usr/home/domains/${{ secrets.SERVER_DOMAIN }}/.env
+
+      - name: Deploy to MyDevil
+        run: |
+          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env' ./server/ filip440@s62.mydevil.net:/usr/home/domains/${{ secrets.SERVER_DOMAIN }}/
