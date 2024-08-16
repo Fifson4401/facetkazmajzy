@@ -1,5 +1,9 @@
 name: CI/CD Pipeline
 
+concurrency:
+  group: production
+  cancel-in-progress: true
+
 on:
   push:
     branches:
