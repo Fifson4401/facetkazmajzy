@@ -5,9 +5,6 @@ on:
     branches:
       - main
 
-env:
-  FRONTEND_DOMAIN: "example.com"  # <-- Tutaj podajesz wartość zmiennej, która nie jest sekretem
-
 jobs:
   lint-client:
     name: Lint Client (Frontend)
@@ -143,8 +140,8 @@ jobs:
 
       - name: Create .env file on server
         run: |
-          echo ${{ secrets.SERVER_ENV }} | base64 -d > /usr/home/domains/${{ secrets.SERVER_DOMAIN }}/.env
+          echo ${{ secrets.SERVER_ENV }} | base64 -d > /usr/home/domains/${{ env.SERVER_DOMAIN }}/.env
 
       - name: Deploy to MyDevil
         run: |
-          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env' ./server/ filip440@s62.mydevil.net:/usr/home/domains/${{ secrets.SERVER_DOMAIN }}/
+          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env' ./server/ filip440@s62.mydevil.net:/usr/home/domains/${{ env.SERVER_DOMAIN }}/
