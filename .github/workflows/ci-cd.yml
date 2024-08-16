@@ -75,6 +75,10 @@ jobs:
         working-directory: server
         run: npm run build
 
+      - name: Create .env.local file on server
+        run: |
+          echo ${{ secrets.CLIENT_ENV }} | base64 -d > client/.env.local
+
   deploy-client:
     name: Deploy Client (Frontend) to MyDevil
     runs-on: ubuntu-latest
@@ -88,10 +92,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Create .env.local file on server
-        run: |
-          echo ${{ secrets.CLIENT_ENV }} | base64 -d > /usr/home/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/.env.local
 
       - name: Deploy to MyDevil
         run: |
@@ -113,7 +113,7 @@ jobs:
 
       - name: Create .env file on server
         run: |
-          echo ${{ secrets.SERVER_ENV }} | base64 -d > /usr/home/domains/${{ vars.SERVER_DOMAIN }}/.env
+          echo ${{ secrets.SERVER_ENV }} | base64 -d > server/.env
 
       - name: Deploy to MyDevil
         run: |
