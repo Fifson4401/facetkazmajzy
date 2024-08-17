@@ -76,4 +76,17 @@ jobs:
         run: |
           ssh filip440@s62.mydevil.net 'echo ${{ secrets.CLIENT_ENV }} | base64 -d > domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/.env.local'
 
-  
+  startup-client:
+    name: Client restart
+    runs-on: ubuntu-latest
+    needs: build-deploy-client
+    environment: production
+    steps:
+     - name: Setup SSH
+       uses: webfactory/ssh-agent@v0.9.0
+       with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+     - name: Run deployment script on server
+       run: |
+         ssh filip440@s62.mydevil.net 'devil www restart filip440.usermd.net'
