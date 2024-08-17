@@ -141,7 +141,7 @@ jobs:
 
       - name: Create .env file on server
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo ${{ secrets.SERVER_ENV }} | base64 -d > domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/.env.local'
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo ${{ secrets.SERVER_ENV }} | base64 -d > domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/.env'
 
       - name: Run deployment script on server
         run: |
