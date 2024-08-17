@@ -37,11 +37,11 @@ jobs:
       - name: Run lint
         working-directory: client
         run: npm run lint
-
-  build-client:
-    name: Build Client (Frontend)
+        
+  build-deploy-client:
+    name: Deploy Client (Frontend) to MyDevil
     runs-on: ubuntu-latest
-    needs: lint-client
+    environment: production
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -58,16 +58,7 @@ jobs:
       - name: Build client
         working-directory: client
         run: npm run build
-        
-  deploy-client:
-    name: Deploy Client (Frontend) to MyDevil
-    runs-on: ubuntu-latest
-    needs: build-client
-    environment: production
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -85,11 +76,4 @@ jobs:
         run: |
           ssh filip440@s62.mydevil.net 'echo ${{ secrets.CLIENT_ENV }} | base64 -d > domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/.env.local'
 
-  restart-server:
-    name: Restart client
-    runs-on: ubuntu-latest
-    needs: deploy-client
-    steps:
-      - name: Run deployment script on server
-        run: |
-          ssh filip440@s62.mydevil.net 'bash domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/deployment.sh'
+  
