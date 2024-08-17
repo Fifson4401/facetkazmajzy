@@ -79,9 +79,10 @@ jobs:
         working-directory: server
         run: npm run build
 
-      - name: Create .env.local file on server
+      - name: Create .env file on server
+        working-directory: server
         run: |
-          echo ${{ secrets.CLIENT_ENV }} | base64 -d > client/.env.local
+          echo ${{ secrets.SERVER_ENV }} | base64 -d > .env
 
   deploy-client:
     name: Deploy Client (Frontend) to MyDevil
@@ -104,7 +105,14 @@ jobs:
       - name: Deploy to MyDevil
         run: |
           rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env.local' ./client/ filip440@s62.mydevil.net:/usr/home/filip440/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/
-
+      
+      - name: Create .env file on server
+        run: |
+          ssh filip440@s62.mydevil.net 'echo ${{ secrets.CLIENT_ENV }} | base64 -d > /usr/home/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/.env.local'
+      
+      - name: Run deployment script on server
+        run: |
+          ssh filip440@s62.mydevil.net 'bash /usr/home/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/deployment.sh'
   deploy-server:
     name: Deploy Server (Backend) to MyDevil
     runs-on: ubuntu-latest
@@ -119,10 +127,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Create .env file on server
-        run: |
-          echo ${{ secrets.SERVER_ENV }} | base64 -d > server/.env
-
       - name: Add remote server to known hosts
         run: |
           ssh-keyscan -H s62.mydevil.net >> ~/.ssh/known_hosts
@@ -130,3 +134,7 @@ jobs:
       - name: Deploy to MyDevil
         run: |
           rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env' ./server/ filip440@s62.mydevil.net:/usr/home/filip440/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/
+
+      - name: Run deployment script on server
+        run: |
+          ssh filip440@s62.mydevil.net 'bash /usr/home/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/deployment.sh'
