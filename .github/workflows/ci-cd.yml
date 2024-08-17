@@ -108,11 +108,11 @@ jobs:
       
       - name: Create .env file on server
         run: |
-          ssh filip440@s62.mydevil.net 'echo ${{ secrets.CLIENT_ENV }} | base64 -d > /usr/home/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/.env.local'
+          ssh filip440@s62.mydevil.net 'echo ${{ secrets.CLIENT_ENV }} | base64 -d > /usr/home/filip440/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/.env.local'
       
       - name: Run deployment script on server
         run: |
-          ssh filip440@s62.mydevil.net 'bash /usr/home/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/deployment.sh'
+          ssh filip440@s62.mydevil.net 'bash /usr/home/filip440/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/deployment.sh'
   deploy-server:
     name: Deploy Server (Backend) to MyDevil
     runs-on: ubuntu-latest
@@ -137,4 +137,4 @@ jobs:
 
       - name: Run deployment script on server
         run: |
-          ssh filip440@s62.mydevil.net 'bash /usr/home/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/deployment.sh'
+          ssh filip440@s62.mydevil.net 'bash /usr/home/filip440/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/deployment.sh'
