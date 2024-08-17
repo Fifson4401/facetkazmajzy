@@ -71,7 +71,18 @@ jobs:
 
       - name: Deploy to MyDevil
         run: |
-          rsync -avz --exclude='.git' --exclude='.github' --exclude='node_modules' --exclude='.env.local' ./client/ filip440@s62.mydevil.net:/usr/home/filip440/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/
+          rsync -avz \
+          --exclude='.husky' \
+          --exclude='.gitignore' \
+          --exclude='node_modules' \
+          --exclude='.env*' \
+          --exclude='next-env.d.ts' \
+          --exclude='postcss.config.mjs' \
+          --exclude='tailwind.config.ts' \
+          --exclude='.eslintrc.json' \
+          --exclude='README.md' \
+          --exclude='tsconfig.json' \
+          ./client/ filip440@s62.mydevil.net:/usr/home/filip440/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/      
       
       - name: Create .env file on server
         run: |
@@ -87,6 +98,10 @@ jobs:
        uses: webfactory/ssh-agent@v0.9.0
        with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+     - name: Add remote server to known hosts
+       run: |
+         ssh-keyscan -H s62.mydevil.net >> ~/.ssh/known_hosts
 
      - name: Run deployment script on server
        run: |
