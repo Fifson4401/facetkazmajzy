@@ -137,7 +137,7 @@ jobs:
           --exclude='tsconfig.json' \
           --exclude='src' \
           --exclude='tmp' \
-          ./client/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_USER }}/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/
+          ./server/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_USER }}/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/
 
       - name: Create .env file on server
         run: |
