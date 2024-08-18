@@ -64,45 +64,6 @@ export interface MenuMenuItem extends Schema.Component {
   };
 }
 
-export interface HomeSearch extends Schema.Component {
-  collectionName: 'components_home_searches';
-  info: {
-    displayName: 'search';
-    icon: 'search';
-  };
-  attributes: {
-    placeholder: Attribute.String;
-    image: Attribute.Media<'images'> & Attribute.Required;
-  };
-}
-
-export interface HomeHeader extends Schema.Component {
-  collectionName: 'components_home_headers';
-  info: {
-    displayName: 'header';
-    icon: 'layout';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    image: Attribute.Media<'images'> & Attribute.Required;
-    button: Attribute.Component<'home.button'> & Attribute.Required;
-  };
-}
-
-export interface HomeButton extends Schema.Component {
-  collectionName: 'components_home_buttons';
-  info: {
-    displayName: 'button';
-    icon: 'layer';
-  };
-  attributes: {
-    text: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-  };
-}
-
 export interface BlogPostTitle extends Schema.Component {
   collectionName: 'components_blog_post_titles';
   info: {
@@ -162,20 +123,59 @@ export interface BlogPostAnswer extends Schema.Component {
   };
 }
 
+export interface HomeSearch extends Schema.Component {
+  collectionName: 'components_home_searches';
+  info: {
+    displayName: 'search';
+    icon: 'search';
+  };
+  attributes: {
+    placeholder: Attribute.String;
+    image: Attribute.Media<'images'> & Attribute.Required;
+  };
+}
+
+export interface HomeHeader extends Schema.Component {
+  collectionName: 'components_home_headers';
+  info: {
+    displayName: 'header';
+    icon: 'layout';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    button: Attribute.Component<'home.button'> & Attribute.Required;
+  };
+}
+
+export interface HomeButton extends Schema.Component {
+  collectionName: 'components_home_buttons';
+  info: {
+    displayName: 'button';
+    icon: 'layer';
+  };
+  attributes: {
+    text: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'shared.seo': SharedSeo;
       'shared.meta-social': SharedMetaSocial;
       'menu.menu-item': MenuMenuItem;
-      'home.search': HomeSearch;
-      'home.header': HomeHeader;
-      'home.button': HomeButton;
       'blog-post.title': BlogPostTitle;
       'blog-post.tex': BlogPostTex;
       'blog-post.source': BlogPostSource;
       'blog-post.image': BlogPostImage;
       'blog-post.answer': BlogPostAnswer;
+      'home.search': HomeSearch;
+      'home.header': HomeHeader;
+      'home.button': HomeButton;
     }
   }
 }
