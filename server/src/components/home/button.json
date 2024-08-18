@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_home_buttons",
+  "info": {
+    "displayName": "button",
+    "icon": "layer"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
