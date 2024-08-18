@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blog_post_answers",
+  "info": {
+    "displayName": "Answer",
+    "icon": "lightbulb"
+  },
+  "options": {},
+  "attributes": {
+    "TEX": {
+      "type": "text"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

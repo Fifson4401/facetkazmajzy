@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_blog_post_titles",
+  "info": {
+    "displayName": "title",
+    "icon": "layer"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  }
+}

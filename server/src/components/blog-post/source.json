@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_blog_post_sources",
+  "info": {
+    "displayName": "source",
+    "icon": "oneWay"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "default": "Źródło:",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

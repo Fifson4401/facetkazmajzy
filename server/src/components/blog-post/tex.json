@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_blog_post_texes",
+  "info": {
+    "displayName": "TEX",
+    "icon": "feather"
+  },
+  "options": {},
+  "attributes": {
+    "TEX": {
+      "type": "text"
+    }
+  }
+}
