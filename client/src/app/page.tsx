@@ -1,9 +1,9 @@
-import { fetchHomePageData } from "@/api/fetchHomePageData";
+import { getHomePageProps } from "@/api/pages/getHomePageProps";
 import Image from "next/image";
 
 export default async function Home() {
-  const homePageData = await fetchHomePageData();
-  console.log(JSON.stringify(homePageData));
+  const homePageData = await getHomePageProps();
+
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
