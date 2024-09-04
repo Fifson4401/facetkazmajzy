@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Golos_Text } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import Header from "@/components/Header/Header";
+import ProgressBar from "@/components/ProgressBar/ProgressBar";
 
 const golos = Golos_Text({ subsets: ["latin"] });
 
@@ -16,9 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={golos.className}>
-        <Providers>{children}</Providers>
+    <html lang="en" className="light">
+      <body className={`${golos.className} text-foreground bg-background`}>
+        <Providers>
+          <Header />
+          <ProgressBar />
+          {children}
+        </Providers>
       </body>
     </html>
   );
