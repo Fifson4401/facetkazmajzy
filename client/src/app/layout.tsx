@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
+    <html lang="pl" className="light">
       <body className={`${golos.className} text-foreground bg-background`}>
         <Providers>
           <Header />
