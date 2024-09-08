@@ -1,8 +1,9 @@
-import { ImageProps } from "next/image";
+import { ImageProps, MenuArray, PageAttributes } from "./defaults";
 
-export type HomePageAttributes = {
+export type HomePageAttributes = PageAttributes & {
   header: HeaderAttributes;
   search: SearchAttributes;
+  menu: MenuArray;
 };
 
 export type HeaderAttributes = {

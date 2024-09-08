@@ -4,12 +4,40 @@ import { StrapiFindAllResponse, StrapiResponse } from "./strapiResponse";
 import { SEO } from "./seo";
 
 // used
-
-//unUsed
-
 export interface DefaultPageProps<T> {
   pageData: T | null;
 }
+
+export type PropsWithClassName<T = object> = T & {
+  className?: string | undefined;
+};
+
+export type ImageProps = {
+  data?: {
+    id: number;
+    attributes: ImageAttributes;
+  };
+};
+
+export type MenuItemProps = {
+  text: string;
+  url: string;
+};
+
+export type MenuAttributes = DefaultAttributes & {
+  name: string;
+  MenuItem: MenuItemProps[];
+};
+
+export type DefaultAttributes = {
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+};
+
+export type MenuArray = StrapiFindAllResponse<MenuAttributes>;
+
+//unUsed
 
 export type DefaultPageAttributes = {
   createdAt: string;
@@ -25,10 +53,6 @@ export type PageAttributes = DefaultPageAttributes & {
 export type PageDataAnd<T> = PageAttributes & T;
 
 export type PageDataOr<T> = PageAttributes | T;
-
-export type PropsWithClassName<T = object> = T & {
-  className?: string | undefined;
-};
 
 export type PropsWithShouldScroll<T = object> = T & {
   shouldScroll?: boolean;
@@ -87,13 +111,6 @@ export type ImagesArray = {
     id: number;
     attributes: ImageAttributes;
   }[];
-};
-
-export type ImageProps = {
-  data?: {
-    id: number;
-    attributes: ImageAttributes;
-  };
 };
 
 export type ImageAttributes = Omit<SizedImage, "path"> & {
