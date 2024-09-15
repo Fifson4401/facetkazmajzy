@@ -8,7 +8,6 @@ export default async function Home() {
   const { pageData } = await getHomePageProps();
 
   if (!pageData) {
-    console.log('tu wpadam');
     notFound()
 
   }

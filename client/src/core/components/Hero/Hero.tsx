@@ -23,7 +23,7 @@ const Hero: FC<HeroProps> = ({ title, description, image, button }) => {
           {description}
         </p>
         <Link href={button.url}>
-          <Button radius="full" size="lg" className="bg-[#cc3266] text-white">
+          <Button size="lg" className="bg-[#cc3266] text-white shadow-xl">
             {button.text}
           </Button>
         </Link>

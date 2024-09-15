@@ -10,9 +10,6 @@ export const getHomePageProps = async (): Promise<
     getHeaderMenuProps(),
   ]);
 
-  console.log("isHomePageAttributes: ", isHomePageAttributes(pageData));
-  console.log("pageData: ", pageData);
-
   if (!pageData || !isHomePageAttributes(pageData)) {
     return {
       pageData: null,
