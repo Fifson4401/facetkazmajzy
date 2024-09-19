@@ -16,6 +16,11 @@ interface SearchProps {
 const Search: FC<SearchProps> = ({ placeholder, searchText, setFilter }) => {
   const [searchValue, setSearchValue] = useState<string>(searchText || '')
 
+  const handleClear = () => {
+    setFilter({ name: 'search', value: undefined });
+    setSearchValue("")
+  }
+
 
   return (
     <form onSubmit={(event) => {
@@ -54,7 +59,7 @@ const Search: FC<SearchProps> = ({ placeholder, searchText, setFilter }) => {
               "!cursor-text",
             ],
           }}
-          onClear={() => { setFilter({ name: 'search', value: undefined }); setSearchValue("") }}
+          onClear={() => handleClear()}
         />
       </div>
       <Button type="submit" className="bg-[#cc3266] text-white shadow-xl" startContent={<IoMdSearch size={25} />} aria-description="Szukaj" />
