@@ -19,7 +19,7 @@ const TagsChip: FC<TagsArray> = ({ data }) => {
     <>
       {data.map((item, index) => {
         const tagName = item.attributes.name;
-        const tagStyles = isYear(tagName) ? "bg-[#6D597A] hover:bg-[#B56576]" : "bg-[#9AA357] hover:bg-[#616F39]"
+        const tagStyles = isYear(tagName) ? "bg-[#460076] hover:bg-[#fa6bb4]" : "bg-[#a40066] hover:bg-[#fa6bb4] "
 
 
         return (

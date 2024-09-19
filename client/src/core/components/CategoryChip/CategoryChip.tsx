@@ -17,7 +17,7 @@ const CategoryChip: FC<CategoriesBlog | SubCategoriesBlog & { isCategory: boolea
     <Link href={url} passHref>
       <Chip
         size="md"
-        className="bg-[#D4A373] text-white hover:bg-[#BF8B67] transition"
+        className="bg-[#005C99] text-white hover:bg-[#fa6bb4] transition"
         onClick={(e) => e.stopPropagation()}
       >
         {data.attributes.name}
