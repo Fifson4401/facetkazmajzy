@@ -2,7 +2,7 @@ import { ImageProps, MenuArray, PageAttributes } from "./defaults";
 
 export type HomePageAttributes = PageAttributes & {
   header: HeaderAttributes;
-  search: SearchAttributes;
+  search: HomeSearchAttributes;
   menu: MenuArray;
 };
 
@@ -13,7 +13,7 @@ export type HeaderAttributes = {
   button: { text: string; url: string };
 };
 
-export type SearchAttributes = {
+export type HomeSearchAttributes = {
   placeholder: string;
   image: ImageProps;
 };

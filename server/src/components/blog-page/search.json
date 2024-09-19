@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_blog_page_searches",
+  "info": {
+    "displayName": "Search"
+  },
+  "options": {},
+  "attributes": {
+    "placeholder": {
+      "type": "string"
+    }
+  }
+}

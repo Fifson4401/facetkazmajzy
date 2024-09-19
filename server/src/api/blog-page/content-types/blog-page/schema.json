@@ -8,17 +8,20 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "asdas": {
-      "type": "string"
-    },
     "seo": {
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "search": {
+      "displayName": "Search",
+      "type": "component",
+      "repeatable": false,
+      "component": "blog-page.search"
     }
   }
 }

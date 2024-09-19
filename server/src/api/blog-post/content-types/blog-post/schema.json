@@ -21,18 +21,6 @@
       "type": "uid",
       "required": true
     },
-    "categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category",
-      "mappedBy": "blog_post"
-    },
-    "tags": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::tag.tag",
-      "mappedBy": "blog_post"
-    },
     "seo": {
       "type": "component",
       "repeatable": false,
@@ -51,13 +39,39 @@
       "type": "component",
       "repeatable": false,
       "component": "blog-post.answer",
-      "required": true
+      "required": false
     },
     "source": {
       "displayName": "source",
       "type": "component",
       "repeatable": false,
       "component": "blog-post.source"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "blog_posts"
+    },
+    "sub_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::sub-category.sub-category",
+      "inversedBy": "blog_posts"
+    },
+    "contentText": {
+      "type": "text",
+      "private": true
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "blog_posts"
     }
   }
 }

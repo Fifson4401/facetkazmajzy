@@ -9,7 +9,6 @@ export default async function Home() {
 
   if (!pageData) {
     notFound()
-
   }
 
   return (

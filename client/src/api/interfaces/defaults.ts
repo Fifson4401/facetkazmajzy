@@ -66,25 +66,19 @@ export type PropsWithRef<I, T = object> = T & {
   ref?: RefObject<I>;
 };
 
-export type PropsWithCategories<T = object> = T & {
-  categories?: CategoriesArray;
-};
+// export type PropsWithCategories<T = object> = T & {
+//   categories?: CategoriesArray;
+// };
 
-export type PropsWithTags<T = object> = T & {
-  tags?: TagsArray;
-};
+// export type PropsWithTags<T = object> = T & {
+//   tags?: TagsArray;
+// };
 
-export type CategoryAttributes = DefaultPageAttributes & {
-  name: string;
-};
+// export type TagAttributes = DefaultPageAttributes & {
+//   name: string;
+// };
 
-export type CategoriesArray = StrapiFindAllResponse<CategoryAttributes>;
-
-export type TagAttributes = DefaultPageAttributes & {
-  name: string;
-};
-
-export type TagsArray = StrapiFindAllResponse<TagAttributes>;
+// export type TagsArray = StrapiFindAllResponse<TagAttributes>;
 
 export type BlogPaginationAttributes = {
   page: number;
@@ -93,18 +87,18 @@ export type BlogPaginationAttributes = {
   total: number;
 };
 
-export type BlogPageListAttributes = DefaultPageAttributes & {
-  blogTitle: string;
-  slug: string;
-  intro: string;
-  categories?: CategoriesArray;
-  tags?: { data: TagsArray };
-};
+// export type BlogPageListAttributes = DefaultPageAttributes & {
+//   blogTitle: string;
+//   slug: string;
+//   intro: string;
+//   categories?: CategoriesArray;
+//   tags?: { data: TagsArray };
+// };
 
-export type Pages = {
-  pages: StrapiResponse<BlogPageListAttributes>[];
-  serverPagination?: BlogPaginationAttributes | null;
-};
+// export type Pages = {
+//   pages: StrapiResponse<BlogPageListAttributes>[];
+//   serverPagination?: BlogPaginationAttributes | null;
+// };
 
 export type ImagesArray = {
   data?: {

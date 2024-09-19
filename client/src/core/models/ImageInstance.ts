@@ -1,5 +1,6 @@
-import nextConfig from "../../../next.config.mjs";
+//eslint-disable @typescript-eslint/no-explicit-any
 
+import nextConfig from "../../../next.config.mjs";
 export interface ImageInstanceProps {
   url: string;
   alternativeText: string;
@@ -38,6 +39,6 @@ export class ImageInstance {
   get sizes(): string {
     return (nextConfig.images?.deviceSizes || [])
       .map((size: any) => `(max-width: ${size}px) ${size}w`)
-      .join(", "); //eslint-disable-line @typescript-eslint/no-explicit-any
+      .join(", ");
   }
 }

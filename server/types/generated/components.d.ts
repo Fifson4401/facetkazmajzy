@@ -155,10 +155,21 @@ export interface BlogPostAnswer extends Schema.Component {
   info: {
     displayName: 'Answer';
     icon: 'lightbulb';
+    description: '';
   };
   attributes: {
-    TEX: Attribute.Text;
+    TEX: Attribute.Text & Attribute.Required;
     image: Attribute.Media<'images' | 'files'>;
+  };
+}
+
+export interface BlogPageSearch extends Schema.Component {
+  collectionName: 'components_blog_page_searches';
+  info: {
+    displayName: 'Search';
+  };
+  attributes: {
+    placeholder: Attribute.String;
   };
 }
 
@@ -176,6 +187,7 @@ declare module '@strapi/types' {
       'blog-post.source': BlogPostSource;
       'blog-post.image': BlogPostImage;
       'blog-post.answer': BlogPostAnswer;
+      'blog-page.search': BlogPageSearch;
     }
   }
 }

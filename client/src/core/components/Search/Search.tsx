@@ -14,7 +14,7 @@ const Search: FC<SearchProps> = ({ image, placeholder }) => {
 
   return (
     <div className="flex flex-row items-center justify-center px-11 max-h-16 w-full gap-5">
-      <div className="rounded-xl hidden md:block aria-hidden:">
+      <div className="rounded-xl hidden md:block aria-hidden">
         <Link href={'/'}>
           <ImageHandler image={image.data?.attributes} priority removeWrapper imageClassName="rounded-2xl max-w-9" />
         </Link>

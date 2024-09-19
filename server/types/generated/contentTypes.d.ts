@@ -936,14 +936,13 @@ export interface ApiBlogPageBlogPage extends Schema.SingleType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    asdas: Attribute.String;
     seo: Attribute.Component<'shared.seo'>;
+    search: Attribute.Component<'blog-page.search'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::blog-page.blog-page',
       'oneToOne',
@@ -976,22 +975,29 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
   attributes: {
     title: Attribute.String & Attribute.Required & Attribute.Unique;
     slug: Attribute.UID & Attribute.Required;
-    categories: Attribute.Relation<
-      'api::blog-post.blog-post',
-      'oneToMany',
-      'api::category.category'
-    >;
-    tags: Attribute.Relation<
-      'api::blog-post.blog-post',
-      'oneToMany',
-      'api::tag.tag'
-    >;
     seo: Attribute.Component<'shared.seo'>;
     content: Attribute.DynamicZone<
       ['blog-post.tex', 'blog-post.title', 'blog-post.image']
     >;
-    answer: Attribute.Component<'blog-post.answer'> & Attribute.Required;
+    answer: Attribute.Component<'blog-post.answer'>;
     source: Attribute.Component<'blog-post.source'>;
+    category: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'manyToOne',
+      'api::category.category'
+    >;
+    sub_category: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'manyToOne',
+      'api::sub-category.sub-category'
+    >;
+    contentText: Attribute.Text & Attribute.Private;
+    description: Attribute.Text;
+    tags: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'manyToMany',
+      'api::tag.tag'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1019,16 +1025,22 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'Category';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String & Attribute.Unique;
-    blog_post: Attribute.Relation<
+    blog_posts: Attribute.Relation<
       'api::category.category',
-      'manyToOne',
+      'oneToMany',
       'api::blog-post.blog-post'
+    >;
+    sub_categories: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::sub-category.sub-category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1148,21 +1160,65 @@ export interface ApiMenuMenu extends Schema.CollectionType {
   };
 }
 
+export interface ApiSubCategorySubCategory extends Schema.CollectionType {
+  collectionName: 'sub_categories';
+  info: {
+    singularName: 'sub-category';
+    pluralName: 'sub-categories';
+    displayName: 'SubCategory';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    category: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'manyToOne',
+      'api::category.category'
+    >;
+    name: Attribute.String;
+    blog_posts: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'oneToMany',
+      'api::blog-post.blog-post'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    sitemap_exclude: Attribute.Boolean &
+      Attribute.Private &
+      Attribute.DefaultTo<false>;
+  };
+}
+
 export interface ApiTagTag extends Schema.CollectionType {
   collectionName: 'tags';
   info: {
     singularName: 'tag';
     pluralName: 'tags';
     displayName: 'Tag';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String & Attribute.Unique;
-    blog_post: Attribute.Relation<
+    blog_posts: Attribute.Relation<
       'api::tag.tag',
-      'manyToOne',
+      'manyToMany',
       'api::blog-post.blog-post'
     >;
     createdAt: Attribute.DateTime;
@@ -1204,6 +1260,7 @@ declare module '@strapi/types' {
       'api::contact-page.contact-page': ApiContactPageContactPage;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::menu.menu': ApiMenuMenu;
+      'api::sub-category.sub-category': ApiSubCategorySubCategory;
       'api::tag.tag': ApiTagTag;
     }
   }
