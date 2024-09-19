@@ -5,24 +5,31 @@ import { FC, useState } from "react";
 import { ImageHandler } from "../ImageHandler";
 import { IoMdSearch } from "react-icons/io";
 import Link from "next/link";
-import { RouteToProps } from "@/api/interfaces/blog";
+import { useRouter } from "next/navigation";
 
-interface SearchProps {
+interface SearchHomeProps {
   placeholder: string,
-  setFilter: (data: RouteToProps) => void
-  searchText?: string
+  image: ImageProps,
 }
 
-const Search: FC<SearchProps> = ({ placeholder, searchText, setFilter }) => {
-  const [searchValue, setSearchValue] = useState<string>(searchText || '')
+const SearchHome: FC<SearchHomeProps> = ({ image, placeholder }) => {
+  const [searchValue, setSearchValue] = useState<string>('')
 
+  const router = useRouter()
 
   return (
     <form onSubmit={(event) => {
       event.preventDefault();
-      setFilter({ name: 'search', value: searchValue })
-    }} className="flex flex-row items-center justify-center px-11 max-h-16 w-full gap-5 pb-8">
-      <div className="flex items-center justify-center w-[60vw]">
+      if (searchValue) {
+        router.push(`/zadania?search=${searchValue}`)
+      }
+    }} className="flex flex-row items-center justify-center px-11 max-h-16 w-full gap-5">
+      <div className="rounded-xl hidden md:block aria-hidden">
+        <Link href={'/'}>
+          <ImageHandler image={image.data?.attributes} priority removeWrapper imageClassName="rounded-2xl max-w-9" />
+        </Link>
+      </div>
+      <div className="flex items-center justify-center w-[80vw]">
         <Input
           isClearable
           type="text"
@@ -54,12 +61,12 @@ const Search: FC<SearchProps> = ({ placeholder, searchText, setFilter }) => {
               "!cursor-text",
             ],
           }}
-          onClear={() => { setFilter({ name: 'search', value: undefined }); setSearchValue("") }}
+          onClear={() => { setSearchValue("") }}
         />
       </div>
-      <Button type="submit" className="bg-[#cc3266] text-white shadow-xl" startContent={<IoMdSearch size={25} />} aria-description="Szukaj" />
+      <Button type="submit" disabled={searchValue === undefined} className="bg-[#cc3266] text-white shadow-xl" startContent={<IoMdSearch size={25} />} aria-description="Szukaj" />
     </form>
   );
 };
 
-export default Search;
+export default SearchHome;

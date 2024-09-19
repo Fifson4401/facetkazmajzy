@@ -10,6 +10,11 @@ const CategoryChip: FC<CategoriesBlog | SubCategoriesBlog & { isCategory: boolea
     return null;
   }
 
+  function getDisplayCategory(categoryName: string) {
+    const match = categoryName.match(/^(.*?\d+)/);
+    return match ? match[1] : categoryName;
+  }
+
   const url = isCategory ? `/zadania?category=${data.id}` : `/zadania?subCategory=${data.id}`
 
   return (
@@ -20,7 +25,7 @@ const CategoryChip: FC<CategoriesBlog | SubCategoriesBlog & { isCategory: boolea
         className="bg-[#005C99] text-white hover:bg-[#fa6bb4] transition"
         onClick={(e) => e.stopPropagation()}
       >
-        {data.attributes.name}
+        {getDisplayCategory(data.attributes.name)}
       </Chip>
     </Link>
 

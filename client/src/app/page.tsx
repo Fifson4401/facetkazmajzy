@@ -1,7 +1,7 @@
 import { getHomePageProps } from "@/api/pages/getHomePageProps";
 import Hero from "@/core/components/Hero/Hero";
 import { Layout } from "@/core/components/Layout/Layout";
-import Search from "@/core/components/Search/Search";
+import SearchHome from "@/core/components/SearchHome/SearchHome";
 import { notFound } from "next/navigation";
 
 export default async function Home() {
@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <Layout menu={pageData.menu}>
-      <Search {...pageData.search} />
+      <SearchHome {...pageData.search} />
       <Hero {...pageData.header} />
     </Layout>
   );
