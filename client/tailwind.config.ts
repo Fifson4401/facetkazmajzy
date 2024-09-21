@@ -44,9 +44,19 @@ const config: Config = {
           "91.66%": { backgroundColor: "rgba(128, 0, 128)" }, // Purple
           "100%": { backgroundColor: "rgba(255, 192, 203)" }, // Smooth transition back to Light Pink
         },
+        fadeInUp: {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        fadeOutDown: {
+          "0%": { opacity: "1", transform: "translateY(0)" },
+          "100%": { opacity: "0", transform: "translateY(20px)" },
+        },
       },
       animation: {
         "progress-bar": "progressColors 10s linear infinite",
+        fadeInUp: "fadeInUp 0.5s forwards",
+        fadeOutDown: "fadeOutDown 0.5s forwards",
       },
     },
   },

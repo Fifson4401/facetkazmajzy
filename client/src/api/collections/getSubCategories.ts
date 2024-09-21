@@ -1,12 +1,12 @@
 import qs from "qs";
 
 import client from "../client";
-import { SubCategoriesBlog } from "../interfaces/collections/subCategories";
+import { SubCategoriesArray } from "../interfaces/collections/subCategories";
 
 export const getSubCategories = async (
   categoryID?: string
 ): Promise<{
-  subCategories?: SubCategoriesBlog;
+  subCategories?: SubCategoriesArray;
 }> => {
   if (!categoryID) {
     return { subCategories: undefined };
@@ -23,7 +23,7 @@ export const getSubCategories = async (
       },
     });
 
-    const { data: subCategories } = await client.get<SubCategoriesBlog>(
+    const { data: subCategories } = await client.get<SubCategoriesArray>(
       `/api/sub-categories?${query}`
     );
     return { subCategories };

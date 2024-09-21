@@ -1,5 +1,12 @@
 import { DefaultAttributes } from "../defaults";
-import { StrapiFindOneResponse } from "../strapiResponse";
+import {
+  StrapiFindAllResponse,
+  StrapiFindOneResponse,
+} from "../strapiResponse";
+
+export type PropsWithCategories<T = object> = T & {
+  categories?: CategoriesArray;
+};
 
 export type CategoryAttributes = DefaultAttributes & {
   name: string;
@@ -7,3 +14,4 @@ export type CategoryAttributes = DefaultAttributes & {
 };
 
 export type CategoriesBlog = StrapiFindOneResponse<CategoryAttributes>;
+export type CategoriesArray = StrapiFindAllResponse<CategoryAttributes>;

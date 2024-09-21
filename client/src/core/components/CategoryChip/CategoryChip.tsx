@@ -3,16 +3,12 @@ import Link from "next/link";
 import { Chip } from "@nextui-org/react";
 import { CategoriesBlog } from "@/api/interfaces/collections/categories";
 import { SubCategoriesBlog } from "@/api/interfaces/collections/subCategories";
+import { getDisplayCategory } from "./utils";
 
 const CategoryChip: FC<CategoriesBlog | SubCategoriesBlog & { isCategory: boolean }> = ({ data }, isCategory = false) => {
 
   if (!data) {
     return null;
-  }
-
-  function getDisplayCategory(categoryName: string) {
-    const match = categoryName.match(/^(.*?\d+)/);
-    return match ? match[1] : categoryName;
   }
 
   const url = isCategory ? `/zadania?category=${data.id}` : `/zadania?subCategory=${data.id}`

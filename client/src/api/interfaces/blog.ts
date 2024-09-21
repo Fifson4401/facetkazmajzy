@@ -1,5 +1,10 @@
 import { PostTileProps } from "./collections/blogPosts";
-import { CategoriesBlog } from "./collections/categories";
+import {
+  CategoriesArray,
+  CategoriesBlog,
+  PropsWithCategories,
+} from "./collections/categories";
+import { PropsWithTags } from "./collections/tags";
 import { MenuArray, PageAttributes } from "./defaults";
 import { StrapiResponse } from "./strapiResponse";
 import { NextRouter } from "next/router";
@@ -7,9 +12,10 @@ import { NextRouter } from "next/router";
 export type BlogPageAttributes = PageAttributes & {
   search: BlogSearchAttributes;
   menu: MenuArray;
-  categories?: CategoriesBlog;
   serverPagination?: PaginationProps;
-} & PropsWithBlogPages;
+} & PropsWithBlogPages &
+  PropsWithTags &
+  PropsWithCategories;
 
 export type BlogSearchAttributes = {
   placeholder: string;
@@ -24,10 +30,6 @@ export type PropsWithBlogPages<T = object> = T & {
   pages?: StrapiResponse<PostTileProps>[];
 };
 
-export type PropsWithCategories<T = object> = T & {
-  categories?: CategoriesBlog;
-};
-
 export type PaginationProps = {
   page: number;
   pageSize: number;
@@ -37,17 +39,27 @@ export type PaginationProps = {
 };
 
 export type RouteToAttributes = {
-  name: "page" | "category" | "search" | undefined;
-  value: string | string[] | undefined;
+  name: NameOfRouteProps;
+  value: ValueOfRouteProps;
   slug?: string;
 };
 
 export type UseBlogProps = {
   query: Record<string, string | undefined>;
   setRouteTo: (data: RouteToProps) => void;
+  clearAllQueries: () => void;
 };
 
 export type RouteToProps = {
-  name: "page" | "category" | "search" | undefined;
-  value: string | string[] | undefined;
+  name: NameOfRouteProps;
+  value: ValueOfRouteProps;
 };
+
+export type NameOfRouteProps =
+  | "page"
+  | "category"
+  | "search"
+  | "subCategory"
+  | "tag";
+
+type ValueOfRouteProps = string | string[] | undefined;

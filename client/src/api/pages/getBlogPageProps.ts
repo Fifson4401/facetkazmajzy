@@ -1,4 +1,5 @@
 import { getCategories } from "../collections/getCategories";
+import { getTags } from "../collections/getTags";
 import { BlogPageAttributes } from "../interfaces/blog";
 import { DefaultPageProps } from "../interfaces/defaults";
 import { getHeaderMenuProps, getPageProps } from "./getPageProps";
@@ -7,13 +8,19 @@ import { getBlogPosts, searchParams } from "@/api/collections/getBlogPosts";
 export const getBlogPageProps = async (
   searchParams: searchParams
 ): Promise<DefaultPageProps<BlogPageAttributes>> => {
-  const [{ pageData }, { menu }, { categories }, { pages, serverPagination }] =
-    await Promise.all([
-      getPageProps<BlogPageAttributes>("blog-page", populate),
-      getHeaderMenuProps(),
-      getCategories(),
-      getBlogPosts(searchParams),
-    ]);
+  const [
+    { pageData },
+    { menu },
+    { categories },
+    { pages, serverPagination },
+    { tags },
+  ] = await Promise.all([
+    getPageProps<BlogPageAttributes>("blog-page", populate),
+    getHeaderMenuProps(),
+    getCategories(),
+    getBlogPosts(searchParams),
+    getTags(),
+  ]);
 
   if (!pageData || !isBlogPageAttributes(pageData)) {
     return {
@@ -28,6 +35,7 @@ export const getBlogPageProps = async (
       categories,
       pages,
       serverPagination: serverPagination,
+      tags,
     },
   };
 };

@@ -18,6 +18,8 @@ export const getBlogPosts = async (
     tag = undefined,
   } = searchParams;
 
+  const tagsArray = tag ? tag.split(",") : [];
+
   try {
     const query = qs.stringify(
       {
@@ -50,9 +52,9 @@ export const getBlogPosts = async (
           contentText: {
             $containsi: search,
           },
-          categories: { id: { $eq: category } },
-          sub_categories: { id: { $eq: subCategory } },
-          tags: { name: { $eq: tag } },
+          category: { id: { $eq: category } },
+          sub_category: { id: { $eq: subCategory } },
+          tags: { id: { $in: tagsArray } },
         },
       },
       {

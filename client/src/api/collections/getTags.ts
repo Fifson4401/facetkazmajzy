@@ -1,10 +1,10 @@
 import qs from "qs";
 
-import { CategoriesArray } from "../interfaces/collections/categories";
 import client from "../client";
+import { TagsArray } from "../interfaces/collections/tags";
 
-export const getCategories = async (): Promise<{
-  categories?: CategoriesArray;
+export const getTags = async (): Promise<{
+  tags?: TagsArray;
 }> => {
   try {
     const query = qs.stringify(
@@ -22,11 +22,9 @@ export const getCategories = async (): Promise<{
       }
     );
 
-    const { data: categories } = await client.get<CategoriesArray>(
-      `/api/categories?${query}`
-    );
-    return { categories };
+    const { data: tags } = await client.get<TagsArray>(`/api/tags?${query}`);
+    return { tags };
   } catch (e) {
-    return { categories: undefined };
+    return { tags: undefined };
   }
 };
