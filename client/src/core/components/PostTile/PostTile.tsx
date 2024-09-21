@@ -13,7 +13,7 @@ const PostTile: FC<PostTileProps> = ({ category, description, slug, sub_category
       onClick={() => router.push(`zadania/${slug}`)}
       className="flex flex-col w-full bg-[#FAF3E0] rounded-2xl shadow-lg p-6 hover:bg-[#F1E9D2] transition cursor-pointer"
     >
-      <h2 className="text-lg font-semibold pb-2 line-clamp-1 text-[#3D2C29]">{title}</h2>
+      <h3 className="text-lg font-semibold pb-2 line-clamp-1 text-[#3D2C29]">{title}</h3>
       <div className="flex flex-row gap-2">
         <CategoryChip isCategory {...category} />
         <CategoryChip {...sub_category} />

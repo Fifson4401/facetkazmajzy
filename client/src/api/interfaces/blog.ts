@@ -1,15 +1,12 @@
 import { PostTileProps } from "./collections/blogPosts";
-import {
-  CategoriesArray,
-  CategoriesBlog,
-  PropsWithCategories,
-} from "./collections/categories";
+import { PropsWithCategories } from "./collections/categories";
 import { PropsWithTags } from "./collections/tags";
 import { MenuArray, PageAttributes } from "./defaults";
 import { StrapiResponse } from "./strapiResponse";
-import { NextRouter } from "next/router";
 
 export type BlogPageAttributes = PageAttributes & {
+  title: string;
+  description?: string;
   search: BlogSearchAttributes;
   menu: MenuArray;
   serverPagination?: PaginationProps;

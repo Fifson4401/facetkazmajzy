@@ -12,7 +12,7 @@ const Footer = () => {
         <Link href="/" color="foreground">
           <Image
             as={NextImage}
-            src="/logo.png"
+            src="/logo.webp"
             alt="Facetka Z Majzy Logo"
             width={58}
             height={58}

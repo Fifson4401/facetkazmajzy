@@ -30,9 +30,9 @@ const TagsList: FC<TagsListProps> = ({ tags, setFilter, show, query }) => {
       {showComponent && (
         <motion.div
           className="flex flex-row justify-center gap-6 overflow-hidden flex-wrap"
-          initial={{ opacity: 0, y: 20, height: 0 }}
-          animate={{ opacity: 1, y: 0, height: 'auto' }}
-          exit={{ opacity: 0, y: 20, height: 0 }}
+          initial={{ opacity: 0, y: 20, height: 0, marginBottom: 0 }}
+          animate={{ opacity: 1, y: 0, height: 'auto', marginBottom: 16 }}
+          exit={{ opacity: 0, y: 20, height: 0, marginBottom: 0 }}
           transition={{ duration: 0.25 }}
         >
           {filteredTags.map((item, index) => {

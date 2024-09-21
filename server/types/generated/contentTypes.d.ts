@@ -941,6 +941,8 @@ export interface ApiBlogPageBlogPage extends Schema.SingleType {
   attributes: {
     seo: Attribute.Component<'shared.seo'>;
     search: Attribute.Component<'blog-page.search'>;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

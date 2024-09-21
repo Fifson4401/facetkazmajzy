@@ -2,7 +2,6 @@ import { FC, useState, useEffect } from "react";
 import { RouteToProps } from "@/api/interfaces/blog";
 import { Card, CardBody } from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
-import useSubCategory from "./hooks";
 import { getDisplayCategory } from "../CategoryChip/utils";
 import { StrapiResponse } from "@/api/interfaces/strapiResponse";
 import { SubCategoryAttributes } from "@/api/interfaces/collections/subCategories";
@@ -30,9 +29,9 @@ const SubCategoryPicker: FC<SubCategoryPickerProps> = ({ setFilter, query, subCa
       {showComponent && (
         <motion.div
           className="flex flex-row justify-center gap-6 overflow-hidden flex-wrap"
-          initial={{ opacity: 0, y: 20, height: 0 }}
-          animate={{ opacity: 1, y: 0, height: 'auto' }}
-          exit={{ opacity: 0, y: 20, height: 0 }}
+          initial={{ opacity: 0, y: 20, height: 0, marginBottom: 0 }}
+          animate={{ opacity: 1, y: 0, height: 'auto', marginBottom: 16 }}
+          exit={{ opacity: 0, y: 20, height: 0, marginBottom: 0 }}
           transition={{ duration: 0.25 }}
           layout
         >
