@@ -15,7 +15,7 @@ export const getPageProps = async <T>(
   _populate?: Record<string, object>,
   query?: ParsedUrlQuery
 ): Promise<DefaultPageProps<PageDataOr<T>>> => {
-  const queryParams = query && `&${qs.stringify(query)}`;
+  const queryParams = query ? `&${qs.stringify(query)}` : "";
 
   try {
     const {

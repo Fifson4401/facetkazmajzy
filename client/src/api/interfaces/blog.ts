@@ -8,7 +8,6 @@ export type BlogPageAttributes = PageAttributes & {
   title: string;
   description?: string;
   search: BlogSearchAttributes;
-  menu: MenuArray;
   serverPagination?: PaginationProps;
 } & PropsWithBlogPages &
   PropsWithTags &

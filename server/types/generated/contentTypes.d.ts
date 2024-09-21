@@ -978,9 +978,7 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
     title: Attribute.String & Attribute.Required & Attribute.Unique;
     slug: Attribute.UID & Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
-    content: Attribute.DynamicZone<
-      ['blog-post.tex', 'blog-post.title', 'blog-post.image']
-    >;
+    content: Attribute.DynamicZone<['blog-post.tex', 'blog-post.image']>;
     answer: Attribute.Component<'blog-post.answer'>;
     source: Attribute.Component<'blog-post.source'>;
     category: Attribute.Relation<

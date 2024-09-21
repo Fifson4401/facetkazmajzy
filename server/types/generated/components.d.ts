@@ -103,17 +103,6 @@ export interface HomeButton extends Schema.Component {
   };
 }
 
-export interface BlogPostTitle extends Schema.Component {
-  collectionName: 'components_blog_post_titles';
-  info: {
-    displayName: 'title';
-    icon: 'layer';
-  };
-  attributes: {
-    text: Attribute.String;
-  };
-}
-
 export interface BlogPostTex extends Schema.Component {
   collectionName: 'components_blog_post_texes';
   info: {
@@ -130,12 +119,19 @@ export interface BlogPostSource extends Schema.Component {
   info: {
     displayName: 'source';
     icon: 'oneWay';
+    description: '';
   };
   attributes: {
     text: Attribute.String &
       Attribute.Required &
       Attribute.DefaultTo<'\u0179r\u00F3d\u0142o:'>;
-    url: Attribute.String & Attribute.Required;
+    url: Attribute.Enumeration<
+      [
+        'https://cke.gov.pl/egzamin-osmoklasisty/arkusze/',
+        'https://cke.gov.pl/egzamin-maturalny/egzamin-maturalny-w-formule-2015/arkusze/',
+        'https://cke.gov.pl/egzamin-maturalny/egzamin-w-starej-formule/arkusze/'
+      ]
+    >;
   };
 }
 
@@ -144,6 +140,7 @@ export interface BlogPostImage extends Schema.Component {
   info: {
     displayName: 'image';
     icon: 'landscape';
+    description: '';
   };
   attributes: {
     image: Attribute.Media<'images' | 'files'>;
@@ -159,7 +156,7 @@ export interface BlogPostAnswer extends Schema.Component {
   };
   attributes: {
     TEX: Attribute.Text & Attribute.Required;
-    image: Attribute.Media<'images' | 'files'>;
+    image: Attribute.Component<'blog-post.image'>;
   };
 }
 
@@ -182,7 +179,6 @@ declare module '@strapi/types' {
       'home.search': HomeSearch;
       'home.header': HomeHeader;
       'home.button': HomeButton;
-      'blog-post.title': BlogPostTitle;
       'blog-post.tex': BlogPostTex;
       'blog-post.source': BlogPostSource;
       'blog-post.image': BlogPostImage;

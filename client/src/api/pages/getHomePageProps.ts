@@ -1,9 +1,9 @@
-import { DefaultPageProps, PageAttributes } from "../interfaces/defaults";
+import { DefaultPageProps, PropsWithMenu } from "../interfaces/defaults";
 import { HomePageAttributes } from "../interfaces/home";
 import { getHeaderMenuProps, getPageProps } from "./getPageProps";
 
 export const getHomePageProps = async (): Promise<
-  DefaultPageProps<HomePageAttributes>
+  DefaultPageProps<HomePageAttributes & PropsWithMenu>
 > => {
   const [{ pageData }, { menu }] = await Promise.all([
     getPageProps<HomePageAttributes>("home-page", populate),

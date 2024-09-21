@@ -11,6 +11,10 @@ export type SubCategoryAttributes = DefaultAttributes & {
   order?: number;
 };
 
+export type PropsWithSubCategories<T = object> = T & {
+  categories?: SubCategoriesArray;
+};
+
 export type SubCategoriesBlog = StrapiFindOneResponse<SubCategoryAttributes>;
 export type SubCategoriesArray = StrapiFindAllResponse<SubCategoryAttributes>;
 

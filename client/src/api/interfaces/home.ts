@@ -3,7 +3,6 @@ import { ImageProps, MenuArray, PageAttributes } from "./defaults";
 export type HomePageAttributes = PageAttributes & {
   header: HeaderAttributes;
   search: HomeSearchAttributes;
-  menu: MenuArray;
 };
 
 export type HeaderAttributes = {

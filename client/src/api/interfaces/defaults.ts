@@ -4,6 +4,8 @@ import { StrapiFindAllResponse, StrapiResponse } from "./strapiResponse";
 import { SEO } from "./seo";
 
 // used
+
+export type PropsWithMenu<T = object> = T & { menu: MenuArray };
 export interface DefaultPageProps<T> {
   pageData: T | null;
 }
