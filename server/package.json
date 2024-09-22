@@ -15,6 +15,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@eslint/config-array": "^0.18.0",
     "@strapi/plugin-cloud": "4.25.8",
     "@strapi/plugin-i18n": "4.25.8",
     "@strapi/plugin-seo": "^1.9.9",

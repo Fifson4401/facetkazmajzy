@@ -1,13 +1,13 @@
 import {
   CategoryAttributes,
-  PropsWithCategories,
+  PropsWithCategory,
 } from "./collections/categories";
 import {
-  PropsWithSubCategories,
+  PropsWithSubCategory,
   SubCategoryAttributes,
 } from "./collections/subCategories";
 import { PropsWithTags, TagsArray } from "./collections/tags";
-import { ImageProps, MenuArray, PageAttributes } from "./defaults";
+import { ImageProps, PageAttributes } from "./defaults";
 
 export type PageDataT<T> = PageAttributes & T;
 
@@ -15,8 +15,8 @@ export type BlogSlugPageAttributes = PageAttributes & {
   title: string;
   description?: string;
 } & PropsWithTags &
-  PropsWithCategories &
-  PropsWithSubCategories;
+  PropsWithCategory &
+  PropsWithSubCategory;
 
 type BlogPostTEX = string;
 type BlogPostImage = { image: ImageProps };

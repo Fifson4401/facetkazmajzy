@@ -975,7 +975,7 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String & Attribute.Required & Attribute.Unique;
+    title: Attribute.String & Attribute.Required;
     slug: Attribute.UID & Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
     content: Attribute.DynamicZone<['blog-post.tex', 'blog-post.image']>;
@@ -1160,6 +1160,38 @@ export interface ApiMenuMenu extends Schema.CollectionType {
   };
 }
 
+export interface ApiRandomRandom extends Schema.CollectionType {
+  collectionName: 'randoms';
+  info: {
+    singularName: 'random';
+    pluralName: 'randoms';
+    displayName: 'random';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    random: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::random.random',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::random.random',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    sitemap_exclude: Attribute.Boolean &
+      Attribute.Private &
+      Attribute.DefaultTo<false>;
+  };
+}
+
 export interface ApiSubCategorySubCategory extends Schema.CollectionType {
   collectionName: 'sub_categories';
   info: {
@@ -1260,6 +1292,7 @@ declare module '@strapi/types' {
       'api::contact-page.contact-page': ApiContactPageContactPage;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::menu.menu': ApiMenuMenu;
+      'api::random.random': ApiRandomRandom;
       'api::sub-category.sub-category': ApiSubCategorySubCategory;
       'api::tag.tag': ApiTagTag;
     }

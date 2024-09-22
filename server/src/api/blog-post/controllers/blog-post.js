@@ -23,8 +23,6 @@ module.exports = createCoreController(
       //@ts-ignore
       const { results } = await this.sanitizeOutput(entity, ctx);
 
-      console.log('results: ', results);
-
       return this.transformResponse(results[0]);
     },
   })

@@ -26,7 +26,7 @@ export const getBlogPostPageProps = async (
 };
 
 function isBlogPostPageProps(data: any): data is BlogSlugPageAttributes {
-  return data && "content" in data && "answear" in data && "source" in data;
+  return data && "content" in data && "answer" in data && "source" in data;
 }
 
 const populate = {
@@ -38,7 +38,7 @@ const populate = {
       },
     },
   },
-  answear: {
+  answer: {
     populate: {
       image: {
         populate: "*",

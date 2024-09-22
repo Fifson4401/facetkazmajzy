@@ -3,7 +3,7 @@ import {
   SubCategoriesGetResponse,
   SubCategoryAttributes,
 } from "@/api/interfaces/collections/subCategories";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse, AxiosError } from "axios";
 import qs from "qs";
 import { StrapiResponse } from "@/api/interfaces/strapiResponse";
 
@@ -39,16 +39,20 @@ const useSubCategory = ({ query }: useSubCategoryProps) => {
         signal: controller.signal,
       });
 
-    query?.category &&
+    if (query?.category) {
       fetchData()
         .then((response: AxiosResponse<SubCategoriesGetResponse>) => {
           if (response?.data?.data) {
             setSubCategories(response.data.data);
           }
         })
-        .catch((e) => {
-          console.error(e);
+        .catch((error: AxiosError) => {
+          if (error.code !== "ERR_CANCELED") {
+            console.error(error);
+          }
+          // Opcjonalnie możesz obsłużyć anulowanie tutaj, jeśli potrzebujesz
         });
+    }
 
     return () => {
       controller.abort();

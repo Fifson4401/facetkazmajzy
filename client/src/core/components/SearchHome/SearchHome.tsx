@@ -64,7 +64,7 @@ const SearchHome: FC<SearchHomeProps> = ({ image, placeholder }) => {
           onClear={() => { setSearchValue("") }}
         />
       </div>
-      <Button type="submit" disabled={searchValue === undefined} className="bg-[#cc3266] text-white shadow-xl" startContent={<IoMdSearch size={25} />} aria-description="Szukaj" />
+      <Button type="submit" disabled={searchValue === undefined} className="bg-[#cc3266] text-white shadow-xl" startContent={<IoMdSearch size={25} />} aria-label="Szukaj" />
     </form>
   );
 };

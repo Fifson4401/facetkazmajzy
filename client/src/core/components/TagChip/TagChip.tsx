@@ -20,7 +20,7 @@ const TagChip: FC<TagsChipProps> = ({ tag, onClick, size = 'sm', name, ...props 
       className={`text-white transition cursor-pointer ${tagStyles}`}
       onClick={(e) => {
         e.stopPropagation()
-        onClick && onClick()
+        onClick ? onClick() : null
       }}
       {...props}
     >

@@ -12,7 +12,11 @@ export type SubCategoryAttributes = DefaultAttributes & {
 };
 
 export type PropsWithSubCategories<T = object> = T & {
-  categories?: SubCategoriesArray;
+  subCategories?: SubCategoriesArray;
+};
+
+export type PropsWithSubCategory<T = object> = T & {
+  sub_category?: { data: StrapiResponse<SubCategoryAttributes> };
 };
 
 export type SubCategoriesBlog = StrapiFindOneResponse<SubCategoryAttributes>;

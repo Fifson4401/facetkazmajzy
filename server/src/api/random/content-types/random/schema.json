@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "randoms",
+  "info": {
+    "singularName": "random",
+    "pluralName": "randoms",
+    "displayName": "random"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "random": {
+      "type": "string"
+    }
+  }
+}
