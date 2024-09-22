@@ -15,6 +15,14 @@
         "images",
         "files"
       ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "image"
+      ],
+      "default": "image",
+      "required": true
     }
   }
 }

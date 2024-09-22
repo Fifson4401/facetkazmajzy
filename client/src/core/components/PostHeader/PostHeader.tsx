@@ -26,7 +26,6 @@ const PostHeader: FC<PostHeaderProps> = ({
 }) => {
   const router = useRouter();
 
-  // Tworzenie linków bez useMemo
   const categoryLink = category ? `/zadania?category=${category.data.id}` : '#';
   const subCategoryID = sub_category?.data?.id;
   const subCategoryLink = subCategoryID
@@ -39,7 +38,7 @@ const PostHeader: FC<PostHeaderProps> = ({
     <div className="flex w-full flex-col md:px-11">
       <div className="mb-6 flex w-full flex-row justify-between md:mt-8">
         <div>
-          <h1 className="mb-4 font-medium leading-tight sm:text-2xl md:text-4xl lg:text-5xl">
+          <h1 className="mb-4 font-semibold md:font-medium leading-tight sm:text-2xl md:text-4xl lg:text-5xl">
             {title}
           </h1>
           <div className="mb-4 flex flex-row gap-4">
@@ -72,16 +71,16 @@ const PostHeader: FC<PostHeaderProps> = ({
         </div>
         {randomSlug && !loading && (
           <Link href={`/zadania/${randomSlug}`} className="group flex flex-col">
-            <p className="pb-1 group-hover:opacity-70">Wylosuj zadanie!</p>
             <Image
               alt="Kości do gry"
               aria-label="Wylosuj kolejne zadanie"
               src="/dices.webp"
               width={105}
               height={105}
-              className="mx-auto flex group-hover:opacity-70"
+              className="mx-auto flex group-hover:opacity-70 mt-1 w-20 max-h-20 sm:w-max sm:max-h-max"
               removeWrapper
             />
+            <p className="pt-2 group-hover:opacity-70 font-semibold md:font-medium">Wylosuj zadanie!</p>
           </Link>
         )}
       </div>

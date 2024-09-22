@@ -1,18 +1,5 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
-export interface MenuMenuItem extends Schema.Component {
-  collectionName: 'components_menu_menu_items';
-  info: {
-    displayName: 'MenuItem';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    text: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-  };
-}
-
 export interface SharedSeo extends Schema.Component {
   collectionName: 'components_shared_seos';
   info: {
@@ -64,6 +51,19 @@ export interface SharedMetaSocial extends Schema.Component {
   };
 }
 
+export interface MenuMenuItem extends Schema.Component {
+  collectionName: 'components_menu_menu_items';
+  info: {
+    displayName: 'MenuItem';
+    icon: 'bulletList';
+    description: '';
+  };
+  attributes: {
+    text: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface HomeSearch extends Schema.Component {
   collectionName: 'components_home_searches';
   info: {
@@ -108,9 +108,13 @@ export interface BlogPostTex extends Schema.Component {
   info: {
     displayName: 'TEX';
     icon: 'feather';
+    description: '';
   };
   attributes: {
     TEX: Attribute.Text;
+    type: Attribute.Enumeration<['tex']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'tex'>;
   };
 }
 
@@ -144,6 +148,9 @@ export interface BlogPostImage extends Schema.Component {
   };
   attributes: {
     image: Attribute.Media<'images' | 'files'>;
+    type: Attribute.Enumeration<['image']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'image'>;
   };
 }
 
@@ -173,9 +180,9 @@ export interface BlogPageSearch extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'menu.menu-item': MenuMenuItem;
       'shared.seo': SharedSeo;
       'shared.meta-social': SharedMetaSocial;
+      'menu.menu-item': MenuMenuItem;
       'home.search': HomeSearch;
       'home.header': HomeHeader;
       'home.button': HomeButton;
