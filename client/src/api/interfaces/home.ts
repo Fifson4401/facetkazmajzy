@@ -1,4 +1,4 @@
-import { ImageProps, MenuArray, PageAttributes } from "./defaults";
+import { ImageProps, MenuArray, PageAttributes } from './defaults';
 
 export type HomePageAttributes = PageAttributes & {
   header: HeaderAttributes;

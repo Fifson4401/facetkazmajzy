@@ -1,9 +1,9 @@
-import { getCategories } from "../collections/getCategories";
-import { getTags } from "../collections/getTags";
-import { BlogPageAttributes } from "../interfaces/blog";
-import { DefaultPageProps, PropsWithMenu } from "../interfaces/defaults";
-import { getHeaderMenuProps, getPageProps } from "./getPageProps";
-import { getBlogPosts, searchParams } from "@/api/collections/getBlogPosts";
+import { getCategories } from '../collections/getCategories';
+import { getTags } from '../collections/getTags';
+import { BlogPageAttributes } from '../interfaces/blog';
+import { DefaultPageProps, PropsWithMenu } from '../interfaces/defaults';
+import { getHeaderMenuProps, getPageProps } from './getPageProps';
+import { getBlogPosts, searchParams } from '@/api/collections/getBlogPosts';
 
 export const getBlogPageProps = async (
   searchParams: searchParams
@@ -15,7 +15,7 @@ export const getBlogPageProps = async (
     { pages, serverPagination },
     { tags },
   ] = await Promise.all([
-    getPageProps<BlogPageAttributes>("blog-page", populate),
+    getPageProps<BlogPageAttributes>('blog-page', populate),
     getHeaderMenuProps(),
     getCategories(),
     getBlogPosts(searchParams),
@@ -41,24 +41,24 @@ export const getBlogPageProps = async (
 };
 
 function isBlogPageAttributes(data: any): data is BlogPageAttributes {
-  return data && "search" in data;
+  return data && 'search' in data;
 }
 
 const populate = {
   header: {
     populate: {
       image: {
-        populate: "*",
+        populate: '*',
       },
       button: {
-        populate: "*",
+        populate: '*',
       },
     },
   },
   search: {
     populate: {
       image: {
-        populate: "*",
+        populate: '*',
       },
     },
   },

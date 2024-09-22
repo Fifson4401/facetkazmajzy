@@ -1,26 +1,40 @@
-"use client"
+'use client';
 
-import { MenuArray } from "@/api/interfaces/defaults";
-import { Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react"
-import { Image } from "@nextui-org/react";
-import NextImage from "next/image";
-import { FC, useState } from "react";
+import { MenuArray } from '@/api/interfaces/defaults';
+import {
+  Link,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+} from '@nextui-org/react';
+import { Image } from '@nextui-org/react';
+import NextImage from 'next/image';
+import { FC, useState } from 'react';
 
 interface HeaderProps {
-  menu: MenuArray
+  menu: MenuArray;
 }
 
 const Header: FC<HeaderProps> = ({ menu }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = menu.data[0].attributes.MenuItem
+  const menuItems = menu.data[0].attributes.MenuItem;
 
   if (!Array.isArray(menuItems) || menuItems.length < 1) {
-    return null
+    return null;
   }
 
   return (
-    <Navbar id="header" position="static" className="md:h-20 h-14 bg-background shadow-sm" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      id="header"
+      position="static"
+      className="h-14 bg-background shadow-sm md:h-20"
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent justify="start">
         <NavbarBrand>
           <Link href="/" color="foreground">
@@ -36,22 +50,26 @@ const Header: FC<HeaderProps> = ({ menu }) => {
           </Link>
         </NavbarBrand>
       </NavbarContent>
-      <NavbarContent className="hidden lg:flex gap-5" justify="center">
+      <NavbarContent className="hidden gap-5 lg:flex" justify="center">
         {menuItems.map((item, index) => {
-          const isActive = false
+          const isActive = false;
           //TODO active and aria
           return (
-            <NavbarItem key={`${item.text}-${index}`} isActive={isActive} >
-              <Link color="foreground" href={item.url} className="max-w-40 text-wrap text-center	">
+            <NavbarItem key={`${item.text}-${index}`} isActive={isActive}>
+              <Link
+                color="foreground"
+                href={item.url}
+                className="max-w-40 text-wrap text-center"
+              >
                 {item.text}
               </Link>
             </NavbarItem>
-          )
+          );
         })}
       </NavbarContent>
       <NavbarContent justify="end" className="lg:hidden">
         <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         />
       </NavbarContent>
       <NavbarMenu className="mt-5">
@@ -59,7 +77,11 @@ const Header: FC<HeaderProps> = ({ menu }) => {
           <NavbarMenuItem key={`${item.text}-${index}`}>
             <Link
               color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                index === 2
+                  ? 'primary'
+                  : index === menuItems.length - 1
+                    ? 'danger'
+                    : 'foreground'
               }
               className="w-full"
               href={item.url}
@@ -71,7 +93,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
         ))}
       </NavbarMenu>
     </Navbar>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

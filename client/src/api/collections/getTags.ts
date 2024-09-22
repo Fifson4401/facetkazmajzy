@@ -1,7 +1,7 @@
-import qs from "qs";
+import qs from 'qs';
 
-import client from "../client";
-import { TagsArray } from "../interfaces/collections/tags";
+import client from '../client';
+import { TagsArray } from '../interfaces/collections/tags';
 
 export const getTags = async (): Promise<{
   tags?: TagsArray;

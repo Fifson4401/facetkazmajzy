@@ -1,5 +1,5 @@
-import { MetaTag } from "next-seo/lib/types";
-import { ImageProps } from "next/image";
+import { MetaTag } from 'next-seo/lib/types';
+import { ImageProps } from 'next/image';
 
 export type SEO = {
   id: number;
@@ -22,5 +22,5 @@ export type SEO = {
 
 export type BasicStructuredDataAttributes = {
   name?: string;
-  "@type": string;
+  '@type': string;
 };

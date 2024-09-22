@@ -1,39 +1,48 @@
-'use client'
+'use client';
 
-import { Divider, Image } from "@nextui-org/react";
-import { FC } from "react";
-import { TagsArray } from "@/api/interfaces/collections/tags";
-import TagChip from "../TagChip/TagChip";
-import { getDisplayCategory } from "../CategoryChip/utils";
-import { BlogSlugPageAttributes } from "@/api/interfaces/blogPost";
-import { useRouter } from "next/navigation";
-import useRandomPost from "./hook";
-import Link from "next/link";
+import { Divider, Image } from '@nextui-org/react';
+import { FC } from 'react';
+import { TagsArray } from '@/api/interfaces/collections/tags';
+import TagChip from '../TagChip/TagChip';
+import { getDisplayCategory } from '../CategoryChip/utils';
+import { BlogSlugPageAttributes } from '@/api/interfaces/blogPost';
+import { useRouter } from 'next/navigation';
+import useRandomPost from './hook';
+import Link from 'next/link';
 
-interface PostHeaderProps extends Pick<BlogSlugPageAttributes, 'category' | 'sub_category'> {
+interface PostHeaderProps
+  extends Pick<BlogSlugPageAttributes, 'category' | 'sub_category'> {
   title: string;
   tags?: TagsArray;
   slug?: string;
 }
 
-const PostHeader: FC<PostHeaderProps> = ({ title, tags, category, sub_category, slug = '' }) => {
+const PostHeader: FC<PostHeaderProps> = ({
+  title,
+  tags,
+  category,
+  sub_category,
+  slug = '',
+}) => {
   const router = useRouter();
 
   // Tworzenie linków bez useMemo
   const categoryLink = category ? `/zadania?category=${category.data.id}` : '#';
   const subCategoryID = sub_category?.data?.id;
-  const subCategoryLink = subCategoryID ? `${categoryLink}&subCategory=${subCategoryID}` : categoryLink;
+  const subCategoryLink = subCategoryID
+    ? `${categoryLink}&subCategory=${subCategoryID}`
+    : categoryLink;
 
   const { randomSlug, loading } = useRandomPost({ category, slug });
 
   return (
-    <div className="flex flex-col md:px-11 w-full">
-      <div className="flex flex-row w-full md:mt-8 justify-between mb-6">
+    <div className="flex w-full flex-col md:px-11">
+      <div className="mb-6 flex w-full flex-row justify-between md:mt-8">
         <div>
-          <h1 className="sm:text-2xl md:text-4xl lg:text-5xl leading-tight mb-4 font-medium">
+          <h1 className="mb-4 font-medium leading-tight sm:text-2xl md:text-4xl lg:text-5xl">
             {title}
           </h1>
-          <div className="flex flex-row gap-4 mb-4">
+          <div className="mb-4 flex flex-row gap-4">
             {category && (
               <TagChip
                 name={category.data.attributes.name}
@@ -43,7 +52,9 @@ const PostHeader: FC<PostHeaderProps> = ({ title, tags, category, sub_category, 
             )}
             {subCategoryID && (
               <TagChip
-                name={getDisplayCategory(sub_category?.data.attributes.name || '')}
+                name={getDisplayCategory(
+                  sub_category?.data.attributes.name || ''
+                )}
                 size="lg"
                 onClick={() => router.push(subCategoryLink)}
               />
@@ -61,14 +72,14 @@ const PostHeader: FC<PostHeaderProps> = ({ title, tags, category, sub_category, 
         </div>
         {randomSlug && !loading && (
           <Link href={`/zadania/${randomSlug}`} className="group flex flex-col">
-            <p className="group-hover:opacity-70 pb-1">Wylosuj zadanie!</p>
+            <p className="pb-1 group-hover:opacity-70">Wylosuj zadanie!</p>
             <Image
               alt="Kości do gry"
               aria-label="Wylosuj kolejne zadanie"
               src="/dices.webp"
               width={105}
               height={105}
-              className="flex mx-auto group-hover:opacity-70"
+              className="mx-auto flex group-hover:opacity-70"
               removeWrapper
             />
           </Link>

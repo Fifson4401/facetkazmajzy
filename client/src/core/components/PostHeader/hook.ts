@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { BlogSlugPageAttributes } from "@/api/interfaces/blogPost";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { BlogSlugPageAttributes } from '@/api/interfaces/blogPost';
 
 interface UseRandomPostProps {
   slug: string;
-  category: BlogSlugPageAttributes["category"];
+  category: BlogSlugPageAttributes['category'];
 }
 
-const VALID_CATEGORIES = ["egzamin maturalny", "egzamin 8-klasisty"];
+const VALID_CATEGORIES = ['egzamin maturalny', 'egzamin 8-klasisty'];
 
 const useRandomPost = ({ slug, category }: UseRandomPostProps) => {
   const [randomSlug, setRandomSlug] = useState<string | null>(null);
@@ -31,7 +31,7 @@ const useRandomPost = ({ slug, category }: UseRandomPostProps) => {
     const fetchRandomPost = async () => {
       setLoading(true);
       try {
-        const response = await axios.get<{ slug: string }>("/api/random", {
+        const response = await axios.get<{ slug: string }>('/api/random', {
           params: { category: category.data.id, slug },
           signal: controller.signal,
         });

@@ -1,13 +1,13 @@
 import {
   CategoryAttributes,
   PropsWithCategory,
-} from "./collections/categories";
+} from './collections/categories';
 import {
   PropsWithSubCategory,
   SubCategoryAttributes,
-} from "./collections/subCategories";
-import { PropsWithTags, TagsArray } from "./collections/tags";
-import { ImageProps, PageAttributes } from "./defaults";
+} from './collections/subCategories';
+import { PropsWithTags, TagsArray } from './collections/tags';
+import { ImageProps, PageAttributes } from './defaults';
 
 export type PageDataT<T> = PageAttributes & T;
 

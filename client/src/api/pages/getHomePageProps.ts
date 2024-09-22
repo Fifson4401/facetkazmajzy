@@ -1,12 +1,12 @@
-import { DefaultPageProps, PropsWithMenu } from "../interfaces/defaults";
-import { HomePageAttributes } from "../interfaces/home";
-import { getHeaderMenuProps, getPageProps } from "./getPageProps";
+import { DefaultPageProps, PropsWithMenu } from '../interfaces/defaults';
+import { HomePageAttributes } from '../interfaces/home';
+import { getHeaderMenuProps, getPageProps } from './getPageProps';
 
 export const getHomePageProps = async (): Promise<
   DefaultPageProps<HomePageAttributes & PropsWithMenu>
 > => {
   const [{ pageData }, { menu }] = await Promise.all([
-    getPageProps<HomePageAttributes>("home-page", populate),
+    getPageProps<HomePageAttributes>('home-page', populate),
     getHeaderMenuProps(),
   ]);
 
@@ -25,24 +25,24 @@ export const getHomePageProps = async (): Promise<
 };
 
 function isHomePageAttributes(data: any): data is HomePageAttributes {
-  return data && "header" in data && "search" in data;
+  return data && 'header' in data && 'search' in data;
 }
 
 const populate = {
   header: {
     populate: {
       image: {
-        populate: "*",
+        populate: '*',
       },
       button: {
-        populate: "*",
+        populate: '*',
       },
     },
   },
   search: {
     populate: {
       image: {
-        populate: "*",
+        populate: '*',
       },
     },
   },

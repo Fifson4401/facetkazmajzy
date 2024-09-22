@@ -2,22 +2,22 @@ import {
   RouteToAttributes,
   NameOfRouteProps,
   UseBlogProps,
-} from "@/api/interfaces/blog";
-import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
-import { useCallback, useMemo } from "react";
+} from '@/api/interfaces/blog';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { useCallback, useMemo } from 'react';
 
 const RESET_PARAMS_MAP: Partial<Record<NameOfRouteProps, string[]>> = {
-  search: ["tag", "page"],
-  subCategory: ["tag", "page"],
-  category: ["subCategory", "tag", "page"],
+  search: ['tag', 'page'],
+  subCategory: ['tag', 'page'],
+  category: ['subCategory', 'tag', 'page'],
 };
 
 const toggleTags = (
   currentTags: string[],
   tagValue: string | string[]
 ): string[] => {
-  if (typeof tagValue === "string") {
+  if (typeof tagValue === 'string') {
     return currentTags.includes(tagValue)
       ? currentTags.filter((t) => t !== tagValue)
       : [...currentTags, tagValue];
@@ -46,19 +46,19 @@ export const useBlog = (): UseBlogProps => {
         resetParams.forEach((param: string) => params.delete(param));
       }
 
-      if (routeTo.name === "tag" && routeTo.value) {
-        let tags = params.get("tag")?.split(",") || [];
+      if (routeTo.name === 'tag' && routeTo.value) {
+        let tags = params.get('tag')?.split(',') || [];
         tags = toggleTags(tags, routeTo.value);
 
         if (tags.length > 0) {
-          params.set("tag", tags.join(","));
+          params.set('tag', tags.join(','));
         } else {
-          params.delete("tag");
+          params.delete('tag');
         }
       } else if (routeTo.name) {
         if (routeTo.value === undefined) {
           params.delete(routeTo.name);
-        } else if (typeof routeTo.value === "string") {
+        } else if (typeof routeTo.value === 'string') {
           params.set(routeTo.name, routeTo.value);
         }
         // Możesz dodać obsługę innych typów wartości, jeśli to konieczne
@@ -68,14 +68,14 @@ export const useBlog = (): UseBlogProps => {
       const url = queryString ? `/zadania?${queryString}` : `/zadania`;
 
       router.push(url, {
-        scroll: routeTo.name === "page",
+        scroll: routeTo.name === 'page',
       });
     },
     [searchParams, router]
   );
 
   const clearAllQueries = useCallback(() => {
-    router.push("/zadania");
+    router.push('/zadania');
   }, [router]);
 
   return { query: queryURL, setRouteTo, clearAllQueries };

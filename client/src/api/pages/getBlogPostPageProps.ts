@@ -1,7 +1,7 @@
-import { BlogPageAttributes } from "../interfaces/blog";
-import { BlogSlugPageAttributes } from "../interfaces/blogPost";
-import { DefaultPageProps, PropsWithMenu } from "../interfaces/defaults";
-import { getHeaderMenuProps, getPageProps } from "./getPageProps";
+import { BlogPageAttributes } from '../interfaces/blog';
+import { BlogSlugPageAttributes } from '../interfaces/blogPost';
+import { DefaultPageProps, PropsWithMenu } from '../interfaces/defaults';
+import { getHeaderMenuProps, getPageProps } from './getPageProps';
 
 export const getBlogPostPageProps = async (
   slug: string
@@ -26,33 +26,33 @@ export const getBlogPostPageProps = async (
 };
 
 function isBlogPostPageProps(data: any): data is BlogSlugPageAttributes {
-  return data && "content" in data && "answer" in data && "source" in data;
+  return data && 'content' in data && 'answer' in data && 'source' in data;
 }
 
 const populate = {
-  fields: ["title", "description"],
+  fields: ['title', 'description'],
   content: {
     populate: {
       image: {
-        populate: "*",
+        populate: '*',
       },
     },
   },
   answer: {
     populate: {
       image: {
-        populate: "*",
+        populate: '*',
       },
     },
   },
   source: {
-    populate: "*",
+    populate: '*',
   },
-  category: { populate: { name: { populate: "*" } } },
-  sub_category: { populate: { name: { populate: "*" } } },
+  category: { populate: { name: { populate: '*' } } },
+  sub_category: { populate: { name: { populate: '*' } } },
   tags: {
     populate: {
-      name: { populate: "*" },
+      name: { populate: '*' },
     },
   },
 };

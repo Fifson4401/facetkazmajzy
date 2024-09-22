@@ -1,15 +1,15 @@
-import qs from "qs";
+import qs from 'qs';
 
-import client from "../client";
-import { StrapiFindAllResponse } from "../interfaces/strapiResponse";
-import { BlogPageProps } from "../interfaces/blog";
-import { PostTileProps } from "../interfaces/collections/blogPosts";
+import client from '../client';
+import { StrapiFindAllResponse } from '../interfaces/strapiResponse';
+import { BlogPageProps } from '../interfaces/blog';
+import { PostTileProps } from '../interfaces/collections/blogPosts';
 
 export type searchParams = Record<string, string | undefined>;
 
 export const getBlogPosts = async (
   searchParams: searchParams
-): Promise<Pick<BlogPageProps, "pages" | "serverPagination">> => {
+): Promise<Pick<BlogPageProps, 'pages' | 'serverPagination'>> => {
   const {
     page = 1,
     search = undefined,
@@ -18,29 +18,29 @@ export const getBlogPosts = async (
     tag = undefined,
   } = searchParams;
 
-  const tagsArray = tag ? tag.split(",") : [];
+  const tagsArray = tag ? tag.split(',') : [];
 
   try {
     const query = qs.stringify(
       {
-        fields: ["slug", "title", "description"],
+        fields: ['slug', 'title', 'description'],
         populate: {
           header: {
             populate: {
-              title: { populate: "*" },
-              bgImage: { populate: "*" },
+              title: { populate: '*' },
+              bgImage: { populate: '*' },
               postAuthor: {
                 populate: {
-                  blogPostAuthor: { populate: "*" },
+                  blogPostAuthor: { populate: '*' },
                 },
               },
             },
           },
-          category: { populate: { name: { populate: "*" } } },
-          sub_category: { populate: { name: { populate: "*" } } },
+          category: { populate: { name: { populate: '*' } } },
+          sub_category: { populate: { name: { populate: '*' } } },
           tags: {
             populate: {
-              name: { populate: "*" },
+              name: { populate: '*' },
             },
           },
         },

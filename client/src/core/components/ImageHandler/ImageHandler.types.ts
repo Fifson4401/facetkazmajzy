@@ -1,5 +1,5 @@
-import { ImageAttributes } from "@/api/interfaces/defaults";
-import { ImageProps } from "@nextui-org/react";
+import { ImageAttributes } from '@/api/interfaces/defaults';
+import { ImageProps } from '@nextui-org/react';
 
 export type ImageHandlerProps = {
   image: ImageAttributes | undefined;

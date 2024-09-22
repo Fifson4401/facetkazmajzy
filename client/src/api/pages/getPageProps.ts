@@ -1,21 +1,21 @@
-import { ParsedUrlQuery } from "querystring";
+import { ParsedUrlQuery } from 'querystring';
 import {
   DefaultPageProps,
   MenuArray,
   PageDataAnd,
   PageDataOr,
-} from "../interfaces/defaults";
-import qs from "qs";
-import client from "../client";
-import { StrapiFindOneResponse } from "../interfaces/strapiResponse";
-import { notFound } from "next/navigation";
+} from '../interfaces/defaults';
+import qs from 'qs';
+import client from '../client';
+import { StrapiFindOneResponse } from '../interfaces/strapiResponse';
+import { notFound } from 'next/navigation';
 
 export const getPageProps = async <T>(
   url: string,
   _populate?: Record<string, object>,
   query?: ParsedUrlQuery
 ): Promise<DefaultPageProps<PageDataOr<T>>> => {
-  const queryParams = query ? `&${qs.stringify(query)}` : "";
+  const queryParams = query ? `&${qs.stringify(query)}` : '';
 
   try {
     const {
@@ -28,7 +28,7 @@ export const getPageProps = async <T>(
 
     return { pageData: attributes };
   } catch (error) {
-    console.error("Error fetching HomePage data:", error);
+    console.error('Error fetching HomePage data:', error);
     notFound();
   }
 };
@@ -39,7 +39,7 @@ export const seoQuery = (populate: Record<string, object> = {}): string => {
       populate: {
         seo: {
           populate: {
-            metaImage: { populate: "*" },
+            metaImage: { populate: '*' },
           },
         },
         ...populate,
@@ -56,10 +56,10 @@ export const seoQuery = (populate: Record<string, object> = {}): string => {
 export const getHeaderMenuProps = async (): Promise<{ menu: MenuArray }> => {
   try {
     const query = qs.stringify({
-      populate: "*",
+      populate: '*',
       filters: {
         name: {
-          $eq: "header",
+          $eq: 'header',
         },
       },
     });

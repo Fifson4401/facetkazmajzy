@@ -1,2 +1,2 @@
-export { ImageHandler, ImageHandlerPopulate } from './ImageHandler'
-export type { ImageHandlerProps } from './ImageHandler.types'
+export { ImageHandler, ImageHandlerPopulate } from './ImageHandler';
+export type { ImageHandlerProps } from './ImageHandler.types';

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { SubCategoryAttributes } from "@/api/interfaces/collections/subCategories";
-import { StrapiResponse } from "@/api/interfaces/strapiResponse";
-import { TagsArray } from "@/api/interfaces/collections/tags";
+import { useState, useEffect } from 'react';
+import { SubCategoryAttributes } from '@/api/interfaces/collections/subCategories';
+import { StrapiResponse } from '@/api/interfaces/strapiResponse';
+import { TagsArray } from '@/api/interfaces/collections/tags';
 
 interface useChipsProps {
   query?: Record<string, string | undefined>;
@@ -17,7 +17,7 @@ const useListChips = ({ query, tags }: useChipsProps) => {
     if (tags && query) {
       setFilteredTags(
         tags.data.filter(
-          (value) => !query?.tag?.split(",").includes(value.id.toString())
+          (value) => !query?.tag?.split(',').includes(value.id.toString())
         )
       );
     }

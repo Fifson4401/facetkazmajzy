@@ -1,6 +1,6 @@
-import { CategoriesBlog } from "./categories";
-import { SubCategoriesBlog } from "./subCategories";
-import { TagsArray } from "./tags";
+import { CategoriesBlog } from './categories';
+import { SubCategoriesBlog } from './subCategories';
+import { TagsArray } from './tags';
 
 export type PostTileProps = {
   id: string;

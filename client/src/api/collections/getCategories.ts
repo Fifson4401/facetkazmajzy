@@ -1,7 +1,7 @@
-import qs from "qs";
+import qs from 'qs';
 
-import { CategoriesArray } from "../interfaces/collections/categories";
-import client from "../client";
+import { CategoriesArray } from '../interfaces/collections/categories';
+import client from '../client';
 
 export const getCategories = async (): Promise<{
   categories?: CategoriesArray;

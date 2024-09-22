@@ -1,14 +1,14 @@
-import { Image } from "@nextui-org/react";
-import NextImage from "next/image";
-import Link from "next/link";
-import { useMemo } from "react";
+import { Image } from '@nextui-org/react';
+import NextImage from 'next/image';
+import Link from 'next/link';
+import { useMemo } from 'react';
 
 const Footer = () => {
-  const date = useMemo(() => new Date(), [])
+  const date = useMemo(() => new Date(), []);
 
   return (
-    <div className="flex flex-col px-11 bg-background shadow-sm justify-center md:pt-7">
-      <div className="flex flex-row items-start w-full justify-center mb-2">
+    <div className="flex flex-col justify-center bg-background px-11 shadow-sm md:pt-7">
+      <div className="mb-2 flex w-full flex-row items-start justify-center">
         <Link href="/" color="foreground">
           <Image
             as={NextImage}
@@ -20,23 +20,16 @@ const Footer = () => {
           />
         </Link>
       </div>
-      <div className="flex flex-row items-start w-full justify-center">
-        <p className="mb-2 md:text-medium text-sm">
+      <div className="flex w-full flex-row items-start justify-center">
+        <p className="mb-2 text-sm md:text-medium">
           Facetka z Majzy © {date.getFullYear()}
         </p>
       </div>
-      <div className="flex flex-row items-start w-full justify-center gap-2 mb-6 md:text-medium text-sm">
-        <Link href={'/'}>
-          Zadania
-        </Link>
-        <Link href={'/'}>
-          Kontakt
-        </Link>
-        <Link href={'/'}>
-          Polityka prywatności
-        </Link>
+      <div className="mb-6 flex w-full flex-row items-start justify-center gap-2 text-sm md:text-medium">
+        <Link href={'/'}>Zadania</Link>
+        <Link href={'/'}>Kontakt</Link>
+        <Link href={'/'}>Polityka prywatności</Link>
       </div>
-
     </div>
   );
 };

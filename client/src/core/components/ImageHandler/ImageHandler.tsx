@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import { Image } from "@nextui-org/react";
-import NextImage from "next/image";
+import { Image } from '@nextui-org/react';
+import NextImage from 'next/image';
 
-import { FC } from 'react'
+import { FC } from 'react';
 
-import { ImageInstance } from '@/core/models/ImageInstance'
+import { ImageInstance } from '@/core/models/ImageInstance';
 
-import { ImageHandlerProps } from './ImageHandler.types'
-import { PropsWithClassName } from '@/api/interfaces/defaults'
-import { useDevicePixelRatio } from "@/core/hooks/devicePixelRatio/hooks";
+import { ImageHandlerProps } from './ImageHandler.types';
+import { PropsWithClassName } from '@/api/interfaces/defaults';
+import { useDevicePixelRatio } from '@/core/hooks/devicePixelRatio/hooks';
 
 export const ImageHandlerPopulate = {
   populate: {
@@ -17,29 +17,28 @@ export const ImageHandlerPopulate = {
     alternativeText: { populate: '*' },
     caption: { populate: '*' },
     width: { populate: '*' },
-    height: { populate: '*' }
-  }
-}
+    height: { populate: '*' },
+  },
+};
 
 export const ImageHandler: FC<PropsWithClassName<ImageHandlerProps>> = ({
   image,
   wrapperClassName = '',
-  imageClassName = "",
+  imageClassName = '',
   priority = false,
   isBlurred = false,
-  removeWrapper = false
+  removeWrapper = false,
 }) => {
-  const { getValueBasedOnPixelRatio } = useDevicePixelRatio()
-
+  const { getValueBasedOnPixelRatio } = useDevicePixelRatio();
 
   if (!image) {
-    return null
+    return null;
   }
 
-  const source = new ImageInstance(image)
+  const source = new ImageInstance(image);
 
   return (
-    <div className={`w-full h-full ${wrapperClassName}`}>
+    <div className={`h-full w-full ${wrapperClassName}`}>
       <Image
         isBlurred={isBlurred}
         as={NextImage}
@@ -55,5 +54,5 @@ export const ImageHandler: FC<PropsWithClassName<ImageHandlerProps>> = ({
         removeWrapper={removeWrapper}
       />
     </div>
-  )
-}
+  );
+};

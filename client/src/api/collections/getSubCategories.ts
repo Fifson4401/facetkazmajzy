@@ -1,7 +1,7 @@
-import qs from "qs";
+import qs from 'qs';
 
-import client from "../client";
-import { SubCategoriesArray } from "../interfaces/collections/subCategories";
+import client from '../client';
+import { SubCategoriesArray } from '../interfaces/collections/subCategories';
 
 export const getSubCategories = async (
   categoryID?: string

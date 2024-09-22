@@ -1,8 +1,8 @@
-import { FC, useState, useEffect } from "react";
-import { CategoriesArray } from "@/api/interfaces/collections/categories";
-import { RouteToProps } from "@/api/interfaces/blog";
-import { Card, CardBody } from "@nextui-org/react";
-import { motion, AnimatePresence } from "framer-motion";
+import { FC, useState, useEffect } from 'react';
+import { CategoriesArray } from '@/api/interfaces/collections/categories';
+import { RouteToProps } from '@/api/interfaces/blog';
+import { Card, CardBody } from '@nextui-org/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface CategoryPickerProps {
   setFilter: (data: RouteToProps) => void;
@@ -10,7 +10,11 @@ interface CategoryPickerProps {
   query?: Record<string, string | undefined>;
 }
 
-const CategoryPicker: FC<CategoryPickerProps> = ({ categories, setFilter, query }) => {
+const CategoryPicker: FC<CategoryPickerProps> = ({
+  categories,
+  setFilter,
+  query,
+}) => {
   const [showComponent, setShowComponent] = useState(!query?.category);
 
   useEffect(() => {
@@ -25,7 +29,7 @@ const CategoryPicker: FC<CategoryPickerProps> = ({ categories, setFilter, query 
     <AnimatePresence>
       {showComponent && (
         <motion.div
-          className="flex flex-row justify-center gap-6 overflow-hidden flex-wrap"
+          className="flex flex-row flex-wrap justify-center gap-6 overflow-hidden"
           initial={{ opacity: 0, y: 20, height: 0 }}
           animate={{ opacity: 1, y: 0, height: 'auto' }}
           exit={{ opacity: 0, y: 20, height: 0 }}
@@ -35,14 +39,16 @@ const CategoryPicker: FC<CategoryPickerProps> = ({ categories, setFilter, query 
           {categories.data.map((item) => (
             <Card
               isBlurred
-              className="border-none max-w-36 w-1/2 md:w-1/3 lg:w-1/4 text-white bg-[#015c99] hover:bg-[#fa6bb4] shadow-md"
+              className="w-1/2 max-w-36 border-none bg-[#015c99] text-white shadow-md hover:bg-[#fa6bb4] md:w-1/3 lg:w-1/4"
               shadow="sm"
               isPressable
-              onPress={() => setFilter({ name: "category", value: item.id.toString() })}
+              onPress={() =>
+                setFilter({ name: 'category', value: item.id.toString() })
+              }
               key={item.id}
             >
-              <CardBody className="text-center justify-center">
-                <p className="md:font-semibold text-sm md:text-base">
+              <CardBody className="justify-center text-center">
+                <p className="text-sm md:text-base md:font-semibold">
                   {item.attributes.name}
                 </p>
               </CardBody>

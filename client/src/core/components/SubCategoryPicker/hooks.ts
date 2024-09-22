@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   SubCategoriesGetResponse,
   SubCategoryAttributes,
-} from "@/api/interfaces/collections/subCategories";
-import axios, { AxiosResponse, AxiosError } from "axios";
-import qs from "qs";
-import { StrapiResponse } from "@/api/interfaces/strapiResponse";
+} from '@/api/interfaces/collections/subCategories';
+import axios, { AxiosResponse, AxiosError } from 'axios';
+import qs from 'qs';
+import { StrapiResponse } from '@/api/interfaces/strapiResponse';
 
 interface useSubCategoryProps {
   query?: Record<string, string | undefined>;
@@ -47,7 +47,7 @@ const useSubCategory = ({ query }: useSubCategoryProps) => {
           }
         })
         .catch((error: AxiosError) => {
-          if (error.code !== "ERR_CANCELED") {
+          if (error.code !== 'ERR_CANCELED') {
             console.error(error);
           }
           // Opcjonalnie możesz obsłużyć anulowanie tutaj, jeśli potrzebujesz

@@ -1,12 +1,12 @@
 /* eslint-disable */
-import { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren } from 'react';
 import Header from '../Header/Header';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { MenuArray } from '@/api/interfaces/defaults';
 import Footer from '../Footer/Footer';
 
 export type LayoutProps = PropsWithChildren<object> & {
-  menu: MenuArray
+  menu: MenuArray;
   lang?: string;
 };
 
@@ -14,9 +14,12 @@ export const Layout: FC<LayoutProps> = ({ children, lang = 'pl', menu }) => (
   <>
     <Header menu={menu} />
     <ProgressBar />
-    <main lang={lang} className="flex min-h-screen flex-col items-center xl:px-28 md:px-14 md:py-8 light text-foreground bg-background p-8 overflow-hidden gap-6 md:gap-10">
+    <main
+      lang={lang}
+      className="flex min-h-screen flex-col items-center gap-6 overflow-hidden bg-background p-8 text-foreground light md:gap-10 md:px-14 md:py-8 xl:px-28"
+    >
       {children}
     </main>
     <Footer />
   </>
-)
+);

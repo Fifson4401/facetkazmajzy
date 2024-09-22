@@ -1,7 +1,7 @@
-import { RefObject } from "react";
+import { RefObject } from 'react';
 
-import { StrapiFindAllResponse, StrapiResponse } from "./strapiResponse";
-import { SEO } from "./seo";
+import { StrapiFindAllResponse, StrapiResponse } from './strapiResponse';
+import { SEO } from './seo';
 
 // used
 
@@ -109,7 +109,7 @@ export type ImagesArray = {
   }[];
 };
 
-export type ImageAttributes = Omit<SizedImage, "path"> & {
+export type ImageAttributes = Omit<SizedImage, 'path'> & {
   alternativeText: string;
   caption: string;
   createdAt: string;
@@ -173,7 +173,7 @@ export type ImageSingle = {
 export type LinkType = { id: number; name: string; href: string };
 
 export type RouteToAttributes = {
-  name: "page" | "category" | "search" | undefined;
+  name: 'page' | 'category' | 'search' | undefined;
   value: string | string[] | undefined;
   slug?: string;
 };

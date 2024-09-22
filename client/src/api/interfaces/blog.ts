@@ -1,8 +1,8 @@
-import { PostTileProps } from "./collections/blogPosts";
-import { PropsWithCategories } from "./collections/categories";
-import { PropsWithTags } from "./collections/tags";
-import { MenuArray, PageAttributes } from "./defaults";
-import { StrapiResponse } from "./strapiResponse";
+import { PostTileProps } from './collections/blogPosts';
+import { PropsWithCategories } from './collections/categories';
+import { PropsWithTags } from './collections/tags';
+import { MenuArray, PageAttributes } from './defaults';
+import { StrapiResponse } from './strapiResponse';
 
 export type BlogPageAttributes = PageAttributes & {
   title: string;
@@ -52,10 +52,10 @@ export type RouteToProps = {
 };
 
 export type NameOfRouteProps =
-  | "page"
-  | "category"
-  | "search"
-  | "subCategory"
-  | "tag";
+  | 'page'
+  | 'category'
+  | 'search'
+  | 'subCategory'
+  | 'tag';
 
 type ValueOfRouteProps = string | string[] | undefined;

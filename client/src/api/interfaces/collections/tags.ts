@@ -1,5 +1,5 @@
-import { DefaultPageAttributes } from "../defaults";
-import { StrapiFindAllResponse } from "../strapiResponse";
+import { DefaultPageAttributes } from '../defaults';
+import { StrapiFindAllResponse } from '../strapiResponse';
 
 export type PropsWithTags<T = object> = T & {
   tags?: TagsArray;

@@ -1,15 +1,15 @@
 // app/[...route]/route.ts
 
-import client from "@/api/client";
-import { AxiosError } from "axios";
-import { NextRequest } from "next/server";
+import client from '@/api/client';
+import { AxiosError } from 'axios';
+import { NextRequest } from 'next/server';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { route: string[] } }
 ) {
   // Odtwórz ścieżkę API z parametrów trasy
-  const apiPath = `/${params.route.join("/")}`;
+  const apiPath = `/${params.route.join('/')}`;
 
   // Pobierz parametry zapytania
   const searchParams = request.nextUrl.search;
@@ -24,18 +24,18 @@ export async function GET(
     // Zwróć odpowiedź
     return new Response(JSON.stringify(response.data), {
       status: response.status,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     });
   } catch (err) {
     const error = err as AxiosError;
 
     const statusCode = error.response?.status || 500;
     const errorMessage =
-      (error.response?.data as string) || error.message || "Unknown error";
+      (error.response?.data as string) || error.message || 'Unknown error';
 
     return new Response(JSON.stringify({ error: errorMessage }), {
       status: statusCode,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     });
   }
 }

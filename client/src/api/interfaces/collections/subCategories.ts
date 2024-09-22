@@ -1,10 +1,10 @@
-import { DefaultAttributes } from "../defaults";
+import { DefaultAttributes } from '../defaults';
 import {
   Pagination,
   StrapiFindAllResponse,
   StrapiFindOneResponse,
   StrapiResponse,
-} from "../strapiResponse";
+} from '../strapiResponse';
 
 export type SubCategoryAttributes = DefaultAttributes & {
   name: string;
