@@ -127,7 +127,7 @@ const Search: FC<SearchProps> = ({
             color="danger"
             className="max-w-3 bg-[#ED0C0C] text-white shadow-xl"
             startContent={<IoMdTrash size={20} />}
-            aria-description="Usuń parametry wyszukiwania"
+            aria-label="Usuń parametry wyszukiwania"
             onClick={clearAll}
           />
         )}
@@ -171,7 +171,7 @@ const Search: FC<SearchProps> = ({
           disabled={searchValue.trim() === ''}
           className="bg-[#cc3266] text-white shadow-xl"
           startContent={<IoMdSearch size={25} />}
-          aria-description="Szukaj"
+          aria-label="Szukaj"
         />
       </div>
 
