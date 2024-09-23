@@ -1,16 +1,16 @@
 'use client';
 
 import { Button, Input } from '@nextui-org/react';
-import { FC, useMemo, useState, useCallback } from 'react';
+import { FC, useState, useCallback } from 'react';
 import { IoMdSearch, IoMdTrash } from 'react-icons/io';
 import { RouteToProps } from '@/api/interfaces/blog';
 import { TagsArray } from '@/api/interfaces/collections/tags';
-import useChips from './hooks';
+import useChips from './useChips';
 import TagChip from '../TagChip/TagChip';
 import { CategoriesArray } from '@/api/interfaces/collections/categories';
 import { StrapiResponse } from '@/api/interfaces/strapiResponse';
 import { SubCategoryAttributes } from '@/api/interfaces/collections/subCategories';
-import { getDisplayCategory } from '../CategoryChip/utils';
+import useSearch from './useSearch';
 
 interface SearchProps {
   placeholder: string;
@@ -31,49 +31,17 @@ const Search: FC<SearchProps> = ({
   categories,
   subCategories,
 }) => {
-  // Lokalny stan dla wartości wyszukiwania
   const [searchValue, setSearchValue] = useState<string>(query?.search || '');
 
-  // Użycie custom hooka do filtrowania tagów
   const { filteredTags } = useChips({ query, tags });
 
-  // Wyliczenie, czy pokazać przycisk "Usuń wszystkie filtry"
-  const showDeleteAll = useMemo(
-    () => Object.keys(query || {}).length > 1,
-    [query]
-  );
+  const { categoryName, showDeleteAll, subCategoryName } = useSearch({ query, categories, subCategories })
 
-  // Wyliczenie nazwy kategorii na podstawie query i dostępnych kategorii
-  const categoryName = useMemo(() => {
-    const categoryId = query?.category
-      ? Object.values(query.category)[0]
-      : undefined;
-    const category = categories?.data.find(
-      (item) => item.id.toString() === categoryId
-    );
-    return category?.attributes.name;
-  }, [query, categories]);
-
-  // Wyliczenie nazwy subkategorii na podstawie query i dostępnych subkategorii
-  const subCategoryName = useMemo(() => {
-    const subCategoryId = query?.subCategory
-      ? Object.values(query.subCategory)[0]
-      : undefined;
-    const subCategory = subCategories?.find(
-      (item) => item.id.toString() === subCategoryId
-    );
-    return subCategory
-      ? getDisplayCategory(subCategory.attributes.name || '')
-      : undefined;
-  }, [query, subCategories]);
-
-  // Funkcja obsługująca wyczyszczenie pola wyszukiwania
   const handleClear = useCallback(() => {
     setFilter({ name: 'search', value: undefined });
     setSearchValue('');
   }, [setFilter]);
 
-  // Funkcje obsługujące zamykanie poszczególnych filtrów
   const handleCloseTag = useCallback(
     (id: number) => {
       setFilter({ name: 'tag', value: id.toString() });
@@ -96,7 +64,6 @@ const Search: FC<SearchProps> = ({
         setFilter({ name: 'search', value: searchValue });
       }}
     >
-      {/* Sekcja z tagami kategorii i subkategorii */}
       <div className="mt-4 flex flex-wrap justify-end gap-2 md:px-11">
         {categoryName && (
           <TagChip
@@ -119,8 +86,6 @@ const Search: FC<SearchProps> = ({
           />
         )}
       </div>
-
-      {/* Główna sekcja wyszukiwania */}
       <div className="flex w-full flex-row items-center justify-center gap-5 pb-2 pt-2 md:px-11">
         {showDeleteAll && (
           <Button
@@ -174,8 +139,6 @@ const Search: FC<SearchProps> = ({
           aria-label="Szukaj"
         />
       </div>
-
-      {/* Sekcja z tagami filtrów */}
       {filteredTags.length > 0 && (
         <div className="flex flex-wrap justify-end gap-2 md:px-11">
           {filteredTags.map((item) => (
