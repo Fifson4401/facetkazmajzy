@@ -57,9 +57,10 @@ const ClientBlogPage: FC<Omit<BlogPageAttributes, 'menu'>> = ({
       />
       <Spacer y={5} />
       <PostList pages={pages} />
-      {serverPagination && serverPagination?.pageCount > 1 && (
-        <Pagination total={serverPagination.pageCount} initialPage={1} />
-      )}
+      <div className='pt-6 flex justify-center'>
+        {serverPagination && serverPagination?.pageCount > 1 && (
+          <Pagination total={serverPagination.pageCount} initialPage={1} classNames={{ item: 'border-2 border-[#a40066]', cursor: 'bg-[#a40066]' }} size='lg' onChange={(page) => setRouteTo({ 'name': 'page', 'value': page.toString() })} page={parseInt(query?.page || '1')} />
+        )}</div>
     </div>
   );
 };

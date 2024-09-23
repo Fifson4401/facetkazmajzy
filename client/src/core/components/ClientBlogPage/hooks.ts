@@ -5,7 +5,7 @@ import {
 } from '@/api/interfaces/blog';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useEffect, useRef } from 'react';
 
 const RESET_PARAMS_MAP: Partial<Record<NameOfRouteProps, string[]>> = {
   search: ['tag', 'page'],
@@ -30,12 +30,23 @@ const toggleTags = (
 export const useBlog = (): UseBlogProps => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Memoizacja queryURL dla optymalizacji
   const queryURL = useMemo(
     () => Object.fromEntries(searchParams.entries()),
     [searchParams]
   );
+
+  const smoothScrollToCategory = useCallback(() => {
+    console.log('Attempting to scroll to category');
+    const categoryElement = document.getElementById('category');
+    if (categoryElement) {
+      console.log('Category element found, scrolling');
+      categoryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      console.log('Category element not found');
+    }
+  }, []);
 
   const setRouteTo = useCallback(
     (routeTo: RouteToAttributes) => {
@@ -61,22 +72,45 @@ export const useBlog = (): UseBlogProps => {
         } else if (typeof routeTo.value === 'string') {
           params.set(routeTo.name, routeTo.value);
         }
-        // Możesz dodać obsługę innych typów wartości, jeśli to konieczne
       }
 
       const queryString = params.toString();
-      const url = queryString ? `/zadania?${queryString}` : `/zadania`;
+      let url = queryString ? `/zadania?${queryString}` : `/zadania`;
 
-      router.push(url, {
-        scroll: routeTo.name === 'page',
-      });
+      if (routeTo.name === 'page') {
+        url += '#category';
+      }
+
+      console.log(`Navigating to: ${url}`);
+      router.push(url, { scroll: false });
+
+      if (routeTo.name === 'page') {
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
+        scrollTimeoutRef.current = setTimeout(() => {
+          smoothScrollToCategory();
+        }, 100);
+      }
     },
-    [searchParams, router]
+    [searchParams, router, smoothScrollToCategory]
   );
 
   const clearAllQueries = useCallback(() => {
     router.push('/zadania');
   }, [router]);
+
+  useEffect(() => {
+    console.log('URL changed, current hash:', window.location.hash);
+    if (window.location.hash === '#category') {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      scrollTimeoutRef.current = setTimeout(() => {
+        smoothScrollToCategory();
+      }, 100);
+    }
+  }, [searchParams, smoothScrollToCategory]);
 
   return { query: queryURL, setRouteTo, clearAllQueries };
 };

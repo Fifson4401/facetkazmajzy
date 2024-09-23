@@ -3,6 +3,8 @@ import { Layout } from '@/core/components/Layout/Layout';
 import PostAnswer from '@/core/components/PostAnswer/PostAnswer';
 import { PostContent } from '@/core/components/PostContent/PostContent';
 import PostHeader from '@/core/components/PostHeader/PostHeader';
+import PostSource from '@/core/components/PostSource/PostSource';
+import PostVideo from '@/core/components/PostVideo/PostVideo';
 import { notFound } from 'next/navigation';
 
 interface BlogPostPageProps {
@@ -16,7 +18,18 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const { menu, title, category, sub_category, tags, slug, content, answer } = pageData;
+  const {
+    menu,
+    title,
+    category,
+    sub_category,
+    tags,
+    slug,
+    content,
+    answer,
+    source,
+    video,
+  } = pageData;
 
   return (
     <Layout menu={menu}>
@@ -29,6 +42,8 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       />
       <PostContent content={content || []} />
       <PostAnswer TEX={answer?.TEX} image={answer?.image} />
+      <PostSource source={source} />
+      <PostVideo video={video} />
     </Layout>
   );
 }

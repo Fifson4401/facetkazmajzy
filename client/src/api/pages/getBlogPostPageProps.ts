@@ -48,6 +48,9 @@ const populate = {
   source: {
     populate: '*',
   },
+  video: {
+    populate: '*',
+  },
   category: { populate: { name: { populate: '*' } } },
   sub_category: { populate: { name: { populate: '*' } } },
   tags: {

@@ -18,6 +18,8 @@ export type BlogSlugPageAttributes = PageAttributes & {
   description?: string;
   content?: BlogPostContentTypes[];
   answer?: BlogPageAnswerProps;
+  source?: BlogPostSource;
+  video?: BlogPostVideo;
 } & PropsWithTags &
   PropsWithCategory &
   PropsWithSubCategory;
@@ -26,6 +28,8 @@ export type BlogPostTEX = { TEX: string; type: ContentType };
 export type BlogPostImage = { image: ImageProps; type: ContentType };
 
 export type BlogPostSource = { text: string; url?: string };
+
+export type BlogPostVideo = { title: string; embedURL?: string };
 
 export type BlogPostContentTypes = BlogPostTEX | BlogPostImage;
 

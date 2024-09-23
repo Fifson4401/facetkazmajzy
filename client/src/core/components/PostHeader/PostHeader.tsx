@@ -38,7 +38,7 @@ const PostHeader: FC<PostHeaderProps> = ({
     <div className="flex w-full flex-col md:px-11">
       <div className="mb-6 flex w-full flex-row justify-between md:mt-8">
         <div>
-          <h1 className="mb-4 font-semibold md:font-medium leading-tight sm:text-2xl md:text-4xl lg:text-5xl">
+          <h1 className="mb-4 font-semibold leading-tight sm:text-2xl md:text-4xl md:font-medium lg:text-5xl">
             {title}
           </h1>
           <div className="mb-4 flex flex-row gap-4">
@@ -77,10 +77,12 @@ const PostHeader: FC<PostHeaderProps> = ({
               src="/dices.webp"
               width={105}
               height={105}
-              className="mx-auto flex group-hover:opacity-70 mt-1 w-20 max-h-20 sm:w-max sm:max-h-max"
+              className="mx-auto mt-1 flex max-h-20 w-20 group-hover:opacity-70 sm:max-h-max sm:w-max"
               removeWrapper
             />
-            <p className="pt-2 group-hover:opacity-70 font-semibold md:font-medium">Wylosuj zadanie!</p>
+            <p className="pt-2 font-semibold group-hover:opacity-70 md:font-medium">
+              Wylosuj zadanie!
+            </p>
           </Link>
         )}
       </div>

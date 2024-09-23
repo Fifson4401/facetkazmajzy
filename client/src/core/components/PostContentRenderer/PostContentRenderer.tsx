@@ -4,7 +4,6 @@ import 'katex/dist/katex.min.css';
 
 export interface PostContentRendererProps {
   content?: string;
-  key: string;
   className?: string;
 }
 
@@ -13,7 +12,8 @@ const parseContent = (content: string): React.ReactNode[] => {
   let lastIndex = 0;
 
   // Kombinowane wyrażenie regularne z alternatywami dla różnych typów dopasowań
-  const regex = /\\textbf\{([^}]+)\}|\\begin\{equation\*\}([\s\S]*?)\\end\{equation\*\}|\$([^$]+)\$|\\\\|\n/g;
+  const regex =
+    /\\textbf\{([^}]+)\}|\\begin\{equation\*\}([\s\S]*?)\\end\{equation\*\}|\$([^$]+)\$|\\\\|\n/g;
   let match: RegExpExecArray | null;
 
   while ((match = regex.exec(content)) !== null) {
@@ -31,9 +31,7 @@ const parseContent = (content: string): React.ReactNode[] => {
       const boldContent = match[1];
       // Rekurencyjnie parsujemy zawartość pogrubienia
       elements.push(
-        <strong key={matchStart}>
-          {parseContent(boldContent)}
-        </strong>
+        <strong key={matchStart}>{parseContent(boldContent)}</strong>
       );
     } else if (match[2]) {
       // \begin{equation*}...\end{equation*}
@@ -62,13 +60,16 @@ const parseContent = (content: string): React.ReactNode[] => {
   return elements;
 };
 
-const PostContentRenderer: FC<PostContentRendererProps> = ({ content, key, className = 'md:px-11' }) => {
+const PostContentRenderer: FC<PostContentRendererProps> = ({
+  content,
+  className = 'md:px-11',
+}) => {
   if (!content) {
     return null;
   }
 
   const parsedElements = parseContent(content);
-  return <div key={key} className={`w-full ${className}`}>{parsedElements}</div>;
+  return <div className={`w-full ${className}`}>{parsedElements}</div>;
 };
 
 export default PostContentRenderer;

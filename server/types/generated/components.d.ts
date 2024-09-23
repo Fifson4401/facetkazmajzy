@@ -51,19 +51,6 @@ export interface SharedMetaSocial extends Schema.Component {
   };
 }
 
-export interface MenuMenuItem extends Schema.Component {
-  collectionName: 'components_menu_menu_items';
-  info: {
-    displayName: 'MenuItem';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    text: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-  };
-}
-
 export interface HomeSearch extends Schema.Component {
   collectionName: 'components_home_searches';
   info: {
@@ -100,6 +87,19 @@ export interface HomeButton extends Schema.Component {
   attributes: {
     text: Attribute.String & Attribute.Required;
     url: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface BlogPostVideo extends Schema.Component {
+  collectionName: 'components_blog_post_videos';
+  info: {
+    displayName: 'video';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.DefaultTo<'Hej! Mo\u017Ce rozwi\u0105\u017Cemy to razem?'>;
+    embedURL: Attribute.String & Attribute.Required;
   };
 }
 
@@ -167,6 +167,19 @@ export interface BlogPostAnswer extends Schema.Component {
   };
 }
 
+export interface MenuMenuItem extends Schema.Component {
+  collectionName: 'components_menu_menu_items';
+  info: {
+    displayName: 'MenuItem';
+    icon: 'bulletList';
+    description: '';
+  };
+  attributes: {
+    text: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface BlogPageSearch extends Schema.Component {
   collectionName: 'components_blog_page_searches';
   info: {
@@ -182,14 +195,15 @@ declare module '@strapi/types' {
     export interface Components {
       'shared.seo': SharedSeo;
       'shared.meta-social': SharedMetaSocial;
-      'menu.menu-item': MenuMenuItem;
       'home.search': HomeSearch;
       'home.header': HomeHeader;
       'home.button': HomeButton;
+      'blog-post.video': BlogPostVideo;
       'blog-post.tex': BlogPostTex;
       'blog-post.source': BlogPostSource;
       'blog-post.image': BlogPostImage;
       'blog-post.answer': BlogPostAnswer;
+      'menu.menu-item': MenuMenuItem;
       'blog-page.search': BlogPageSearch;
     }
   }

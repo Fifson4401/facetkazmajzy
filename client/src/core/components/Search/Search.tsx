@@ -35,7 +35,11 @@ const Search: FC<SearchProps> = ({
 
   const { filteredTags } = useChips({ query, tags });
 
-  const { categoryName, showDeleteAll, subCategoryName } = useSearch({ query, categories, subCategories })
+  const { categoryName, showDeleteAll, subCategoryName } = useSearch({
+    query,
+    categories,
+    subCategories,
+  });
 
   const handleClear = useCallback(() => {
     setFilter({ name: 'search', value: undefined });
@@ -63,6 +67,7 @@ const Search: FC<SearchProps> = ({
         event.preventDefault();
         setFilter({ name: 'search', value: searchValue });
       }}
+      id='category'
     >
       <div className="mt-4 flex flex-wrap justify-end gap-2 md:px-11">
         {categoryName && (

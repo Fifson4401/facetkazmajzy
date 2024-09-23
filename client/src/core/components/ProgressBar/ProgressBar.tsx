@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
 
 const ProgressBar = () => {
   const [show, setShow] = useState<boolean>(false);
@@ -45,10 +46,13 @@ const ProgressBar = () => {
   }, [show]);
 
   return show ? (
-    <div
-      id="progress-bar"
-      className="fixed -top-0 left-0 z-50 h-1.5 w-full animate-progress-bar bg-transparent shadow-lg"
-    />
+    <>
+      <div
+        id="progress-bar"
+        className="fixed -top-0 left-0 z-50 h-1.5 w-full animate-progress-bar bg-transparent shadow-lg"
+      />
+      <ScrollToTop />
+    </>
   ) : null;
 };
 

@@ -998,6 +998,7 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
       'manyToMany',
       'api::tag.tag'
     >;
+    video: Attribute.Component<'blog-post.video'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
