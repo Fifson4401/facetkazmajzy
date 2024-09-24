@@ -29,7 +29,7 @@ const ClientBlogPage: FC<Omit<BlogPageAttributes, 'menu'>> = ({
       <h1 className="text-center text-3xl">{title}</h1>
       <Spacer y={5} />
       {description && <h2 className="text-l text-center">{description}</h2>}
-      <Spacer y={10} />
+      <Spacer y={10} id="category" />
       <CategoryPicker
         setFilter={setRouteTo}
         categories={categories}

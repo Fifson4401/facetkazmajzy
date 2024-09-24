@@ -67,7 +67,6 @@ const Search: FC<SearchProps> = ({
         event.preventDefault();
         setFilter({ name: 'search', value: searchValue });
       }}
-      id="category"
     >
       <div className="mt-4 flex flex-wrap justify-end gap-2 md:px-11">
         {categoryName && (

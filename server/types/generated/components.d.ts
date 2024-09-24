@@ -51,6 +51,19 @@ export interface SharedMetaSocial extends Schema.Component {
   };
 }
 
+export interface MenuMenuItem extends Schema.Component {
+  collectionName: 'components_menu_menu_items';
+  info: {
+    displayName: 'MenuItem';
+    icon: 'bulletList';
+    description: '';
+  };
+  attributes: {
+    text: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface HomeSearch extends Schema.Component {
   collectionName: 'components_home_searches';
   info: {
@@ -167,19 +180,6 @@ export interface BlogPostAnswer extends Schema.Component {
   };
 }
 
-export interface MenuMenuItem extends Schema.Component {
-  collectionName: 'components_menu_menu_items';
-  info: {
-    displayName: 'MenuItem';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    text: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-  };
-}
-
 export interface BlogPageSearch extends Schema.Component {
   collectionName: 'components_blog_page_searches';
   info: {
@@ -195,6 +195,7 @@ declare module '@strapi/types' {
     export interface Components {
       'shared.seo': SharedSeo;
       'shared.meta-social': SharedMetaSocial;
+      'menu.menu-item': MenuMenuItem;
       'home.search': HomeSearch;
       'home.header': HomeHeader;
       'home.button': HomeButton;
@@ -203,7 +204,6 @@ declare module '@strapi/types' {
       'blog-post.source': BlogPostSource;
       'blog-post.image': BlogPostImage;
       'blog-post.answer': BlogPostAnswer;
-      'menu.menu-item': MenuMenuItem;
       'blog-page.search': BlogPageSearch;
     }
   }
