@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC } from 'react';
 import { BlogPostVideo } from '@/api/interfaces/blogPost';
 
@@ -10,6 +12,8 @@ const PostVideo: FC<PostVideoProps> = ({ video }) => {
     return null;
   }
 
+  const embedURL = video.embedURL.replace('www.youtube.com', 'www.youtube-nocookie.com');
+
   return (
     <div className="flex w-full justify-center md:px-11">
       <div className="w-full max-w-[75%]">
@@ -19,9 +23,10 @@ const PostVideo: FC<PostVideoProps> = ({ video }) => {
         <div className="relative w-full pb-[56.25%]">
           <iframe
             className="absolute left-0 top-0 h-full w-full"
-            src={video.embedURL}
+            src={embedURL}
+            loading="lazy"
             title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           />
