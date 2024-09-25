@@ -26,8 +26,8 @@ const Footer = () => {
         </p>
       </div>
       <div className="mb-6 flex w-full flex-row items-start justify-center gap-2 text-sm md:text-medium">
-        <Link href={'/'}>Zadania</Link>
-        <Link href={'/'}>Kontakt</Link>
+        <Link href={'/zadania'}>Zadania</Link>
+        <Link href={'/kontakt'}>Kontakt</Link>
         <Link href={'/'}>Polityka prywatności</Link>
       </div>
     </div>
