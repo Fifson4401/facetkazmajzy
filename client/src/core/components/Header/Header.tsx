@@ -103,7 +103,11 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                       : 'foreground'
                 }
                 className="w-full"
-                href={item.url}
+                href={
+                  item.url
+                    ? item.url
+                    : `/zadania?category=${item?.category?.data.id}`
+                }
                 size="lg"
               >
                 {item.text}

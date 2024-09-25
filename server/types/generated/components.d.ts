@@ -1,23 +1,5 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
-export interface MenuMenuItem extends Schema.Component {
-  collectionName: 'components_menu_menu_items';
-  info: {
-    displayName: 'MenuItems';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    text: Attribute.String & Attribute.Required;
-    url: Attribute.String;
-    category: Attribute.Relation<
-      'menu.menu-item',
-      'oneToOne',
-      'api::category.category'
-    >;
-  };
-}
-
 export interface SharedSeo extends Schema.Component {
   collectionName: 'components_shared_seos';
   info: {
@@ -69,6 +51,24 @@ export interface SharedMetaSocial extends Schema.Component {
   };
 }
 
+export interface MenuMenuItem extends Schema.Component {
+  collectionName: 'components_menu_menu_items';
+  info: {
+    displayName: 'MenuItems';
+    icon: 'bulletList';
+    description: '';
+  };
+  attributes: {
+    text: Attribute.String & Attribute.Required;
+    url: Attribute.String;
+    category: Attribute.Relation<
+      'menu.menu-item',
+      'oneToOne',
+      'api::category.category'
+    >;
+  };
+}
+
 export interface HomeSearch extends Schema.Component {
   collectionName: 'components_home_searches';
   info: {
@@ -105,16 +105,6 @@ export interface HomeButton extends Schema.Component {
   attributes: {
     text: Attribute.String & Attribute.Required;
     url: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface BlogPageSearch extends Schema.Component {
-  collectionName: 'components_blog_page_searches';
-  info: {
-    displayName: 'Search';
-  };
-  attributes: {
-    placeholder: Attribute.String;
   };
 }
 
@@ -195,21 +185,31 @@ export interface BlogPostAnswer extends Schema.Component {
   };
 }
 
+export interface BlogPageSearch extends Schema.Component {
+  collectionName: 'components_blog_page_searches';
+  info: {
+    displayName: 'Search';
+  };
+  attributes: {
+    placeholder: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'menu.menu-item': MenuMenuItem;
       'shared.seo': SharedSeo;
       'shared.meta-social': SharedMetaSocial;
+      'menu.menu-item': MenuMenuItem;
       'home.search': HomeSearch;
       'home.header': HomeHeader;
       'home.button': HomeButton;
-      'blog-page.search': BlogPageSearch;
       'blog-post.video': BlogPostVideo;
       'blog-post.tex': BlogPostTex;
       'blog-post.source': BlogPostSource;
       'blog-post.image': BlogPostImage;
       'blog-post.answer': BlogPostAnswer;
+      'blog-page.search': BlogPageSearch;
     }
   }
 }

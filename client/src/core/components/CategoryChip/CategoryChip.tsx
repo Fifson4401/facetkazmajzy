@@ -6,7 +6,7 @@ import { SubCategoriesBlog } from '@/api/interfaces/collections/subCategories';
 import { getDisplayCategory } from './utils';
 
 const CategoryChip: FC<
-  CategoriesBlog | (SubCategoriesBlog & { isCategory: boolean })
+  CategoriesBlog | (SubCategoriesBlog & { isCategory?: boolean })
 > = ({ data }, isCategory = false) => {
   if (!data) {
     return null;

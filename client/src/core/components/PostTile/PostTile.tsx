@@ -1,8 +1,11 @@
+'use client'
+
 import { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import CategoryChip from '../CategoryChip/CategoryChip';
 import { PostTileProps } from '@/api/interfaces/collections/blogPosts';
 import TagsLink from '../TagsLink/TagsLink';
+import { parseContent } from '../PostContentRenderer/PostContentRenderer';
 
 const PostTile: FC<PostTileProps> = ({
   category,
@@ -14,6 +17,7 @@ const PostTile: FC<PostTileProps> = ({
 }) => {
   const router = useRouter();
 
+  const parsedElements = description ? parseContent(description) : '';
   return (
     <div
       onClick={() => router.push(`zadania/${slug}`)}
@@ -27,7 +31,7 @@ const PostTile: FC<PostTileProps> = ({
         <CategoryChip {...sub_category} />
       </div>
       <p className="line-clamp-2 pt-4 text-sm text-[#2b2b2b] md:text-base">
-        {description}
+        {parsedElements}
       </p>
       <div className="flex flex-row gap-2 pt-3">
         <TagsLink {...tags} />

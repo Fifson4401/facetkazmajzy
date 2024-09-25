@@ -48,11 +48,17 @@ const ProgressBar = () => {
 
       resizeObserver.observe(contentContainer);
 
+      // Wywołaj handleProgress() natychmiast po dodaniu nasłuchiwaczy
+      handleProgress();
+
       return () => {
         window.removeEventListener('scroll', handleProgress);
         resizeObserver.disconnect();
       };
     } else {
+      // Jeśli kontener nie został znaleziony, nadal wywołaj handleProgress
+      handleProgress();
+
       return () => {
         window.removeEventListener('scroll', handleProgress);
       };
@@ -63,8 +69,9 @@ const ProgressBar = () => {
     <>
       <div
         id="progress-bar"
-        className="fixed -top-0 left-0 z-50 h-1.5 w-full animate-progress-bar bg-transparent shadow-lg"
-      />
+        style={{ width: '0%' }} // Ustawienie początkowej szerokości na 0%
+        className="fixed -top-0 left-0 z-50 h-1.5 animate-progress-bar bg-transparent shadow-lg"
+      ></div>
       <ScrollToTop />
     </>
   ) : null;

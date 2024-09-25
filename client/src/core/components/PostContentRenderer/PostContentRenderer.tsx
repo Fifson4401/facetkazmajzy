@@ -7,7 +7,7 @@ export interface PostContentRendererProps {
   className?: string;
 }
 
-const parseContent = (content: string): React.ReactNode[] => {
+export const parseContent = (content: string): React.ReactNode[] => {
   const elements: React.ReactNode[] = [];
   let lastIndex = 0;
 
