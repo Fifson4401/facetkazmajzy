@@ -38,13 +38,9 @@ export const useBlog = (): UseBlogProps => {
   );
 
   const smoothScrollToCategory = useCallback(() => {
-    console.log('Attempting to scroll to category');
     const categoryElement = document.getElementById('category');
     if (categoryElement) {
-      console.log('Category element found, scrolling');
       categoryElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      console.log('Category element not found');
     }
   }, []);
 
@@ -81,7 +77,6 @@ export const useBlog = (): UseBlogProps => {
         url += '#category';
       }
 
-      console.log(`Navigating to: ${url}`);
       router.push(url, { scroll: false });
 
       if (routeTo.name === 'page') {
@@ -101,7 +96,6 @@ export const useBlog = (): UseBlogProps => {
   }, [router]);
 
   useEffect(() => {
-    console.log('URL changed, current hash:', window.location.hash);
     if (window.location.hash === '#category') {
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);

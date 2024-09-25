@@ -1,7 +1,7 @@
 {
   "collectionName": "components_menu_menu_items",
   "info": {
-    "displayName": "MenuItem",
+    "displayName": "MenuItems",
     "icon": "bulletList",
     "description": ""
   },
@@ -13,7 +13,12 @@
     },
     "url": {
       "type": "string",
-      "required": true
+      "required": false
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
     }
   }
 }

@@ -1,7 +1,8 @@
 import { RefObject } from 'react';
 
-import { StrapiFindAllResponse, StrapiResponse } from './strapiResponse';
+import { StrapiFindAllResponse } from './strapiResponse';
 import { SEO } from './seo';
+import { CategoriesBlog } from './collections/categories';
 
 // used
 
@@ -23,12 +24,13 @@ export type ImageProps = {
 
 export type MenuItemProps = {
   text: string;
-  url: string;
+  url?: string;
+  category?: CategoriesBlog;
 };
 
 export type MenuAttributes = DefaultAttributes & {
   name: string;
-  MenuItem: MenuItemProps[];
+  menuItems: MenuItemProps[];
 };
 
 export type DefaultAttributes = {

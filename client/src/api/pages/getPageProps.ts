@@ -56,7 +56,11 @@ export const seoQuery = (populate: Record<string, object> = {}): string => {
 export const getHeaderMenuProps = async (): Promise<{ menu: MenuArray }> => {
   try {
     const query = qs.stringify({
-      populate: '*',
+      populate: {
+        category: { populate: '*' },
+        menuItems: { populate: '*' },
+        populate: '*',
+      },
       filters: {
         name: {
           $eq: 'header',

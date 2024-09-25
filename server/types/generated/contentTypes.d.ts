@@ -1146,7 +1146,7 @@ export interface ApiMenuMenu extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    MenuItem: Attribute.Component<'menu.menu-item', true>;
+    menuItems: Attribute.Component<'menu.menu-item', true>;
     name: Attribute.String & Attribute.Required & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

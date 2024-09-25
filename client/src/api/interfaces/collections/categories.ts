@@ -14,6 +14,7 @@ export type PropsWithCategory<T = object> = T & {
 };
 
 export type CategoryAttributes = DefaultAttributes & {
+  id: number;
   name: string;
   order?: number;
 };
