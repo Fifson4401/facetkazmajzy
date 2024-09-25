@@ -27,16 +27,6 @@ const SearchHome: FC<SearchHomeProps> = ({ image, placeholder }) => {
       }}
       className="flex max-h-16 w-full flex-row items-center justify-center gap-5 px-11"
     >
-      <div className="aria-hidden hidden rounded-xl md:block">
-        <Link href={'/'}>
-          <ImageHandler
-            image={image.data?.attributes}
-            priority
-            removeWrapper
-            imageClassName="rounded-2xl max-w-9"
-          />
-        </Link>
-      </div>
       <div className="flex w-[80vw] items-center justify-center">
         <Input
           isClearable
