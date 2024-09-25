@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { FC } from 'react';
 import { BlogPostVideo } from '@/api/interfaces/blogPost';
@@ -12,7 +12,10 @@ const PostVideo: FC<PostVideoProps> = ({ video }) => {
     return null;
   }
 
-  const embedURL = video.embedURL.replace('www.youtube.com', 'www.youtube-nocookie.com');
+  const embedURL = video.embedURL.replace(
+    'www.youtube.com',
+    'www.youtube-nocookie.com'
+  );
 
   return (
     <div className="flex w-full justify-center md:px-11">

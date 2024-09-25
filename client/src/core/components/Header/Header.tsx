@@ -60,13 +60,19 @@ const Header: FC<HeaderProps> = ({ menu }) => {
       </NavbarContent>
       <NavbarContent className="hidden gap-5 lg:flex" justify="center">
         {menuItems.map((item, index) => {
-          const isActive = queryURL?.category ? queryURL?.category === item.category?.data?.id.toString() : false;
+          const isActive = queryURL?.category
+            ? queryURL?.category === item.category?.data?.id.toString()
+            : false;
 
           return (
             <NavbarItem key={`${item.text}-${index}`} isActive={isActive}>
               <Link
                 color="foreground"
-                href={item.url ? item.url : `/zadania?category=${item?.category?.data.id}`}
+                href={
+                  item.url
+                    ? item.url
+                    : `/zadania?category=${item?.category?.data.id}`
+                }
                 className="max-w-40 text-wrap text-center"
               >
                 {item.text}
@@ -82,7 +88,9 @@ const Header: FC<HeaderProps> = ({ menu }) => {
       </NavbarContent>
       <NavbarMenu className="mt-5">
         {menuItems.map((item, index) => {
-          const isActive = queryURL?.category ? queryURL?.category === item.category?.data?.id.toString() : false;
+          const isActive = queryURL?.category
+            ? queryURL?.category === item.category?.data?.id.toString()
+            : false;
 
           return (
             <NavbarMenuItem key={`${item.text}-${index}`}>
@@ -101,7 +109,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                 {item.text}
               </Link>
             </NavbarMenuItem>
-          )
+          );
         })}
       </NavbarMenu>
     </Navbar>

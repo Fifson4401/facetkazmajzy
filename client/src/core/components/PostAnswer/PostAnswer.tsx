@@ -16,6 +16,7 @@ const PostAnswer: FC<BlogPageAnswerProps> = ({ TEX, image }) => {
         className="w-full border-[#cc3266]"
       >
         <AccordionItem
+          id="content-container"
           key="1"
           aria-label="Odpowiedź na zadanie"
           title="Zobacz odpowiedź!"

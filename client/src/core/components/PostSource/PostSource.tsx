@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { BlogPostSource } from '@/api/interfaces/blogPost';
-import { Divider } from '@nextui-org/react';
+import { Divider, Link } from '@nextui-org/react';
 
 interface PostSourceProps {
   source?: BlogPostSource;
@@ -14,9 +14,13 @@ const PostSource: FC<PostSourceProps> = ({ source }) => {
   return (
     <div className="w-full md:px-11">
       <Divider />
-      <div className="flex flex-row gap-3 pt-4">
+      <div className="flex flex-row gap-2 pt-4">
         <p>{source.text}</p>
-        <p>{source.url}</p>
+        {!!source.url && (
+          <Link href={source.url} rel="external noreferrer noopener nofollow">
+            {source.url}
+          </Link>
+        )}
       </div>
     </div>
   );

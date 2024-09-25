@@ -38,11 +38,25 @@ const ProgressBar = () => {
     };
 
     window.addEventListener('scroll', handleProgress);
-    handleProgress();
 
-    return () => {
-      window.removeEventListener('scroll', handleProgress);
-    };
+    const contentContainer = document.getElementById('content-container');
+
+    if (contentContainer) {
+      const resizeObserver = new ResizeObserver(() => {
+        handleProgress();
+      });
+
+      resizeObserver.observe(contentContainer);
+
+      return () => {
+        window.removeEventListener('scroll', handleProgress);
+        resizeObserver.disconnect();
+      };
+    } else {
+      return () => {
+        window.removeEventListener('scroll', handleProgress);
+      };
+    }
   }, [show]);
 
   return show ? (
