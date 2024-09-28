@@ -28,7 +28,7 @@ export const getPageProps = async <T>(
 
     return { pageData: attributes };
   } catch (error) {
-    console.error('Error fetching HomePage data:', error);
+    console.error('Error fetching PageProps data:', error);
     notFound();
   }
 };

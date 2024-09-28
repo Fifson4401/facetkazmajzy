@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import { PropsWithBlogPages } from '@/api/interfaces/blog';
 import PostTile from '../PostTile/PostTile';
+import PostNoResults from '../PostNoResults/PostNoResults';
 
 const PostList: FC<PropsWithBlogPages> = ({ pages }) => {
-  if (!pages) {
-    return null;
+  if (!pages || !pages.length) {
+    return (<PostNoResults />);
   }
 
   return (
