@@ -51,24 +51,6 @@ export interface SharedMetaSocial extends Schema.Component {
   };
 }
 
-export interface MenuMenuItem extends Schema.Component {
-  collectionName: 'components_menu_menu_items';
-  info: {
-    displayName: 'MenuItems';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    text: Attribute.String & Attribute.Required;
-    url: Attribute.String;
-    category: Attribute.Relation<
-      'menu.menu-item',
-      'oneToOne',
-      'api::category.category'
-    >;
-  };
-}
-
 export interface HomeSearch extends Schema.Component {
   collectionName: 'components_home_searches';
   info: {
@@ -105,6 +87,24 @@ export interface HomeButton extends Schema.Component {
   attributes: {
     text: Attribute.String & Attribute.Required;
     url: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface MenuMenuItem extends Schema.Component {
+  collectionName: 'components_menu_menu_items';
+  info: {
+    displayName: 'MenuItems';
+    icon: 'bulletList';
+    description: '';
+  };
+  attributes: {
+    text: Attribute.String & Attribute.Required;
+    url: Attribute.String;
+    category: Attribute.Relation<
+      'menu.menu-item',
+      'oneToOne',
+      'api::category.category'
+    >;
   };
 }
 
@@ -200,10 +200,10 @@ declare module '@strapi/types' {
     export interface Components {
       'shared.seo': SharedSeo;
       'shared.meta-social': SharedMetaSocial;
-      'menu.menu-item': MenuMenuItem;
       'home.search': HomeSearch;
       'home.header': HomeHeader;
       'home.button': HomeButton;
+      'menu.menu-item': MenuMenuItem;
       'blog-post.video': BlogPostVideo;
       'blog-post.tex': BlogPostTex;
       'blog-post.source': BlogPostSource;

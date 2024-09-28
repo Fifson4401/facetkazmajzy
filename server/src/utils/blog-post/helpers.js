@@ -81,7 +81,7 @@ function getDescription(content) {
     // Przypisz zmodyfikowany tekst do opisu w żądaniu
     return modifiedTex;
   } else {
-    console.log('Nie znaleziono komponentu typu blog-post.tex w content');
+    strapi.log.error('Nie znaleziono komponentu typu blog-post.tex w content');
   }
 }
 
