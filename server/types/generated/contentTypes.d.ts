@@ -991,7 +991,7 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
       'manyToOne',
       'api::sub-category.sub-category'
     >;
-    contentText: Attribute.Text & Attribute.Private;
+    contentText: Attribute.Text;
     description: Attribute.Text;
     tags: Attribute.Relation<
       'api::blog-post.blog-post',

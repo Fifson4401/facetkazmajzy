@@ -1,18 +1,14 @@
 'use client';
-import { ImageProps } from '@/api/interfaces/defaults';
 import { Button, Input } from '@nextui-org/react';
 import { FC, useState } from 'react';
-import { ImageHandler } from '../ImageHandler';
 import { IoMdSearch } from 'react-icons/io';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 interface SearchHomeProps {
   placeholder: string;
-  image: ImageProps;
 }
 
-const SearchHome: FC<SearchHomeProps> = ({ image, placeholder }) => {
+const SearchHome: FC<SearchHomeProps> = ({ placeholder }) => {
   const [searchValue, setSearchValue] = useState<string>('');
 
   const router = useRouter();

@@ -4,6 +4,7 @@ import client from '../client';
 import { StrapiFindAllResponse } from '../interfaces/strapiResponse';
 import { BlogPageProps } from '../interfaces/blog';
 import { PostTileProps } from '../interfaces/collections/blogPosts';
+import normalizeSearchText from '../utils/normalizeSearchText';
 
 export type searchParams = Record<string, string | undefined>;
 
@@ -17,6 +18,8 @@ export const getBlogPosts = async (
     subCategory = undefined,
     tag = undefined,
   } = searchParams;
+
+  const normalizedSearch = search ? normalizeSearchText(search) : undefined;
 
   const tagsArray = tag ? tag.split(',') : [];
 
@@ -50,7 +53,7 @@ export const getBlogPosts = async (
         },
         filters: {
           contentText: {
-            $containsi: search,
+            $containsi: normalizedSearch,
           },
           category: { id: { $eq: category } },
           sub_category: { id: { $eq: subCategory } },

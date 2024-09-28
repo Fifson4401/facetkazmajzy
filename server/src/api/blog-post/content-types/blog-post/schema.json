@@ -59,8 +59,7 @@
       "inversedBy": "blog_posts"
     },
     "contentText": {
-      "type": "text",
-      "private": true
+      "type": "text"
     },
     "description": {
       "type": "text",
