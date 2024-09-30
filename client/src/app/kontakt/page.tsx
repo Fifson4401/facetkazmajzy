@@ -1,5 +1,5 @@
 import { getContactPageProps } from '@/api/pages/getContactPageProps';
-import Hero from '@/core/components/Hero/Hero';
+import ContactHero from '@/core/components/ContactHero/ContactHero';
 import { Layout } from '@/core/components/Layout/Layout';
 import { notFound } from 'next/navigation';
 
@@ -12,7 +12,7 @@ export default async function Contact() {
 
   return (
     <Layout menu={pageData.menu}>
-      <Hero {...pageData.hero} />
+      <ContactHero {...pageData.hero} />
     </Layout>
   );
 }

@@ -1080,6 +1080,7 @@ export interface ApiContactPageContactPage extends Schema.SingleType {
     instaUrl: Attribute.String;
     facebookUrl: Attribute.String;
     seo: Attribute.Component<'shared.seo'>;
+    hero: Attribute.Component<'shared.hero'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
