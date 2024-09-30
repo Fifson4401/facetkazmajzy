@@ -45,16 +45,6 @@ function isBlogPageAttributes(data: any): data is BlogPageAttributes {
 }
 
 const populate = {
-  header: {
-    populate: {
-      image: {
-        populate: '*',
-      },
-      button: {
-        populate: '*',
-      },
-    },
-  },
   search: {
     populate: {
       image: {

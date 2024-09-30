@@ -107,6 +107,52 @@ export interface MenuMenuItem extends Schema.Component {
   };
 }
 
+export interface ContactPagePets extends Schema.Component {
+  collectionName: 'components_contact_page_pets';
+  info: {
+    displayName: 'Pets';
+    description: '';
+  };
+  attributes: {
+    petItem: Attribute.Component<'contact-page.pet-item', true>;
+    title: Attribute.String;
+  };
+}
+
+export interface ContactPagePetItem extends Schema.Component {
+  collectionName: 'components_contact_page_pet_items';
+  info: {
+    displayName: 'PetItem';
+  };
+  attributes: {
+    text: Attribute.String;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
+export interface ContactPageContactItem extends Schema.Component {
+  collectionName: 'components_contact_page_contact_items';
+  info: {
+    displayName: 'ContactItem';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+  };
+}
+
+export interface ContactPageContactInfo extends Schema.Component {
+  collectionName: 'components_contact_page_contact_infos';
+  info: {
+    displayName: 'ContactInfo';
+    description: '';
+  };
+  attributes: {
+    contactItem: Attribute.Component<'contact-page.contact-item', true>;
+    mapUrl: Attribute.Text;
+  };
+}
+
 export interface BlogPostVideo extends Schema.Component {
   collectionName: 'components_blog_post_videos';
   info: {
@@ -184,52 +230,6 @@ export interface BlogPostAnswer extends Schema.Component {
   };
 }
 
-export interface ContactPagePets extends Schema.Component {
-  collectionName: 'components_contact_page_pets';
-  info: {
-    displayName: 'Pets';
-    description: '';
-  };
-  attributes: {
-    petItem: Attribute.Component<'contact-page.pet-item', true>;
-    title: Attribute.String;
-  };
-}
-
-export interface ContactPagePetItem extends Schema.Component {
-  collectionName: 'components_contact_page_pet_items';
-  info: {
-    displayName: 'PetItem';
-  };
-  attributes: {
-    text: Attribute.String;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-  };
-}
-
-export interface ContactPageContactItem extends Schema.Component {
-  collectionName: 'components_contact_page_contact_items';
-  info: {
-    displayName: 'ContactItem';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-  };
-}
-
-export interface ContactPageContactInfo extends Schema.Component {
-  collectionName: 'components_contact_page_contact_infos';
-  info: {
-    displayName: 'ContactInfo';
-    description: '';
-  };
-  attributes: {
-    contactItem: Attribute.Component<'contact-page.contact-item', true>;
-    mapUrl: Attribute.Text;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -239,15 +239,15 @@ declare module '@strapi/types' {
       'shared.hero': SharedHero;
       'shared.button': SharedButton;
       'menu.menu-item': MenuMenuItem;
+      'contact-page.pets': ContactPagePets;
+      'contact-page.pet-item': ContactPagePetItem;
+      'contact-page.contact-item': ContactPageContactItem;
+      'contact-page.contact-info': ContactPageContactInfo;
       'blog-post.video': BlogPostVideo;
       'blog-post.tex': BlogPostTex;
       'blog-post.source': BlogPostSource;
       'blog-post.image': BlogPostImage;
       'blog-post.answer': BlogPostAnswer;
-      'contact-page.pets': ContactPagePets;
-      'contact-page.pet-item': ContactPagePetItem;
-      'contact-page.contact-item': ContactPageContactItem;
-      'contact-page.contact-info': ContactPageContactInfo;
     }
   }
 }

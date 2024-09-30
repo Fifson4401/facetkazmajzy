@@ -28,17 +28,6 @@ export const getBlogPosts = async (
       {
         fields: ['slug', 'title', 'description'],
         populate: {
-          header: {
-            populate: {
-              title: { populate: '*' },
-              bgImage: { populate: '*' },
-              postAuthor: {
-                populate: {
-                  blogPostAuthor: { populate: '*' },
-                },
-              },
-            },
-          },
           category: { populate: { name: { populate: '*' } } },
           sub_category: { populate: { name: { populate: '*' } } },
           tags: {
