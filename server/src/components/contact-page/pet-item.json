@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_contact_page_pet_items",
+  "info": {
+    "displayName": "PetItem"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

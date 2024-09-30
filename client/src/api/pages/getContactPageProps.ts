@@ -1,16 +1,16 @@
+import { ContactPageAttributes } from '../interfaces/contact';
 import { DefaultPageProps, PropsWithMenu } from '../interfaces/defaults';
-import { HomePageAttributes } from '../interfaces/home';
 import { getHeaderMenuProps, getPageProps } from './getPageProps';
 
-export const getHomePageProps = async (): Promise<
-  DefaultPageProps<HomePageAttributes & PropsWithMenu>
+export const getContactPageProps = async (): Promise<
+  DefaultPageProps<ContactPageAttributes & PropsWithMenu>
 > => {
   const [{ pageData }, { menu }] = await Promise.all([
-    getPageProps<HomePageAttributes>('home-page', populate),
+    getPageProps<ContactPageAttributes>('contact-page', populate),
     getHeaderMenuProps(),
   ]);
 
-  if (!pageData || !isHomePageAttributes(pageData)) {
+  if (!pageData || !isContactPageProps(pageData)) {
     return {
       pageData: null,
     };
@@ -24,8 +24,8 @@ export const getHomePageProps = async (): Promise<
   };
 };
 
-function isHomePageAttributes(data: any): data is HomePageAttributes {
-  return data && 'hero' in data && 'search' in data;
+function isContactPageProps(data: any): data is ContactPageAttributes {
+  return data && 'hero' in data && 'contactInfo' in data && 'pets' in data;
 }
 
 const populate = {
@@ -39,7 +39,8 @@ const populate = {
       },
     },
   },
-  search: {
+  contactInfo: { populate: '*' },
+  pets: {
     populate: {
       image: {
         populate: '*',

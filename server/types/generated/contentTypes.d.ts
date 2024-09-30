@@ -939,10 +939,10 @@ export interface ApiBlogPageBlogPage extends Schema.SingleType {
     draftAndPublish: false;
   };
   attributes: {
-    seo: Attribute.Component<'shared.seo'>;
-    search: Attribute.Component<'blog-page.search'>;
     title: Attribute.String & Attribute.Required;
     description: Attribute.Text;
+    search: Attribute.Component<'shared.search'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -977,7 +977,6 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
   attributes: {
     title: Attribute.String & Attribute.Required;
     slug: Attribute.UID & Attribute.Required;
-    seo: Attribute.Component<'shared.seo'>;
     content: Attribute.DynamicZone<['blog-post.tex', 'blog-post.image']>;
     answer: Attribute.Component<'blog-post.answer'>;
     source: Attribute.Component<'blog-post.source'>;
@@ -999,6 +998,7 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
       'api::tag.tag'
     >;
     video: Attribute.Component<'blog-post.video'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1075,7 +1075,10 @@ export interface ApiContactPageContactPage extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    sa: Attribute.String;
+    contactInfo: Attribute.Component<'contact-page.contact-info'>;
+    pets: Attribute.Component<'contact-page.pets'>;
+    instaUrl: Attribute.String;
+    facebookUrl: Attribute.String;
     seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1110,8 +1113,8 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    header: Attribute.Component<'home.header'> & Attribute.Required;
-    search: Attribute.Component<'home.search'> & Attribute.Required;
+    search: Attribute.Component<'shared.search'>;
+    hero: Attribute.Component<'shared.hero'>;
     seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

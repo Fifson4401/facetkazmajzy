@@ -1,7 +1,8 @@
 {
-  "collectionName": "components_blog_page_searches",
+  "collectionName": "components_shared_searches",
   "info": {
-    "displayName": "Search"
+    "displayName": "Search",
+    "icon": "search"
   },
   "options": {},
   "attributes": {

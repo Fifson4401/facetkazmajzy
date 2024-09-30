@@ -5,13 +5,18 @@ import { FC } from 'react';
 import { ImageHandler } from '../ImageHandler';
 
 interface HeroProps {
-  title: string;
-  description: string;
-  image: ImageProps;
-  button: { text: string; url: string };
+  title?: string;
+  description?: string;
+  image?: ImageProps;
+  button?: { text: string; url: string };
 }
 
 const Hero: FC<HeroProps> = ({ title, description, image, button }) => {
+
+  if (!title || !description || !image || !button) {
+    return null;
+  }
+
   return (
     <div className="flex max-w-[100vw] flex-col px-11 lg:flex-row">
       <div className="order-2 mt-8 flex w-full flex-col items-start md:pe-20 lg:order-1 lg:w-1/2 lg:pe-28">

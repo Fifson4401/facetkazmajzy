@@ -12,23 +12,22 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "seo": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.seo"
-    },
-    "search": {
-      "displayName": "Search",
-      "type": "component",
-      "repeatable": false,
-      "component": "blog-page.search"
-    },
     "title": {
       "type": "string",
       "required": true
     },
     "description": {
       "type": "text"
+    },
+    "search": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.search"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

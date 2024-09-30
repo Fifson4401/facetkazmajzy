@@ -41,6 +41,13 @@ export type DefaultAttributes = {
 
 export type MenuArray = StrapiFindAllResponse<MenuAttributes>;
 
+export type HeroAttributes = {
+  title: string;
+  description: string;
+  image: ImageProps;
+  button: { text: string; url: string };
+};
+
 //unUsed
 
 export type DefaultPageAttributes = {

@@ -1,34 +1,33 @@
 {
-  "collectionName": "components_home_headers",
+  "collectionName": "components_shared_heroes",
   "info": {
-    "displayName": "header",
+    "displayName": "Hero",
     "icon": "layout",
     "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "description": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "image": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
-        "images"
+        "images",
+        "files",
+        "videos",
+        "audios"
       ]
     },
     "button": {
-      "displayName": "button",
       "type": "component",
       "repeatable": false,
-      "component": "home.button",
-      "required": true
+      "component": "shared.button"
     }
   }
 }

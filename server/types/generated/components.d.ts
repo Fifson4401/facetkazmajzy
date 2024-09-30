@@ -28,6 +28,17 @@ export interface SharedSeo extends Schema.Component {
   };
 }
 
+export interface SharedSearch extends Schema.Component {
+  collectionName: 'components_shared_searches';
+  info: {
+    displayName: 'Search';
+    icon: 'search';
+  };
+  attributes: {
+    placeholder: Attribute.String;
+  };
+}
+
 export interface SharedMetaSocial extends Schema.Component {
   collectionName: 'components_shared_meta_socials';
   info: {
@@ -51,49 +62,37 @@ export interface SharedMetaSocial extends Schema.Component {
   };
 }
 
-export interface HomeSearch extends Schema.Component {
-  collectionName: 'components_home_searches';
+export interface SharedHero extends Schema.Component {
+  collectionName: 'components_shared_heroes';
   info: {
-    displayName: 'search';
-    icon: 'search';
-  };
-  attributes: {
-    placeholder: Attribute.String;
-    image: Attribute.Media<'images'> & Attribute.Required;
-  };
-}
-
-export interface HomeHeader extends Schema.Component {
-  collectionName: 'components_home_headers';
-  info: {
-    displayName: 'header';
+    displayName: 'Hero';
     icon: 'layout';
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    image: Attribute.Media<'images'> & Attribute.Required;
-    button: Attribute.Component<'home.button'> & Attribute.Required;
+    title: Attribute.String;
+    description: Attribute.String;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    button: Attribute.Component<'shared.button'>;
   };
 }
 
-export interface HomeButton extends Schema.Component {
-  collectionName: 'components_home_buttons';
+export interface SharedButton extends Schema.Component {
+  collectionName: 'components_shared_buttons';
   info: {
-    displayName: 'button';
-    icon: 'layer';
+    displayName: 'Button';
+    icon: 'server';
   };
   attributes: {
-    text: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
+    text: Attribute.String;
+    url: Attribute.String;
   };
 }
 
 export interface MenuMenuItem extends Schema.Component {
   collectionName: 'components_menu_menu_items';
   info: {
-    displayName: 'MenuItems';
+    displayName: 'MenuItem';
     icon: 'bulletList';
     description: '';
   };
@@ -185,13 +184,49 @@ export interface BlogPostAnswer extends Schema.Component {
   };
 }
 
-export interface BlogPageSearch extends Schema.Component {
-  collectionName: 'components_blog_page_searches';
+export interface ContactPagePets extends Schema.Component {
+  collectionName: 'components_contact_page_pets';
   info: {
-    displayName: 'Search';
+    displayName: 'Pets';
+    description: '';
   };
   attributes: {
-    placeholder: Attribute.String;
+    petItem: Attribute.Component<'contact-page.pet-item', true>;
+    title: Attribute.String;
+  };
+}
+
+export interface ContactPagePetItem extends Schema.Component {
+  collectionName: 'components_contact_page_pet_items';
+  info: {
+    displayName: 'PetItem';
+  };
+  attributes: {
+    text: Attribute.String;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
+export interface ContactPageContactItem extends Schema.Component {
+  collectionName: 'components_contact_page_contact_items';
+  info: {
+    displayName: 'ContactItem';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+  };
+}
+
+export interface ContactPageContactInfo extends Schema.Component {
+  collectionName: 'components_contact_page_contact_infos';
+  info: {
+    displayName: 'ContactInfo';
+    description: '';
+  };
+  attributes: {
+    contactItem: Attribute.Component<'contact-page.contact-item', true>;
+    mapUrl: Attribute.Text;
   };
 }
 
@@ -199,17 +234,20 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'shared.seo': SharedSeo;
+      'shared.search': SharedSearch;
       'shared.meta-social': SharedMetaSocial;
-      'home.search': HomeSearch;
-      'home.header': HomeHeader;
-      'home.button': HomeButton;
+      'shared.hero': SharedHero;
+      'shared.button': SharedButton;
       'menu.menu-item': MenuMenuItem;
       'blog-post.video': BlogPostVideo;
       'blog-post.tex': BlogPostTex;
       'blog-post.source': BlogPostSource;
       'blog-post.image': BlogPostImage;
       'blog-post.answer': BlogPostAnswer;
-      'blog-page.search': BlogPageSearch;
+      'contact-page.pets': ContactPagePets;
+      'contact-page.pet-item': ContactPagePetItem;
+      'contact-page.contact-item': ContactPageContactItem;
+      'contact-page.contact-info': ContactPageContactInfo;
     }
   }
 }

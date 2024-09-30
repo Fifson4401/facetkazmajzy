@@ -21,17 +21,9 @@
       "type": "uid",
       "required": true
     },
-    "seo": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.seo"
-    },
     "content": {
       "type": "dynamiczone",
-      "components": [
-        "blog-post.tex",
-        "blog-post.image"
-      ]
+      "components": ["blog-post.tex", "blog-post.image"]
     },
     "answer": {
       "displayName": "Answer",
@@ -76,6 +68,11 @@
       "type": "component",
       "repeatable": false,
       "component": "blog-post.video"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

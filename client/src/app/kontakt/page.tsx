@@ -1,11 +1,10 @@
-import { getHomePageProps } from '@/api/pages/getHomePageProps';
+import { getContactPageProps } from '@/api/pages/getContactPageProps';
 import Hero from '@/core/components/Hero/Hero';
 import { Layout } from '@/core/components/Layout/Layout';
-import SearchHome from '@/core/components/SearchHome/SearchHome';
 import { notFound } from 'next/navigation';
 
-export default async function Home() {
-  const { pageData } = await getHomePageProps();
+export default async function Contact() {
+  const { pageData } = await getContactPageProps();
 
   if (!pageData) {
     notFound();
@@ -13,7 +12,6 @@ export default async function Home() {
 
   return (
     <Layout menu={pageData.menu}>
-      <SearchHome {...pageData.search} />
       <Hero {...pageData.hero} />
     </Layout>
   );

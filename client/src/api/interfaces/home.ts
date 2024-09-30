@@ -1,15 +1,8 @@
-import { ImageProps, MenuArray, PageAttributes } from './defaults';
+import { HeroAttributes, ImageProps, PageAttributes } from './defaults';
 
 export type HomePageAttributes = PageAttributes & {
-  header: HeaderAttributes;
+  hero: HeroAttributes;
   search: HomeSearchAttributes;
-};
-
-export type HeaderAttributes = {
-  title: string;
-  description: string;
-  image: ImageProps;
-  button: { text: string; url: string };
 };
 
 export type HomeSearchAttributes = {
