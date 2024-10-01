@@ -1,5 +1,23 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface MenuMenuItem extends Schema.Component {
+  collectionName: 'components_menu_menu_items';
+  info: {
+    displayName: 'MenuItem';
+    icon: 'bulletList';
+    description: '';
+  };
+  attributes: {
+    text: Attribute.String & Attribute.Required;
+    url: Attribute.String;
+    category: Attribute.Relation<
+      'menu.menu-item',
+      'oneToOne',
+      'api::category.category'
+    >;
+  };
+}
+
 export interface SharedSeo extends Schema.Component {
   collectionName: 'components_shared_seos';
   info: {
@@ -86,24 +104,6 @@ export interface SharedButton extends Schema.Component {
   attributes: {
     text: Attribute.String;
     url: Attribute.String;
-  };
-}
-
-export interface MenuMenuItem extends Schema.Component {
-  collectionName: 'components_menu_menu_items';
-  info: {
-    displayName: 'MenuItem';
-    icon: 'bulletList';
-    description: '';
-  };
-  attributes: {
-    text: Attribute.String & Attribute.Required;
-    url: Attribute.String;
-    category: Attribute.Relation<
-      'menu.menu-item',
-      'oneToOne',
-      'api::category.category'
-    >;
   };
 }
 
@@ -233,12 +233,12 @@ export interface ContactPageContactInfo extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'menu.menu-item': MenuMenuItem;
       'shared.seo': SharedSeo;
       'shared.search': SharedSearch;
       'shared.meta-social': SharedMetaSocial;
       'shared.hero': SharedHero;
       'shared.button': SharedButton;
-      'menu.menu-item': MenuMenuItem;
       'blog-post.video': BlogPostVideo;
       'blog-post.tex': BlogPostTex;
       'blog-post.source': BlogPostSource;

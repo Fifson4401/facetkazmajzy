@@ -13,7 +13,7 @@ import {
 } from '@nextui-org/react';
 import { Image } from '@nextui-org/react';
 import NextImage from 'next/image';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { FC, useEffect, useMemo, useState } from 'react';
 
 interface HeaderProps {
@@ -32,6 +32,8 @@ const Header: FC<HeaderProps> = ({ menu }) => {
     () => Object.fromEntries(searchParams.entries()),
     [searchParams]
   );
+
+  const path = usePathname()
 
   useEffect(() => {
     if (!Array.isArray(menuItems) || menuItems.length < 1) {
@@ -69,7 +71,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
             {menuItems.map((item, index) => {
               const isActive = queryURL?.category
                 ? queryURL?.category === item.category?.data?.id.toString()
-                : false;
+                : path.includes(item.text.toLocaleLowerCase());
 
               return (
                 <NavbarItem key={`${item.text}-${index}`} isActive={isActive}>
