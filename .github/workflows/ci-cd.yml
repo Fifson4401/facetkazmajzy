@@ -169,7 +169,6 @@ jobs:
           --exclude='types' \
           --exclude='README.md' \
           --exclude='tsconfig.json' \
-          --exclude='src' \
           --exclude='tmp' \
           ./server/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_USER }}/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/
 
