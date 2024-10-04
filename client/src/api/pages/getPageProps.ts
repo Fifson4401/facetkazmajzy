@@ -18,13 +18,17 @@ export const getPageProps = async <T>(
   const queryParams = query ? `&${qs.stringify(query)}` : '';
 
   try {
-    const {
-      data: {
-        data: { attributes },
-      },
-    } = await client.get<StrapiFindOneResponse<PageDataAnd<T>>>(
+    const response = await client.get<StrapiFindOneResponse<PageDataAnd<T>>>(
       `api/${url}?${seoQuery(_populate)}${queryParams}`
     );
+
+    // Sprawdzenie, czy data i data.data istnieją
+    if (!response.data || !response.data.data) {
+      console.error('Nieprawidłowa struktura odpowiedzi:', response.data);
+      notFound();
+    }
+
+    const { attributes } = response.data.data;
 
     return { pageData: attributes };
   } catch (error) {
