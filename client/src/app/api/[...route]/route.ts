@@ -1,6 +1,6 @@
 import client from '@/api/client';
 import { AxiosError } from 'axios';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
 export async function GET(
   request: NextRequest,
