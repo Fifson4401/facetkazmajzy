@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_blog_post_sources",
+  "info": {
+    "displayName": "source",
+    "icon": "oneWay",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "default": "Źródło:",
+      "required": true
+    },
+    "url": {
+      "type": "enumeration",
+      "enum": [
+        "https://cke.gov.pl/egzamin-osmoklasisty/arkusze/",
+        "https://cke.gov.pl/egzamin-maturalny/egzamin-maturalny-w-formule-2015/arkusze/",
+        "https://cke.gov.pl/egzamin-maturalny/egzamin-w-starej-formule/arkusze/"
+      ]
+    }
+  }
+}

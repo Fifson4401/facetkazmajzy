@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_contact_page_contact_infos",
+  "info": {
+    "displayName": "ContactInfo",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "contactItem": {
+      "displayName": "ContactItem",
+      "type": "component",
+      "repeatable": true,
+      "component": "contact-page.contact-item"
+    },
+    "mapUrl": {
+      "type": "text"
+    }
+  }
+}

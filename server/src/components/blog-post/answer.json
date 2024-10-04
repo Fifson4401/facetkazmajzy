@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_blog_post_answers",
+  "info": {
+    "displayName": "Answer",
+    "icon": "lightbulb",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "TEX": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blog-post.image"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_blog_post_images",
+  "info": {
+    "displayName": "image",
+    "icon": "landscape",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "image"
+      ],
+      "default": "image",
+      "required": true
+    }
+  }
+}

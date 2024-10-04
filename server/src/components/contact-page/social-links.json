@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_contact_page_social_links",
+  "info": {
+    "displayName": "SocialLinks",
+    "icon": "cursor",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "facebookUrl": {
+      "type": "string"
+    },
+    "instaUrl": {
+      "type": "string"
+    },
+    "youtubeUrl": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

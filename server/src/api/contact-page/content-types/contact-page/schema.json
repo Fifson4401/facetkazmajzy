@@ -1,0 +1,44 @@
+{
+  "kind": "singleType",
+  "collectionName": "contact_pages",
+  "info": {
+    "singularName": "contact-page",
+    "pluralName": "contact-pages",
+    "displayName": "ContactPage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "contactInfo": {
+      "displayName": "ContactInfo",
+      "type": "component",
+      "repeatable": false,
+      "component": "contact-page.contact-info"
+    },
+    "pets": {
+      "displayName": "Pets",
+      "type": "component",
+      "repeatable": false,
+      "component": "contact-page.pets"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    },
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.hero"
+    },
+    "socialLinks": {
+      "displayName": "SocialLinks",
+      "type": "component",
+      "repeatable": false,
+      "component": "contact-page.social-links"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_blog_post_texes",
+  "info": {
+    "displayName": "TEX",
+    "icon": "feather",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "TEX": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "tex"
+      ],
+      "default": "tex",
+      "required": true
+    }
+  }
+}

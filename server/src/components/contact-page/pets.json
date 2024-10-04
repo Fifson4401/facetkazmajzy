@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_contact_page_pets",
+  "info": {
+    "displayName": "Pets",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "petItem": {
+      "displayName": "PetItem",
+      "type": "component",
+      "repeatable": true,
+      "component": "contact-page.pet-item"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}
