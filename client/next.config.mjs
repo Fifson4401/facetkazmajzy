@@ -4,7 +4,6 @@ const nextConfig = {
     API_HOST: process.env.API_HOST,
     NEXT_PUBLIC_API_HOST: process.env.NEXT_PUBLIC_API_HOST,
   },
-  telemetry: false,
   images: {
     domains: [
       process.env.NODE_ENV === 'production'
