@@ -48,7 +48,7 @@ const ClientBlogPage: FC<Omit<BlogPageAttributes, 'menu'>> = ({
       />
       <Search
         setFilter={setRouteTo}
-        placeholder={search.placeholder}
+        placeholder={search?.placeholder}
         query={query}
         tags={tags}
         clearAll={() => clearAllQueries()}
