@@ -28,6 +28,8 @@ export const getPageProps = async <T>(
       notFound();
     }
 
+    console.log(response);
+
     const { attributes } = response.data.data;
 
     return { pageData: attributes };
