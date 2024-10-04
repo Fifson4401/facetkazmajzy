@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_searches",
+  "info": {
+    "displayName": "Search",
+    "icon": "search"
+  },
+  "options": {},
+  "attributes": {
+    "placeholder": {
+      "type": "string"
+    }
+  }
+}

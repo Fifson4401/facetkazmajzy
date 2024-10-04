@@ -12,19 +12,15 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "header": {
-      "displayName": "header",
-      "type": "component",
-      "repeatable": false,
-      "component": "home.header",
-      "required": true
-    },
     "search": {
-      "displayName": "search",
       "type": "component",
       "repeatable": false,
-      "component": "home.search",
-      "required": true
+      "component": "shared.search"
+    },
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.hero"
     },
     "seo": {
       "type": "component",

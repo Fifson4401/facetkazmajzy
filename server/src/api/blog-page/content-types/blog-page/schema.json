@@ -8,12 +8,21 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "asdas": {
-      "type": "string"
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "search": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.search"
     },
     "seo": {
       "type": "component",

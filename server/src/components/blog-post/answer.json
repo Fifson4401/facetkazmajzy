@@ -2,20 +2,19 @@
   "collectionName": "components_blog_post_answers",
   "info": {
     "displayName": "Answer",
-    "icon": "lightbulb"
+    "icon": "lightbulb",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "TEX": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "image": {
-      "allowedTypes": [
-        "images",
-        "files"
-      ],
-      "type": "media",
-      "multiple": false
+      "type": "component",
+      "repeatable": false,
+      "component": "blog-post.image"
     }
   }
 }

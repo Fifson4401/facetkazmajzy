@@ -936,14 +936,15 @@ export interface ApiBlogPageBlogPage extends Schema.SingleType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    asdas: Attribute.String;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    search: Attribute.Component<'shared.search'>;
     seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::blog-page.blog-page',
       'oneToOne',
@@ -974,24 +975,30 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String & Attribute.Required & Attribute.Unique;
+    title: Attribute.String & Attribute.Required;
     slug: Attribute.UID & Attribute.Required;
-    categories: Attribute.Relation<
+    content: Attribute.DynamicZone<['blog-post.tex', 'blog-post.image']>;
+    answer: Attribute.Component<'blog-post.answer'>;
+    source: Attribute.Component<'blog-post.source'>;
+    category: Attribute.Relation<
       'api::blog-post.blog-post',
-      'oneToMany',
+      'manyToOne',
       'api::category.category'
     >;
+    sub_category: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'manyToOne',
+      'api::sub-category.sub-category'
+    >;
+    contentText: Attribute.Text;
+    description: Attribute.Text;
     tags: Attribute.Relation<
       'api::blog-post.blog-post',
-      'oneToMany',
+      'manyToMany',
       'api::tag.tag'
     >;
+    video: Attribute.Component<'blog-post.video'>;
     seo: Attribute.Component<'shared.seo'>;
-    content: Attribute.DynamicZone<
-      ['blog-post.tex', 'blog-post.title', 'blog-post.image']
-    >;
-    answer: Attribute.Component<'blog-post.answer'> & Attribute.Required;
-    source: Attribute.Component<'blog-post.source'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1019,16 +1026,22 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'Category';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String & Attribute.Unique;
-    blog_post: Attribute.Relation<
+    blog_posts: Attribute.Relation<
       'api::category.category',
-      'manyToOne',
+      'oneToMany',
       'api::blog-post.blog-post'
+    >;
+    sub_categories: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::sub-category.sub-category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1062,8 +1075,11 @@ export interface ApiContactPageContactPage extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    sa: Attribute.String;
+    contactInfo: Attribute.Component<'contact-page.contact-info'>;
+    pets: Attribute.Component<'contact-page.pets'>;
     seo: Attribute.Component<'shared.seo'>;
+    hero: Attribute.Component<'shared.hero'>;
+    socialLinks: Attribute.Component<'contact-page.social-links'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1097,8 +1113,8 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    header: Attribute.Component<'home.header'> & Attribute.Required;
-    search: Attribute.Component<'home.search'> & Attribute.Required;
+    search: Attribute.Component<'shared.search'>;
+    hero: Attribute.Component<'shared.hero'>;
     seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1133,7 +1149,7 @@ export interface ApiMenuMenu extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    MenuItem: Attribute.Component<'menu.menu-item', true>;
+    menuItems: Attribute.Component<'menu.menu-item', true>;
     name: Attribute.String & Attribute.Required & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1148,21 +1164,97 @@ export interface ApiMenuMenu extends Schema.CollectionType {
   };
 }
 
+export interface ApiRandomRandom extends Schema.CollectionType {
+  collectionName: 'randoms';
+  info: {
+    singularName: 'random';
+    pluralName: 'randoms';
+    displayName: 'random';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    random: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::random.random',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::random.random',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    sitemap_exclude: Attribute.Boolean &
+      Attribute.Private &
+      Attribute.DefaultTo<false>;
+  };
+}
+
+export interface ApiSubCategorySubCategory extends Schema.CollectionType {
+  collectionName: 'sub_categories';
+  info: {
+    singularName: 'sub-category';
+    pluralName: 'sub-categories';
+    displayName: 'SubCategory';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    category: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'manyToOne',
+      'api::category.category'
+    >;
+    name: Attribute.String;
+    blog_posts: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'oneToMany',
+      'api::blog-post.blog-post'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sub-category.sub-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    sitemap_exclude: Attribute.Boolean &
+      Attribute.Private &
+      Attribute.DefaultTo<false>;
+  };
+}
+
 export interface ApiTagTag extends Schema.CollectionType {
   collectionName: 'tags';
   info: {
     singularName: 'tag';
     pluralName: 'tags';
     displayName: 'Tag';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String & Attribute.Unique;
-    blog_post: Attribute.Relation<
+    blog_posts: Attribute.Relation<
       'api::tag.tag',
-      'manyToOne',
+      'manyToMany',
       'api::blog-post.blog-post'
     >;
     createdAt: Attribute.DateTime;
@@ -1204,6 +1296,8 @@ declare module '@strapi/types' {
       'api::contact-page.contact-page': ApiContactPageContactPage;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::menu.menu': ApiMenuMenu;
+      'api::random.random': ApiRandomRandom;
+      'api::sub-category.sub-category': ApiSubCategorySubCategory;
       'api::tag.tag': ApiTagTag;
     }
   }
