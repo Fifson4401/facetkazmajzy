@@ -98,7 +98,6 @@ jobs:
           --exclude='.eslintrc.json' \
           --exclude='README.md' \
           --exclude='tsconfig.json' \
-          --exclude='src' \
           --exclude='tmp' \
           ./client/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_USER }}/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/
 
@@ -161,8 +160,6 @@ jobs:
       - name: Deploy to MyDevil
         run: |
           rsync -avz \
-          --exclude='database' \
-          --exclude='.editorconfig' \
           --exclude='node_modules' \
           --exclude='.gitignore' \
           --exclude='.env*' \
