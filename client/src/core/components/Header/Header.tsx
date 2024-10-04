@@ -80,7 +80,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                     href={
                       item.url
                         ? item.url
-                        : `/zadania?category=${item?.category?.data.id}`
+                        : `/zadania?category=${item?.category?.data?.id}`
                     }
                     className="max-w-40 text-wrap text-center"
                   >
@@ -115,7 +115,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                     href={
                       item.url
                         ? item.url
-                        : `/zadania?category=${item?.category?.data.id}`
+                        : `/zadania?category=${item?.category?.data?.id}`
                     }
                     size="lg"
                   >
