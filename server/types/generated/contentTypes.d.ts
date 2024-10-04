@@ -1077,10 +1077,9 @@ export interface ApiContactPageContactPage extends Schema.SingleType {
   attributes: {
     contactInfo: Attribute.Component<'contact-page.contact-info'>;
     pets: Attribute.Component<'contact-page.pets'>;
-    instaUrl: Attribute.String;
-    facebookUrl: Attribute.String;
     seo: Attribute.Component<'shared.seo'>;
     hero: Attribute.Component<'shared.hero'>;
+    socialLinks: Attribute.Component<'contact-page.social-links'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

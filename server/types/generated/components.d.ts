@@ -18,6 +18,67 @@ export interface MenuMenuItem extends Schema.Component {
   };
 }
 
+export interface ContactPageSocialLinks extends Schema.Component {
+  collectionName: 'components_contact_page_social_links';
+  info: {
+    displayName: 'SocialLinks';
+    icon: 'cursor';
+    description: '';
+  };
+  attributes: {
+    facebookUrl: Attribute.String;
+    instaUrl: Attribute.String;
+    youtubeUrl: Attribute.String;
+    title: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface ContactPagePets extends Schema.Component {
+  collectionName: 'components_contact_page_pets';
+  info: {
+    displayName: 'Pets';
+    description: '';
+  };
+  attributes: {
+    petItem: Attribute.Component<'contact-page.pet-item', true>;
+    title: Attribute.String;
+  };
+}
+
+export interface ContactPagePetItem extends Schema.Component {
+  collectionName: 'components_contact_page_pet_items';
+  info: {
+    displayName: 'PetItem';
+  };
+  attributes: {
+    text: Attribute.String;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
+export interface ContactPageContactItem extends Schema.Component {
+  collectionName: 'components_contact_page_contact_items';
+  info: {
+    displayName: 'ContactItem';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+  };
+}
+
+export interface ContactPageContactInfo extends Schema.Component {
+  collectionName: 'components_contact_page_contact_infos';
+  info: {
+    displayName: 'ContactInfo';
+    description: '';
+  };
+  attributes: {
+    contactItem: Attribute.Component<'contact-page.contact-item', true>;
+    mapUrl: Attribute.Text;
+  };
+}
+
 export interface SharedSeo extends Schema.Component {
   collectionName: 'components_shared_seos';
   info: {
@@ -184,56 +245,15 @@ export interface BlogPostAnswer extends Schema.Component {
   };
 }
 
-export interface ContactPagePets extends Schema.Component {
-  collectionName: 'components_contact_page_pets';
-  info: {
-    displayName: 'Pets';
-    description: '';
-  };
-  attributes: {
-    petItem: Attribute.Component<'contact-page.pet-item', true>;
-    title: Attribute.String;
-  };
-}
-
-export interface ContactPagePetItem extends Schema.Component {
-  collectionName: 'components_contact_page_pet_items';
-  info: {
-    displayName: 'PetItem';
-  };
-  attributes: {
-    text: Attribute.String;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-  };
-}
-
-export interface ContactPageContactItem extends Schema.Component {
-  collectionName: 'components_contact_page_contact_items';
-  info: {
-    displayName: 'ContactItem';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-  };
-}
-
-export interface ContactPageContactInfo extends Schema.Component {
-  collectionName: 'components_contact_page_contact_infos';
-  info: {
-    displayName: 'ContactInfo';
-    description: '';
-  };
-  attributes: {
-    contactItem: Attribute.Component<'contact-page.contact-item', true>;
-    mapUrl: Attribute.Text;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'menu.menu-item': MenuMenuItem;
+      'contact-page.social-links': ContactPageSocialLinks;
+      'contact-page.pets': ContactPagePets;
+      'contact-page.pet-item': ContactPagePetItem;
+      'contact-page.contact-item': ContactPageContactItem;
+      'contact-page.contact-info': ContactPageContactInfo;
       'shared.seo': SharedSeo;
       'shared.search': SharedSearch;
       'shared.meta-social': SharedMetaSocial;
@@ -244,10 +264,6 @@ declare module '@strapi/types' {
       'blog-post.source': BlogPostSource;
       'blog-post.image': BlogPostImage;
       'blog-post.answer': BlogPostAnswer;
-      'contact-page.pets': ContactPagePets;
-      'contact-page.pet-item': ContactPagePetItem;
-      'contact-page.contact-item': ContactPageContactItem;
-      'contact-page.contact-info': ContactPageContactInfo;
     }
   }
 }

@@ -7,7 +7,7 @@ const Footer = () => {
   const date = useMemo(() => new Date(), []);
 
   return (
-    <div className="flex flex-col justify-center bg-background px-11 shadow-sm md:pt-7">
+    <div className="flex flex-col justify-center bg-background px-11 shadow-sm pt-7">
       <div className="mb-2 flex w-full flex-row items-start justify-center">
         <Link href="/" color="foreground">
           <Image

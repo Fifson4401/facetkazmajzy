@@ -3,8 +3,11 @@ import { HeroAttributes, ImageProps, PageAttributes } from './defaults';
 export type ContactPageAttributes = PageAttributes & {
   hero?: HeroAttributes;
   contactInfo?: ContactInfoAttributes;
-  instaUrl?: string;
-  facebookUrl?: string;
+  socialLinks?: {
+    instaUrl?: string;
+    facebookUrl?: string;
+    youtubeUrl?: string;
+  };
   pets?: string;
 };
 

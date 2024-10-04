@@ -40,6 +40,7 @@ const populate = {
     },
   },
   contactInfo: { populate: '*' },
+  socialLinks: { populate: '*' },
   pets: {
     populate: {
       image: {

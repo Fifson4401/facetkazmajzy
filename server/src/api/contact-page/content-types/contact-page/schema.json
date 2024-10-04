@@ -24,12 +24,6 @@
       "repeatable": false,
       "component": "contact-page.pets"
     },
-    "instaUrl": {
-      "type": "string"
-    },
-    "facebookUrl": {
-      "type": "string"
-    },
     "seo": {
       "type": "component",
       "repeatable": false,
@@ -39,6 +33,12 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.hero"
+    },
+    "socialLinks": {
+      "displayName": "SocialLinks",
+      "type": "component",
+      "repeatable": false,
+      "component": "contact-page.social-links"
     }
   }
 }
