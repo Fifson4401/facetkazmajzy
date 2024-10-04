@@ -43,6 +43,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     needs: lint-client
+    env:
+      API_HOST: ${{ secrets.API_HOST }}
+      NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -52,6 +55,16 @@ jobs:
         with:
           node-version: "20.x"
 
+      - name: Cache npm dependencies and .next/cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            client/node_modules
+            client/.next/cache
+          key: ${{ runner.os }}-client-node-${{ hashFiles('client/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-client-node-
+
       - name: Install dependencies
         working-directory: client
         run: npm ci
@@ -59,6 +72,9 @@ jobs:
       - name: Build client
         working-directory: client
         run: npm run build
+        env:
+          API_HOST: ${{ secrets.API_HOST }}
+          NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -98,6 +114,10 @@ jobs:
     name: Deploy & Build Server (Backend) to MyDevil
     runs-on: ubuntu-latest
     environment: production
+    env:
+      API_HOST: ${{ secrets.API_HOST }}
+      NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
+      API_TOKEN: ${{ secrets.API_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -107,6 +127,16 @@ jobs:
         with:
           node-version: "20.x"
 
+      - name: Cache npm dependencies and .next/cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            server/node_modules
+            server/.next/cache
+          key: ${{ runner.os }}-server-node-${{ hashFiles('server/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-server-node-
+
       - name: Install dependencies
         working-directory: server
         run: npm ci
@@ -114,6 +144,10 @@ jobs:
       - name: Build server
         working-directory: server
         run: npm run build
+        env:
+          API_HOST: ${{ secrets.API_HOST }}
+          NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
