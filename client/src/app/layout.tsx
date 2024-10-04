@@ -17,12 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ErrorBoundary>
-      <html lang="pl" className="light">
-        <body className={`${golos.className} bg-background text-foreground`}>
+    <html lang="pl" className="light">
+      <body className={`${golos.className} bg-background text-foreground`}>
+        <ErrorBoundary>
           <Providers>{children}</Providers>
-        </body>
-      </html>
-    </ErrorBoundary>
+        </ErrorBoundary>
+      </body>
+    </html>
   );
 }

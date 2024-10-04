@@ -1,16 +1,5 @@
 module.exports = ({ env }) => ({
   auth: {
-    events: {
-      onConnectionSuccess(e) {
-        console.log(e.user, e.provider);
-      },
-      onConnectionError(e) {
-        console.error(e.error, e.provider);
-      },
-    },
-    options: {
-      expiresIn: '7d',
-    },
     secret: env('ADMIN_JWT_SECRET', 'someSecretKey'),
   },
   apiToken: {
