@@ -1,89 +1,10 @@
-import type { Schema, Attribute } from "@strapi/strapi";
-
-export interface MenuMenuItem extends Schema.Component {
-  collectionName: "components_menu_menu_items";
-  info: {
-    displayName: "MenuItem";
-    icon: "bulletList";
-    description: "";
-  };
-  attributes: {
-    text: Attribute.String & Attribute.Required;
-    url: Attribute.String;
-    category: Attribute.Relation<
-      "menu.menu-item",
-      "oneToOne",
-      "api::category.category"
-    >;
-  };
-}
-
-export interface ContactPageSocialLinks extends Schema.Component {
-  collectionName: "components_contact_page_social_links";
-  info: {
-    displayName: "SocialLinks";
-    icon: "cursor";
-    description: "";
-  };
-  attributes: {
-    facebookUrl: Attribute.String;
-    instaUrl: Attribute.String;
-    youtubeUrl: Attribute.String;
-    title: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface ContactPagePets extends Schema.Component {
-  collectionName: "components_contact_page_pets";
-  info: {
-    displayName: "Pets";
-    description: "";
-  };
-  attributes: {
-    petItem: Attribute.Component<"contact-page.pet-item", true>;
-    title: Attribute.String;
-  };
-}
-
-export interface ContactPagePetItem extends Schema.Component {
-  collectionName: "components_contact_page_pet_items";
-  info: {
-    displayName: "PetItem";
-  };
-  attributes: {
-    text: Attribute.String;
-    image: Attribute.Media<"images" | "files" | "videos" | "audios">;
-  };
-}
-
-export interface ContactPageContactItem extends Schema.Component {
-  collectionName: "components_contact_page_contact_items";
-  info: {
-    displayName: "ContactItem";
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-  };
-}
-
-export interface ContactPageContactInfo extends Schema.Component {
-  collectionName: "components_contact_page_contact_infos";
-  info: {
-    displayName: "ContactInfo";
-    description: "";
-  };
-  attributes: {
-    contactItem: Attribute.Component<"contact-page.contact-item", true>;
-    mapUrl: Attribute.Text;
-  };
-}
+import type { Schema, Attribute } from '@strapi/strapi';
 
 export interface SharedSeo extends Schema.Component {
-  collectionName: "components_shared_seos";
+  collectionName: 'components_shared_seos';
   info: {
-    displayName: "seo";
-    icon: "search";
+    displayName: 'seo';
+    icon: 'search';
   };
   attributes: {
     metaTitle: Attribute.String &
@@ -97,8 +18,8 @@ export interface SharedSeo extends Schema.Component {
         minLength: 50;
         maxLength: 160;
       }>;
-    metaImage: Attribute.Media<"images" | "files" | "videos">;
-    metaSocial: Attribute.Component<"shared.meta-social", true>;
+    metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
+    metaSocial: Attribute.Component<'shared.meta-social', true>;
     keywords: Attribute.Text;
     metaRobots: Attribute.String;
     structuredData: Attribute.JSON;
@@ -108,10 +29,10 @@ export interface SharedSeo extends Schema.Component {
 }
 
 export interface SharedSearch extends Schema.Component {
-  collectionName: "components_shared_searches";
+  collectionName: 'components_shared_searches';
   info: {
-    displayName: "Search";
-    icon: "search";
+    displayName: 'Search';
+    icon: 'search';
   };
   attributes: {
     placeholder: Attribute.String;
@@ -119,13 +40,13 @@ export interface SharedSearch extends Schema.Component {
 }
 
 export interface SharedMetaSocial extends Schema.Component {
-  collectionName: "components_shared_meta_socials";
+  collectionName: 'components_shared_meta_socials';
   info: {
-    displayName: "metaSocial";
-    icon: "project-diagram";
+    displayName: 'metaSocial';
+    icon: 'project-diagram';
   };
   attributes: {
-    socialNetwork: Attribute.Enumeration<["Facebook", "Twitter"]> &
+    socialNetwork: Attribute.Enumeration<['Facebook', 'Twitter']> &
       Attribute.Required;
     title: Attribute.String &
       Attribute.Required &
@@ -137,30 +58,30 @@ export interface SharedMetaSocial extends Schema.Component {
       Attribute.SetMinMaxLength<{
         maxLength: 65;
       }>;
-    image: Attribute.Media<"images" | "files" | "videos">;
+    image: Attribute.Media<'images' | 'files' | 'videos'>;
   };
 }
 
 export interface SharedHero extends Schema.Component {
-  collectionName: "components_shared_heroes";
+  collectionName: 'components_shared_heroes';
   info: {
-    displayName: "Hero";
-    icon: "layout";
-    description: "";
+    displayName: 'Hero';
+    icon: 'layout';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     description: Attribute.String;
-    image: Attribute.Media<"images" | "files" | "videos" | "audios">;
-    button: Attribute.Component<"shared.button">;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    button: Attribute.Component<'shared.button'>;
   };
 }
 
 export interface SharedButton extends Schema.Component {
-  collectionName: "components_shared_buttons";
+  collectionName: 'components_shared_buttons';
   info: {
-    displayName: "Button";
-    icon: "server";
+    displayName: 'Button';
+    icon: 'server';
   };
   attributes: {
     text: Attribute.String;
@@ -169,29 +90,29 @@ export interface SharedButton extends Schema.Component {
 }
 
 export interface MenuMenuItem extends Schema.Component {
-  collectionName: "components_menu_menu_items";
+  collectionName: 'components_menu_menu_items';
   info: {
-    displayName: "MenuItem";
-    icon: "bulletList";
-    description: "";
+    displayName: 'MenuItem';
+    icon: 'bulletList';
+    description: '';
   };
   attributes: {
     text: Attribute.String & Attribute.Required;
     url: Attribute.String;
     category: Attribute.Relation<
-      "menu.menu-item",
-      "oneToOne",
-      "api::category.category"
+      'menu.menu-item',
+      'oneToOne',
+      'api::category.category'
     >;
   };
 }
 
 export interface ContactPageSocialLinks extends Schema.Component {
-  collectionName: "components_contact_page_social_links";
+  collectionName: 'components_contact_page_social_links';
   info: {
-    displayName: "SocialLinks";
-    icon: "cursor";
-    description: "";
+    displayName: 'SocialLinks';
+    icon: 'cursor';
+    description: '';
   };
   attributes: {
     facebookUrl: Attribute.String;
@@ -202,32 +123,32 @@ export interface ContactPageSocialLinks extends Schema.Component {
 }
 
 export interface ContactPagePets extends Schema.Component {
-  collectionName: "components_contact_page_pets";
+  collectionName: 'components_contact_page_pets';
   info: {
-    displayName: "Pets";
-    description: "";
+    displayName: 'Pets';
+    description: '';
   };
   attributes: {
-    petItem: Attribute.Component<"contact-page.pet-item", true>;
+    petItem: Attribute.Component<'contact-page.pet-item', true>;
     title: Attribute.String;
   };
 }
 
 export interface ContactPagePetItem extends Schema.Component {
-  collectionName: "components_contact_page_pet_items";
+  collectionName: 'components_contact_page_pet_items';
   info: {
-    displayName: "PetItem";
+    displayName: 'PetItem';
   };
   attributes: {
     text: Attribute.String;
-    image: Attribute.Media<"images" | "files" | "videos" | "audios">;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 
 export interface ContactPageContactItem extends Schema.Component {
-  collectionName: "components_contact_page_contact_items";
+  collectionName: 'components_contact_page_contact_items';
   info: {
-    displayName: "ContactItem";
+    displayName: 'ContactItem';
   };
   attributes: {
     title: Attribute.String;
@@ -236,113 +157,113 @@ export interface ContactPageContactItem extends Schema.Component {
 }
 
 export interface ContactPageContactInfo extends Schema.Component {
-  collectionName: "components_contact_page_contact_infos";
+  collectionName: 'components_contact_page_contact_infos';
   info: {
-    displayName: "ContactInfo";
-    description: "";
+    displayName: 'ContactInfo';
+    description: '';
   };
   attributes: {
-    contactItem: Attribute.Component<"contact-page.contact-item", true>;
+    contactItem: Attribute.Component<'contact-page.contact-item', true>;
     mapUrl: Attribute.Text;
   };
 }
 
 export interface BlogPostVideo extends Schema.Component {
-  collectionName: "components_blog_post_videos";
+  collectionName: 'components_blog_post_videos';
   info: {
-    displayName: "video";
-    description: "";
+    displayName: 'video';
+    description: '';
   };
   attributes: {
     title: Attribute.String &
-      Attribute.DefaultTo<"Hej! Mo\u017Ce rozwi\u0105\u017Cemy to razem?">;
+      Attribute.DefaultTo<'Hej! Mo\u017Ce rozwi\u0105\u017Cemy to razem?'>;
     embedURL: Attribute.String & Attribute.Required;
   };
 }
 
 export interface BlogPostTex extends Schema.Component {
-  collectionName: "components_blog_post_texes";
+  collectionName: 'components_blog_post_texes';
   info: {
-    displayName: "TEX";
-    icon: "feather";
-    description: "";
+    displayName: 'TEX';
+    icon: 'feather';
+    description: '';
   };
   attributes: {
     TEX: Attribute.Text;
-    type: Attribute.Enumeration<["tex"]> &
+    type: Attribute.Enumeration<['tex']> &
       Attribute.Required &
-      Attribute.DefaultTo<"tex">;
+      Attribute.DefaultTo<'tex'>;
   };
 }
 
 export interface BlogPostSource extends Schema.Component {
-  collectionName: "components_blog_post_sources";
+  collectionName: 'components_blog_post_sources';
   info: {
-    displayName: "source";
-    icon: "oneWay";
-    description: "";
+    displayName: 'source';
+    icon: 'oneWay';
+    description: '';
   };
   attributes: {
     text: Attribute.String &
       Attribute.Required &
-      Attribute.DefaultTo<"\u0179r\u00F3d\u0142o:">;
+      Attribute.DefaultTo<'\u0179r\u00F3d\u0142o:'>;
     url: Attribute.Enumeration<
       [
-        "https://cke.gov.pl/egzamin-osmoklasisty/arkusze/",
-        "https://cke.gov.pl/egzamin-maturalny/egzamin-maturalny-w-formule-2015/arkusze/",
-        "https://cke.gov.pl/egzamin-maturalny/egzamin-w-starej-formule/arkusze/"
+        'https://cke.gov.pl/egzamin-osmoklasisty/arkusze/',
+        'https://cke.gov.pl/egzamin-maturalny/egzamin-maturalny-w-formule-2015/arkusze/',
+        'https://cke.gov.pl/egzamin-maturalny/egzamin-w-starej-formule/arkusze/'
       ]
     >;
   };
 }
 
 export interface BlogPostImage extends Schema.Component {
-  collectionName: "components_blog_post_images";
+  collectionName: 'components_blog_post_images';
   info: {
-    displayName: "image";
-    icon: "landscape";
-    description: "";
+    displayName: 'image';
+    icon: 'landscape';
+    description: '';
   };
   attributes: {
-    image: Attribute.Media<"images" | "files">;
-    type: Attribute.Enumeration<["image"]> &
+    image: Attribute.Media<'images' | 'files'>;
+    type: Attribute.Enumeration<['image']> &
       Attribute.Required &
-      Attribute.DefaultTo<"image">;
+      Attribute.DefaultTo<'image'>;
   };
 }
 
 export interface BlogPostAnswer extends Schema.Component {
-  collectionName: "components_blog_post_answers";
+  collectionName: 'components_blog_post_answers';
   info: {
-    displayName: "Answer";
-    icon: "lightbulb";
-    description: "";
+    displayName: 'Answer';
+    icon: 'lightbulb';
+    description: '';
   };
   attributes: {
     TEX: Attribute.Text & Attribute.Required;
-    image: Attribute.Component<"blog-post.image">;
+    image: Attribute.Component<'blog-post.image'>;
   };
 }
 
-declare module "@strapi/types" {
+declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      "shared.seo": SharedSeo;
-      "shared.search": SharedSearch;
-      "shared.meta-social": SharedMetaSocial;
-      "shared.hero": SharedHero;
-      "shared.button": SharedButton;
-      "menu.menu-item": MenuMenuItem;
-      "contact-page.social-links": ContactPageSocialLinks;
-      "contact-page.pets": ContactPagePets;
-      "contact-page.pet-item": ContactPagePetItem;
-      "contact-page.contact-item": ContactPageContactItem;
-      "contact-page.contact-info": ContactPageContactInfo;
-      "blog-post.video": BlogPostVideo;
-      "blog-post.tex": BlogPostTex;
-      "blog-post.source": BlogPostSource;
-      "blog-post.image": BlogPostImage;
-      "blog-post.answer": BlogPostAnswer;
+      'shared.seo': SharedSeo;
+      'shared.search': SharedSearch;
+      'shared.meta-social': SharedMetaSocial;
+      'shared.hero': SharedHero;
+      'shared.button': SharedButton;
+      'menu.menu-item': MenuMenuItem;
+      'contact-page.social-links': ContactPageSocialLinks;
+      'contact-page.pets': ContactPagePets;
+      'contact-page.pet-item': ContactPagePetItem;
+      'contact-page.contact-item': ContactPageContactItem;
+      'contact-page.contact-info': ContactPageContactInfo;
+      'blog-post.video': BlogPostVideo;
+      'blog-post.tex': BlogPostTex;
+      'blog-post.source': BlogPostSource;
+      'blog-post.image': BlogPostImage;
+      'blog-post.answer': BlogPostAnswer;
     }
   }
 }

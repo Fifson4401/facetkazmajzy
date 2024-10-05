@@ -40,10 +40,6 @@ const populate = {
     },
   },
   search: {
-    populate: {
-      image: {
-        populate: '*',
-      },
-    },
+    populate: '*',
   },
 };
