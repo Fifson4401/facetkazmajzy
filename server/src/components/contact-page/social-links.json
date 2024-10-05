@@ -8,17 +8,24 @@
   "options": {},
   "attributes": {
     "facebookUrl": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "default": "https://www.facebook.com/profile.php?id=100095406271152"
     },
     "instaUrl": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "default": "https://www.instagram.com/facetkazmajzy?igsh=MXdoMzRhYTc0ZjJuZg=="
     },
     "youtubeUrl": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "default": "https://www.youtube.com/@Facetkazmajzy"
     },
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "default": "Sprawdź moje linki tutaj!"
     }
   }
 }

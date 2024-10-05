@@ -11,19 +11,25 @@ interface ContactHeroProps {
   button?: { text: string; url: string };
 }
 
-const ContactHero: FC<ContactHeroProps> = ({ title, description, image, button }) => {
-
+const ContactHero: FC<ContactHeroProps> = ({
+  title,
+  description,
+  image,
+  button,
+}) => {
   if (!title || !description || !image || !button) {
     return null;
   }
 
   return (
-    <div className="flex max-w-[100vw] flex-col p-8 lg:p-11 lg:flex-row bg-[#e8e1d8] rounded-3xl justify-evenly relative items-center">
-      <div className="order-1 mt-8 flex w-full flex-col items-start lg:order-2 lg:w-1/2 mb-14 max-lg:mb-5 max-lg:mt-0 max-lg:items-center">
-        <h1 className="mb-12 leading-tight max-lg:mb-5 sm:text-2xl md:text-3xl text-left">
+    <div className="relative flex max-w-[100vw] flex-col items-center justify-evenly rounded-3xl bg-[#e8e1d8] p-8 lg:flex-row lg:p-11">
+      <div className="order-1 mb-14 mt-8 flex w-full flex-col items-start max-lg:mb-5 max-lg:mt-0 max-lg:items-center lg:order-2 lg:w-1/2">
+        <h1 className="mb-12 text-left leading-tight max-lg:mb-5 sm:text-2xl md:text-3xl">
           {title}
         </h1>
-        <p className="mb-12 max-lg:mb-5 text-sm md:text-xl text-left">{description}</p>
+        <p className="mb-12 text-left text-sm max-lg:mb-5 md:text-xl">
+          {description}
+        </p>
         <Link href={button.url}>
           <Button size="lg" className="bg-[#cc3266] text-white shadow-xl">
             {button.text}
@@ -38,7 +44,12 @@ const ContactHero: FC<ContactHeroProps> = ({ title, description, image, button }
           imageClassName="object-contain md:object-cover max-lg:max-h-[50vh] object-top"
         />
       </div>
-      <p className='absolute text-8xl text-[#f4f0ee] font-semibold bottom-2 right-4 z-10' aria-hidden>facetka</p>
+      <p
+        className="absolute bottom-2 right-4 z-10 text-8xl font-semibold text-[#f4f0ee]"
+        aria-hidden
+      >
+        facetka
+      </p>
     </div>
   );
 };

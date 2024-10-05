@@ -8,17 +8,28 @@ export type ContactPageAttributes = PageAttributes & {
     facebookUrl?: string;
     youtubeUrl?: string;
   };
-  pets?: string;
+  pets?: ContactPetsAttributes;
+};
+
+export type ContactPetsAttributes = {
+  title?: string;
+  petItems?: ContactPetItemAttribute[];
+};
+
+export type ContactPetItemAttribute = {
+  text: string;
+  image: ImageProps;
 };
 
 export type ContactInfoAttributes = {
   mapUrl?: string;
-  contactItem: ContactItemAttribute;
+  contactItem?: ContactItemAttribute[];
 };
 
 export type ContactItemAttribute = {
   title: string;
   description: string;
+  type: 'hours' | 'email' | 'phone';
 };
 
 export type PetAttribute = {

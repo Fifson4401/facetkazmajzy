@@ -2,6 +2,7 @@
 
 import { MenuArray } from '@/api/interfaces/defaults';
 import {
+  Image,
   Link,
   Navbar,
   NavbarBrand,
@@ -11,10 +12,9 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@nextui-org/react';
-import { Image } from '@nextui-org/react';
-import NextImage from 'next/image';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { FC, useEffect, useMemo, useState } from 'react';
+import NextImage from 'next/image';
 
 interface HeaderProps {
   menu?: MenuArray;
@@ -22,10 +22,9 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ menu }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showMenuItems, setShowMenuItems] = useState(false)
+  const [showMenuItems, setShowMenuItems] = useState(false);
 
   const searchParams = useSearchParams();
-
   const menuItems = menu?.data[0].attributes.menuItems;
 
   const queryURL = useMemo(
@@ -33,15 +32,15 @@ const Header: FC<HeaderProps> = ({ menu }) => {
     [searchParams]
   );
 
-  const path = usePathname()
+  const path = usePathname();
 
   useEffect(() => {
     if (!Array.isArray(menuItems) || menuItems.length < 1) {
-      setShowMenuItems(false)
-      return
+      setShowMenuItems(false);
+      return;
     }
-    setShowMenuItems(true)
-  }, [menuItems])
+    setShowMenuItems(true);
+  }, [menuItems]);
 
   return (
     <Navbar
@@ -51,37 +50,38 @@ const Header: FC<HeaderProps> = ({ menu }) => {
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent justify="start">
-        <NavbarBrand>
-          <Link href="/" color="foreground">
+        <NavbarBrand className="h-full">
+          <Link href="/" color="foreground" className="flex items-center h-full">
             <Image
               as={NextImage}
               src="/logo.webp"
               alt="Facetka Z Majzy Logo"
               width={58}
               height={58}
+              className="h-full w-auto object-contain max-md:py-1"
               priority
             />
             <p className="ml-2 md:ml-6">Facetka z Majzy</p>
           </Link>
         </NavbarBrand>
       </NavbarContent>
-      {!!showMenuItems && !!menuItems?.length &&
+      {!!showMenuItems && !!menuItems?.length && (
         <>
           <NavbarContent className="hidden gap-5 lg:flex" justify="center">
             {menuItems.map((item, index) => {
               const isActive = queryURL?.category
                 ? queryURL?.category === item.category?.data?.id.toString()
-                : path.includes(item.text.toLocaleLowerCase());
+                : path.includes(item.text.toLowerCase());
+
+              const itemUrl = item.url
+                ? item.url
+                : `/zadania?category=${item?.category?.data?.id || 1}`;
 
               return (
                 <NavbarItem key={`${item.text}-${index}`} isActive={isActive}>
                   <Link
                     color="foreground"
-                    href={
-                      item.url
-                        ? item.url
-                        : `/zadania?category=${item?.category?.data?.id}`
-                    }
+                    href={itemUrl}
                     className="max-w-40 text-wrap text-center"
                   >
                     {item.text}
@@ -101,6 +101,10 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                 ? queryURL?.category === item.category?.data?.id.toString()
                 : false;
 
+              const itemUrl = item.url
+                ? item.url
+                : `/zadania?category=${item?.category?.data?.id || 1}`;
+
               return (
                 <NavbarMenuItem key={`${item.text}-${index}`}>
                   <Link
@@ -112,11 +116,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                           : 'foreground'
                     }
                     className="w-full"
-                    href={
-                      item.url
-                        ? item.url
-                        : `/zadania?category=${item?.category?.data?.id}`
-                    }
+                    href={itemUrl}
                     size="lg"
                   >
                     {item.text}
@@ -125,7 +125,8 @@ const Header: FC<HeaderProps> = ({ menu }) => {
               );
             })}
           </NavbarMenu>
-        </>}
+        </>
+      )}
     </Navbar>
   );
 };
