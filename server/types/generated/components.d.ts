@@ -37,6 +37,7 @@ export interface SharedSearch extends Schema.Component {
   };
   attributes: {
     placeholder: Attribute.String &
+      Attribute.Required &
       Attribute.DefaultTo<'Prosz\u0119 podpowiedz bo nic nie wiem...'>;
   };
 }
@@ -72,9 +73,13 @@ export interface SharedHero extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.String;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Test \u00F3smoklasisty przyprawia o zawr\u00F3t g\u0142owy? A mo\u017Ce matura ju\u017C za rok, a Ty nie wiesz od czego zacz\u0105\u0107?'>;
+    description: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Nie czekaj, RAZEM damy rad\u0119!'>;
+    image: Attribute.Media<'images'> & Attribute.Required;
     button: Attribute.Component<'shared.button'>;
   };
 }
@@ -84,10 +89,15 @@ export interface SharedButton extends Schema.Component {
   info: {
     displayName: 'Button';
     icon: 'server';
+    description: '';
   };
   attributes: {
-    text: Attribute.String;
-    url: Attribute.String;
+    text: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Po prostu zadzwo\u0144!'>;
+    url: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'#contactSection'>;
   };
 }
 
@@ -117,10 +127,18 @@ export interface ContactPageSocialLinks extends Schema.Component {
     description: '';
   };
   attributes: {
-    facebookUrl: Attribute.String;
-    instaUrl: Attribute.String;
-    youtubeUrl: Attribute.String;
-    title: Attribute.String & Attribute.Required;
+    facebookUrl: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'https://www.facebook.com/profile.php?id=100095406271152'>;
+    instaUrl: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'https://www.instagram.com/facetkazmajzy?igsh=MXdoMzRhYTc0ZjJuZg=='>;
+    youtubeUrl: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'https://www.youtube.com/@Facetkazmajzy'>;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Sprawd\u017A moje linki tutaj!'>;
   };
 }
 

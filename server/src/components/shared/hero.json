@@ -8,20 +8,21 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "default": "Test ósmoklasisty przyprawia o zawrót głowy? A może matura już za rok, a Ty nie wiesz od czego zacząć?"
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "default": "Nie czekaj, RAZEM damy radę!",
+      "required": true
     },
     "image": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
     },
     "button": {

@@ -9,7 +9,8 @@
   "attributes": {
     "placeholder": {
       "type": "string",
-      "default": "Proszę podpowiedz bo nic nie wiem..."
+      "default": "Proszę podpowiedz bo nic nie wiem...",
+      "required": true
     }
   }
 }
