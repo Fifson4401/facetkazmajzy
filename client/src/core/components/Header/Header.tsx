@@ -2,6 +2,7 @@
 
 import { MenuArray } from '@/api/interfaces/defaults';
 import {
+  Image,
   Link,
   Navbar,
   NavbarBrand,
@@ -11,10 +12,9 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@nextui-org/react';
-import { Image } from '@nextui-org/react';
-import NextImage from 'next/image';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { FC, useEffect, useMemo, useState } from 'react';
+import NextImage from 'next/image';
 
 interface HeaderProps {
   menu?: MenuArray;
@@ -25,7 +25,6 @@ const Header: FC<HeaderProps> = ({ menu }) => {
   const [showMenuItems, setShowMenuItems] = useState(false);
 
   const searchParams = useSearchParams();
-
   const menuItems = menu?.data[0].attributes.menuItems;
 
   const queryURL = useMemo(
@@ -51,14 +50,15 @@ const Header: FC<HeaderProps> = ({ menu }) => {
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent justify="start">
-        <NavbarBrand>
-          <Link href="/" color="foreground">
+        <NavbarBrand className="h-full">
+          <Link href="/" color="foreground" className="flex items-center h-full">
             <Image
               as={NextImage}
               src="/logo.webp"
               alt="Facetka Z Majzy Logo"
               width={58}
               height={58}
+              className="h-full w-auto object-contain max-md:py-1"
               priority
             />
             <p className="ml-2 md:ml-6">Facetka z Majzy</p>
@@ -71,7 +71,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
             {menuItems.map((item, index) => {
               const isActive = queryURL?.category
                 ? queryURL?.category === item.category?.data?.id.toString()
-                : path.includes(item.text.toLocaleLowerCase());
+                : path.includes(item.text.toLowerCase());
 
               const itemUrl = item.url
                 ? item.url
