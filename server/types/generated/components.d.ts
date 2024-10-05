@@ -30,7 +30,7 @@ export interface ContactPagePets extends Schema.Component {
     description: '';
   };
   attributes: {
-    petItem: Attribute.Component<'contact-page.pet-item', true>;
+    petItems: Attribute.Component<'contact-page.pet-item', true>;
     title: Attribute.String;
   };
 }
