@@ -5,7 +5,7 @@ import PostNoResults from '../PostNoResults/PostNoResults';
 
 const PostList: FC<PropsWithBlogPages> = ({ pages }) => {
   if (!pages || !pages.length) {
-    return (<PostNoResults />);
+    return <PostNoResults />;
   }
 
   return (

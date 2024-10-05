@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@nextui-org/react';
@@ -11,7 +11,7 @@ const ContactPhoneButton = ({ phoneNumber }: { phoneNumber: string }) => {
 
   useEffect(() => {
     if (!/^\d{9}$/.test(phoneNumber)) {
-      setShow(false)
+      setShow(false);
       return;
     }
 
@@ -27,7 +27,7 @@ const ContactPhoneButton = ({ phoneNumber }: { phoneNumber: string }) => {
   };
 
   if (!show || !phoneNumber) {
-    return null
+    return null;
   }
 
   return (
@@ -37,25 +37,34 @@ const ContactPhoneButton = ({ phoneNumber }: { phoneNumber: string }) => {
           <Button
             onClick={toggleReveal}
             className="flex items-center bg-[#cc3266]"
-            aria-label={isRevealed ? 'Ukryj numer telefonu' : 'Pokaż numer telefonu'}
+            aria-label={
+              isRevealed ? 'Ukryj numer telefonu' : 'Pokaż numer telefonu'
+            }
           >
-            <p className='text-white flex flex-row'>
+            <p className="flex flex-row text-white">
               {isRevealed ? (
                 <>
-                  <FaEyeSlash className="h-5 w-5 mr-2 text-white" aria-hidden="true" />
+                  <FaEyeSlash
+                    className="mr-2 h-5 w-5 text-white"
+                    aria-hidden="true"
+                  />
                   Ukryj Numer
                 </>
               ) : (
                 <>
-                  <FaEye className="h-5 w-5 mr-2 text-white" aria-hidden="true" />
+                  <FaEye
+                    className="mr-2 h-5 w-5 text-white"
+                    aria-hidden="true"
+                  />
                   Pokaż Numer
                 </>
               )}
             </p>
           </Button>
           <span
-            className={`mt-4 text-lg font-semibold cursor-pointer transition-opacity duration-500 ${isRevealed ? 'opacity-100' : 'opacity-0'
-              }`}
+            className={`mt-4 cursor-pointer text-lg font-semibold transition-opacity duration-500 ${
+              isRevealed ? 'opacity-100' : 'opacity-0'
+            }`}
             dangerouslySetInnerHTML={{
               __html: isRevealed ? encodedNumber : '',
             }}

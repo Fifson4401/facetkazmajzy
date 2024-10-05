@@ -22,7 +22,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ menu }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showMenuItems, setShowMenuItems] = useState(false)
+  const [showMenuItems, setShowMenuItems] = useState(false);
 
   const searchParams = useSearchParams();
 
@@ -33,15 +33,15 @@ const Header: FC<HeaderProps> = ({ menu }) => {
     [searchParams]
   );
 
-  const path = usePathname()
+  const path = usePathname();
 
   useEffect(() => {
     if (!Array.isArray(menuItems) || menuItems.length < 1) {
-      setShowMenuItems(false)
-      return
+      setShowMenuItems(false);
+      return;
     }
-    setShowMenuItems(true)
-  }, [menuItems])
+    setShowMenuItems(true);
+  }, [menuItems]);
 
   return (
     <Navbar
@@ -65,7 +65,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
           </Link>
         </NavbarBrand>
       </NavbarContent>
-      {!!showMenuItems && !!menuItems?.length &&
+      {!!showMenuItems && !!menuItems?.length && (
         <>
           <NavbarContent className="hidden gap-5 lg:flex" justify="center">
             {menuItems.map((item, index) => {
@@ -73,7 +73,9 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                 ? queryURL?.category === item.category?.data?.id.toString()
                 : path.includes(item.text.toLocaleLowerCase());
 
-              const itemUrl = item.url ? item.url : `/zadania?category=${item?.category?.data?.id || 1}`
+              const itemUrl = item.url
+                ? item.url
+                : `/zadania?category=${item?.category?.data?.id || 1}`;
 
               return (
                 <NavbarItem key={`${item.text}-${index}`} isActive={isActive}>
@@ -99,7 +101,9 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                 ? queryURL?.category === item.category?.data?.id.toString()
                 : false;
 
-              const itemUrl = item.url ? item.url : `/zadania?category=${item?.category?.data?.id || 1}`
+              const itemUrl = item.url
+                ? item.url
+                : `/zadania?category=${item?.category?.data?.id || 1}`;
 
               return (
                 <NavbarMenuItem key={`${item.text}-${index}`}>
@@ -121,7 +125,8 @@ const Header: FC<HeaderProps> = ({ menu }) => {
               );
             })}
           </NavbarMenu>
-        </>}
+        </>
+      )}
     </Navbar>
   );
 };
