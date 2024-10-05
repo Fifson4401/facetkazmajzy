@@ -7,7 +7,7 @@ export async function GET(
   { params }: { params: { route: string[] } }
 ) {
   // Odtwórz ścieżkę API z parametrów trasy
-  const apiPath = `api/${params.route.join('/')}`;
+  const apiPath = `/${params.route.join('/')}`;
 
   // Pobierz parametry zapytania
   const searchParams = request.nextUrl.search;
