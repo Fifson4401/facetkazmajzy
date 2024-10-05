@@ -977,9 +977,10 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
   attributes: {
     title: Attribute.String & Attribute.Required;
     slug: Attribute.UID & Attribute.Required;
-    content: Attribute.DynamicZone<['blog-post.tex', 'blog-post.image']>;
-    answer: Attribute.Component<'blog-post.answer'>;
-    source: Attribute.Component<'blog-post.source'>;
+    content: Attribute.DynamicZone<['blog-post.tex', 'blog-post.image']> &
+      Attribute.Required;
+    answer: Attribute.Component<'blog-post.answer'> & Attribute.Required;
+    source: Attribute.Component<'blog-post.source'> & Attribute.Required;
     category: Attribute.Relation<
       'api::blog-post.blog-post',
       'manyToOne',
@@ -1032,7 +1033,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    name: Attribute.String & Attribute.Unique;
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
     blog_posts: Attribute.Relation<
       'api::category.category',
       'oneToMany',
@@ -1170,12 +1171,13 @@ export interface ApiRandomRandom extends Schema.CollectionType {
     singularName: 'random';
     pluralName: 'randoms';
     displayName: 'random';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    random: Attribute.String;
+    random: Attribute.String & Attribute.Private;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1213,7 +1215,7 @@ export interface ApiSubCategorySubCategory extends Schema.CollectionType {
       'manyToOne',
       'api::category.category'
     >;
-    name: Attribute.String;
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
     blog_posts: Attribute.Relation<
       'api::sub-category.sub-category',
       'oneToMany',
@@ -1251,7 +1253,7 @@ export interface ApiTagTag extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    name: Attribute.String & Attribute.Unique;
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
     blog_posts: Attribute.Relation<
       'api::tag.tag',
       'manyToMany',

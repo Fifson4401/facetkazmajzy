@@ -6,7 +6,7 @@
   },
   "options": {},
   "attributes": {
-    "petItem": {
+    "petItems": {
       "displayName": "PetItem",
       "type": "component",
       "repeatable": true,

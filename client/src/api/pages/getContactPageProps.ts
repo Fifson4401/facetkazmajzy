@@ -43,8 +43,12 @@ const populate = {
   socialLinks: { populate: '*' },
   pets: {
     populate: {
-      image: {
-        populate: '*',
+      petItems: {
+        populate: {
+          image: {
+            populate: '*',
+          },
+        },
       },
     },
   },

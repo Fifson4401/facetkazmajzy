@@ -12,7 +12,6 @@ interface HeroProps {
 }
 
 const Hero: FC<HeroProps> = ({ title, description, image, button }) => {
-
   if (!title || !description || !image || !button) {
     return null;
   }
