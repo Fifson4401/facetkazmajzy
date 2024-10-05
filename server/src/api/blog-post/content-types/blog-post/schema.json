@@ -23,20 +23,25 @@
     },
     "content": {
       "type": "dynamiczone",
-      "components": ["blog-post.tex", "blog-post.image"]
+      "components": [
+        "blog-post.tex",
+        "blog-post.image"
+      ],
+      "required": true
     },
     "answer": {
       "displayName": "Answer",
       "type": "component",
       "repeatable": false,
       "component": "blog-post.answer",
-      "required": false
+      "required": true
     },
     "source": {
       "displayName": "source",
       "type": "component",
       "repeatable": false,
-      "component": "blog-post.source"
+      "component": "blog-post.source",
+      "required": true
     },
     "category": {
       "type": "relation",

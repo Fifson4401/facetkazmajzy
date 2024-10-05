@@ -33,9 +33,11 @@ export interface SharedSearch extends Schema.Component {
   info: {
     displayName: 'Search';
     icon: 'search';
+    description: '';
   };
   attributes: {
-    placeholder: Attribute.String;
+    placeholder: Attribute.String &
+      Attribute.DefaultTo<'Prosz\u0119 podpowiedz bo nic nie wiem...'>;
   };
 }
 

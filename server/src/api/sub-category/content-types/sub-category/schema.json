@@ -19,7 +19,9 @@
       "inversedBy": "sub_categories"
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "blog_posts": {
       "type": "relation",

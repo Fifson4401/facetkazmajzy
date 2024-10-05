@@ -4,7 +4,8 @@
   "info": {
     "singularName": "random",
     "pluralName": "randoms",
-    "displayName": "random"
+    "displayName": "random",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -12,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "random": {
-      "type": "string"
+      "type": "string",
+      "private": true
     }
   }
 }

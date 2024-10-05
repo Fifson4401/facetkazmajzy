@@ -73,15 +73,13 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                 ? queryURL?.category === item.category?.data?.id.toString()
                 : path.includes(item.text.toLocaleLowerCase());
 
+              const itemUrl = item.url ? item.url : `/zadania?category=${item?.category?.data?.id || 1}`
+
               return (
                 <NavbarItem key={`${item.text}-${index}`} isActive={isActive}>
                   <Link
                     color="foreground"
-                    href={
-                      item.url
-                        ? item.url
-                        : `/zadania?category=${item?.category?.data?.id}`
-                    }
+                    href={itemUrl}
                     className="max-w-40 text-wrap text-center"
                   >
                     {item.text}
@@ -101,6 +99,8 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                 ? queryURL?.category === item.category?.data?.id.toString()
                 : false;
 
+              const itemUrl = item.url ? item.url : `/zadania?category=${item?.category?.data?.id || 1}`
+
               return (
                 <NavbarMenuItem key={`${item.text}-${index}`}>
                   <Link
@@ -112,11 +112,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
                           : 'foreground'
                     }
                     className="w-full"
-                    href={
-                      item.url
-                        ? item.url
-                        : `/zadania?category=${item?.category?.data?.id}`
-                    }
+                    href={itemUrl}
                     size="lg"
                   >
                     {item.text}
