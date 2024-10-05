@@ -13,12 +13,13 @@ export type ContactPageAttributes = PageAttributes & {
 
 export type ContactInfoAttributes = {
   mapUrl?: string;
-  contactItem: ContactItemAttribute;
+  contactItem?: ContactItemAttribute[];
 };
 
 export type ContactItemAttribute = {
   title: string;
   description: string;
+  type: 'hours' | 'email' | 'phone';
 };
 
 export type PetAttribute = {
