@@ -95,7 +95,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             />
           </NavbarContent>
-          <NavbarMenu className="mt-5">
+          <NavbarMenu className="md:mt-5">
             {menuItems.map((item, index) => {
               const isActive = queryURL?.category
                 ? queryURL?.category === item.category?.data?.id.toString()

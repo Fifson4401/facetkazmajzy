@@ -90,17 +90,17 @@ const Search: FC<SearchProps> = ({
           />
         )}
       </div>
-      <div className="flex w-full flex-row items-center justify-center gap-5 pb-2 pt-2 md:px-11">
+      <div className="flex w-full flex-col md:flex-row items-center justify-center gap-3 md:gap-5 pb-2 pt-2 md:px-11">
         {showDeleteAll && (
           <Button
             color="danger"
-            className="max-w-3 bg-[#ED0C0C] text-white shadow-xl"
+            className="md:max-w-3 bg-[#ED0C0C] text-white shadow-xl flex w-full md:w-fit order-3 md:order-1"
             startContent={<IoMdTrash size={20} />}
             aria-label="Usuń parametry wyszukiwania"
             onClick={clearAll}
           />
         )}
-        <div className="flex w-full items-center justify-center">
+        <div className="flex w-full items-center justify-center order-1 md:order-2">
           <Input
             isClearable
             type="text"
@@ -138,7 +138,7 @@ const Search: FC<SearchProps> = ({
         <Button
           type="submit"
           disabled={searchValue.trim() === ''}
-          className="bg-[#cc3266] text-white shadow-xl"
+          className="bg-[#cc3266] text-white shadow-xl flex w-full md:w-fit order-2 md:order-3"
           startContent={<IoMdSearch size={25} />}
           aria-label="Szukaj"
         />

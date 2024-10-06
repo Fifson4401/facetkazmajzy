@@ -40,11 +40,10 @@ const SubCategoryPicker: FC<SubCategoryPickerProps> = ({
         >
           {subCategories.map((item) => {
             const isSelected = query?.subCategory === item.id.toString();
-
             return (
               <Card
                 isBlurred
-                className={`border-none bg-[#015c99] text-white hover:bg-[#fa6bb4] md:max-w-36 ${isSelected && 'bg-[#a40066]'}`}
+                className={`border-none bg-[#015c99] text-white hover:bg-[#fa6bb4] w-2/5 sm:w-fit ${isSelected && 'bg-[#a40066]'}`}
                 shadow="sm"
                 isPressable
                 onPress={() =>

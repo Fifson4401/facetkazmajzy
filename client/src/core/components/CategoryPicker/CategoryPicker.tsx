@@ -29,7 +29,7 @@ const CategoryPicker: FC<CategoryPickerProps> = ({
     <AnimatePresence>
       {showComponent && (
         <motion.div
-          className="flex flex-row flex-wrap justify-center gap-6 overflow-hidden"
+          className="flex flex-row flex-wrap justify-center gap-6 overflow-hidden w-full"
           initial={{ opacity: 0, y: 20, height: 0 }}
           animate={{ opacity: 1, y: 0, height: 'auto' }}
           exit={{ opacity: 0, y: 20, height: 0 }}
@@ -39,7 +39,7 @@ const CategoryPicker: FC<CategoryPickerProps> = ({
           {categories.data.map((item) => (
             <Card
               isBlurred
-              className="w-1/2 max-w-36 border-none bg-[#015c99] text-white shadow-md hover:bg-[#fa6bb4] md:w-1/3 lg:w-1/4"
+              className="w-full md:w-fit border-none bg-[#015c99] text-white shadow-md hover:bg-[#fa6bb4] lg:w-1/4"
               shadow="sm"
               isPressable
               onPress={() =>

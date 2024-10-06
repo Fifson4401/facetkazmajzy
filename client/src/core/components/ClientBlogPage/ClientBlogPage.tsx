@@ -26,9 +26,9 @@ const ClientBlogPage: FC<Omit<BlogPageAttributes, 'menu'>> = ({
 
   return (
     <div className="flex w-full flex-col">
-      <h1 className="text-center text-3xl">{title}</h1>
+      <h1 className="text-center text-2xl md:text-3xl lg:text-4xl">{title}</h1>
       <Spacer y={5} />
-      {description && <h2 className="text-l text-center">{description}</h2>}
+      {description && <p className="text-sm md:text-l lg:text-xl text-center">{description}</p>}
       <Spacer y={10} id="category" />
       <CategoryPicker
         setFilter={setRouteTo}

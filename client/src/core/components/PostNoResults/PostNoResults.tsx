@@ -4,7 +4,7 @@ import { Image } from '@nextui-org/react';
 const PostNoResults = () => {
   return (
     <div className="flex flex-col items-center justify-center px-11 lg:flex-row">
-      <div className="order-2 mx-auto mt-8 flex w-full flex-col items-center justify-center align-middle lg:order-1 lg:w-1/2">
+      <div className="order-2 mx-auto md:mt-8 flex w-full flex-col items-center justify-center align-middle lg:order-1 lg:w-1/2">
         <h3 className="mb-12 text-center leading-tight max-md:mb-6 sm:text-2xl md:text-4xl">
           Niestety nic tutaj nie ma... 😔
         </h3>
