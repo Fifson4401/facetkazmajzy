@@ -19,9 +19,9 @@ const PostVideo: FC<PostVideoProps> = ({ video }) => {
 
   return (
     <div className="flex w-full justify-center md:px-11">
-      <div className="w-full max-w-[75%]">
+      <div className="w-full md:max-w-[75%]">
         {video.title && (
-          <h2 className="pb-4 pt-6 text-center text-3xl">{video.title}</h2>
+          <h2 className="pb-4 pt-6 text-center text-lg md:text-3xl">{video.title}</h2>
         )}
         <div className="relative w-full pb-[56.25%]">
           <iframe

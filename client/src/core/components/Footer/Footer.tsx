@@ -25,7 +25,7 @@ const Footer = () => {
           Facetka z Majzy © {date.getFullYear()}
         </p>
       </div>
-      <div className="mb-6 flex w-full flex-row items-start justify-center gap-2 text-sm md:text-medium">
+      <div className="mb-6 flex w-full flex-wrap flex-row items-start justify-center gap-2 text-sm md:text-medium">
         <Link href={'/zadania'}>Zadania</Link>
         <Link href={'/kontakt'}>Kontakt</Link>
         <Link href={'/'}>Polityka prywatności</Link>
