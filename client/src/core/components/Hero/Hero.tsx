@@ -17,14 +17,14 @@ const Hero: FC<HeroProps> = ({ title, description, image, button }) => {
   }
 
   return (
-    <div className="flex max-w-[100vw] flex-col px-11 lg:flex-row">
+    <div className="flex max-w-[100vw] flex-col sm:px-11 lg:flex-row">
       <div className="order-2 mt-8 flex w-full flex-col items-start md:pe-20 lg:order-1 lg:w-1/2 lg:pe-28">
         <h1 className="mb-12 leading-tight max-md:mb-6 sm:text-2xl md:text-4xl lg:text-5xl">
           {title}
         </h1>
         <p className="mb-12 text-sm md:text-xl">{description}</p>
-        <Link href={button.url}>
-          <Button size="lg" className="bg-[#cc3266] text-white shadow-xl">
+        <Link href={button.url} className='flex w-full'>
+          <Button size="lg" className="bg-[#cc3266] text-white shadow-xl w-full sm:w-fit">
             {button.text}
           </Button>
         </Link>

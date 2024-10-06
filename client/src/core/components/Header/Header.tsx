@@ -58,7 +58,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
               alt="Facetka Z Majzy Logo"
               width={58}
               height={58}
-              className="h-full w-auto object-contain max-md:py-1"
+              className="h-full w-auto object-contain py-1 md:py-0 min-w-12"
               priority
             />
             <p className="ml-2 md:ml-6">Facetka z Majzy</p>

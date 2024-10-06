@@ -21,9 +21,9 @@ const SearchHome: FC<SearchHomeProps> = ({ placeholder }) => {
           router.push(`/zadania?search=${searchValue}`);
         }
       }}
-      className="flex max-h-16 w-full flex-row items-center justify-center gap-5 px-11"
+      className="flex md:max-h-16 w-full flex-row items-center justify-center gap-5 sm:px-11 max-md:flex-col"
     >
-      <div className="flex w-[80vw] items-center justify-center">
+      <div className="flex w-full md:w-[80vw] items-center justify-center ">
         <Input
           isClearable
           type="text"
@@ -63,7 +63,7 @@ const SearchHome: FC<SearchHomeProps> = ({ placeholder }) => {
       <Button
         type="submit"
         disabled={searchValue === undefined}
-        className="bg-[#cc3266] text-white shadow-xl"
+        className="bg-[#cc3266] text-white shadow-xl flex w-full md:w-fit"
         startContent={<IoMdSearch size={25} />}
         aria-label="Szukaj"
       />
