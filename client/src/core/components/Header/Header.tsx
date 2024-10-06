@@ -51,14 +51,18 @@ const Header: FC<HeaderProps> = ({ menu }) => {
     >
       <NavbarContent justify="start">
         <NavbarBrand className="h-full">
-          <Link href="/" color="foreground" className="flex items-center h-full">
+          <Link
+            href="/"
+            color="foreground"
+            className="flex h-full items-center"
+          >
             <Image
               as={NextImage}
               src="/logo.webp"
               alt="Facetka Z Majzy Logo"
               width={58}
               height={58}
-              className="h-full w-auto object-contain py-1 md:py-0 min-w-12"
+              className="h-full w-auto min-w-12 object-contain py-1 md:py-0"
               priority
             />
             <p className="ml-2 md:ml-6">Facetka z Majzy</p>

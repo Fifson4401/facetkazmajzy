@@ -43,7 +43,7 @@ const SubCategoryPicker: FC<SubCategoryPickerProps> = ({
             return (
               <Card
                 isBlurred
-                className={`border-none bg-[#015c99] text-white hover:bg-[#fa6bb4] w-2/5 sm:w-fit ${isSelected && 'bg-[#a40066]'}`}
+                className={`w-2/5 border-none bg-[#015c99] text-white hover:bg-[#fa6bb4] sm:w-fit ${isSelected && 'bg-[#a40066]'}`}
                 shadow="sm"
                 isPressable
                 onPress={() =>

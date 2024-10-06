@@ -22,8 +22,9 @@ const ScrollToTop = () => {
 
   return (
     <button
-      className={`duration-600 fixed bottom-[5vh] my-auto flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-lg border-2 border-[#a40066] bg-[#f7ede2] shadow-xl transition-all ease-in-out ${isVisible ? 'right-[3vw] opacity-100' : 'right-[-60px] opacity-0'
-        } z-20`}
+      className={`duration-600 fixed bottom-[5vh] my-auto flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-lg border-2 border-[#a40066] bg-[#f7ede2] shadow-xl transition-all ease-in-out ${
+        isVisible ? 'right-[3vw] opacity-100' : 'right-[-60px] opacity-0'
+      } z-20`}
       onClick={() => window.scrollTo(0, 0)}
     >
       <HiChevronDoubleUp

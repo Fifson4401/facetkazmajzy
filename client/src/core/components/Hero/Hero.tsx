@@ -23,8 +23,11 @@ const Hero: FC<HeroProps> = ({ title, description, image, button }) => {
           {title}
         </h1>
         <p className="mb-12 text-sm md:text-xl">{description}</p>
-        <Link href={button.url} className='flex w-full'>
-          <Button size="lg" className="bg-[#cc3266] text-white shadow-xl w-full sm:w-fit">
+        <Link href={button.url} className="flex w-full">
+          <Button
+            size="lg"
+            className="w-full bg-[#cc3266] text-white shadow-xl sm:w-fit"
+          >
             {button.text}
           </Button>
         </Link>

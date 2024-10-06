@@ -20,13 +20,13 @@ const ContactPetsSlider: FC<ContactPetsGridProps> = ({ petItems, title }) => {
   return (
     <div className="mx-auto w-full max-w-5xl p-4">
       {title && (
-        <h2 className="mb-6 text-center text-md md:text-2xl">{title}</h2>
+        <h2 className="text-md mb-6 text-center md:text-2xl">{title}</h2>
       )}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
         {petItems.map((item, index) => (
           <Card
             key={index}
-            className="shadow-md transition-shadow duration-300 hover:shadow-lg "
+            className="shadow-md transition-shadow duration-300 hover:shadow-lg"
           >
             <CardBody className="bg-[#cc3266] p-0">
               <ImageHandler
