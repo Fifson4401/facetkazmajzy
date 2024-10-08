@@ -5,6 +5,7 @@ export interface SharedSeo extends Schema.Component {
   info: {
     displayName: 'seo';
     icon: 'search';
+    description: '';
   };
   attributes: {
     metaTitle: Attribute.String &
@@ -21,10 +22,12 @@ export interface SharedSeo extends Schema.Component {
     metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
     metaSocial: Attribute.Component<'shared.meta-social', true>;
     keywords: Attribute.Text;
-    metaRobots: Attribute.String;
+    metaRobots: Attribute.String & Attribute.DefaultTo<'nofollow, noindex'>;
     structuredData: Attribute.JSON;
     metaViewport: Attribute.String;
-    canonicalURL: Attribute.String;
+    canonicalURL: Attribute.String & Attribute.DefaultTo<'facetkazmajzy.pl'>;
+    structuredQuestion: Attribute.Text;
+    structuredAnswear: Attribute.Text;
   };
 }
 

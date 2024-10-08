@@ -2,7 +2,8 @@
   "collectionName": "components_shared_seos",
   "info": {
     "displayName": "seo",
-    "icon": "search"
+    "icon": "search",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -38,7 +39,8 @@
     },
     "metaRobots": {
       "type": "string",
-      "regex": "[^,]+"
+      "regex": "[^,]+",
+      "default": "nofollow, noindex"
     },
     "structuredData": {
       "type": "json"
@@ -47,7 +49,14 @@
       "type": "string"
     },
     "canonicalURL": {
-      "type": "string"
+      "type": "string",
+      "default": "facetkazmajzy.pl"
+    },
+    "structuredQuestion": {
+      "type": "text"
+    },
+    "structuredAnswear": {
+      "type": "text"
     }
   }
 }
