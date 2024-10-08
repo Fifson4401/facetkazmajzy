@@ -11,8 +11,6 @@ interface ContactPetsGridProps {
 }
 
 const ContactPetsSlider: FC<ContactPetsGridProps> = ({ petItems, title }) => {
-  console.log(petItems);
-
   if (!petItems || petItems.length === 0) {
     return <p className="text-center">No items to display</p>;
   }
