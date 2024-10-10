@@ -2,12 +2,7 @@ const removeAccents = require("remove-accents");
 
 async function getSlug(title, categoryName, tags, id) {
 
-  let tagNumber = null;
-
-  const numericTags = getNumberTags(tags)
-  if (numericTags.length > 0) {
-    tagNumber = numericTags[0].name;
-  }
+  const tagNumber = getFirstNumberTag(tags)
 
   let slug = buildSlug(title, categoryName, tagNumber)
 
@@ -18,8 +13,34 @@ async function getSlug(title, categoryName, tags, id) {
   return slug;
 }
 
+function getFirstNumberTag(tags) {
+  let tagNumber = null;
+
+  const numericTags = getNumberTags(tags)
+  if (numericTags.length > 0) {
+    tagNumber = numericTags[0].name;
+  }
+
+  return tagNumber
+}
+
+function getFirstWordTag(tags) {
+  let tagWord = null;
+
+  const numericTags = getWordTags(tags)
+  if (numericTags.length > 0) {
+    tagWord = numericTags[0].name;
+  }
+
+  return tagWord
+}
+
 function getNumberTags(tags) {
   return tags.filter((tag) => !isNaN(parseInt(tag.name)));
+}
+
+function getWordTags(tags) {
+  return tags.filter((tag) => isNaN(parseInt(tag.name)));
 }
 
 function buildSlug(title, categoryName, tagNumber) {
@@ -80,4 +101,6 @@ async function ensureUniqueSlug(slug, currentId = null) {
 
 module.exports = {
   getSlug,
+  getFirstNumberTag,
+  getFirstWordTag
 };

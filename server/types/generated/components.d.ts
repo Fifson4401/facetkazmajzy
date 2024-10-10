@@ -24,7 +24,8 @@ export interface SharedSeo extends Schema.Component {
     keywords: Attribute.Text;
     metaRobots: Attribute.String & Attribute.DefaultTo<'nofollow, noindex'>;
     structuredData: Attribute.JSON;
-    metaViewport: Attribute.String;
+    metaViewport: Attribute.String &
+      Attribute.DefaultTo<'width=device-width, initial-scale=1'>;
     canonicalURL: Attribute.String & Attribute.DefaultTo<'facetkazmajzy.pl'>;
     structuredQuestion: Attribute.Text;
     structuredAnswear: Attribute.Text;

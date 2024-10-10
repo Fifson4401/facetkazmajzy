@@ -7,7 +7,6 @@ const { getSeo } = require('./helpers/getSeo');
 exports.handleBlogPost = async function handleBlogPost(ctx) {
   const { content, title, id, category, tags, seo } = ctx.request.body;
 
-
   try {
     let description = ''
 
@@ -26,10 +25,11 @@ exports.handleBlogPost = async function handleBlogPost(ctx) {
       categoryName = categoriesArray[0].name;
     }
 
-    ctx.request.body.slug = await getSlug(title, categoryName, tagsArray, id)
+    const slug = await getSlug(title, categoryName, tagsArray, id)
+    ctx.request.body.slug = slug
 
     // if (seo) {
-    //   ctx.request.body.seo = getSeo(seo, categoryName, tagsArray, title, description)
+    getSeo(seo, categoryName, tagsArray, title, description, slug)
     // }
 
   } catch (error) {
