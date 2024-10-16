@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import { getContactPageProps } from '@/api/pages/getContactPageProps';
 import ContactHero from '@/core/components/ContactHero/ContactHero';
 import ContactInfo from '@/core/components/ContactInfo/ContactInfo';

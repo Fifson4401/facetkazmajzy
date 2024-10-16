@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import { getHomePageProps } from '@/api/pages/getHomePageProps';
 import Hero from '@/core/components/Hero/Hero';
 import { Layout } from '@/core/components/Layout/Layout';
