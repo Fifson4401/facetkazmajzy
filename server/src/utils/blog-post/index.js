@@ -28,7 +28,7 @@ exports.handleBlogPost = async function handleBlogPost(ctx) {
     const slug = await getSlug(title, categoryName, tagsArray, id)
     ctx.request.body.slug = slug
 
-    const updatedSeo = getSeo(seo, categoryName, tagsArray, title, description, slug, publishedAt, updatedAt, video);
+    const updatedSeo = getSeo(seo, categoryName, tagsArray, title.trim(), description, slug, publishedAt, updatedAt, video);
     ctx.request.body.seo = updatedSeo;
 
   } catch (error) {

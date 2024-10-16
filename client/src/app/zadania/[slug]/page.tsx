@@ -5,11 +5,16 @@ import { PostContent } from '@/core/components/PostContent/PostContent';
 import PostHeader from '@/core/components/PostHeader/PostHeader';
 import PostSource from '@/core/components/PostSource/PostSource';
 import PostVideo from '@/core/components/PostVideo/PostVideo';
+import { Seo } from '@/core/components/SEO/SEO';
 import { notFound } from 'next/navigation';
 
 interface BlogPostPageProps {
   params: { slug: string };
 }
+
+export const revalidate = 3600;
+
+export { generateMetadata } from './generateMetadata';
 
 export default async function BlogPost({ params }: BlogPostPageProps) {
   const { pageData } = await getBlogPostPageProps(params.slug);
@@ -28,11 +33,12 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     content,
     answer,
     source,
-    video,
+    video, seo
   } = pageData;
 
   return (
     <Layout menu={menu}>
+      <Seo seo={seo} />
       <PostHeader
         title={title}
         category={category}
