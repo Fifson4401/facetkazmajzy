@@ -1,4 +1,4 @@
-// utils.js
+import removeAccents from 'remove-accents';
 
 /**
  * Funkcja normalizująca tekst dla celów wyszukiwania.
@@ -12,10 +12,10 @@
 export default function normalizeSearchText(text?: string) {
   if (!text) return '';
 
+  text = removeAccents(text);
+
   return text
     .toLowerCase()
-    .normalize('NFD') // Rozdziela znaki z akcentami od podstawowych znaków
-    .replace(/[\u0300-\u036f]/g, '') // Usuwa znaki diakrytyczne
     .replace(/\s+/g, ' ') // Zamienia wiele białych znaków na pojedynczą spację
     .trim(); // Usuwa spacje na początku i końcu tekstu
 }

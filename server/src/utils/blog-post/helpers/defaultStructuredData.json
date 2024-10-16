@@ -1,0 +1,70 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Facetka z Majzy - Helena Niemczynowska",
+    "url": "https://facetkazmajzy.pl",
+    "logo": "https://facetkazmajzy.pl/logo.webp",
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=100095406271152",
+      "https://www.instagram.com/facetkazmajzy",
+      "https://www.youtube.com/@Facetkazmajzy"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Facetka z Majzy",
+    "url": "https://facetkazmajzy.pl",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://facetkazmajzy.pl/zadania?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Strona Główna",
+        "item": "https://facetkazmajzy.pl"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Facetka z Majzy - Helena Niemczynowska",
+    "image": "https://facetkazmajzy.pl/logo.webp",
+    "@id": "",
+    "url": "https://facetkazmajzy.pl",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ul. Kasztanowa",
+      "addressLocality": "Siemianowice Śląskie",
+      "postalCode": "41-100",
+      "addressCountry": "PL"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 50.2931666,
+      "longitude": 19.0181688
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "14:00",
+      "closes": "20:00"
+    }
+  }
+]
