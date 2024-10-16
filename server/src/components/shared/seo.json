@@ -46,7 +46,8 @@
       "type": "json"
     },
     "metaViewport": {
-      "type": "string"
+      "type": "string",
+      "default": "width=device-width, initial-scale=1"
     },
     "canonicalURL": {
       "type": "string",
@@ -56,6 +57,9 @@
       "type": "text"
     },
     "structuredAnswear": {
+      "type": "text"
+    },
+    "shortStructuredQuestion": {
       "type": "text"
     }
   }

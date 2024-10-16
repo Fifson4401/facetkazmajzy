@@ -29,6 +29,7 @@ export interface SharedSeo extends Schema.Component {
     canonicalURL: Attribute.String & Attribute.DefaultTo<'facetkazmajzy.pl'>;
     structuredQuestion: Attribute.Text;
     structuredAnswear: Attribute.Text;
+    shortStructuredQuestion: Attribute.Text;
   };
 }
 

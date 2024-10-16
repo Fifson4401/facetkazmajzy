@@ -10,8 +10,13 @@ export const metadata: Metadata = {
   title: 'Facetka z Majzy',
   description: 'Korepetycje z matematyki',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/logo.webp',
   },
+  metadataBase: new URL('https://facetkazmajzy.pl'),
+  alternates: {
+    canonical: '/',
+  },
+
 };
 
 export default function RootLayout({

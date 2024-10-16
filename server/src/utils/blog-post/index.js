@@ -5,7 +5,7 @@ const { getSlug } = require('./helpers/getSlug');
 const { getSeo } = require('./helpers/getSeo');
 
 exports.handleBlogPost = async function handleBlogPost(ctx) {
-  const { content, title, id, category, tags, seo } = ctx.request.body;
+  const { content, title, id, category, tags, seo, updatedAt, publishedAt, video } = ctx.request.body;
 
   try {
     let description = ''
@@ -28,9 +28,8 @@ exports.handleBlogPost = async function handleBlogPost(ctx) {
     const slug = await getSlug(title, categoryName, tagsArray, id)
     ctx.request.body.slug = slug
 
-    // if (seo) {
-    getSeo(seo, categoryName, tagsArray, title, description, slug)
-    // }
+    const updatedSeo = getSeo(seo, categoryName, tagsArray, title, description, slug, publishedAt, updatedAt, video);
+    ctx.request.body.seo = updatedSeo;
 
   } catch (error) {
     strapi.log.error(`Error in blog post:`, error);

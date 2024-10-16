@@ -1,7 +1,9 @@
 const { latexToText } = require('./latexToText');
 const { getFirstNumberTag, getFirstWordTag } = require('./getSlug');
 
-function getSeo(seo, categoryName, tags, title, description, slug) {
+const author = 'Facetka z majzy - Helena Niemczynowska'
+
+function getSeo(seo, categoryName, tags, title, description, slug, publishedAt, updatedAt, video) {
   const newSeo = seo || {}
 
   const tagNumber = getFirstNumberTag(tags)
@@ -14,36 +16,160 @@ function getSeo(seo, categoryName, tags, title, description, slug) {
   newSeo.keywords = getKeywords(title, categoryName, tags, tagNumber, description)
   newSeo.metaViewport = "width=device-width, initial-scale=1"
   newSeo.canonicalURL = `https://facetkazmajzy.pl/zadania/${slug}`
+  newSeo.metaRobots = process.env.HOST.includes('api.facetkazmajzy.pl') ? "follow, index, max-snippet:-1, max-image-preview:large, max-video-preview:-1" : "nofollow, noindex"
 
-  console.log(newSeo.metaTitle);
+  const structuredData = []
 
+  structuredData.push(organization);
+  structuredData.push(website);
 
+  const breadcrumbs = generateBreadcrumbs(newSeo.canonicalURL);
+  if (breadcrumbs) {
+    structuredData.push(breadcrumbs);
+  }
 
+  if (newSeo.structuredQuestion && newSeo.structuredAnswear) {
+    const structuredQuestion = latexToText(newSeo.structuredQuestion)
+    const structuredAnswear = latexToText(newSeo.structuredAnswear)
+    const shortStructuredQuestion = newSeo.shortStructuredQuestion ? latexToText(newSeo.shortStructuredQuestion) : structuredQuestion
+
+    newSeo.structuredQuestion = structuredQuestion
+    newSeo.structuredAnswear = structuredAnswear
+    newSeo.shortStructuredQuestion = shortStructuredQuestion
+
+    const qaPage = generateQAPage({
+      question: structuredQuestion,
+      questionShort: shortStructuredQuestion,
+      answer: structuredAnswear,
+      author,
+      url: newSeo.canonicalURL,
+      publishedAt,
+      updatedAt,
+      video
+    });
+
+    if (qaPage) {
+      structuredData.push(qaPage);
+    }
+  }
+
+  newSeo.structuredData = structuredData;
+
+  if (newSeo.metaSocial && Array.isArray(newSeo.metaSocial)) {
+    newSeo.metaSocial = newSeo.metaSocial.map((social) => {
+      let updatedSocial = {
+        ...social,
+        title: truncateText(newSeo.metaTitle || title, 60),
+        description: truncateText(newSeo.metaDescription || description, 65),
+        image: newSeo.metaImage || social.image // Ustawienie obrazu z metaImage, jeśli dostępny
+      };
+
+      return updatedSocial;
+    });
+  }
+
+  return newSeo
 }
 
-const dupa = {
-  "id": 3,
-  "metaTitle": "Medical software certification - a guide  for managers",
-  "metaDescription": "askodoqwkm oiwm saokm doim doaskmd okmq o",
-  "keywords": "sada",
-  "metaRobots": "nofollow, noindex",
-  "structuredData": {},
-  "metaViewport": "width=device-width, initial-scale=1",
-  "canonicalURL": "facetkazmajzy.pl",
-  "structuredQuestion": "asd",
-  "structuredAnswear": "asd",
-  "metaImage": null,
-  "metaSocial": [
-    {
-      "id": 3,
-      "socialNetwork": "Facebook",
-      "title": "Medical software certification - a guide  for managers",
-      "description": "Medical software certification - a guide  for managers",
-      "image": null,
-      "__temp_key__": 0
+function generateQAPage({ question, questionShort, answer, author, url, publishedAt, updatedAt, video }) {
+  const qaPage = {
+    "@context": "https://schema.org",
+    "@type": "QAPage",
+    "url": url,
+    "mainEntity": {
+      "@type": "Question",
+      "name": questionShort,
+      "text": question,
+      "author": {
+        "@type": "Person",
+        "name": author
+      },
+      "dateCreated": publishedAt,
+      "dateModified": updatedAt,
+      "answerCount": 1,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "url": url,
+        "text": answer,
+        "dateCreated": publishedAt,
+        "dateModified": updatedAt,
+        "author": {
+          "@type": "Person",
+          "name": author
+        }
+      }
     }
-  ],
-  "__temp_key__": 0
+  };
+
+  // Jeśli istnieje wideo, dodaj VideoObject
+  if (video && video.embedURL) {
+    const videoIdMatch = video.embedURL.match(/embed\/([a-zA-Z0-9_-]{11})/);
+    const videoId = videoIdMatch ? videoIdMatch[1] : null;
+
+    if (videoId) {
+      const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+
+      qaPage.mainEntity.video = {
+        "@type": "VideoObject",
+        "name": video.title || "Video",
+        "description": question,
+        "thumbnailUrl": thumbnailUrl,
+        "uploadDate": publishedAt,
+        "embedUrl": video.embedURL,
+        "contentUrl": video.embedURL,
+        "publisher": {
+          "@type": "Organization",
+          "name": "Facetka z Majzy",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://facetkazmajzy.pl/logo.webp"
+          }
+        }
+      };
+    }
+  }
+
+  return qaPage;
+}
+
+function generateBreadcrumbs(canonicalUrl) {
+  try {
+    const url = new URL(canonicalUrl);
+    const pathSegments = url.pathname.split('/').filter(segment => segment.length > 0);
+
+    const breadcrumbs = [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Strona Główna",
+        "item": `${url.origin}/`
+      }
+    ];
+
+    let cumulativePath = '';
+    pathSegments.forEach((segment, index) => {
+      cumulativePath += `/${segment}`;
+      const name = decodeURIComponent(segment.replace(/-/g, ' ')).replace(/\b\w/g, char => char.toUpperCase());
+
+      breadcrumbs.push({
+        "@type": "ListItem",
+        "position": index + 2, // +2 ponieważ "Home" jest na pozycji 1
+        "name": name,
+        "item": `${url.origin}${cumulativePath}/`
+      });
+    });
+
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbs
+    };
+
+    return breadcrumbSchema;
+  } catch (error) {
+    console.error("Błąd generowania breadcrumbów:", error);
+    return null;
+  }
 }
 
 function getKeywords(title, categoryName, tags, tagNumber, description) {
@@ -66,7 +192,6 @@ function getKeywords(title, categoryName, tags, tagNumber, description) {
 }
 
 function removeCommas(text) {
-  // Wyrażenie regularne szuka wszystkich przecinków w tekście
   return text.replace(/,/g, '');
 }
 
@@ -114,23 +239,35 @@ function getFirstSentence(text) {
   }
 }
 
-function removeCommasBetweenWords(text) {
-  if (!text) {
-    return '';
-  }
-
-  // Regex:
-  // (?<!\d), - Dopasowuje przecinek, który **nie** jest poprzedzony cyfrą
-  // | - Alternatywa (OR)
-  // ,(?!\d) - Dopasowuje przecinek, który **nie** jest następowany przez cyfrę
-  const regex = /(?<!\d),|,(?!\d)/g;
-
-  // Zamiana dopasowanych przecinków na spację
-  text = text.replace(regex, ' ');
-
-  return text;
+function truncateText(text, maxLength) {
+  if (!text) return '';
+  return text.length > maxLength ? text.substring(0, maxLength - 3).trim() + '...' : text.trim();
 }
 
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Facetka z Majzy - Helena Niemczynowska",
+  "url": "https://facetkazmajzy.pl",
+  "logo": "https://facetkazmajzy.pl/logo.webp",
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=100095406271152",
+    "https://www.instagram.com/facetkazmajzy",
+    "https://www.youtube.com/@Facetkazmajzy"
+  ]
+}
+
+const website = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Facetka z Majzy",
+  "url": "https://facetkazmajzy.pl",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://facetkazmajzy.pl/zadania?search={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
 
 
 module.exports = {

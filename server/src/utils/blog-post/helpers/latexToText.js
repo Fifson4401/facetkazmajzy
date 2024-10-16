@@ -5,12 +5,29 @@ function latexToText(latexInput) {
 
   let textOutput = latexInput;
 
-  // Usuwanie niepotrzebnych tagów LaTeX
-  textOutput = textOutput.replace(/\\begin\{.*?\}|\s*\\end\{.*?\}/g, '');
-  textOutput = textOutput.replace(/\\\\/g, ' '); // Zamień podwójne backslashes na spację
-  textOutput = textOutput.replace(/\\textbf\{(.*?)\}/g, '$1'); // Pogrubienie
+  // ** Nowy Krok 0: Escape'owanie wszystkich % na \% **
+  // Dzięki temu wszystkie % są traktowane jako literały, a nie komentarze
+  textOutput = textOutput.replace(/%/g, '\\%');
 
-  // Zamiana symboli matematycznych
+  // 1. Zamień \% na unikalny znacznik, aby ochronić je przed usunięciem jako komentarze
+  textOutput = textOutput.replace(/\\%/g, '###PERCENT###');
+
+  // 2. Usuwanie niepotrzebnych tagów LaTeX, w tym \begin{array}{rcl} i \end{array}
+  textOutput = textOutput.replace(/\\begin\{array\}\{[^}]+\}|\s*\\end\{array\}/g, '');
+
+  // 3. Usuwanie {rcl}
+  textOutput = textOutput.replace(/\{rcl\}/g, '');
+
+  // 4. Usuwanie innych \begin{...} i \end{...} jeśli istnieją
+  textOutput = textOutput.replace(/\\begin\{.*?\}|\s*\\end\{.*?\}/g, '');
+
+  // 5. Zamień podwójne backslashes na spację
+  textOutput = textOutput.replace(/\\\\/g, ' ');
+
+  // 6. Zamień \textbf{...} na sam tekst
+  textOutput = textOutput.replace(/\\textbf\{(.*?)\}/g, '$1');
+
+  // 7. Zamiana symboli matematycznych
   const symbols = {
     '\\infty': '∞',
     '\\cdot': '*', // Zamieniamy '·' na '*'
@@ -66,7 +83,6 @@ function latexToText(latexInput) {
     '\\angle': '∠',
     '\\degree': '°',
     '\\circ': '°',
-    '\\%': '%',
     '\\#': '#',
     '\\&': '&',
     '\\_': '_',
@@ -87,11 +103,11 @@ function latexToText(latexInput) {
     textOutput = textOutput.replace(regex, value);
   }
 
-  // Specjalna zamiana ^{\circ} i ^{°} na °
+  // 8. Specjalna zamiana ^{\circ} i ^{°} na °
   textOutput = textOutput.replace(/\^\{\\circ\}/g, '°');
   textOutput = textOutput.replace(/\^\{°\}/g, '°');
 
-  // Zamiana potęg i indeksów dolnych
+  // 9. Zamiana potęg i indeksów dolnych
   // Najpierw zamieniamy ^{x} na ^(x) dla wszystkich x, niezależnie od długości
   textOutput = textOutput.replace(/\^{([^{}]+)}/g, '^($1)');
   textOutput = textOutput.replace(/_\{([^{}]+)\}/g, '_($1)');
@@ -100,40 +116,53 @@ function latexToText(latexInput) {
   textOutput = textOutput.replace(/\^([^\s^{])/g, '^($1)');
   textOutput = textOutput.replace(/_([^\s^{])/g, '_($1)');
 
-  // Zamiana ułamków \frac{a}{b} na a/b
+  // 10. Zamiana ułamków \frac{a}{b} na a/b
   textOutput = textOutput.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '$1/$2');
 
-  // Zamiana pierwiastków \sqrt{a} na √(a)
+  // 11. Zamiana pierwiastków \sqrt{a} na √(a)
   textOutput = textOutput.replace(/\\sqrt\{([^{}]+)\}/g, '√($1)');
 
-  // Usuwanie zbędnych znaków $
+  // 12. Usuwanie zbędnych znaków $
   textOutput = textOutput.replace(/\$/g, '');
 
-  // Zamiana przecinków na kropki w liczbach dziesiętnych
+  // 13. Zamiana przecinków na kropki w liczbach dziesiętnych
   textOutput = textOutput.replace(/(\d),(\d)/g, '$1.$2');
 
-  // Usuwanie nadmiarowych spacji
-  textOutput = textOutput.replace(/\s+/g, ' ').trim();
-
-  // Zamiana znaków specjalnych LaTeX na zwykłe
+  // 14. Zamiana znaków specjalnych LaTeX na zwykłe
   textOutput = textOutput.replace(/\\left\(/g, '(');
   textOutput = textOutput.replace(/\\right\)/g, ')');
   textOutput = textOutput.replace(/\\left\[/g, '[');
   textOutput = textOutput.replace(/\\right\]/g, ']');
-  textOutput = textOutput.replace(/\\left\\{/g, '{');
-  textOutput = textOutput.replace(/\\right\\}/g, '}');
+  textOutput = textOutput.replace(/\\left\{/g, '{');
+  textOutput = textOutput.replace(/\\right\}/g, '}');
 
-  // Usuwanie komentarzy LaTeX (%)
-  textOutput = textOutput.replace(/%.*$/gm, '');
+  // ** Usunięcie \right. **
+  textOutput = textOutput.replace(/\\right\./g, '');
 
-  // Usuwanie reszty znaczników LaTeX, które nie zostały wcześniej obsłużone
+  // 15. Usuwanie komentarzy LaTeX (%) - teraz tylko niechronione %
+  // Ponieważ wszystkie % zostały wcześniej zamienione na \%, nie powinno być niechronionych %
+  // Jednak dla bezpieczeństwa pozostawiamy ten krok
+  // Jeśli jednak masz niezamaskowane %, które są prawdziwymi komentarzami, możesz usunąć ten krok
+  textOutput = textOutput.replace(/(?<!\\)%.*$/gm, '');
+
+  // 16. Przywrócenie symboli procenta
+  textOutput = textOutput.replace(/###PERCENT###/g, '%');
+
+  // 17. Usuwanie reszty znaczników LaTeX, które nie zostały wcześniej obsłużone
   textOutput = textOutput.replace(/\\[a-zA-Z]+/g, '');
 
-  // Zamiana wielokrotnych spacji i znaków nowej linii na pojedynczą spację
+  // 18. Usuwanie niechcianej kropki po \right. i ewentualnych spacji przed nią
+  textOutput = textOutput.replace(/}\s*\./g, '}');
+
+  // 19. Usuwanie spacji po znakach arytmetycznych
+  textOutput = textOutput.replace(/([+\-*/=])\s+/g, '$1');
+
+  // 20. Zamiana wielokrotnych spacji i znaków nowej linii na pojedynczą spację
   textOutput = textOutput.replace(/[\n\s]+/g, ' ').trim();
 
   return textOutput;
 }
+
 
 module.exports = {
   latexToText,
