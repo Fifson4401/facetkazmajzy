@@ -1,28 +1,31 @@
 import { ContactPageAttributes } from '../interfaces/contact';
 import { DefaultPageProps, PropsWithMenu } from '../interfaces/defaults';
 import { getHeaderMenuProps, getPageProps } from './getPageProps';
+import { cache } from 'react';
 
-export const getContactPageProps = async (): Promise<
-  DefaultPageProps<ContactPageAttributes & PropsWithMenu>
-> => {
-  const [{ pageData }, { menu }] = await Promise.all([
-    getPageProps<ContactPageAttributes>('contact-page', populate),
-    getHeaderMenuProps(),
-  ]);
+export const getContactPageProps = cache(
+  async (): Promise<
+    DefaultPageProps<ContactPageAttributes & PropsWithMenu>
+  > => {
+    const [{ pageData }, { menu }] = await Promise.all([
+      getPageProps<ContactPageAttributes>('contact-page', populate),
+      getHeaderMenuProps(),
+    ]);
 
-  if (!pageData || !isContactPageProps(pageData)) {
+    if (!pageData || !isContactPageProps(pageData)) {
+      return {
+        pageData: null,
+      };
+    }
+
     return {
-      pageData: null,
+      pageData: {
+        ...pageData,
+        menu,
+      },
     };
   }
-
-  return {
-    pageData: {
-      ...pageData,
-      menu,
-    },
-  };
-};
+);
 
 function isContactPageProps(data: any): data is ContactPageAttributes {
   return data && 'hero' in data && 'contactInfo' in data && 'pets' in data;

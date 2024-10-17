@@ -27,9 +27,7 @@ export class ImageInstance {
   }
 
   private get _apiHost(): string {
-    return (
-      process.env.NEXT_PUBLIC_API_HOST || 'https://api.revolve.healthcare/'
-    );
+    return process.env.NEXT_PUBLIC_API_HOST || 'https://api.facetkazmajzy.pl/';
   }
 
   get url(): string {

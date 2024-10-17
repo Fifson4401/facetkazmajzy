@@ -45,7 +45,7 @@ const ContactHero: FC<ContactHeroProps> = ({
         />
       </div>
       <p
-        className="absolute bottom-2 right-4 z-10 text-8xl font-semibold text-[#f4f0ee]"
+        className="absolute bottom-2 right-4 z-10 text-6xl font-semibold text-[#f4f0ee] sm:text-8xl"
         aria-hidden
       >
         facetka

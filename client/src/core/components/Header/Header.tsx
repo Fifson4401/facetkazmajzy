@@ -51,14 +51,18 @@ const Header: FC<HeaderProps> = ({ menu }) => {
     >
       <NavbarContent justify="start">
         <NavbarBrand className="h-full">
-          <Link href="/" color="foreground" className="flex items-center h-full">
+          <Link
+            href="/"
+            color="foreground"
+            className="flex h-full items-center"
+          >
             <Image
               as={NextImage}
               src="/logo.webp"
               alt="Facetka Z Majzy Logo"
               width={58}
               height={58}
-              className="h-full w-auto object-contain max-md:py-1"
+              className="h-full w-auto min-w-12 object-contain py-1 md:py-0"
               priority
             />
             <p className="ml-2 md:ml-6">Facetka z Majzy</p>
@@ -95,7 +99,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             />
           </NavbarContent>
-          <NavbarMenu className="mt-5">
+          <NavbarMenu className="md:mt-5">
             {menuItems.map((item, index) => {
               const isActive = queryURL?.category
                 ? queryURL?.category === item.category?.data?.id.toString()

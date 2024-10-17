@@ -5,66 +5,69 @@ import { StrapiFindAllResponse } from '../interfaces/strapiResponse';
 import { BlogPageProps } from '../interfaces/blog';
 import { PostTileProps } from '../interfaces/collections/blogPosts';
 import normalizeSearchText from '../utils/normalizeSearchText';
+import { cache } from 'react';
 
 export type searchParams = Record<string, string | undefined>;
 
-export const getBlogPosts = async (
-  searchParams: searchParams
-): Promise<Pick<BlogPageProps, 'pages' | 'serverPagination'>> => {
-  const {
-    page = 1,
-    search = undefined,
-    category = undefined,
-    subCategory = undefined,
-    tag = undefined,
-  } = searchParams;
+export const getBlogPosts = cache(
+  async (
+    searchParams: searchParams
+  ): Promise<Pick<BlogPageProps, 'pages' | 'serverPagination'>> => {
+    const {
+      page = 1,
+      search = undefined,
+      category = undefined,
+      subCategory = undefined,
+      tag = undefined,
+    } = searchParams;
 
-  const normalizedSearch = search ? normalizeSearchText(search) : undefined;
+    const normalizedSearch = search ? normalizeSearchText(search) : undefined;
 
-  const tagsArray = tag ? tag.split(',') : [];
+    const tagsArray = tag ? tag.split(',') : [];
 
-  try {
-    const query = qs.stringify(
-      {
-        fields: ['slug', 'title', 'description'],
-        populate: {
-          category: { populate: { name: { populate: '*' } } },
-          sub_category: { populate: { name: { populate: '*' } } },
-          tags: {
-            populate: {
-              name: { populate: '*' },
+    try {
+      const query = qs.stringify(
+        {
+          fields: ['slug', 'title', 'description'],
+          populate: {
+            category: { populate: { name: { populate: '*' } } },
+            sub_category: { populate: { name: { populate: '*' } } },
+            tags: {
+              populate: {
+                name: { populate: '*' },
+              },
             },
           },
-        },
-        pagination: {
-          page: page,
-          pageSize: 9,
-        },
-        filters: {
-          contentText: {
-            $containsi: normalizedSearch,
+          pagination: {
+            page: page,
+            pageSize: 9,
           },
-          category: { id: { $eq: category } },
-          sub_category: { id: { $eq: subCategory } },
-          tags: { id: { $in: tagsArray } },
+          filters: {
+            contentText: {
+              $containsi: normalizedSearch,
+            },
+            category: { id: { $eq: category } },
+            sub_category: { id: { $eq: subCategory } },
+            tags: { id: { $in: tagsArray } },
+          },
         },
-      },
-      {
-        encodeValuesOnly: true,
-      }
-    );
+        {
+          encodeValuesOnly: true,
+        }
+      );
 
-    const {
-      data: {
-        data: pages,
-        meta: { pagination: serverPagination },
-      },
-    } = await client.get<StrapiFindAllResponse<PostTileProps>>(
-      `/api/blog-posts?${query}`
-    );
+      const {
+        data: {
+          data: pages,
+          meta: { pagination: serverPagination },
+        },
+      } = await client.get<StrapiFindAllResponse<PostTileProps>>(
+        `/api/blog-posts?${query}`
+      );
 
-    return { pages, serverPagination };
-  } catch {
-    return { pages: [] };
+      return { pages, serverPagination };
+    } catch {
+      return { pages: [] };
+    }
   }
-};
+);
