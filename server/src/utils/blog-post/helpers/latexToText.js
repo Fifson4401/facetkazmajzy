@@ -104,7 +104,6 @@ function latexToText(latexInput) {
   textOutput = textOutput.replace(/\^\{°\}/g, '°');
 
   // 9. Zamiana potęg i indeksów dolnych
-  // Modyfikacja regexów, aby uniknąć ponownego przetwarzania
   textOutput = textOutput.replace(/\^\{([^{}]+)\}/g, '^($1)');
   textOutput = textOutput.replace(/_\{([^{}]+)\}/g, '_($1)');
 
@@ -152,6 +151,9 @@ function latexToText(latexInput) {
 
   // 20. Zamiana wielokrotnych spacji i znaków nowej linii na pojedynczą spację
   textOutput = textOutput.replace(/[\n\s]+/g, ' ').trim();
+
+  // ** Nowy Krok 21: Usunięcie wystąpień {0.1cm}, {2cm} itp. **
+  textOutput = textOutput.replace(/\{\s*[\d.]+\s*cm\s*\}/g, '');
 
   return textOutput;
 }
