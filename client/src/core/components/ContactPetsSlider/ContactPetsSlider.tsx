@@ -11,8 +11,6 @@ interface ContactPetsGridProps {
 }
 
 const ContactPetsSlider: FC<ContactPetsGridProps> = ({ petItems, title }) => {
-  console.log(petItems);
-
   if (!petItems || petItems.length === 0) {
     return <p className="text-center">No items to display</p>;
   }
@@ -20,7 +18,7 @@ const ContactPetsSlider: FC<ContactPetsGridProps> = ({ petItems, title }) => {
   return (
     <div className="mx-auto w-full max-w-5xl p-4">
       {title && (
-        <h2 className="mb-6 text-center text-xl md:text-2xl">{title}</h2>
+        <h2 className="text-md mb-6 text-center md:text-2xl">{title}</h2>
       )}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
         {petItems.map((item, index) => (
@@ -33,7 +31,7 @@ const ContactPetsSlider: FC<ContactPetsGridProps> = ({ petItems, title }) => {
                 image={item.image.data?.attributes}
                 priority
                 removeWrapper
-                imageClassName="object-cover h-48 w-full"
+                imageClassName="object-cover max-h-64 md:h-fit w-full"
               />
             </CardBody>
             <CardFooter className="flex items-center bg-[#cc3266]">
