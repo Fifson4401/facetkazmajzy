@@ -1,24 +1,19 @@
 function latexToText(latexInput) {
-  if (!latexInput) { // Jeśli wejście jest puste, zwróć pusty string
+  if (!latexInput) {
     return '';
   }
 
   let textOutput = latexInput;
 
   // ** Nowy Krok 0: Escape'owanie wszystkich % na \% **
-  // Dzięki temu wszystkie % są traktowane jako literały, a nie komentarze
   textOutput = textOutput.replace(/%/g, '\\%');
 
   // 1. Zamień \% na unikalny znacznik, aby ochronić je przed usunięciem jako komentarze
   textOutput = textOutput.replace(/\\%/g, '###PERCENT###');
 
-  // 2. Usuwanie niepotrzebnych tagów LaTeX, w tym \begin{array}{rcl} i \end{array}
+  // 2. Usuwanie niepotrzebnych tagów LaTeX
   textOutput = textOutput.replace(/\\begin\{array\}\{[^}]+\}|\s*\\end\{array\}/g, '');
-
-  // 3. Usuwanie {rcl}
   textOutput = textOutput.replace(/\{rcl\}/g, '');
-
-  // 4. Usuwanie innych \begin{...} i \end{...} jeśli istnieją
   textOutput = textOutput.replace(/\\begin\{.*?\}|\s*\\end\{.*?\}/g, '');
 
   // 5. Zamień podwójne backslashes na spację
@@ -30,7 +25,8 @@ function latexToText(latexInput) {
   // 7. Zamiana symboli matematycznych
   const symbols = {
     '\\infty': '∞',
-    '\\cdot': '*', // Zamieniamy '·' na '*'
+    '\\cdot': '*',
+    '\\ast': '*',
     '\\times': '×',
     '\\leq': '≤',
     '\\geq': '≥',
@@ -108,13 +104,13 @@ function latexToText(latexInput) {
   textOutput = textOutput.replace(/\^\{°\}/g, '°');
 
   // 9. Zamiana potęg i indeksów dolnych
-  // Najpierw zamieniamy ^{x} na ^(x) dla wszystkich x, niezależnie od długości
-  textOutput = textOutput.replace(/\^{([^{}]+)}/g, '^($1)');
+  // Modyfikacja regexów, aby uniknąć ponownego przetwarzania
+  textOutput = textOutput.replace(/\^\{([^{}]+)\}/g, '^($1)');
   textOutput = textOutput.replace(/_\{([^{}]+)\}/g, '_($1)');
 
-  // Dodatkowo, zamiana ^x na ^(x) jeśli x jest pojedynczym znakiem (bez nawiasów)
-  textOutput = textOutput.replace(/\^([^\s^{])/g, '^($1)');
-  textOutput = textOutput.replace(/_([^\s^{])/g, '_($1)');
+  // Zamiana ^x na ^(x) jeśli x jest pojedynczym znakiem (bez nawiasów i już nie jest w nawiasach)
+  textOutput = textOutput.replace(/\^([^\s^{(])/g, '^($1)');
+  textOutput = textOutput.replace(/_([^\s^{(])/g, '_($1)');
 
   // 10. Zamiana ułamków \frac{a}{b} na a/b
   textOutput = textOutput.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '$1/$2');
@@ -136,22 +132,19 @@ function latexToText(latexInput) {
   textOutput = textOutput.replace(/\\left\{/g, '{');
   textOutput = textOutput.replace(/\\right\}/g, '}');
 
-  // ** Usunięcie \right. **
+  // Usunięcie \right.
   textOutput = textOutput.replace(/\\right\./g, '');
 
-  // 15. Usuwanie komentarzy LaTeX (%) - teraz tylko niechronione %
-  // Ponieważ wszystkie % zostały wcześniej zamienione na \%, nie powinno być niechronionych %
-  // Jednak dla bezpieczeństwa pozostawiamy ten krok
-  // Jeśli jednak masz niezamaskowane %, które są prawdziwymi komentarzami, możesz usunąć ten krok
+  // 15. Usuwanie komentarzy LaTeX (%)
   textOutput = textOutput.replace(/(?<!\\)%.*$/gm, '');
 
   // 16. Przywrócenie symboli procenta
   textOutput = textOutput.replace(/###PERCENT###/g, '%');
 
-  // 17. Usuwanie reszty znaczników LaTeX, które nie zostały wcześniej obsłużone
+  // 17. Usuwanie reszty znaczników LaTeX
   textOutput = textOutput.replace(/\\[a-zA-Z]+/g, '');
 
-  // 18. Usuwanie niechcianej kropki po \right. i ewentualnych spacji przed nią
+  // 18. Usuwanie niechcianej kropki po \right.
   textOutput = textOutput.replace(/}\s*\./g, '}');
 
   // 19. Usuwanie spacji po znakach arytmetycznych
@@ -162,7 +155,6 @@ function latexToText(latexInput) {
 
   return textOutput;
 }
-
 
 module.exports = {
   latexToText,
