@@ -16,8 +16,8 @@ export const Seo: FC<SeoProps> = ({ seo }) => {
 
   return (
     <>
-      <Script id="gtag-base" strategy="afterInteractive" defer={true} src='https://www.googletagmanager.com/gtag/js?id=G-ZGT0KL8BXX' />
-      <Script id="gtag-base2" strategy="afterInteractive" defer={true} >
+      <Script id="gtag-base" strategy="beforeInteractive" defer={true} src='https://www.googletagmanager.com/gtag/js?id=G-ZGT0KL8BXX' />
+      <Script id="gtag-base2" strategy="beforeInteractive" >
         {`window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
