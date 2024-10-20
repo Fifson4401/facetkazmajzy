@@ -11,13 +11,19 @@ function latexToText(latexInput) {
   // 1. Zamień \% na unikalny znacznik, aby ochronić je przed usunięciem jako komentarze
   textOutput = textOutput.replace(/\\%/g, '###PERCENT###');
 
+  // ** Nowy Krok: Replace LaTeX newlines '\\\\' with a placeholder **
+  textOutput = textOutput.replace(/\\\\/g, '###NEWLINE###');
+
+  // ** Nowy Krok: Reduce double backslashes to single backslashes **
+  textOutput = textOutput.replace(/\\\\/g, '\\');
+
   // 2. Usuwanie niepotrzebnych tagów LaTeX
   textOutput = textOutput.replace(/\\begin\{array\}\{[^}]+\}|\s*\\end\{array\}/g, '');
   textOutput = textOutput.replace(/\{rcl\}/g, '');
   textOutput = textOutput.replace(/\\begin\{.*?\}|\s*\\end\{.*?\}/g, '');
 
-  // 5. Zamień podwójne backslashes na spację
-  textOutput = textOutput.replace(/\\\\/g, ' ');
+  // 5. Zamień placeholder for newlines back to a space
+  textOutput = textOutput.replace(/###NEWLINE###/g, ' ');
 
   // 6. Zamień \textbf{...} na sam tekst
   textOutput = textOutput.replace(/\\textbf\{(.*?)\}/g, '$1');
