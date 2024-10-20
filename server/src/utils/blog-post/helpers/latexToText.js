@@ -5,27 +5,115 @@ function latexToText(latexInput) {
 
   let textOutput = latexInput;
 
-  // **Step 0: Normalize backslashes**
+  // Normalize backslashes
   textOutput = textOutput.replace(/\\\\/g, '\\');
 
-  // ** Nowy Krok 0: Escape all % to \% **
+  // Step 1: Escape all % to \%
   textOutput = textOutput.replace(/%/g, '\\%');
 
-  // 1. Replace \% with a unique placeholder to protect them from being removed as comments
+  // Step 2: Replace \% with a unique placeholder
   textOutput = textOutput.replace(/\\%/g, '###PERCENT###');
 
-  // 2. Remove unnecessary LaTeX tags
-  textOutput = textOutput.replace(/\\begin\{array\}\{[^}]+\}|\s*\\end\{array\}/g, '');
-  textOutput = textOutput.replace(/\{rcl\}/g, '');
-  textOutput = textOutput.replace(/\\begin\{.*?\}|\s*\\end\{.*?\}/g, '');
+  // Remove LaTeX comments (handle escaped %)
+  textOutput = textOutput.replace(/(?<!\\)%.*$/gm, '');
 
-  // 5. Replace LaTeX newlines '\\' with a space
+  // Remove unnecessary LaTeX tags
+  textOutput = textOutput.replace(/\\begin\{.*?\}|\s*\\end\{.*?\}/gs, '');
+
+  // Replace LaTeX newlines '\\' with a space
   textOutput = textOutput.replace(/\\\\/g, ' ');
 
-  // 6. Replace \textbf{...} with just the text inside
-  textOutput = textOutput.replace(/\\textbf\{(.*?)\}/gs, '$1');
+  // Function to replace commands with content, handling nested braces
+  function replaceCommand(input, command, replaceWith = '') {
+    let output = '';
+    let i = 0;
+    while (i < input.length) {
+      if (input.substr(i, command.length + 1) === '\\' + command + '{') {
+        i += command.length + 1;
+        let braceDepth = 1;
+        let content = '';
+        while (i < input.length && braceDepth > 0) {
+          if (input[i] === '{') {
+            braceDepth++;
+            content += input[i];
+            i++;
+          } else if (input[i] === '}') {
+            braceDepth--;
+            if (braceDepth > 0) {
+              content += input[i];
+            }
+            i++;
+          } else {
+            content += input[i];
+            i++;
+          }
+        }
+        output += replaceWith + content;
+      } else {
+        output += input[i];
+        i++;
+      }
+    }
+    return output;
+  }
 
-  // 7. Replace mathematical symbols
+  // Replace \textbf{...} with the content inside
+  textOutput = replaceCommand(textOutput, 'textbf');
+
+  // Replace fractions \frac{a}{b} with a/b
+  function replaceFrac(input) {
+    let output = '';
+    let i = 0;
+    while (i < input.length) {
+      if (input.substr(i, 6) === '\\frac{') {
+        i += 6;
+        let numerator = '';
+        let braceDepth = 1;
+        while (i < input.length && braceDepth > 0) {
+          if (input[i] === '{') {
+            braceDepth++;
+            numerator += input[i++];
+          } else if (input[i] === '}') {
+            braceDepth--;
+            if (braceDepth > 0) numerator += input[i];
+            i++;
+          } else {
+            numerator += input[i++];
+          }
+        }
+        if (input.substr(i, 1) === '{') {
+          i++;
+          let denominator = '';
+          braceDepth = 1;
+          while (i < input.length && braceDepth > 0) {
+            if (input[i] === '{') {
+              braceDepth++;
+              denominator += input[i++];
+            } else if (input[i] === '}') {
+              braceDepth--;
+              if (braceDepth > 0) denominator += input[i];
+              i++;
+            } else {
+              denominator += input[i++];
+            }
+          }
+          output += numerator + '/' + denominator;
+        } else {
+          output += '\\frac{' + numerator + '}';
+        }
+      } else {
+        output += input[i++];
+      }
+    }
+    return output;
+  }
+
+  textOutput = replaceFrac(textOutput);
+
+  // Remove $ symbols (math mode)
+  textOutput = textOutput.replace(/\$/g, '');
+
+  // Replace special symbols
   const symbols = {
     '\\infty': '∞',
     '\\cdot': '*',
@@ -102,11 +190,11 @@ function latexToText(latexInput) {
     textOutput = textOutput.replace(regex, value);
   }
 
-  // 8. Special replacements for ^{\circ} and ^{°} to °
+  // Special replacements for ^{\circ} and ^{°} to °
   textOutput = textOutput.replace(/\^\{\\circ\}/g, '°');
   textOutput = textOutput.replace(/\^\{°\}/g, '°');
 
-  // 9. Replace superscripts and subscripts
+  // Replace superscripts and subscripts
   textOutput = textOutput.replace(/\^\{([^{}]+)\}/g, '^($1)');
   textOutput = textOutput.replace(/_\{([^{}]+)\}/g, '_($1)');
 
@@ -114,48 +202,62 @@ function latexToText(latexInput) {
   textOutput = textOutput.replace(/\^([^\s^{(])/g, '^($1)');
   textOutput = textOutput.replace(/_([^\s^{(])/g, '_($1)');
 
-  // 10. Replace fractions \frac{a}{b} with a/b
-  textOutput = textOutput.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '$1/$2');
+  // Replace square roots \sqrt{a} with √(a)
+  function replaceSqrt(input) {
+    let output = '';
+    let i = 0;
+    while (i < input.length) {
+      if (input.substr(i, 6) === '\\sqrt{') {
+        i += 6;
+        let content = '';
+        let braceDepth = 1;
+        while (i < input.length && braceDepth > 0) {
+          if (input[i] === '{') {
+            braceDepth++;
+            content += input[i++];
+          } else if (input[i] === '}') {
+            braceDepth--;
+            if (braceDepth > 0) content += input[i];
+            i++;
+          } else {
+            content += input[i++];
+          }
+        }
+        output += '√(' + content + ')';
+      } else {
+        output += input[i++];
+      }
+    }
+    return output;
+  }
 
-  // 11. Replace square roots \sqrt{a} with √(a)
-  textOutput = textOutput.replace(/\\sqrt\{([^{}]+)\}/g, '√($1)');
+  textOutput = replaceSqrt(textOutput);
 
-  // 12. Remove unnecessary $ symbols
-  textOutput = textOutput.replace(/\$/g, '');
-
-  // 13. Replace commas with dots in decimal numbers
-  textOutput = textOutput.replace(/(\d),(\d)/g, '$1.$2');
-
-  // 14. Replace special LaTeX characters with normal ones
+  // Replace special LaTeX constructs
   textOutput = textOutput.replace(/\\left\(/g, '(');
   textOutput = textOutput.replace(/\\right\)/g, ')');
   textOutput = textOutput.replace(/\\left\[/g, '[');
   textOutput = textOutput.replace(/\\right\]/g, ']');
   textOutput = textOutput.replace(/\\left\{/g, '{');
   textOutput = textOutput.replace(/\\right\}/g, '}');
-
-  // Remove \right.
   textOutput = textOutput.replace(/\\right\./g, '');
 
-  // 15. Remove LaTeX comments (%)
-  textOutput = textOutput.replace(/(?<!\\)%.*$/gm, '');
-
-  // 16. Restore percentage symbols
-  textOutput = textOutput.replace(/###PERCENT###/g, '%');
-
-  // 17. Remove remaining LaTeX commands
+  // Remove remaining LaTeX commands
   textOutput = textOutput.replace(/\\[a-zA-Z]+/g, '');
 
-  // 18. Remove unwanted dot after \right.
+  // Restore percentage symbols
+  textOutput = textOutput.replace(/###PERCENT###/g, '%');
+
+  // Remove unwanted dot after \right.
   textOutput = textOutput.replace(/}\s*\./g, '}');
 
-  // 19. Remove spaces after arithmetic operators
+  // Remove spaces after arithmetic operators
   textOutput = textOutput.replace(/([+\-*/=])\s+/g, '$1');
 
-  // 20. Replace multiple spaces and newlines with a single space
+  // Replace multiple spaces and newlines with a single space
   textOutput = textOutput.replace(/[\n\s]+/g, ' ').trim();
 
-  // ** New Step 21: Remove occurrences of {0.1cm}, {2cm}, etc. **
+  // Remove occurrences of {0.1cm}, {2cm}, etc.
   textOutput = textOutput.replace(/\{\s*[\d.]+\s*cm\s*\}/g, '');
 
   return textOutput;
