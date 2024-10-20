@@ -5,8 +5,8 @@ function latexToText(latexInput) {
 
   let textOutput = latexInput;
 
-  // Normalize backslashes
-  textOutput = textOutput.replace(/\\\\/g, '\\');
+  // **Step 0: Replace LaTeX newlines '\\' with a space directly**
+  textOutput = textOutput.replace(/\\\\/g, ' ');
 
   // Step 1: Escape all % to \%
   textOutput = textOutput.replace(/%/g, '\\%');
@@ -19,9 +19,6 @@ function latexToText(latexInput) {
 
   // Remove unnecessary LaTeX tags
   textOutput = textOutput.replace(/\\begin\{.*?\}|\s*\\end\{.*?\}/gs, '');
-
-  // Replace LaTeX newlines '\\' with a space
-  textOutput = textOutput.replace(/\\\\/g, ' ');
 
   // Function to replace commands with content, handling nested braces
   function replaceCommand(input, command, replaceWith = '') {
@@ -255,14 +252,11 @@ function latexToText(latexInput) {
   // Remove occurrences of {0.1cm}, {2cm}, etc.
   textOutput = textOutput.replace(/\{\s*[\d.]+\s*cm\s*\}/g, '');
 
-  // ** New Step: Remove leading and trailing braces if they wrap the entire string **
-  if (textOutput.startsWith('{') && textOutput.endsWith('}')) {
-    textOutput = textOutput.slice(1, -1);
-  }
+  // ** New Step: Remove any isolated braces and backslashes **
+  textOutput = textOutput.replace(/[{}]/g, '');
+  textOutput = textOutput.replace(/\\+/g, '');
 
-  // ** New Step: Remove any trailing backslashes **
-  textOutput = textOutput.replace(/\\+$/, '');
-
+  // Trim the output
   return textOutput.trim();
 }
 
