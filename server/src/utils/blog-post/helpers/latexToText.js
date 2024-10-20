@@ -35,23 +35,18 @@ function latexToText(latexInput) {
         while (i < input.length && braceDepth > 0) {
           if (input[i] === '{') {
             braceDepth++;
-            content += input[i];
-            i++;
+            content += input[i++];
           } else if (input[i] === '}') {
             braceDepth--;
-            if (braceDepth > 0) {
-              content += input[i];
-            }
+            if (braceDepth > 0) content += input[i];
             i++;
           } else {
-            content += input[i];
-            i++;
+            content += input[i++];
           }
         }
         output += replaceWith + content;
       } else {
-        output += input[i];
-        i++;
+        output += input[i++];
       }
     }
     return output;
@@ -260,7 +255,15 @@ function latexToText(latexInput) {
   // Remove occurrences of {0.1cm}, {2cm}, etc.
   textOutput = textOutput.replace(/\{\s*[\d.]+\s*cm\s*\}/g, '');
 
-  return textOutput;
+  // ** New Step: Remove leading and trailing braces if they wrap the entire string **
+  if (textOutput.startsWith('{') && textOutput.endsWith('}')) {
+    textOutput = textOutput.slice(1, -1);
+  }
+
+  // ** New Step: Remove any trailing backslashes **
+  textOutput = textOutput.replace(/\\+$/, '');
+
+  return textOutput.trim();
 }
 
 module.exports = {
