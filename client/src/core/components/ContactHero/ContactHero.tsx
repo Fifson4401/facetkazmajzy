@@ -2,7 +2,7 @@ import { ImageProps } from '@/api/interfaces/defaults';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { FC } from 'react';
-import { ImageHandler } from '../ImageHandler';
+import { ImageHandlerLCP } from '../ImageHandlerLCP';
 
 interface ContactHeroProps {
   title?: string;
@@ -37,10 +37,8 @@ const ContactHero: FC<ContactHeroProps> = ({
         </Link>
       </div>
       <div className="order-2 flex w-2/3 items-center justify-center lg:order-1 lg:w-1/3">
-        <ImageHandler
+        <ImageHandlerLCP
           image={image.data?.attributes}
-          priority
-          removeWrapper
           imageClassName="object-contain md:object-cover max-lg:max-h-[50vh] object-top"
         />
       </div>

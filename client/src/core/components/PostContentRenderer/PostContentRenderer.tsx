@@ -7,54 +7,101 @@ export interface PostContentRendererProps {
   className?: string;
 }
 
+// Helper function to find the matching closing brace for a given opening brace
+const findMatchingBrace = (content: string, startIndex: number): number => {
+  let braceCount = 0;
+  for (let i = startIndex; i < content.length; i++) {
+    if (content[i] === '{') {
+      braceCount++;
+    } else if (content[i] === '}') {
+      braceCount--;
+      if (braceCount === 0) {
+        return i;
+      }
+    }
+  }
+  return -1; // No matching closing brace found
+};
+
 export const parseContent = (content: string): React.ReactNode[] => {
   const elements: React.ReactNode[] = [];
-  let lastIndex = 0;
+  let i = 0;
 
-  // Kombinowane wyrażenie regularne z alternatywami dla różnych typów dopasowań
-  const regex =
-    /\\textbf\{([^}]+)\}|\\begin\{equation\*\}([\s\S]*?)\\end\{equation\*\}|\$([^$]+)\$|\\\\|\n/g;
-  let match: RegExpExecArray | null;
-
-  while ((match = regex.exec(content)) !== null) {
-    const matchStart = match.index;
-    const matchEnd = regex.lastIndex;
-
-    // Dodanie tekstu przed dopasowaniem jako zwykły tekst
-    if (lastIndex < matchStart) {
-      const text = content.substring(lastIndex, matchStart);
-      elements.push(<span key={lastIndex}>{text}</span>);
+  while (i < content.length) {
+    if (content.startsWith('\\textbf{', i)) {
+      // Handle \textbf{...} with nested braces
+      const startIndex = i + 8; // Move past '\textbf{'
+      const endIndex = findMatchingBrace(content, startIndex);
+      if (endIndex !== -1) {
+        const boldContent = content.substring(startIndex, endIndex);
+        elements.push(<strong key={i}>{parseContent(boldContent)}</strong>);
+        i = endIndex + 1;
+      } else {
+        // No matching closing brace found, treat as regular text
+        elements.push(<span key={i}>{content.substring(i)}</span>);
+        break;
+      }
+    } else if (content.startsWith('\\begin{equation*}', i)) {
+      // Handle \begin{equation*}...\end{equation*}
+      const startIndex = i + 17; // Move past '\begin{equation*}'
+      const endMarker = '\\end{equation*}';
+      const endIndex = content.indexOf(endMarker, startIndex);
+      if (endIndex !== -1) {
+        const blockMathContent = content.substring(startIndex, endIndex);
+        elements.push(<BlockMath key={i} math={blockMathContent} />);
+        i = endIndex + endMarker.length;
+      } else {
+        // No matching \end{equation*} found, treat as regular text
+        elements.push(<span key={i}>{content.substring(i)}</span>);
+        break;
+      }
+    } else if (content[i] === '$') {
+      // Handle inline math $...$
+      const startIndex = i + 1;
+      const endIndex = content.indexOf('$', startIndex);
+      if (endIndex !== -1) {
+        const inlineMathContent = content.substring(startIndex, endIndex);
+        elements.push(<InlineMath key={i}>{inlineMathContent}</InlineMath>);
+        i = endIndex + 1;
+      } else {
+        // No closing '$' found, treat as regular text
+        elements.push(<span key={i}>{content.substring(i)}</span>);
+        break;
+      }
+    } else if (content.startsWith('\\\\', i)) {
+      // Handle line break '\\\\'
+      elements.push(<br key={i} />);
+      i += 2;
+    } else if (content[i] === '\n') {
+      // Handle newline '\n'
+      elements.push(<br key={i} />);
+      i += 1;
+    } else {
+      // Regular text character
+      let nextSpecialIndex = content.length;
+      const specialSequences = [
+        '\\textbf{',
+        '\\begin{equation*}',
+        '$',
+        '\\\\',
+        '\n',
+      ];
+      for (const seq of specialSequences) {
+        const idx = content.indexOf(seq, i);
+        if (idx !== -1 && idx < nextSpecialIndex) {
+          nextSpecialIndex = idx;
+        }
+      }
+      if (nextSpecialIndex > i) {
+        const text = content.substring(i, nextSpecialIndex);
+        elements.push(<span key={i}>{text}</span>);
+        i = nextSpecialIndex;
+      } else {
+        // Should not reach here, but just in case
+        elements.push(<span key={i}>{content[i]}</span>);
+        i += 1;
+      }
     }
-
-    if (match[1]) {
-      // \textbf{...}
-      const boldContent = match[1];
-      // Rekurencyjnie parsujemy zawartość pogrubienia
-      elements.push(
-        <strong key={matchStart}>{parseContent(boldContent)}</strong>
-      );
-    } else if (match[2]) {
-      // \begin{equation*}...\end{equation*}
-      const blockMathContent = match[2];
-      elements.push(<BlockMath key={matchStart} math={blockMathContent} />);
-    } else if (match[3]) {
-      // $...$ (inline math)
-      const inlineMathContent = match[3];
-      elements.push(<InlineMath key={matchStart} math={inlineMathContent} />);
-    } else if (match[0] === '\\\\') {
-      // \\\\ (line break)
-      elements.push(<br key={matchStart} />);
-    } else if (match[0] === '\n') {
-      // \n (newline)
-      elements.push(<br key={matchStart} />);
-    }
-
-    lastIndex = matchEnd;
-  }
-
-  if (lastIndex < content.length) {
-    const text = content.substring(lastIndex);
-    elements.push(<span key={lastIndex}>{text}</span>);
   }
 
   return elements;

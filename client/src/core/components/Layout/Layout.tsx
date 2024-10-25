@@ -11,7 +11,13 @@ export type LayoutProps = PropsWithChildren<object> & {
 };
 
 export const Layout: FC<LayoutProps> = ({ children, lang = 'pl', menu }) => (
-  <Suspense fallback={<div className="flex min-h-screen flex-col justify-between">Loading...</div>}>
+  <Suspense
+    fallback={
+      <div className="flex min-h-screen flex-col justify-between">
+        Loading...
+      </div>
+    }
+  >
     <div className="flex min-h-screen flex-col justify-between">
       <Header menu={menu} />
       <ProgressBar />

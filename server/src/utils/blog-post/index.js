@@ -9,20 +9,19 @@ exports.handleBlogPost = async function handleBlogPost(ctx) {
 
   try {
     let description = ''
-
-    if (Array.isArray(content) && content.length > 0) {
-      description = getDescription(content);
-      ctx.request.body.description = description;
-
-      ctx.request.body.contentText = getContentText(content);
-    }
-
     const { categoriesArray, tagsArray } = await getTagsAndCategory(category, tags, id)
 
     let categoryName = null;
 
     if (categoriesArray.length > 0) {
       categoryName = categoriesArray[0].name;
+    }
+
+    if (Array.isArray(content) && content.length > 0) {
+      description = getDescription(content);
+      ctx.request.body.description = description;
+
+      ctx.request.body.contentText = getContentText(content, title, categoryName);
     }
 
     const slug = await getSlug(title, categoryName, tagsArray, id)

@@ -1,5 +1,9 @@
 import { cache } from 'react';
-import { DefaultPageProps, PropsWithMenu } from '../interfaces/defaults';
+import {
+  DefaultPageProps,
+  PageDataOr,
+  PropsWithMenu,
+} from '../interfaces/defaults';
 import { HomePageAttributes } from '../interfaces/home';
 import { getHeaderMenuProps, getPageProps } from './getPageProps';
 
@@ -25,7 +29,9 @@ export const getHomePageProps = cache(
   }
 );
 
-function isHomePageAttributes(data: any): data is HomePageAttributes {
+function isHomePageAttributes(
+  data: PageDataOr<HomePageAttributes>
+): data is HomePageAttributes {
   return data && 'hero' in data && 'search' in data;
 }
 

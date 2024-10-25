@@ -6,7 +6,7 @@ const removeAccents = require("remove-accents");
  * @param {Array} content - Tablica obiektów zawierających treść bloga.
  * @returns {String} - Czysty tekst z obiektów typu 'tex'.
  */
-function getContentText(content) {
+function getContentText(content, title, categoryName) {
   const textArray = content
     // Filtrujemy obiekty typu 'blog-post.tex'
     .filter((item) => item.__component === "blog-post.tex" && item.TEX)
@@ -35,9 +35,7 @@ function getContentText(content) {
 
 
       // Normalizacja tekstu dla wyszukiwania
-      text = text.toLowerCase();
-      text = text.replace(/[.,\/#!$%\^&\*;:{}=\-_~()]/g, "");
-      text = removeAccents(text);
+      text = getNormalizeText(text)
 
       return text;
     });
@@ -45,7 +43,17 @@ function getContentText(content) {
   // Połącz wszystkie teksty w jedną linię, oddzielone spacją
   const uniqueTextArray = [...new Set(textArray)];
 
-  return uniqueTextArray.join(" ").replace(/\s+/g, " ").trim();
+  const basicData = getNormalizeText(`${title} ${categoryName} `)
+
+  return basicData + uniqueTextArray.join(" ").replace(/\s+/g, " ").trim();
+}
+
+function getNormalizeText(text) {
+  text = text.toLowerCase();
+  text = text.replace(/[.,\/#!$%\^&\*;:{}=\-_~()]/g, "");
+  text = removeAccents(text);
+
+  return text
 }
 
 module.exports = {
