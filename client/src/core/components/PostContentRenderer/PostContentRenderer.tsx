@@ -84,11 +84,7 @@ const parseTextbf = (
 
   const innerContent = content.substring(startIndex, index - 1);
   const { nodes } = parseContent(innerContent);
-  const node = (
-    <strong key={startIndex}>
-      {nodes}
-    </strong>
-  );
+  const node = <strong key={startIndex}>{nodes}</strong>;
 
   return { node, newIndex: index };
 };
@@ -105,9 +101,7 @@ const parseInlineMath = (
       index += 2; // Skip escaped character
     } else if (content[index] === '$') {
       const mathContent = content.substring(startIndex, index);
-      const node = (
-        <InlineMath key={startIndex} math={mathContent} />
-      );
+      const node = <InlineMath key={startIndex} math={mathContent} />;
       return { node, newIndex: index + 1 };
     } else {
       index += 1;
@@ -132,9 +126,7 @@ const parseBlockMath = (
   }
 
   const mathContent = content.substring(startIndex, endIndex);
-  const node = (
-    <BlockMath key={startIndex} math={mathContent} />
-  );
+  const node = <BlockMath key={startIndex} math={mathContent} />;
   return { node, newIndex: endIndex + endCmd.length };
 };
 
