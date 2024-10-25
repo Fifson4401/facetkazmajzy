@@ -1,5 +1,6 @@
 import { getHomePageProps } from '@/api/pages/getHomePageProps';
 import { SeoInstance } from '@/core/components/SEO/SeoInstance';
+import { ImageInstance } from '@/core/models/ImageInstance';
 import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -11,6 +12,9 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 
     const instance = new SeoInstance(pageData.seo);
+    const image = pageData.hero.image.data?.attributes
+      ? new ImageInstance(pageData.hero.image.data?.attributes)
+      : null;
 
     return {
       title: instance.title,
@@ -27,6 +31,24 @@ export async function generateMetadata(): Promise<Metadata> {
       robots: instance.robots,
       other: {
         type: '',
+      },
+      icons: {
+        other: [
+          {
+            rel: 'preload',
+            fetchPriority: 'high',
+            url: image?.url || '',
+            sizes: image?.sizes,
+          },
+          {
+            rel: 'preconnect',
+            url: 'https://facetkazmajzy.pl/',
+          },
+          {
+            rel: 'dns-prefetch',
+            url: 'https://facetkazmajzy.pl/',
+          },
+        ],
       },
     };
   } catch (error) {
