@@ -7,104 +7,135 @@ export interface PostContentRendererProps {
   className?: string;
 }
 
-// Helper function to find the matching closing brace for a given opening brace
-const findMatchingBrace = (content: string, startIndex: number): number => {
-  let braceCount = 0;
-  for (let i = startIndex; i < content.length; i++) {
-    if (content[i] === '{') {
-      braceCount++;
-    } else if (content[i] === '}') {
-      braceCount--;
-      if (braceCount === 0) {
-        return i;
-      }
+const parseContent = (
+  content: string,
+  index: number = 0
+): { nodes: React.ReactNode[]; newIndex: number } => {
+  const nodes: React.ReactNode[] = [];
+  const length = content.length;
+
+  while (index < length) {
+    if (content.startsWith('\\textbf{', index)) {
+      const result = parseTextbf(content, index);
+      nodes.push(result.node);
+      index = result.newIndex;
+    } else if (content.startsWith('\\begin{equation*}', index)) {
+      const result = parseBlockMath(content, index);
+      nodes.push(result.node);
+      index = result.newIndex;
+    } else if (content[index] === '$') {
+      const result = parseInlineMath(content, index);
+      nodes.push(result.node);
+      index = result.newIndex;
+    } else if (content.startsWith('\\\\', index) || content[index] === '\n') {
+      nodes.push(<br key={index} />);
+      index += content[index] === '\n' ? 1 : 2;
+    } else {
+      const nextIndex = findNextSpecialIndex(content, index);
+      const text = content.substring(index, nextIndex);
+      nodes.push(<span key={index}>{text}</span>);
+      index = nextIndex;
     }
   }
-  return -1; // No matching closing brace found
+
+  return { nodes, newIndex: index };
 };
 
-export const parseContent = (content: string): React.ReactNode[] => {
-  const elements: React.ReactNode[] = [];
-  let i = 0;
+const findNextSpecialIndex = (content: string, index: number): number => {
+  const specialStrings = ['\\textbf{', '\\begin{equation*}', '$', '\\\\', '\n'];
+  let nextIndex = content.length;
 
-  while (i < content.length) {
-    if (content.startsWith('\\textbf{', i)) {
-      // Handle \textbf{...} with nested braces
-      const startIndex = i + 8; // Move past '\textbf{'
-      const endIndex = findMatchingBrace(content, startIndex);
-      if (endIndex !== -1) {
-        const boldContent = content.substring(startIndex, endIndex);
-        elements.push(<strong key={i}>{parseContent(boldContent)}</strong>);
-        i = endIndex + 1;
-      } else {
-        // No matching closing brace found, treat as regular text
-        elements.push(<span key={i}>{content.substring(i)}</span>);
-        break;
-      }
-    } else if (content.startsWith('\\begin{equation*}', i)) {
-      // Handle \begin{equation*}...\end{equation*}
-      const startIndex = i + 17; // Move past '\begin{equation*}'
-      const endMarker = '\\end{equation*}';
-      const endIndex = content.indexOf(endMarker, startIndex);
-      if (endIndex !== -1) {
-        const blockMathContent = content.substring(startIndex, endIndex);
-        elements.push(<BlockMath key={i} math={blockMathContent} />);
-        i = endIndex + endMarker.length;
-      } else {
-        // No matching \end{equation*} found, treat as regular text
-        elements.push(<span key={i}>{content.substring(i)}</span>);
-        break;
-      }
-    } else if (content[i] === '$') {
-      // Handle inline math $...$
-      const startIndex = i + 1;
-      const endIndex = content.indexOf('$', startIndex);
-      if (endIndex !== -1) {
-        const inlineMathContent = content.substring(startIndex, endIndex);
-        elements.push(<InlineMath key={i}>{inlineMathContent}</InlineMath>);
-        i = endIndex + 1;
-      } else {
-        // No closing '$' found, treat as regular text
-        elements.push(<span key={i}>{content.substring(i)}</span>);
-        break;
-      }
-    } else if (content.startsWith('\\\\', i)) {
-      // Handle line break '\\\\'
-      elements.push(<br key={i} />);
-      i += 2;
-    } else if (content[i] === '\n') {
-      // Handle newline '\n'
-      elements.push(<br key={i} />);
-      i += 1;
-    } else {
-      // Regular text character
-      let nextSpecialIndex = content.length;
-      const specialSequences = [
-        '\\textbf{',
-        '\\begin{equation*}',
-        '$',
-        '\\\\',
-        '\n',
-      ];
-      for (const seq of specialSequences) {
-        const idx = content.indexOf(seq, i);
-        if (idx !== -1 && idx < nextSpecialIndex) {
-          nextSpecialIndex = idx;
-        }
-      }
-      if (nextSpecialIndex > i) {
-        const text = content.substring(i, nextSpecialIndex);
-        elements.push(<span key={i}>{text}</span>);
-        i = nextSpecialIndex;
-      } else {
-        // Should not reach here, but just in case
-        elements.push(<span key={i}>{content[i]}</span>);
-        i += 1;
-      }
+  for (const special of specialStrings) {
+    const i = content.indexOf(special, index);
+    if (i !== -1 && i < nextIndex) {
+      nextIndex = i;
     }
   }
 
-  return elements;
+  return nextIndex;
+};
+
+const parseTextbf = (
+  content: string,
+  index: number
+): { node: React.ReactNode; newIndex: number } => {
+  const cmd = '\\textbf{';
+  index += cmd.length;
+  const startIndex = index;
+  let depth = 1;
+
+  while (index < content.length && depth > 0) {
+    if (content[index] === '\\') {
+      index += 2; // Skip escaped character
+    } else if (content[index] === '{') {
+      depth += 1;
+      index += 1;
+    } else if (content[index] === '}') {
+      depth -= 1;
+      index += 1;
+    } else {
+      index += 1;
+    }
+  }
+
+  if (depth !== 0) {
+    throw new Error('Unmatched brace in \\textbf{...}');
+  }
+
+  const innerContent = content.substring(startIndex, index - 1);
+  const { nodes } = parseContent(innerContent);
+  const node = (
+    <strong key={startIndex}>
+      {nodes}
+    </strong>
+  );
+
+  return { node, newIndex: index };
+};
+
+const parseInlineMath = (
+  content: string,
+  index: number
+): { node: React.ReactNode; newIndex: number } => {
+  index += 1; // Skip the opening '$'
+  const startIndex = index;
+
+  while (index < content.length) {
+    if (content[index] === '\\') {
+      index += 2; // Skip escaped character
+    } else if (content[index] === '$') {
+      const mathContent = content.substring(startIndex, index);
+      const node = (
+        <InlineMath key={startIndex} math={mathContent} />
+      );
+      return { node, newIndex: index + 1 };
+    } else {
+      index += 1;
+    }
+  }
+
+  throw new Error('Unmatched $ in inline math');
+};
+
+const parseBlockMath = (
+  content: string,
+  index: number
+): { node: React.ReactNode; newIndex: number } => {
+  const beginCmd = '\\begin{equation*}';
+  const endCmd = '\\end{equation*}';
+  index += beginCmd.length;
+  const startIndex = index;
+
+  const endIndex = content.indexOf(endCmd, index);
+  if (endIndex === -1) {
+    throw new Error('Unmatched \\begin{equation*}...\\end{equation*}');
+  }
+
+  const mathContent = content.substring(startIndex, endIndex);
+  const node = (
+    <BlockMath key={startIndex} math={mathContent} />
+  );
+  return { node, newIndex: endIndex + endCmd.length };
 };
 
 const PostContentRenderer: FC<PostContentRendererProps> = ({
@@ -115,8 +146,8 @@ const PostContentRenderer: FC<PostContentRendererProps> = ({
     return null;
   }
 
-  const parsedElements = parseContent(content);
-  return <div className={`w-full ${className}`}>{parsedElements}</div>;
+  const { nodes } = parseContent(content);
+  return <div className={`w-full ${className}`}>{nodes}</div>;
 };
 
 export default PostContentRenderer;
