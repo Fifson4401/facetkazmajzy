@@ -2,7 +2,7 @@ import { ImageProps } from '@/api/interfaces/defaults';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import { FC } from 'react';
-import { ImageHandlerLCP2 } from '../ImageHandlerLCP2';
+import { ImageHandlerLCP } from '../ImageHandlerLCP';
 
 interface HeroProps {
   title?: string;
@@ -33,7 +33,7 @@ const Hero: FC<HeroProps> = ({ title, description, image, button }) => {
         </Link>
       </div>
       <div className="order-1 flex w-full items-center justify-center lg:order-2 lg:w-1/2">
-        <ImageHandlerLCP2
+        <ImageHandlerLCP
           image={image.data?.attributes}
           imageClassName="object-cover max-lg:max-h-[50vh] max-md:max-h-[40vh]"
         />

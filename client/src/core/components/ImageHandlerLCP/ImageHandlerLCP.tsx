@@ -1,4 +1,5 @@
 import NextImage from 'next/image';
+import { Image } from '@nextui-org/react';
 
 import { FC } from 'react';
 
@@ -21,7 +22,8 @@ export const ImageHandlerLCP: FC<PropsWithClassName<ImageHandlerLCPProps>> = ({
 
   return (
     <div className={`h-full w-full ${wrapperClassName}`}>
-      <NextImage
+      <Image
+        as={NextImage}
         style={{ width: '100%', height: 'inherit', borderRadius: 12 }}
         width={source.width}
         height={source.height}
