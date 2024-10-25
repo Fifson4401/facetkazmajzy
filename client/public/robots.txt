@@ -1,0 +1,12 @@
+User-agent: Googlebot-Image
+Allow: /uploads/
+Allow: /_next/
+
+User-agent: *
+Disallow: /privacy-policy
+Disallow: /content/
+Disallow: /uploads/
+Disallow: /_next/
+
+Host: https://facetkazmajzy.pl
+Sitemap: https://api.facetkazmajzy.pl/api/sitemap/index.xml  
