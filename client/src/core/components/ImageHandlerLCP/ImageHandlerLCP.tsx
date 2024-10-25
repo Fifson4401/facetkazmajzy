@@ -1,5 +1,4 @@
 import NextImage from 'next/image';
-import { Image } from '@nextui-org/react';
 
 import { FC } from 'react';
 
@@ -22,8 +21,7 @@ export const ImageHandlerLCP: FC<PropsWithClassName<ImageHandlerLCPProps>> = ({
 
   return (
     <div className={`h-full w-full ${wrapperClassName}`}>
-      <Image
-        as={NextImage}
+      <NextImage
         style={{ width: '100%', height: 'inherit', borderRadius: 12 }}
         width={source.width}
         height={source.height}
@@ -33,7 +31,6 @@ export const ImageHandlerLCP: FC<PropsWithClassName<ImageHandlerLCPProps>> = ({
         title={source.title}
         className={`block object-contain object-center ${imageClassName}`}
         priority={priority}
-        removeWrapper
         quality={75}
       />
     </div>
