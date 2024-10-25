@@ -33,6 +33,7 @@ export const ImageHandlerLCP: FC<PropsWithClassName<ImageHandlerLCPProps>> = ({
         title={source.title}
         className={`block object-contain object-center ${imageClassName}`}
         priority={priority}
+        removeWrapper
         quality={75}
       />
     </div>
