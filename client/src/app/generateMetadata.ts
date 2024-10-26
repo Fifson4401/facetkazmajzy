@@ -35,12 +35,6 @@ export async function generateMetadata(): Promise<Metadata> {
       icons: {
         other: [
           {
-            rel: 'preload',
-            fetchPriority: 'high',
-            url: image?.url || '',
-            sizes: image?.sizes,
-          },
-          {
             rel: 'preconnect',
             url: 'https://facetkazmajzy.pl/',
           },
