@@ -1,6 +1,6 @@
 'use client';
 
-import { Image } from '@nextui-org/react';
+import { Image } from "@nextui-org/image";
 import NextImage from 'next/image';
 
 import { FC } from 'react';
@@ -52,6 +52,7 @@ export const ImageHandler: FC<PropsWithClassName<ImageHandlerProps>> = ({
         className={`block object-contain object-center ${imageClassName}`}
         priority={priority}
         removeWrapper={removeWrapper}
+        quality={45}
       />
     </div>
   );

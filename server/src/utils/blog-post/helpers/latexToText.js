@@ -1,36 +1,115 @@
 function latexToText(latexInput) {
-  if (!latexInput) { // Jeśli wejście jest puste, zwróć pusty string
+  if (!latexInput) {
     return '';
   }
 
   let textOutput = latexInput;
 
-  // ** Nowy Krok 0: Escape'owanie wszystkich % na \% **
-  // Dzięki temu wszystkie % są traktowane jako literały, a nie komentarze
-  textOutput = textOutput.replace(/%/g, '\\%');
-
-  // 1. Zamień \% na unikalny znacznik, aby ochronić je przed usunięciem jako komentarze
-  textOutput = textOutput.replace(/\\%/g, '###PERCENT###');
-
-  // 2. Usuwanie niepotrzebnych tagów LaTeX, w tym \begin{array}{rcl} i \end{array}
-  textOutput = textOutput.replace(/\\begin\{array\}\{[^}]+\}|\s*\\end\{array\}/g, '');
-
-  // 3. Usuwanie {rcl}
-  textOutput = textOutput.replace(/\{rcl\}/g, '');
-
-  // 4. Usuwanie innych \begin{...} i \end{...} jeśli istnieją
-  textOutput = textOutput.replace(/\\begin\{.*?\}|\s*\\end\{.*?\}/g, '');
-
-  // 5. Zamień podwójne backslashes na spację
+  // **Step 0: Replace LaTeX newlines '\\' with a space directly**
   textOutput = textOutput.replace(/\\\\/g, ' ');
 
-  // 6. Zamień \textbf{...} na sam tekst
-  textOutput = textOutput.replace(/\\textbf\{(.*?)\}/g, '$1');
+  // Step 1: Escape all % to \%
+  textOutput = textOutput.replace(/%/g, '\\%');
 
-  // 7. Zamiana symboli matematycznych
+  // Step 2: Replace \% with a unique placeholder
+  textOutput = textOutput.replace(/\\%/g, '###PERCENT###');
+
+  // Remove LaTeX comments (handle escaped %)
+  textOutput = textOutput.replace(/(?<!\\)%.*$/gm, '');
+
+  // Remove unnecessary LaTeX tags
+  textOutput = textOutput.replace(/\\begin\{.*?\}|\s*\\end\{.*?\}/gs, '');
+
+  // Function to replace commands with content, handling nested braces
+  function replaceCommand(input, command, replaceWith = '') {
+    let output = '';
+    let i = 0;
+    while (i < input.length) {
+      if (input.substr(i, command.length + 1) === '\\' + command + '{') {
+        i += command.length + 1;
+        let braceDepth = 1;
+        let content = '';
+        while (i < input.length && braceDepth > 0) {
+          if (input[i] === '{') {
+            braceDepth++;
+            content += input[i++];
+          } else if (input[i] === '}') {
+            braceDepth--;
+            if (braceDepth > 0) content += input[i];
+            i++;
+          } else {
+            content += input[i++];
+          }
+        }
+        output += replaceWith + content;
+      } else {
+        output += input[i++];
+      }
+    }
+    return output;
+  }
+
+  // Replace \textbf{...} with the content inside
+  textOutput = replaceCommand(textOutput, 'textbf');
+
+  // Replace fractions \frac{a}{b} with a/b
+  function replaceFrac(input) {
+    let output = '';
+    let i = 0;
+    while (i < input.length) {
+      if (input.substr(i, 6) === '\\frac{') {
+        i += 6;
+        let numerator = '';
+        let braceDepth = 1;
+        while (i < input.length && braceDepth > 0) {
+          if (input[i] === '{') {
+            braceDepth++;
+            numerator += input[i++];
+          } else if (input[i] === '}') {
+            braceDepth--;
+            if (braceDepth > 0) numerator += input[i];
+            i++;
+          } else {
+            numerator += input[i++];
+          }
+        }
+        if (input.substr(i, 1) === '{') {
+          i++;
+          let denominator = '';
+          braceDepth = 1;
+          while (i < input.length && braceDepth > 0) {
+            if (input[i] === '{') {
+              braceDepth++;
+              denominator += input[i++];
+            } else if (input[i] === '}') {
+              braceDepth--;
+              if (braceDepth > 0) denominator += input[i];
+              i++;
+            } else {
+              denominator += input[i++];
+            }
+          }
+          output += numerator + '/' + denominator;
+        } else {
+          output += '\\frac{' + numerator + '}';
+        }
+      } else {
+        output += input[i++];
+      }
+    }
+    return output;
+  }
+
+  textOutput = replaceFrac(textOutput);
+
+  // Remove $ symbols (math mode)
+  textOutput = textOutput.replace(/\$/g, '');
+
+  // Replace special symbols
   const symbols = {
     '\\infty': '∞',
-    '\\cdot': '*', // Zamieniamy '·' na '*'
+    '\\cdot': '*',
+    '\\ast': '*',
     '\\times': '×',
     '\\leq': '≤',
     '\\geq': '≥',
@@ -97,72 +176,89 @@ function latexToText(latexInput) {
     '~': ' ',
   };
 
-  // Zamiana symboli
+  // Replace symbols
   for (const [key, value] of Object.entries(symbols)) {
     const regex = new RegExp(key.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g');
     textOutput = textOutput.replace(regex, value);
   }
 
-  // 8. Specjalna zamiana ^{\circ} i ^{°} na °
+  // Special replacements for ^{\circ} and ^{°} to °
   textOutput = textOutput.replace(/\^\{\\circ\}/g, '°');
   textOutput = textOutput.replace(/\^\{°\}/g, '°');
 
-  // 9. Zamiana potęg i indeksów dolnych
-  // Najpierw zamieniamy ^{x} na ^(x) dla wszystkich x, niezależnie od długości
-  textOutput = textOutput.replace(/\^{([^{}]+)}/g, '^($1)');
+  // Replace superscripts and subscripts
+  textOutput = textOutput.replace(/\^\{([^{}]+)\}/g, '^($1)');
   textOutput = textOutput.replace(/_\{([^{}]+)\}/g, '_($1)');
 
-  // Dodatkowo, zamiana ^x na ^(x) jeśli x jest pojedynczym znakiem (bez nawiasów)
-  textOutput = textOutput.replace(/\^([^\s^{])/g, '^($1)');
-  textOutput = textOutput.replace(/_([^\s^{])/g, '_($1)');
+  // Replace ^x with ^(x) if x is a single character
+  textOutput = textOutput.replace(/\^([^\s^{(])/g, '^($1)');
+  textOutput = textOutput.replace(/_([^\s^{(])/g, '_($1)');
 
-  // 10. Zamiana ułamków \frac{a}{b} na a/b
-  textOutput = textOutput.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '$1/$2');
+  // Replace square roots \sqrt{a} with √(a)
+  function replaceSqrt(input) {
+    let output = '';
+    let i = 0;
+    while (i < input.length) {
+      if (input.substr(i, 6) === '\\sqrt{') {
+        i += 6;
+        let content = '';
+        let braceDepth = 1;
+        while (i < input.length && braceDepth > 0) {
+          if (input[i] === '{') {
+            braceDepth++;
+            content += input[i++];
+          } else if (input[i] === '}') {
+            braceDepth--;
+            if (braceDepth > 0) content += input[i];
+            i++;
+          } else {
+            content += input[i++];
+          }
+        }
+        output += '√(' + content + ')';
+      } else {
+        output += input[i++];
+      }
+    }
+    return output;
+  }
 
-  // 11. Zamiana pierwiastków \sqrt{a} na √(a)
-  textOutput = textOutput.replace(/\\sqrt\{([^{}]+)\}/g, '√($1)');
+  textOutput = replaceSqrt(textOutput);
 
-  // 12. Usuwanie zbędnych znaków $
-  textOutput = textOutput.replace(/\$/g, '');
-
-  // 13. Zamiana przecinków na kropki w liczbach dziesiętnych
-  textOutput = textOutput.replace(/(\d),(\d)/g, '$1.$2');
-
-  // 14. Zamiana znaków specjalnych LaTeX na zwykłe
+  // Replace special LaTeX constructs
   textOutput = textOutput.replace(/\\left\(/g, '(');
   textOutput = textOutput.replace(/\\right\)/g, ')');
   textOutput = textOutput.replace(/\\left\[/g, '[');
   textOutput = textOutput.replace(/\\right\]/g, ']');
   textOutput = textOutput.replace(/\\left\{/g, '{');
   textOutput = textOutput.replace(/\\right\}/g, '}');
-
-  // ** Usunięcie \right. **
   textOutput = textOutput.replace(/\\right\./g, '');
 
-  // 15. Usuwanie komentarzy LaTeX (%) - teraz tylko niechronione %
-  // Ponieważ wszystkie % zostały wcześniej zamienione na \%, nie powinno być niechronionych %
-  // Jednak dla bezpieczeństwa pozostawiamy ten krok
-  // Jeśli jednak masz niezamaskowane %, które są prawdziwymi komentarzami, możesz usunąć ten krok
-  textOutput = textOutput.replace(/(?<!\\)%.*$/gm, '');
-
-  // 16. Przywrócenie symboli procenta
-  textOutput = textOutput.replace(/###PERCENT###/g, '%');
-
-  // 17. Usuwanie reszty znaczników LaTeX, które nie zostały wcześniej obsłużone
+  // Remove remaining LaTeX commands
   textOutput = textOutput.replace(/\\[a-zA-Z]+/g, '');
 
-  // 18. Usuwanie niechcianej kropki po \right. i ewentualnych spacji przed nią
+  // Restore percentage symbols
+  textOutput = textOutput.replace(/###PERCENT###/g, '%');
+
+  // Remove unwanted dot after \right.
   textOutput = textOutput.replace(/}\s*\./g, '}');
 
-  // 19. Usuwanie spacji po znakach arytmetycznych
+  // Remove spaces after arithmetic operators
   textOutput = textOutput.replace(/([+\-*/=])\s+/g, '$1');
 
-  // 20. Zamiana wielokrotnych spacji i znaków nowej linii na pojedynczą spację
+  // Replace multiple spaces and newlines with a single space
   textOutput = textOutput.replace(/[\n\s]+/g, ' ').trim();
 
-  return textOutput;
-}
+  // Remove occurrences of {0.1cm}, {2cm}, etc.
+  textOutput = textOutput.replace(/\{\s*[\d.]+\s*cm\s*\}/g, '');
 
+  // ** New Step: Remove any isolated braces and backslashes **
+  textOutput = textOutput.replace(/[{}]/g, '');
+  textOutput = textOutput.replace(/\\+/g, '');
+
+  // Trim the output
+  return textOutput.trim();
+}
 
 module.exports = {
   latexToText,

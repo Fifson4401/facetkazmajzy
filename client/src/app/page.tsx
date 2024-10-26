@@ -1,4 +1,5 @@
 import { getHomePageProps } from '@/api/pages/getHomePageProps';
+import { isProductionEnvironment } from '@/core/analytics';
 import Hero from '@/core/components/Hero/Hero';
 import { Layout } from '@/core/components/Layout/Layout';
 import { Seo } from '@/core/components/SEO/SEO';
@@ -18,7 +19,7 @@ export default async function Home() {
 
   return (
     <Layout menu={pageData.menu}>
-      <Seo seo={pageData.seo} />
+      {isProductionEnvironment ? <Seo seo={pageData.seo} /> : ''}
       <SearchHome {...pageData.search} />
       <Hero {...pageData.hero} />
     </Layout>

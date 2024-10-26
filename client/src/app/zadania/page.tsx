@@ -1,5 +1,6 @@
 import { searchParams } from '@/api/collections/getBlogPosts';
 import { getBlogPageProps } from '@/api/pages/getBlogPageProps';
+import { isProductionEnvironment } from '@/core/analytics';
 import ClientBlogPage from '@/core/components/ClientBlogPage/ClientBlogPage';
 import { Layout } from '@/core/components/Layout/Layout';
 import { Seo } from '@/core/components/SEO/SEO';
@@ -24,7 +25,7 @@ export default async function Blog({ searchParams }: BlogPageProps) {
 
   return (
     <Layout menu={menu}>
-      <Seo seo={seo} />
+      {isProductionEnvironment ? <Seo seo={seo} /> : ''}
       <ClientBlogPage {...clientSideProps} />
     </Layout>
   );

@@ -1,4 +1,5 @@
 import { getContactPageProps } from '@/api/pages/getContactPageProps';
+import { isProductionEnvironment } from '@/core/analytics';
 import ContactHero from '@/core/components/ContactHero/ContactHero';
 import ContactInfo from '@/core/components/ContactInfo/ContactInfo';
 import ContactLinks from '@/core/components/ContactLinks/ContactLinks';
@@ -20,7 +21,7 @@ export default async function Contact() {
 
   return (
     <Layout menu={pageData.menu}>
-      <Seo seo={pageData.seo} />
+      {isProductionEnvironment ? <Seo seo={pageData.seo} /> : ''}
       <ContactHero {...pageData.hero} />
       <ContactInfo {...pageData.contactInfo} />
       <ContactLinks {...pageData.socialLinks} />

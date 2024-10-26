@@ -1,6 +1,6 @@
-import { Image } from '@nextui-org/react';
 import Link from 'next/link';
 import { FC } from 'react';
+import NextImage from 'next/image';
 
 interface ContactLinksProps {
   title?: string;
@@ -36,14 +36,12 @@ const ContactLinks: FC<ContactLinksProps> = ({
             link.url && (
               <Link href={link.url} key={index} className="group">
                 <div className="relative overflow-hidden rounded-lg border-3 border-transparent transition-all duration-300 group-hover:border-[#cc3266]">
-                  <Image
+                  <NextImage
                     alt={link.alt}
                     src={link.src}
                     width={300}
                     height={300}
-                    isBlurred
                     className="mx-auto mt-1 flex max-h-28 w-28 transition-transform duration-300 group-hover:scale-105 sm:max-h-32 sm:w-32 md:max-h-max md:w-max"
-                    removeWrapper
                   />
                 </div>
               </Link>

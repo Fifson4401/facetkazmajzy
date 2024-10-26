@@ -1,5 +1,6 @@
-import { Button, Link } from '@nextui-org/react';
-import { Image } from '@nextui-org/react';
+import { Link } from "@nextui-org/link";
+import { Button } from "@nextui-org/button";
+import { Image } from "@nextui-org/image";
 
 const PostNoResults = () => {
   return (

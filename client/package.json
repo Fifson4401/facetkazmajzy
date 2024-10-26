@@ -1,6 +1,6 @@
 {
   "name": "facetkazmajzy_client",
-  "version": "1.0.0-rc.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -13,7 +13,19 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,md,html,json}\""
   },
   "dependencies": {
-    "@nextui-org/react": "^2.4.6",
+    "@nextui-org/accordion": "^2.0.40",
+    "@nextui-org/button": "^2.0.38",
+    "@nextui-org/card": "^2.0.34",
+    "@nextui-org/chip": "^2.0.33",
+    "@nextui-org/divider": "^2.0.32",
+    "@nextui-org/image": "^2.0.32",
+    "@nextui-org/input": "^2.2.5",
+    "@nextui-org/link": "^2.0.35",
+    "@nextui-org/navbar": "^2.0.37",
+    "@nextui-org/pagination": "^2.0.36",
+    "@nextui-org/spacer": "^2.0.33",
+    "@nextui-org/system": "^2.2.6",
+    "@nextui-org/theme": "^2.2.11",
     "axios": "^1.7.4",
     "framer-motion": "^11.5.5",
     "katex": "^0.16.11",
@@ -24,7 +36,8 @@
     "react-dom": "^18",
     "react-icons": "^5.3.0",
     "react-katex": "^3.0.1",
-    "remove-accents": "^0.5.0"
+    "remove-accents": "^0.5.0",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@types/node": "^20",

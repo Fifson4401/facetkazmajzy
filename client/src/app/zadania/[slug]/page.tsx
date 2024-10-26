@@ -1,4 +1,5 @@
 import { getBlogPostPageProps } from '@/api/pages/getBlogPostPageProps';
+import { isProductionEnvironment } from '@/core/analytics';
 import { Layout } from '@/core/components/Layout/Layout';
 import PostAnswer from '@/core/components/PostAnswer/PostAnswer';
 import { PostContent } from '@/core/components/PostContent/PostContent';
@@ -33,12 +34,13 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     content,
     answer,
     source,
-    video, seo
+    video,
+    seo,
   } = pageData;
 
   return (
     <Layout menu={menu}>
-      <Seo seo={seo} />
+      {isProductionEnvironment ? <Seo seo={seo} /> : ''}
       <PostHeader
         title={title}
         category={category}
