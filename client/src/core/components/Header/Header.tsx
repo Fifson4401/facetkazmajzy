@@ -48,8 +48,9 @@ const Header: FC<HeaderProps> = ({ menu }) => {
       position="static"
       className="h-14 bg-background shadow-sm md:h-20"
       onMenuOpenChange={setIsMenuOpen}
+      aria-label='Menu nawigacyjne'
     >
-      <NavbarContent justify="start">
+      <NavbarContent justify="start" aria-label='Logo witryny'>
         <NavbarBrand className="h-full">
           <Link
             href="/"
@@ -71,7 +72,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
       </NavbarContent>
       {!!showMenuItems && !!menuItems?.length && (
         <>
-          <NavbarContent className="hidden gap-5 lg:flex" justify="center">
+          <NavbarContent className="hidden gap-5 lg:flex" justify="center" aria-label='Strony nawigacji'>
             {menuItems.map((item, index) => {
               const isActive = queryURL?.category
                 ? queryURL?.category === item.category?.data?.id.toString()
@@ -99,7 +100,7 @@ const Header: FC<HeaderProps> = ({ menu }) => {
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             />
           </NavbarContent>
-          <NavbarMenu className="md:mt-5">
+          <NavbarMenu className="md:mt-5" aria-label='Rozwijane menu stron nawigacji' aria-expanded={isMenuOpen ? true : false}>
             {menuItems.map((item, index) => {
               const isActive = queryURL?.category
                 ? queryURL?.category === item.category?.data?.id.toString()

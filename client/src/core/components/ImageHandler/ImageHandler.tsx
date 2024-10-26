@@ -52,7 +52,7 @@ export const ImageHandler: FC<PropsWithClassName<ImageHandlerProps>> = ({
         className={`block object-contain object-center ${imageClassName}`}
         priority={priority}
         removeWrapper={removeWrapper}
-        quality={75}
+        quality={45}
       />
     </div>
   );
