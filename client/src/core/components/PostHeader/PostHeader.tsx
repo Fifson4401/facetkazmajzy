@@ -1,6 +1,7 @@
 'use client';
 
-import { Divider, Image } from '@nextui-org/react';
+import { Image } from "@nextui-org/image";
+import { Divider } from "@nextui-org/divider";
 import { FC } from 'react';
 import { TagsArray } from '@/api/interfaces/collections/tags';
 import TagChip from '../TagChip/TagChip';

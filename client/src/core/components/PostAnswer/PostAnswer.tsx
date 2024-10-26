@@ -1,7 +1,7 @@
 'use client';
 
 import { BlogPageAnswerProps } from '@/api/interfaces/blogPost';
-import { Accordion, AccordionItem } from '@nextui-org/react';
+import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { FC } from 'react';
 import PostContentRenderer from '../PostContentRenderer/PostContentRenderer';
 import PostContentImage from '../PostContentImage/PostContentImage';

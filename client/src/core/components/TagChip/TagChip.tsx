@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Chip, ChipProps } from '@nextui-org/react';
-import { TagAttributes, TagsArray } from '@/api/interfaces/collections/tags';
+import { Chip, ChipProps } from "@nextui-org/chip";
+import { TagAttributes } from '@/api/interfaces/collections/tags';
 import { isTagYear } from './utils';
 
 interface TagsChipProps extends ChipProps {

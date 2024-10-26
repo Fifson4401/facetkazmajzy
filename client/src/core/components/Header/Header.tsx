@@ -1,17 +1,17 @@
 'use client';
 
 import { MenuArray } from '@/api/interfaces/defaults';
+import { Image } from "@nextui-org/image";
+import { Link } from "@nextui-org/link";
 import {
-  Image,
-  Link,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
   NavbarMenuToggle,
-} from '@nextui-org/react';
+  NavbarMenu,
+  NavbarMenuItem
+} from "@nextui-org/navbar";
 import { usePathname, useSearchParams } from 'next/navigation';
 import { FC, useEffect, useMemo, useState } from 'react';
 import NextImage from 'next/image';

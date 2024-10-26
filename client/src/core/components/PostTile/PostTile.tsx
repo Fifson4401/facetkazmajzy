@@ -29,9 +29,9 @@ const PostTile: FC<PostTileProps> = ({
         <CategoryChip isCategory {...category} />
         <CategoryChip {...sub_category} />
       </div>
-      <p className="line-clamp-2 pt-4 text-sm text-[#2b2b2b] md:text-base">
+      <div className="line-clamp-2 pt-4 text-sm text-[#2b2b2b] md:text-base">
         <PostContentRenderer content={description} />
-      </p>
+      </div>
       <div className="flex flex-row gap-2 pt-3">
         <TagsLink {...tags} />
       </div>

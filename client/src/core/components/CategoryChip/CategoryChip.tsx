@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import { Chip } from '@nextui-org/react';
+import { Chip } from "@nextui-org/chip";
 import { CategoriesBlog } from '@/api/interfaces/collections/categories';
 import { SubCategoriesBlog } from '@/api/interfaces/collections/subCategories';
 import { getDisplayCategory } from './utils';

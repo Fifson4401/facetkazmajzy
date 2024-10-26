@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { RouteToProps } from '@/api/interfaces/blog';
-import { Card, CardBody } from '@nextui-org/react';
+import { Card, CardBody } from "@nextui-org/card";
 import { motion, AnimatePresence } from 'framer-motion';
 import { getDisplayCategory } from '../CategoryChip/utils';
 import { StrapiResponse } from '@/api/interfaces/strapiResponse';

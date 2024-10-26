@@ -29,7 +29,7 @@ const parseContent = (
       index = result.newIndex;
     } else if (content.startsWith('\\\\', index) || content[index] === '\n') {
       nodes.push(<br key={index} />);
-      index += content[index] === '\n' ? 1 : 2;
+      index += content.startsWith('\\\\', index) ? 2 : 1;
     } else {
       const nextIndex = findNextSpecialIndex(content, index);
       const text = content.substring(index, nextIndex);
@@ -64,6 +64,8 @@ const parseTextbf = (
   const startIndex = index;
   let depth = 1;
 
+  const innerContentStart = index;
+
   while (index < content.length && depth > 0) {
     if (content[index] === '\\') {
       index += 2; // Skip escaped character
@@ -82,7 +84,7 @@ const parseTextbf = (
     throw new Error('Unmatched brace in \\textbf{...}');
   }
 
-  const innerContent = content.substring(startIndex, index - 1);
+  const innerContent = content.substring(innerContentStart, index - 1);
   const { nodes } = parseContent(innerContent);
   const node = <strong key={startIndex}>{nodes}</strong>;
 
@@ -95,7 +97,6 @@ const parseInlineMath = (
 ): { node: React.ReactNode; newIndex: number } => {
   index += 1; // Skip the opening '$'
   const startIndex = index;
-
   while (index < content.length) {
     if (content[index] === '\\') {
       index += 2; // Skip escaped character
@@ -107,8 +108,10 @@ const parseInlineMath = (
       index += 1;
     }
   }
-
-  throw new Error('Unmatched $ in inline math');
+  // If no closing '$' is found, treat the rest as math content
+  const mathContent = content.substring(startIndex);
+  const node = <InlineMath key={startIndex} math={mathContent} />;
+  return { node, newIndex: content.length };
 };
 
 const parseBlockMath = (
