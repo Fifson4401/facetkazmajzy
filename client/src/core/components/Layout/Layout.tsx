@@ -18,9 +18,8 @@ export const Layout: FC<LayoutProps> = ({ children, lang = 'pl', menu }) => (
           lang={lang}
           className="flex flex-grow flex-col items-center gap-6 overflow-hidden bg-background p-8 text-foreground light md:gap-10 md:px-14 md:py-8 xl:px-28"
         >
-          <p>Ładuje ;)</p>
+          <p>Ładuje ;]</p>
         </main>
-        <Footer />
       </div>
     }
   >
