@@ -49,7 +49,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
         slug={slug}
       />
       <PostContent content={content || []} />
-      <PostAnswer TEX={answer?.TEX} image={answer?.image} />
+      <PostAnswer answer={answer} />
       <PostSource source={source} />
       <PostVideo video={video} />
     </Layout>

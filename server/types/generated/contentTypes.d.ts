@@ -937,7 +937,7 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
     slug: Attribute.UID & Attribute.Required;
     content: Attribute.DynamicZone<['blog-post.tex', 'blog-post.image']> &
       Attribute.Required;
-    answer: Attribute.Component<'blog-post.answer'> & Attribute.Required;
+    answer: Attribute.Component<'blog-post.answer', true> & Attribute.Required;
     source: Attribute.Component<'blog-post.source'> & Attribute.Required;
     category: Attribute.Relation<
       'api::blog-post.blog-post',

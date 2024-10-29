@@ -42,7 +42,7 @@ const PostHeader: FC<PostHeaderProps> = ({
           <h1 className="mb-4 font-semibold leading-tight sm:text-2xl md:text-4xl md:font-medium lg:text-5xl">
             {title}
           </h1>
-          <div className="mb-4 flex flex-row gap-4">
+          <div className="mb-8 md:mb-4 flex flex-row gap-4 flex-wrap">
             {category && (
               <TagChip
                 name={category.data.attributes.name}
@@ -60,7 +60,7 @@ const PostHeader: FC<PostHeaderProps> = ({
               />
             )}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             {tags?.data.map((item) => (
               <TagChip
                 name={item.attributes.name}
@@ -71,7 +71,7 @@ const PostHeader: FC<PostHeaderProps> = ({
           </div>
         </div>
         {randomSlug && !loading && (
-          <Link href={`/zadania/${randomSlug}`} className="group flex flex-col">
+          <Link href={`/zadania/${randomSlug}`} className="group flex flex-col justify-center">
             <Image
               alt="Kości do gry"
               aria-label="Wylosuj kolejne zadanie"
@@ -81,7 +81,7 @@ const PostHeader: FC<PostHeaderProps> = ({
               className="mx-auto mt-1 flex max-h-20 w-20 group-hover:opacity-70 sm:max-h-max sm:w-max"
               removeWrapper
             />
-            <p className="pt-2 font-semibold group-hover:opacity-70 md:font-medium">
+            <p className="pt-2 font-semibold group-hover:opacity-70 md:font-medium text-center">
               Wylosuj zadanie!
             </p>
           </Link>

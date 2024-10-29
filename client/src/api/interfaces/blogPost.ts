@@ -38,9 +38,10 @@ export type BlogPageContentProps = {
 };
 
 export type BlogPageAnswerProps = {
+  id: string;
   TEX?: string;
-  image?: ImageProps;
-};
+  image?: BlogPostImage;
+}[];
 
 export type BlogPostProps = BlogPageContentProps & {
   source: BlogPostSource;

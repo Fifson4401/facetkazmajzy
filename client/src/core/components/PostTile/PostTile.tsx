@@ -25,14 +25,14 @@ const PostTile: FC<PostTileProps> = ({
       <h3 className="line-clamp-1 pb-2 text-lg font-semibold text-[#3D2C29]">
         {title}
       </h3>
-      <div className="flex flex-row gap-2">
-        <CategoryChip isCategory {...category} />
-        <CategoryChip {...sub_category} />
+      <div className="flex flex-row gap-2 flex-wrap">
+        <CategoryChip isCategory category={category} />
+        <CategoryChip category={sub_category} parentID={category?.data?.id} />
       </div>
       <div className="line-clamp-2 pt-4 text-sm text-[#2b2b2b] md:text-base">
         <PostContentRenderer content={description} />
       </div>
-      <div className="flex flex-row gap-2 pt-3">
+      <div className="flex flex-row gap-2 pt-3 flex-wrap">
         <TagsLink {...tags} />
       </div>
     </div>
