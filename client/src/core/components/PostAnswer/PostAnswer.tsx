@@ -1,7 +1,7 @@
 'use client';
 
 import { BlogPageAnswerProps } from '@/api/interfaces/blogPost';
-import { Accordion, AccordionItem } from "@nextui-org/accordion";
+import { Accordion, AccordionItem } from '@nextui-org/accordion';
 import { FC } from 'react';
 import PostContentRenderer from '../PostContentRenderer/PostContentRenderer';
 import PostContentImage from '../PostContentImage/PostContentImage';
@@ -9,13 +9,12 @@ import { FaAngleDown } from 'react-icons/fa';
 import { ImageHandler } from '../ImageHandler';
 
 interface PostAnswerProps {
-  answer?: BlogPageAnswerProps
+  answer?: BlogPageAnswerProps;
 }
 
 const PostAnswer: FC<PostAnswerProps> = ({ answer }) => {
-
   if (!answer) {
-    return null
+    return null;
   }
 
   return (
@@ -32,15 +31,16 @@ const PostAnswer: FC<PostAnswerProps> = ({ answer }) => {
           title="Zobacz odpowiedź!"
           indicator={<FaAngleDown color="#323232" />}
         >
-          {!!answer.length && answer.map((item, index) =>
-            <div key={`answer-${item.id}-${index}`}>
-              <PostContentRenderer
-                content={item.TEX}
-                className="pb-4 md:px-4"
-              />
-              <PostContentImage image={item.image?.image} />
-            </div>
-          )}
+          {!!answer.length &&
+            answer.map((item, index) => (
+              <div key={`answer-${item.id}-${index}`}>
+                <PostContentRenderer
+                  content={item.TEX}
+                  className="pb-4 md:px-4"
+                />
+                <PostContentImage image={item.image?.image} />
+              </div>
+            ))}
         </AccordionItem>
       </Accordion>
     </div>

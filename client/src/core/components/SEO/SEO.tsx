@@ -21,9 +21,7 @@ export const Seo: FC<SeoProps> = ({ seo }) => {
         strategy="afterInteractive"
         src="https://www.googletagmanager.com/gtag/js?id=G-ZGT0KL8BXX"
       />
-      <Script id="gtag-base2"
-        strategy="afterInteractive"
-      >
+      <Script id="gtag-base2" strategy="afterInteractive">
         {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)}; gtag('js', new Date()); gtag('config', 'G-ZGT0KL8BXX');`}
       </Script>
       <CustomJson data={seo.structuredData} />

@@ -1,9 +1,9 @@
 import { getHeaderMenuProps } from '@/api/pages/getPageProps';
 import Footer from '@/core/components/Footer/Footer';
 import Header from '@/core/components/Header/Header';
-import { Link } from "@nextui-org/link";
-import { Button } from "@nextui-org/button";
-import { Image } from "@nextui-org/image";
+import { Link } from '@nextui-org/link';
+import { Button } from '@nextui-org/button';
+import { Image } from '@nextui-org/image';
 import { Suspense } from 'react';
 
 export default async function NotFound() {

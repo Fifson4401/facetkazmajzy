@@ -41,7 +41,7 @@ const ContactInfo: FC<ContactInfoProps> = ({ contactItem, mapUrl }) => {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title='Facetka z Majzy na mapie'
+          title="Facetka z Majzy na mapie"
         />
       </div>
       <p

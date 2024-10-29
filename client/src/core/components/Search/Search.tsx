@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
+import { Button } from '@nextui-org/button';
+import { Input } from '@nextui-org/input';
 import { FC, useState, useCallback } from 'react';
 import { IoMdSearch, IoMdTrash } from 'react-icons/io';
 import { RouteToProps } from '@/api/interfaces/blog';

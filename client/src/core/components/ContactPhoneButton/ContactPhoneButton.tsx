@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Button } from "@nextui-org/button";
+import { Button } from '@nextui-org/button';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const ContactPhoneButton = ({ phoneNumber }: { phoneNumber: string }) => {
@@ -62,8 +62,9 @@ const ContactPhoneButton = ({ phoneNumber }: { phoneNumber: string }) => {
             </p>
           </Button>
           <span
-            className={`mt-4 cursor-pointer text-lg font-semibold transition-opacity duration-500 ${isRevealed ? 'opacity-100' : 'opacity-0'
-              }`}
+            className={`mt-4 cursor-pointer text-lg font-semibold transition-opacity duration-500 ${
+              isRevealed ? 'opacity-100' : 'opacity-0'
+            }`}
             dangerouslySetInnerHTML={{
               __html: isRevealed ? encodedNumber : '',
             }}
