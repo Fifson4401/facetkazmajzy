@@ -13,8 +13,7 @@
   "pluginOptions": {},
   "attributes": {
     "random": {
-      "type": "string",
-      "private": true
+      "type": "string"
     }
   }
 }

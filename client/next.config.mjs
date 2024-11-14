@@ -5,15 +5,16 @@ const nextConfig = {
     NEXT_PUBLIC_API_HOST: process.env.NEXT_PUBLIC_API_HOST,
   },
   images: {
-    domains: [
-      process.env.NODE_ENV === 'production'
-        ? 'api.facetkazmajzy.pl'
-        : 'localhost'
-    ],
     remotePatterns: [
       {
+        protocol: process.env.NODE_ENV === 'production' ? 'https' : 'http',
+        hostname: process.env.NODE_ENV === 'production'
+          ? 'api.facetkazmajzy.pl'
+          : 'localhost',
+      },
+      {
         protocol: 'https',
-        hostname: '**.fbcdn.net' // * wildcard on dynamic part of domain url
+        hostname: '**.fbcdn.net'
       }
     ],
     deviceSizes: [320, 375, 575, 768, 1000, 1200, 1999],

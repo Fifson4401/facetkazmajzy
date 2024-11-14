@@ -7,7 +7,7 @@
 const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::random.random', ({ strapi }) => ({
-  async getRandomPost(ctx) {
+  async find(ctx) {
     try {
       const { category, slug } = ctx.query;
 

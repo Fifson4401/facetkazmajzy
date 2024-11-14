@@ -1135,7 +1135,7 @@ export interface ApiRandomRandom extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    random: Attribute.String & Attribute.Private;
+    random: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
