@@ -52,6 +52,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       <PostAnswer answer={answer} />
       <PostSource source={source} />
       <PostVideo video={video} />
+      
     </Layout>
   );
 }
