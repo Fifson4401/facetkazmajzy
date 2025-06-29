@@ -23,13 +23,16 @@
     },
     "content": {
       "type": "dynamiczone",
-      "components": ["blog-post.tex", "blog-post.image"],
+      "components": [
+        "blog-post.tex",
+        "blog-post.image"
+      ],
       "required": true
     },
     "answer": {
       "displayName": "Answer",
       "type": "component",
-      "repeatable": false,
+      "repeatable": true,
       "component": "blog-post.answer",
       "required": true
     },

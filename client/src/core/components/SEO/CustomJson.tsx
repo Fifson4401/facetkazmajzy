@@ -21,7 +21,7 @@ export const CustomJson: FC<CustomJsonProps> = ({ data }) => {
             id={idLabel}
             key={`${idLabel}_${index}`}
             type="application/ld+json"
-            strategy="afterInteractive"
+            strategy="beforeInteractive"
             defer={true}
           >
             {`${JSON.stringify(item)}`}

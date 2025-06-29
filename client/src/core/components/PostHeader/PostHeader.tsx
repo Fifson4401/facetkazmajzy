@@ -1,7 +1,7 @@
 'use client';
 
-import { Image } from "@nextui-org/image";
-import { Divider } from "@nextui-org/divider";
+import { Image } from '@nextui-org/image';
+import { Divider } from '@nextui-org/divider';
 import { FC } from 'react';
 import { TagsArray } from '@/api/interfaces/collections/tags';
 import TagChip from '../TagChip/TagChip';
@@ -42,7 +42,7 @@ const PostHeader: FC<PostHeaderProps> = ({
           <h1 className="mb-4 font-semibold leading-tight sm:text-2xl md:text-4xl md:font-medium lg:text-5xl">
             {title}
           </h1>
-          <div className="mb-4 flex flex-row gap-4">
+          <div className="mb-8 flex flex-row flex-wrap gap-4 md:mb-4">
             {category && (
               <TagChip
                 name={category.data.attributes.name}
@@ -60,7 +60,7 @@ const PostHeader: FC<PostHeaderProps> = ({
               />
             )}
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {tags?.data.map((item) => (
               <TagChip
                 name={item.attributes.name}
@@ -71,7 +71,10 @@ const PostHeader: FC<PostHeaderProps> = ({
           </div>
         </div>
         {randomSlug && !loading && (
-          <Link href={`/zadania/${randomSlug}`} className="group flex flex-col">
+          <Link
+            href={`/zadania/${randomSlug}`}
+            className="group flex flex-col justify-center"
+          >
             <Image
               alt="Kości do gry"
               aria-label="Wylosuj kolejne zadanie"
@@ -81,7 +84,7 @@ const PostHeader: FC<PostHeaderProps> = ({
               className="mx-auto mt-1 flex max-h-20 w-20 group-hover:opacity-70 sm:max-h-max sm:w-max"
               removeWrapper
             />
-            <p className="pt-2 font-semibold group-hover:opacity-70 md:font-medium">
+            <p className="pt-2 text-center font-semibold group-hover:opacity-70 md:font-medium">
               Wylosuj zadanie!
             </p>
           </Link>

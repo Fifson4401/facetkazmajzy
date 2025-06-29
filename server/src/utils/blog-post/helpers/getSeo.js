@@ -10,7 +10,7 @@ function getSeo(seo, categoryName, tags, title, description, slug, publishedAt, 
   const tagWord = getFirstWordTag(tags)
 
   if (categoryName && tagNumber) {
-    newSeo.metaTitle = `${title} z matematyki - ${categoryName} ${tagNumber} ${tagWord ? '- ' + tagWord : ''}`.trim()
+    newSeo.metaTitle = generateMetaTitle(title, categoryName, tagNumber, tagWord)
   }
   newSeo.metaDescription = `${categoryName} przyprawia o zawrót głowy? To może rozwiążemy go razem? Sprawdź rozwiązanie krok po kroku i poszerz swoją wiedzę matematyczną!`
   newSeo.keywords = getKeywords(title, categoryName, tags, tagNumber, description)
@@ -54,6 +54,7 @@ function getSeo(seo, categoryName, tags, title, description, slug, publishedAt, 
   }
 
   newSeo.structuredData = structuredData;
+
 
   if (newSeo.metaSocial && Array.isArray(newSeo.metaSocial)) {
     newSeo.metaSocial = newSeo.metaSocial.map((social) => {
@@ -130,6 +131,20 @@ function generateQAPage({ question, questionShort, answer, author, url, publishe
   }
 
   return qaPage;
+}
+
+function generateMetaTitle(title, categoryName, tagNumber, tagWord) {
+  const baseTitle = `${title} z matematyki - ${categoryName} ${tagNumber}`.trim();
+
+  const fullTitleWithWord = `${baseTitle} - ${tagWord}`.trim();
+
+  // Sprawdzamy, czy pełny tytuł mieści się w limicie
+  if (fullTitleWithWord.length <= 60) {
+    return fullTitleWithWord;
+  }
+
+  // Jeśli nie, zwracamy tytuł bez tagWord
+  return baseTitle;
 }
 
 function generateBreadcrumbs(canonicalUrl) {

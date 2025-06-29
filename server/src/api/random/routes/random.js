@@ -1,19 +1,9 @@
 'use strict';
 
 /**
- * random router
+ * menu router
  */
 
-module.exports = {
-  routes: [
-    {
-      method: 'GET',
-      path: '/random',
-      handler: 'random.getRandomPost',
-      config: {
-        policies: [],
-        middlewares: [],
-      },
-    },
-  ],
-};
+const { createCoreRouter } = require('@strapi/strapi').factories;
+
+module.exports = createCoreRouter('api::random.random');

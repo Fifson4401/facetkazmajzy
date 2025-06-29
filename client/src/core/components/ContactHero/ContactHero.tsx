@@ -1,5 +1,5 @@
 import { ImageProps } from '@/api/interfaces/defaults';
-import { Button } from "@nextui-org/button";
+import { Button } from '@nextui-org/button';
 import Link from 'next/link';
 import { FC } from 'react';
 import { ImageHandlerLCP } from '../ImageHandlerLCP';

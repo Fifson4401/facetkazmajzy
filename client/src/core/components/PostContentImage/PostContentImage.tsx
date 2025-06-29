@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import 'katex/dist/katex.min.css';
 import { ImageHandler } from '../ImageHandler/ImageHandler';
 import { ImageProps } from '@/api/interfaces/defaults';
 
@@ -13,14 +12,11 @@ const PostContentImage: FC<PostContentImageProps> = ({ image }) => {
   }
 
   return (
-    <div>
-      <ImageHandler
-        image={image.data?.attributes}
-        priority
-        removeWrapper
-        imageClassName="object-cover max-lg:max-h-[50vh] max-md:max-h-[40vh]"
-      />
-    </div>
+    <ImageHandler
+      image={image.data?.attributes}
+      wrapperClassName={`items-center align-middle justify-center flex my-10`}
+      imageClassName="object-cover max-lg:max-h-[50vh] max-md:max-h-[40vh] min-h10"
+    />
   );
 };
 

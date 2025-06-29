@@ -1,6 +1,6 @@
 'use client';
-import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
+import { Button } from '@nextui-org/button';
+import { Input } from '@nextui-org/input';
 import { FC, useState } from 'react';
 import { IoMdSearch } from 'react-icons/io';
 import { useRouter } from 'next/navigation';

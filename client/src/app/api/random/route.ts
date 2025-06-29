@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.search;
 
   try {
-    const response = await client.get(`/api/random${searchParams}`);
+    const response = await client.get(`/api/randoms${searchParams}`);
 
     return NextResponse.json(response.data, {
       status: response.status,

@@ -1,7 +1,7 @@
 'use client';
 
-import { Pagination } from "@nextui-org/pagination";
-import { Spacer } from "@nextui-org/spacer";
+import { Pagination } from '@nextui-org/pagination';
+import { Spacer } from '@nextui-org/spacer';
 import { FC } from 'react';
 import { BlogPageAttributes } from '@/api/interfaces/blog';
 import { useBlog } from './hooks';
