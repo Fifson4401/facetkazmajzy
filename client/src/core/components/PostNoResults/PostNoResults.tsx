@@ -1,6 +1,6 @@
-import { Link } from '@nextui-org/link';
-import { Button } from '@nextui-org/button';
-import { Image } from '@nextui-org/image';
+import { Link } from "@heroui/link";
+import { Button } from "@heroui/button";
+import { Image } from "@heroui/image";
 
 const PostNoResults = () => {
   return (

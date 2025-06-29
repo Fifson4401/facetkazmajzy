@@ -74,7 +74,7 @@ export type PropsWithMobileStyle<T = object> = T & {
 };
 
 export type PropsWithRef<I, T = object> = T & {
-  ref?: RefObject<I>;
+  ref?: RefObject<I | null>;
 };
 
 // export type PropsWithCategories<T = object> = T & {

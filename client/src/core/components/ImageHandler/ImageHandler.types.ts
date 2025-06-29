@@ -1,5 +1,5 @@
 import { ImageAttributes } from '@/api/interfaces/defaults';
-import { ImageProps } from '@nextui-org/image';
+import { ImageProps } from "@heroui/image";
 
 export type ImageHandlerProps = {
   image: ImageAttributes | undefined;

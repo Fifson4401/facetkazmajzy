@@ -2,10 +2,8 @@ import client from '@/api/client';
 import { AxiosError } from 'axios';
 import { NextRequest } from 'next/server';
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { route: string[] } }
-) {
+export async function GET(request: NextRequest, props: { params: Promise<{ route: string[] }> }) {
+  const params = await props.params;
   // Odtwórz ścieżkę API z parametrów trasy
   const apiPath = `/${params.route.join('/')}`;
 

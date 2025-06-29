@@ -1,7 +1,7 @@
 'use client';
 
 import React, { FC } from 'react';
-import { Card, CardBody, CardFooter } from '@nextui-org/card';
+import { Card, CardBody, CardFooter } from "@heroui/card";
 import { ContactPetItemAttribute } from '@/api/interfaces/contact';
 import { ImageHandler } from '../ImageHandler';
 

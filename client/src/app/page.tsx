@@ -8,7 +8,8 @@ import { notFound } from 'next/navigation';
 
 export const revalidate = 3600;
 
-export { generateMetadata } from './generateMetadata';
+export { /* @next-codemod-error `generateMetadata` export is re-exported. Check if this component uses `params` or `searchParams`*/
+generateMetadata } from './generateMetadata';
 
 export default async function Home() {
   const { pageData } = await getHomePageProps();

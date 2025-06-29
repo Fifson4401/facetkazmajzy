@@ -1,8 +1,8 @@
 'use client';
 
 import { MenuArray } from '@/api/interfaces/defaults';
-import { Image } from '@nextui-org/image';
-import { Link } from '@nextui-org/link';
+import { Image } from "@heroui/image";
+import { Link } from "@heroui/link";
 import {
   Navbar,
   NavbarBrand,
@@ -11,7 +11,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-} from '@nextui-org/navbar';
+} from "@heroui/navbar";
 import { usePathname, useSearchParams } from 'next/navigation';
 import { FC, useEffect, useMemo, useState } from 'react';
 import NextImage from 'next/image';

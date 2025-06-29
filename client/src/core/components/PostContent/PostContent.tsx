@@ -12,7 +12,7 @@ import PostContentRenderer from '../PostContentRenderer/PostContentRenderer';
 const renderBlogPostContent = (
   block: BlogPostContentTypes,
   index?: number
-): ReactElement | null => {
+): ReactElement<any> | null => {
   const key = index;
   switch (block.type) {
     case 'tex':

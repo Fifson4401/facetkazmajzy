@@ -7,14 +7,16 @@ import { Seo } from '@/core/components/SEO/SEO';
 import { notFound } from 'next/navigation';
 
 interface BlogPageProps {
-  searchParams: searchParams;
+  searchParams: Promise<searchParams>;
 }
 
 export const revalidate = 3600;
 
-export { generateMetadata } from './generateMetadata';
+export { /* @next-codemod-error `generateMetadata` export is re-exported. Check if this component uses `params` or `searchParams`*/
+generateMetadata } from './generateMetadata';
 
-export default async function Blog({ searchParams }: BlogPageProps) {
+export default async function Blog(props: BlogPageProps) {
+  const searchParams = await props.searchParams;
   const { pageData } = await getBlogPageProps(searchParams);
 
   if (!pageData) {

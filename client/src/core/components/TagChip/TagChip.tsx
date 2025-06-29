@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Chip, ChipProps } from '@nextui-org/chip';
+import { Chip, ChipProps } from "@heroui/chip";
 import { TagAttributes } from '@/api/interfaces/collections/tags';
 import { isTagYear } from './utils';
 

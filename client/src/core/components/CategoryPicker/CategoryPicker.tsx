@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import { CategoriesArray } from '@/api/interfaces/collections/categories';
 import { RouteToProps } from '@/api/interfaces/blog';
-import { Card, CardBody } from '@nextui-org/card';
+import { Card, CardBody } from "@heroui/card";
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface CategoryPickerProps {

@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-const { nextui } = require('@nextui-org/theme');
+const {heroui} = require("@heroui/react");
 
 const config: Config = {
   content: [
@@ -7,7 +7,7 @@ const config: Config = {
     './src/core/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/components/(link|button|input|image|chip|card|pagination|spacer|navbar|accordion|divider).js',
+    "./node_modules/@heroui/theme/dist/components/(link|button|input|image|chip|card|pagination|spacer|navbar|accordion|divider).js",
   ],
   theme: {
     extend: {
@@ -62,7 +62,7 @@ const config: Config = {
   },
   darkMode: 'class',
   plugins: [
-    nextui({
+    heroui({
       prefix: 'nextui', // prefix for themes variables
       addCommonColors: false, // override common colors (e.g. "blue", "green", "pink").
       defaultTheme: 'light', // default theme from the themes object

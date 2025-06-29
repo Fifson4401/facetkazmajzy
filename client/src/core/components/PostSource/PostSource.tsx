@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { BlogPostSource } from '@/api/interfaces/blogPost';
-import { Divider } from '@nextui-org/divider';
-import { Link } from '@nextui-org/link';
+import { Divider } from "@heroui/divider";
+import { Link } from "@heroui/link";
 
 interface PostSourceProps {
   source?: BlogPostSource;
