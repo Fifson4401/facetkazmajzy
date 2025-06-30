@@ -6,7 +6,7 @@ import { FC } from 'react';
 import PostContentRenderer from '../PostContentRenderer/PostContentRenderer';
 import PostContentImage from '../PostContentImage/PostContentImage';
 import { FaAngleDown } from 'react-icons/fa';
-import { ImageHandler } from '../ImageHandler';
+import { Variants } from 'framer-motion';
 
 interface PostAnswerProps {
   answer?: BlogPageAnswerProps;
@@ -21,7 +21,7 @@ const PostAnswer: FC<PostAnswerProps> = ({ answer }) => {
     <div className="w-full md:px-11">
       <Accordion
         variant="bordered"
-        motionProps={animationVariant}
+        motionProps={accordionVariants}
         className="w-full border-[#cc3266]"
       >
         <AccordionItem
@@ -47,41 +47,40 @@ const PostAnswer: FC<PostAnswerProps> = ({ answer }) => {
   );
 };
 
-const animationVariant = {
-  variants: {
-    enter: {
-      y: 0,
-      opacity: 1,
-      height: 'auto',
-      transition: {
-        height: {
-          type: 'spring',
-          stiffness: 500,
-          damping: 30,
-          duration: 1,
-        },
-        opacity: {
-          easings: 'ease',
-          duration: 1,
-        },
+const accordionVariants: Variants = {
+  enter: {
+    y: 0,
+    opacity: 1,
+    height: 'auto',
+    transition: {
+      height: {
+        type: 'spring',
+        stiffness: 500,
+        damping: 30,
+        duration: 1,
+      },
+      opacity: {
+        ease: 'easeOut',
+        duration: 1,
       },
     },
-    exit: {
-      y: -10,
-      opacity: 0,
-      height: 0,
-      transition: {
-        height: {
-          easings: 'ease',
-          duration: 0.25,
-        },
-        opacity: {
-          easings: 'ease',
-          duration: 0.3,
-        },
+  },
+  exit: {
+    y: -10,
+    opacity: 0,
+    height: 0,
+    transition: {
+      height: {
+        ease: 'easeOut',
+        duration: 0.25,
+      },
+      opacity: {
+        ease: 'easeOut',
+        duration: 0.3,
       },
     },
   },
 };
+
 
 export default PostAnswer;
