@@ -1,7 +1,7 @@
 'use client';
 
 import { BlogPageAnswerProps } from '@/api/interfaces/blogPost';
-import { Accordion, AccordionItem } from "@heroui/accordion";
+import { Accordion, AccordionItem } from '@heroui/accordion';
 import { FC } from 'react';
 import PostContentRenderer from '../PostContentRenderer/PostContentRenderer';
 import PostContentImage from '../PostContentImage/PostContentImage';
@@ -21,7 +21,9 @@ const PostAnswer: FC<PostAnswerProps> = ({ answer }) => {
     <div className="w-full md:px-11">
       <Accordion
         variant="bordered"
-        motionProps={accordionVariants}
+        motionProps={{
+          variants: accordionVariants,
+        }}
         className="w-full border-[#cc3266]"
       >
         <AccordionItem
@@ -81,6 +83,5 @@ const accordionVariants: Variants = {
     },
   },
 };
-
 
 export default PostAnswer;
