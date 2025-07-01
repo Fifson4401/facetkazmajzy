@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss';
-const {heroui} = require("@heroui/react");
+const plugin = require('tailwindcss/plugin');
+const { heroui } = require('@heroui/react');
+import { type PluginAPI } from 'tailwindcss/types/config';
 
 const config: Config = {
   content: [
@@ -7,7 +9,7 @@ const config: Config = {
     './src/core/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    "./node_modules/@heroui/theme/dist/components/(link|button|input|image|chip|card|pagination|spacer|navbar|accordion|divider).js",
+    './node_modules/@heroui/react/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -15,34 +17,14 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-      fontSize: {
-        xs: ['0.75rem', '1rem'],
-        sm: ['0.875rem', '1.25rem'],
-        base: ['1rem', '1.5rem'],
-        lg: ['1.125rem', '1.75rem'],
-        xl: ['1.25rem', '1.75rem'],
-      },
-      spacing: {
-        '4': '1rem',
-        '8': '2rem',
-        '12': '3rem',
-        '16': '4rem',
-        '20': '5rem',
-        '24': '6rem',
-        '28': '7rem',
-        '32': '8rem',
+        'progress-gradient':
+          'linear-gradient(90deg, rgba(255,192,203,1) 0%, rgba(255,105,180,1) 25%, rgba(219,112,147,1) 50%, rgba(128,0,128,1) 75%, rgba(255,192,203,1) 100%)',
       },
       keyframes: {
-        progressColors: {
-          '0%': { backgroundColor: 'rgba(255, 192, 203)' }, // Light Pink
-          '16.66%': { backgroundColor: 'rgba(255, 174, 185)' }, // Lighter Hot Pink
-          '33.33%': { backgroundColor: 'rgba(255, 105, 180)' }, // Hot Pink
-          '50%': { backgroundColor: 'rgba(255, 85, 170)' }, // Deeper Pink
-          '66.66%': { backgroundColor: 'rgba(219, 112, 147)' }, // Pale Violet Red
-          '83.33%': { backgroundColor: 'rgba(221, 160, 221)' }, // Plum
-          '91.66%': { backgroundColor: 'rgba(128, 0, 128)' }, // Purple
-          '100%': { backgroundColor: 'rgba(255, 192, 203)' }, // Smooth transition back to Light Pink
+        moveGradient: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
         },
         fadeInUp: {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
@@ -54,7 +36,7 @@ const config: Config = {
         },
       },
       animation: {
-        'progress-bar': 'progressColors 10s linear infinite',
+        'progress-bar': 'moveGradient 10s ease-in-out infinite',
         fadeInUp: 'fadeInUp 0.5s forwards',
         fadeOutDown: 'fadeOutDown 0.5s forwards',
       },
@@ -63,25 +45,73 @@ const config: Config = {
   darkMode: 'class',
   plugins: [
     heroui({
-      prefix: 'nextui', // prefix for themes variables
-      addCommonColors: false, // override common colors (e.g. "blue", "green", "pink").
-      defaultTheme: 'light', // default theme from the themes object
-      defaultExtendTheme: 'light', // default theme to extend on custom themes
-      layout: {}, // common layout tokens (applied to all themes)
+      prefix: 'hero',
+      addCommonColors: false,
+      defaultTheme: 'light',
+      defaultExtendTheme: 'light',
+      layout: {},
       themes: {
         light: {
-          layout: {}, // light theme layout tokens
+          layout: {},
           colors: {
             background: '#f7ede2',
             foreground: '#222222',
-          }, // light theme colors
+          },
         },
         dark: {
-          layout: {}, // dark theme layout tokens
-          colors: {}, // dark theme colors
+          layout: {},
+          colors: {
+            background: '#222222',
+            foreground: '#f7ede2',
+          },
         },
-        // ... custom themes
       },
+    }),
+    // NOWA WTYCZKA DO TŁA W KRATKĘ
+    plugin(function ({ addUtilities, theme }: PluginAPI) {
+      addUtilities({
+        '.bg-graph-paper': {
+          'background-image': `
+        linear-gradient(${theme('colors.red.500')}, ${theme('colors.red.500')}),
+        linear-gradient(to bottom, ${theme('colors.slate.200')} 1px, transparent 1px),
+        linear-gradient(to right, ${theme('colors.slate.200')} 1px, transparent 1px),
+        linear-gradient(${theme('colors.white')}, ${theme('colors.white')})
+      `,
+          'background-size': '2px 100%, 0.75rem 0.75rem, 0.75rem 0.75rem, auto',
+          'background-position':
+            'calc(100% - 3rem) center, center, calc(100% - 3rem) center, center',
+          'background-repeat': 'no-repeat, repeat, repeat, no-repeat',
+        },
+        '@screen sm': {
+          '.bg-graph-paper': {
+            'background-size':
+              '2px 100%, 0.85rem 0.85rem, 0.85rem 0.85rem, auto',
+            'background-position':
+              'calc(100% - 5rem) center, center, calc(100% - 5rem) center, center',
+          },
+        },
+        '@screen md': {
+          '.bg-graph-paper': {
+            'background-size': '2px 100%, 1rem 1rem, 1rem 1rem, auto',
+            'background-position':
+              'calc(100% - 6.5rem) center, center, calc(100% - 6.5rem) center, center',
+          },
+        },
+        '@screen lg': {
+          '.bg-graph-paper': {
+            'background-size': '2px 100%, 1.2rem 1.2rem, 1.2rem 1.2rem, auto',
+            'background-position':
+              'calc(100% - 8rem) center, center, calc(100% - 8rem) center, center',
+          },
+        },
+        '@screen 2xl': {
+          '.bg-graph-paper': {
+            'background-size': '2px 100%, 1.5rem 1.5rem, 1.5rem 1.5rem, auto',
+            'background-position':
+              'calc(100% - 10rem) center, center, calc(100% - 10rem) center, center',
+          },
+        },
+      });
     }),
   ],
 };

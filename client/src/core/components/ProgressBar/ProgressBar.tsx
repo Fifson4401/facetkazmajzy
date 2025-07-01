@@ -69,8 +69,8 @@ const ProgressBar = () => {
     <>
       <div
         id="progress-bar"
-        style={{ width: '0%' }} // Ustawienie początkowej szerokości na 0%
-        className="fixed -top-0 left-0 z-50 h-1.5 animate-progress-bar bg-transparent shadow-lg"
+        style={{ width: '0%' }}
+        className="bg-progress-gradient fixed -top-0 left-0 z-50 h-1.5 animate-progress-bar bg-[length:400%_400%] shadow-lg"
       ></div>
       <ScrollToTop />
     </>

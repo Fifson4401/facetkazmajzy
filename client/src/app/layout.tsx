@@ -25,10 +25,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" className="light">
-      <body className={`${golos.className} bg-background text-foreground`}>
-        <ErrorBoundary>
-          <Providers>{children}</Providers>
-        </ErrorBoundary>
+      <body className={golos.className}>
+        <div className="relative isolate min-h-screen">
+          <div className="absolute inset-0 -z-10 bg-graph-paper"></div>
+           <ErrorBoundary>
+            <Providers>{children}</Providers>
+          </ErrorBoundary>
+        </div>
       </body>
     </html>
   );
