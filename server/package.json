@@ -16,9 +16,9 @@
   },
   "dependencies": {
     "@eslint/config-array": "^0.18.0",
-    "@strapi/plugin-i18n": "4.25.22",
+    "@strapi/plugin-i18n": "5.17.0",
     "@strapi/plugin-seo": "^1.9.9",
-    "@strapi/plugin-users-permissions": "4.25.22",
+    "@strapi/plugin-users-permissions": "5.17.0",
     "@strapi/strapi": "^4.25.22",
     "pg": "^8.12.0",
     "react": "^18.0.0",
