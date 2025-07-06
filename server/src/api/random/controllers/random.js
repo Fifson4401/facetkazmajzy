@@ -21,7 +21,7 @@ module.exports = createCoreController('api::random.random', ({ strapi }) => ({
         filters.slug = { $ne: slug };
       }
 
-      const count = await strapi.entityService.count('api::blog-post.blog-post', {
+      const count = await strapi.documents('api::blog-post.blog-post').count({
         filters,
       });
 
@@ -31,7 +31,7 @@ module.exports = createCoreController('api::random.random', ({ strapi }) => ({
 
       const randomOffset = Math.floor(Math.random() * count);
 
-      const [randomPost] = await strapi.entityService.findMany('api::blog-post.blog-post', {
+      const [randomPost] = await strapi.documents('api::blog-post.blog-post').findMany({
         filters,
         fields: ['slug'],
         start: randomOffset,

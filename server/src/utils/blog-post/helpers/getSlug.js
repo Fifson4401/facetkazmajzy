@@ -75,16 +75,13 @@ async function ensureUniqueSlug(slug, currentId = null) {
   let counter = 1;
 
   while (true) {
-    const existingEntries = await strapi.entityService.findMany(
-      'api::blog-post.blog-post',
-      {
-        filters: {
-          slug: uniqueSlug,
-          ...(currentId ? { id: { $ne: currentId } } : {}),
-        },
-        fields: ['id'],
-      }
-    );
+    const existingEntries = await strapi.documents('api::blog-post.blog-post').findMany({
+      filters: {
+        slug: uniqueSlug,
+        ...(currentId ? { id: { $ne: currentId } } : {}),
+      },
+      fields: ['id'],
+    });
 
     if (existingEntries.length === 0) {
       break;
