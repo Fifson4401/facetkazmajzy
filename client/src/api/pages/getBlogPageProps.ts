@@ -48,10 +48,6 @@ function isBlogPageAttributes(data: any): data is BlogPageAttributes {
 
 const populate = {
   search: {
-    populate: {
-      image: {
-        populate: '*',
-      },
-    },
+    populate: '*'
   },
 };

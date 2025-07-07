@@ -17,15 +17,15 @@ export const CustomJson: FC<CustomJsonProps> = ({ data }) => {
         const idLabel = `structured-data_${item['@type'] ?? ''}_${item.name ?? ''}_${index}`;
 
         return (
-          <Script
+            <Script
             id={idLabel}
             key={`${idLabel}_${index}`}
             type="application/ld+json"
-            strategy="beforeInteractive"
+            strategy="afterInteractive"
             defer={true}
-          >
+            >
             {`${JSON.stringify(item)}`}
-          </Script>
+            </Script>
         );
       })}
     </>

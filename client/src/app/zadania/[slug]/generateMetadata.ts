@@ -3,15 +3,16 @@ import { SeoInstance } from '@/core/components/SEO/SeoInstance';
 import { Metadata } from 'next';
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
-    const { pageData } = await getBlogPostPageProps(params.slug);
+    const { slug } = await params;
+    const { pageData } = await getBlogPostPageProps(slug);
 
     if (!pageData?.seo) {
-      throw new Error(`No seo component in Blog Post slug: ${params.slug}`);
+      throw new Error(`No seo component in Blog Post slug: ${slug}`);
     }
 
     const instance = new SeoInstance(pageData.seo);
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: instance.openGraph.images,
       },
       alternates: {
-        canonical: `/zadania/${params.slug}`,
+        canonical: `/zadania/${slug}`,
       },
       keywords: instance.keywords,
       robots: instance.robots,
@@ -34,13 +35,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   } catch (error) {
+    const { slug } = await params;
     console.error('Error generating metadata:', error);
     return {
       title: 'Zadanie | Korepetycje z matematyki',
       description:
         'Skontaktuj się z Facetką z Majzy w sprawie korepetycji z matematyki.',
       alternates: {
-        canonical: `/zadania/${params.slug}`,
+        canonical: `/zadania/${slug}`,
       },
     };
   }
