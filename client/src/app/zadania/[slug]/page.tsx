@@ -10,7 +10,7 @@ import { Seo } from '@/core/components/SEO/SEO';
 import { notFound } from 'next/navigation';
 
 interface BlogPostPageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export const revalidate = 3600;
@@ -19,7 +19,7 @@ export { /* @next-codemod-error `generateMetadata` export is re-exported. Check 
 generateMetadata } from './generateMetadata';
 
 export default async function BlogPost(props: BlogPostPageProps) {
-  const params = await props.params;
+  const params = props.params;
   const { pageData } = await getBlogPostPageProps(params.slug);
 
   if (!pageData) {
