@@ -58,7 +58,7 @@ function calculateCurrentCategoryIds(existingCategoryIds, categoryConnect, categ
 
 async function fetchBlogEntry(id) {
   return await strapi.documents('api::blog-post.blog-post').findOne({
-    documentId: "__TODO__",
+    documentId: id,
     populate: ['category', 'tags']
   });
 }

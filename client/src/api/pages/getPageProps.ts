@@ -57,8 +57,11 @@ export const getHeaderMenuProps = async (): Promise<{ menu: MenuArray }> => {
   try {
     const query = qs.stringify({
       populate: {
-        category: { populate: '*' },
-        menuItems: { populate: '*' },
+        menuItems: {
+          populate: {
+            category: { populate: '*' },
+          },
+        },
         populate: '*',
       },
       filters: {
@@ -71,7 +74,9 @@ export const getHeaderMenuProps = async (): Promise<{ menu: MenuArray }> => {
     const { data: menu } = await client.get<MenuArray>(`/api/menus?${query}`);
 
     return { menu };
-  } catch {
+  } catch (error) {
+    console.log(error);
+
     return { menu: { data: [], meta: {} } };
   }
 };
