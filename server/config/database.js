@@ -1,14 +1,21 @@
-module.exports = ({ env }) => ({
-  connection: {
-    client: 'postgres',
+module.exports = ({ env }) => {
+  const client = env('DATABASE_CLIENT', 'postgres');
+  const host = env('DATABASE_HOST', '127.0.0.1');
+
+  return {
     connection: {
-      host: 'pgsql62.mydevil.net',
-      port: 5432,
-      database: 'p1176_facetkadb',
-      user: 'p1176_facetkadb',
-      password: '~mYza5R3RT1m1fE8jAbtc^C2#11b1W', // <--- WAŻNE!
-      ssl: false,
+      client,
+      connection: {
+        host,
+        port: env.int('DATABASE_PORT', 5432),
+        database: env('DATABASE_NAME', 'strapi'),
+        user: env('DATABASE_USERNAME', 'strapi'),
+        password: env('DATABASE_PASSWORD', 'strapi'),
+        ssl: {
+          rejectUnauthorized: env.bool('DATABASE_SSL_SELF', false),
+        },
+      },
+      debug: false,
     },
-    debug: false,
-  },
-});
+  };
+};
