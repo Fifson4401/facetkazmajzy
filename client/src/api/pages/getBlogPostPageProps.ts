@@ -35,18 +35,10 @@ function isBlogPostPageProps(data: any): data is BlogSlugPageAttributes {
 const populate = {
   fields: ['title', 'description'],
   content: {
-    populate: {
-      image: {
-        populate: '*',
-      },
-    },
+    populate: '*',
   },
   answer: {
-    populate: {
-      image: {
-        populate: '*',
-      },
-    },
+    populate: '*',
   },
   source: {
     populate: '*',
@@ -54,11 +46,7 @@ const populate = {
   video: {
     populate: '*',
   },
-  category: { populate: { name: { populate: '*' } } },
-  sub_category: { populate: { name: { populate: '*' } } },
-  tags: {
-    populate: {
-      name: { populate: '*' },
-    },
-  },
+  category: { populate: '*' },
+  sub_category: { populate: '*' },
+  tags: { populate: '*' },
 };

@@ -30,12 +30,10 @@ export const getBlogPosts = cache(
         {
           fields: ['slug', 'title', 'description'],
           populate: {
-            category: { populate: { name: { populate: '*' } } },
-            sub_category: { populate: { name: { populate: '*' } } },
+            category: { populate: '*' },
+            sub_category: { populate: '*' },
             tags: {
-              populate: {
-                name: { populate: '*' },
-              },
+               populate: '*' 
             },
           },
           pagination: {
