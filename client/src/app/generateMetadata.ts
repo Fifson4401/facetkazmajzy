@@ -1,34 +1,30 @@
 import { getHomePageProps } from '@/api/pages/getHomePageProps';
 import { SeoInstance } from '@/core/components/SEO/SeoInstance';
-import { ImageInstance } from '@/core/models/ImageInstance';
 import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
     const { pageData } = await getHomePageProps();
 
-    if (!pageData?.seo) {
-      throw new Error('No seo component in Home page data');
+    if (!pageData) {
+      throw new Error('No pageData found for Home page');
     }
 
-    const instance = new SeoInstance(pageData.seo);
-    const image = pageData.hero.image.data?.attributes
-      ? new ImageInstance(pageData.hero.image.data?.attributes)
-      : null;
+    const instance = pageData.seo ? new SeoInstance(pageData.seo) : null;
 
     return {
-      title: instance.title,
-      description: instance.description,
+      title: instance?.title ?? 'Strona Główna | Korepetycje z matematyki',
+      description: instance?.description ?? 'Skontaktuj się z Facetką z Majzy w sprawie korepetycji z matematyki.',
       openGraph: {
-        title: instance.openGraph.title,
-        description: instance.openGraph.description,
-        images: instance.openGraph.images,
+        title: instance?.openGraph?.title ?? instance?.title ?? 'Strona Główna',
+        description: instance?.openGraph?.description ?? instance?.description ?? 'Skontaktuj się...',
+        images: instance?.openGraph?.images ?? [],
       },
       alternates: {
         canonical: '/',
       },
-      keywords: instance.keywords,
-      robots: instance.robots,
+      keywords: instance?.keywords,
+      robots: instance?.robots,
       other: {
         type: '',
       },
@@ -49,8 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
     console.error('Error generating metadata:', error);
     return {
       title: 'Strona Główna | Korepetycje z matematyki',
-      description:
-        'Skontaktuj się z Facetką z Majzy w sprawie korepetycji z matematyki.',
+      description: 'Skontaktuj się z Facetką z Majzy w sprawie korepetycji z matematyki.',
       alternates: {
         canonical: '/',
       },

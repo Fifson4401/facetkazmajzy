@@ -57,20 +57,21 @@ function calculateCurrentCategoryIds(existingCategoryIds, categoryConnect, categ
 }
 
 async function fetchBlogEntry(id) {
-  return await strapi.entityService.findOne('api::blog-post.blog-post', id, {
-    populate: ['category', 'tags'],
+  return await strapi.documents('api::blog-post.blog-post').findOne({
+    documentId: id,
+    populate: ['category', 'tags']
   });
 }
 
 async function fetchCategories(categoryIds) {
-  return await strapi.entityService.findMany("api::category.category", {
+  return await strapi.documents("api::category.category").findMany({
     filters: { id: { $in: categoryIds } },
     fields: ["name"],
   });
 }
 
 async function fetchTags(tagIds) {
-  return await strapi.entityService.findMany("api::tag.tag", {
+  return await strapi.documents("api::tag.tag").findMany({
     filters: { id: { $in: tagIds } },
     fields: ["name"],
   });

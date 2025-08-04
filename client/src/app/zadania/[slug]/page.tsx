@@ -15,12 +15,11 @@ interface BlogPostPageProps {
 
 export const revalidate = 3600;
 
-export { /* @next-codemod-error `generateMetadata` export is re-exported. Check if this component uses `params` or `searchParams`*/
-generateMetadata } from './generateMetadata';
+export { generateMetadata } from './generateMetadata';
 
-export default async function BlogPost(props: BlogPostPageProps) {
-  const params = await props.params;
-  const { pageData } = await getBlogPostPageProps(params.slug);
+export default async function BlogPost({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const { pageData } = await getBlogPostPageProps(slug);
 
   if (!pageData) {
     notFound();
@@ -32,7 +31,6 @@ export default async function BlogPost(props: BlogPostPageProps) {
     category,
     sub_category,
     tags,
-    slug,
     content,
     answer,
     source,
@@ -48,7 +46,7 @@ export default async function BlogPost(props: BlogPostPageProps) {
         category={category}
         sub_category={sub_category}
         tags={tags}
-        slug={slug}
+        slug={pageData.slug}
       />
       <PostContent content={content || []} />
       <PostAnswer answer={answer} />

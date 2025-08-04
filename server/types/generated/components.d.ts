@@ -1,6 +1,6 @@
-import type { Attribute, Schema } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface BlogPostAnswer extends Schema.Component {
+export interface BlogPostAnswer extends Struct.ComponentSchema {
   collectionName: 'components_blog_post_answers';
   info: {
     description: '';
@@ -8,12 +8,12 @@ export interface BlogPostAnswer extends Schema.Component {
     icon: 'lightbulb';
   };
   attributes: {
-    image: Attribute.Component<'blog-post.image'>;
-    TEX: Attribute.Text & Attribute.Required;
+    image: Schema.Attribute.Component<'blog-post.image', false>;
+    TEX: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
-export interface BlogPostImage extends Schema.Component {
+export interface BlogPostImage extends Struct.ComponentSchema {
   collectionName: 'components_blog_post_images';
   info: {
     description: '';
@@ -21,14 +21,14 @@ export interface BlogPostImage extends Schema.Component {
     icon: 'landscape';
   };
   attributes: {
-    image: Attribute.Media<'images' | 'files'>;
-    type: Attribute.Enumeration<['image']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'image'>;
+    image: Schema.Attribute.Media<'images' | 'files'>;
+    type: Schema.Attribute.Enumeration<['image']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'image'>;
   };
 }
 
-export interface BlogPostSource extends Schema.Component {
+export interface BlogPostSource extends Struct.ComponentSchema {
   collectionName: 'components_blog_post_sources';
   info: {
     description: '';
@@ -36,20 +36,20 @@ export interface BlogPostSource extends Schema.Component {
     icon: 'oneWay';
   };
   attributes: {
-    text: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'\u0179r\u00F3d\u0142o:'>;
-    url: Attribute.Enumeration<
+    text: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'\u0179r\u00F3d\u0142o:'>;
+    url: Schema.Attribute.Enumeration<
       [
         'https://cke.gov.pl/egzamin-osmoklasisty/arkusze/',
         'https://cke.gov.pl/egzamin-maturalny/egzamin-maturalny-w-formule-2015/arkusze/',
-        'https://cke.gov.pl/egzamin-maturalny/egzamin-w-starej-formule/arkusze/'
+        'https://cke.gov.pl/egzamin-maturalny/egzamin-w-starej-formule/arkusze/',
       ]
     >;
   };
 }
 
-export interface BlogPostTex extends Schema.Component {
+export interface BlogPostTex extends Struct.ComponentSchema {
   collectionName: 'components_blog_post_texes';
   info: {
     description: '';
@@ -57,76 +57,76 @@ export interface BlogPostTex extends Schema.Component {
     icon: 'feather';
   };
   attributes: {
-    TEX: Attribute.Text;
-    type: Attribute.Enumeration<['tex']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'tex'>;
+    TEX: Schema.Attribute.Text;
+    type: Schema.Attribute.Enumeration<['tex']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'tex'>;
   };
 }
 
-export interface BlogPostVideo extends Schema.Component {
+export interface BlogPostVideo extends Struct.ComponentSchema {
   collectionName: 'components_blog_post_videos';
   info: {
     description: '';
     displayName: 'video';
   };
   attributes: {
-    embedURL: Attribute.String & Attribute.Required;
-    title: Attribute.String &
-      Attribute.DefaultTo<'Hej! Mo\u017Ce rozwi\u0105\u017Cemy to razem?'>;
+    embedURL: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Hej! Mo\u017Ce rozwi\u0105\u017Cemy to razem?'>;
   };
 }
 
-export interface ContactPageContactInfo extends Schema.Component {
+export interface ContactPageContactInfo extends Struct.ComponentSchema {
   collectionName: 'components_contact_page_contact_infos';
   info: {
     description: '';
     displayName: 'ContactInfo';
   };
   attributes: {
-    contactItem: Attribute.Component<'contact-page.contact-item', true>;
-    mapUrl: Attribute.Text;
+    contactItem: Schema.Attribute.Component<'contact-page.contact-item', true>;
+    mapUrl: Schema.Attribute.Text;
   };
 }
 
-export interface ContactPageContactItem extends Schema.Component {
+export interface ContactPageContactItem extends Struct.ComponentSchema {
   collectionName: 'components_contact_page_contact_items';
   info: {
     description: '';
     displayName: 'ContactItem';
   };
   attributes: {
-    description: Attribute.Text;
-    title: Attribute.String;
-    type: Attribute.Enumeration<['hours', 'email', 'phone']> &
-      Attribute.Required;
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['hours', 'email', 'phone']> &
+      Schema.Attribute.Required;
   };
 }
 
-export interface ContactPagePetItem extends Schema.Component {
+export interface ContactPagePetItem extends Struct.ComponentSchema {
   collectionName: 'components_contact_page_pet_items';
   info: {
     displayName: 'PetItem';
   };
   attributes: {
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    text: Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    text: Schema.Attribute.String;
   };
 }
 
-export interface ContactPagePets extends Schema.Component {
+export interface ContactPagePets extends Struct.ComponentSchema {
   collectionName: 'components_contact_page_pets';
   info: {
     description: '';
     displayName: 'Pets';
   };
   attributes: {
-    petItems: Attribute.Component<'contact-page.pet-item', true>;
-    title: Attribute.String;
+    petItems: Schema.Attribute.Component<'contact-page.pet-item', true>;
+    title: Schema.Attribute.String;
   };
 }
 
-export interface ContactPageSocialLinks extends Schema.Component {
+export interface ContactPageSocialLinks extends Struct.ComponentSchema {
   collectionName: 'components_contact_page_social_links';
   info: {
     description: '';
@@ -134,22 +134,22 @@ export interface ContactPageSocialLinks extends Schema.Component {
     icon: 'cursor';
   };
   attributes: {
-    facebookUrl: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'https://www.facebook.com/profile.php?id=100095406271152'>;
-    instaUrl: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'https://www.instagram.com/facetkazmajzy?igsh=MXdoMzRhYTc0ZjJuZg=='>;
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Sprawd\u017A moje linki tutaj!'>;
-    youtubeUrl: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'https://www.youtube.com/@Facetkazmajzy'>;
+    facebookUrl: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'https://www.facebook.com/profile.php?id=100095406271152'>;
+    instaUrl: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'https://www.instagram.com/facetkazmajzy?igsh=MXdoMzRhYTc0ZjJuZg=='>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Sprawd\u017A moje linki tutaj!'>;
+    youtubeUrl: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'https://www.youtube.com/@Facetkazmajzy'>;
   };
 }
 
-export interface MenuMenuItem extends Schema.Component {
+export interface MenuMenuItem extends Struct.ComponentSchema {
   collectionName: 'components_menu_menu_items';
   info: {
     description: '';
@@ -157,17 +157,13 @@ export interface MenuMenuItem extends Schema.Component {
     icon: 'bulletList';
   };
   attributes: {
-    category: Attribute.Relation<
-      'menu.menu-item',
-      'oneToOne',
-      'api::category.category'
-    >;
-    text: Attribute.String & Attribute.Required;
-    url: Attribute.String;
+    category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String;
   };
 }
 
-export interface SharedButton extends Schema.Component {
+export interface SharedButton extends Struct.ComponentSchema {
   collectionName: 'components_shared_buttons';
   info: {
     description: '';
@@ -175,16 +171,16 @@ export interface SharedButton extends Schema.Component {
     icon: 'server';
   };
   attributes: {
-    text: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Po prostu zadzwo\u0144!'>;
-    url: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'#contactSection'>;
+    text: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Po prostu zadzwo\u0144!'>;
+    url: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'#contactSection'>;
   };
 }
 
-export interface SharedHero extends Schema.Component {
+export interface SharedHero extends Struct.ComponentSchema {
   collectionName: 'components_shared_heroes';
   info: {
     description: '';
@@ -192,41 +188,41 @@ export interface SharedHero extends Schema.Component {
     icon: 'layout';
   };
   attributes: {
-    button: Attribute.Component<'shared.button'>;
-    description: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Nie czekaj, RAZEM damy rad\u0119!'>;
-    image: Attribute.Media<'images'> & Attribute.Required;
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Test \u00F3smoklasisty przyprawia o zawr\u00F3t g\u0142owy? A mo\u017Ce matura ju\u017C za rok, a Ty nie wiesz od czego zacz\u0105\u0107?'>;
+    button: Schema.Attribute.Component<'shared.button', false>;
+    description: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Nie czekaj, RAZEM damy rad\u0119!'>;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Test \u00F3smoklasisty przyprawia o zawr\u00F3t g\u0142owy? A mo\u017Ce matura ju\u017C za rok, a Ty nie wiesz od czego zacz\u0105\u0107?'>;
   };
 }
 
-export interface SharedMetaSocial extends Schema.Component {
+export interface SharedMetaSocial extends Struct.ComponentSchema {
   collectionName: 'components_shared_meta_socials';
   info: {
     displayName: 'metaSocial';
     icon: 'project-diagram';
   };
   attributes: {
-    description: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    description: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         maxLength: 65;
       }>;
-    image: Attribute.Media<'images' | 'files' | 'videos'>;
-    socialNetwork: Attribute.Enumeration<['Facebook', 'Twitter']> &
-      Attribute.Required;
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    socialNetwork: Schema.Attribute.Enumeration<['Facebook', 'Twitter']> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         maxLength: 60;
       }>;
   };
 }
 
-export interface SharedSearch extends Schema.Component {
+export interface SharedSearch extends Struct.ComponentSchema {
   collectionName: 'components_shared_searches';
   info: {
     description: '';
@@ -234,13 +230,13 @@ export interface SharedSearch extends Schema.Component {
     icon: 'search';
   };
   attributes: {
-    placeholder: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Prosz\u0119 podpowiedz bo nic nie wiem...'>;
+    placeholder: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Prosz\u0119 podpowiedz bo nic nie wiem...'>;
   };
 }
 
-export interface SharedSeo extends Schema.Component {
+export interface SharedSeo extends Struct.ComponentSchema {
   collectionName: 'components_shared_seos';
   info: {
     description: '';
@@ -248,34 +244,36 @@ export interface SharedSeo extends Schema.Component {
     icon: 'search';
   };
   attributes: {
-    canonicalURL: Attribute.String & Attribute.DefaultTo<'facetkazmajzy.pl'>;
-    keywords: Attribute.Text;
-    metaDescription: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    canonicalURL: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'facetkazmajzy.pl'>;
+    keywords: Schema.Attribute.Text;
+    metaDescription: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         maxLength: 160;
         minLength: 50;
       }>;
-    metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
-    metaRobots: Attribute.String & Attribute.DefaultTo<'nofollow, noindex'>;
-    metaSocial: Attribute.Component<'shared.meta-social', true>;
-    metaTitle: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
+    metaImage: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    metaRobots: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'nofollow, noindex'>;
+    metaSocial: Schema.Attribute.Component<'shared.meta-social', true>;
+    metaTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
         maxLength: 60;
       }>;
-    metaViewport: Attribute.String &
-      Attribute.DefaultTo<'width=device-width, initial-scale=1'>;
-    shortStructuredQuestion: Attribute.Text;
-    structuredAnswear: Attribute.Text;
-    structuredData: Attribute.JSON;
-    structuredQuestion: Attribute.Text;
+    metaViewport: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'width=device-width, initial-scale=1'>;
+    shortStructuredQuestion: Schema.Attribute.Text;
+    structuredAnswear: Schema.Attribute.Text;
+    structuredData: Schema.Attribute.JSON;
+    structuredQuestion: Schema.Attribute.Text;
   };
 }
 
-declare module '@strapi/types' {
-  export module Shared {
-    export interface Components {
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
       'blog-post.answer': BlogPostAnswer;
       'blog-post.image': BlogPostImage;
       'blog-post.source': BlogPostSource;
