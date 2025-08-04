@@ -1,0 +1,1 @@
+export const PAPER_MAX_WIDTH = '80rem';
