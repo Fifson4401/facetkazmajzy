@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
-import { Golos_Text } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import ErrorBoundary from '@/core/components/ErrorBoundries/ErrorBoundries';
-
-const golos = Golos_Text({ subsets: ['latin'] });
+import { DotGridBackground } from '@/core/components/Background/DotGridBackground';
+import { specialElite, courierPrime } from '@/core/theme/fonts';
 
 export const metadata: Metadata = {
   title: 'Facetka z Majzy',
@@ -25,12 +24,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" className="light">
-      <body className={golos.className}>
-        <div className="relative isolate min-h-screen">
-          <div className="absolute inset-0 -z-10 bg-graph-paper"></div>
-           <ErrorBoundary>
-            <Providers>{children}</Providers>
-          </ErrorBoundary>
+      <body
+        className={`${specialElite.variable} ${courierPrime.variable} font-body`}
+      >
+        <div className="relative min-h-screen w-full bg-hero-background text-hero-foreground">
+          <DotGridBackground />
+          <main className="relative z-10 mx-auto flex min-h-screen max-w-paper flex-col bg-graph-paper px-6 py-16 shadow-xl sm:px-12 md:py-24">
+            <ErrorBoundary>
+              <Providers>{children}</Providers>
+            </ErrorBoundary>
+          </main>
         </div>
       </body>
     </html>
