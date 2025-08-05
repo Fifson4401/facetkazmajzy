@@ -16,8 +16,14 @@ const config: Config = {
   theme: {
     extend: {
       maxWidth: {
-        // ZMIANA: Używamy stałej zamiast statycznej wartości
         paper: PAPER_MAX_WIDTH,
+      },
+      // ZMIANA: Dodajemy nową sekcję fontFamily
+      fontFamily: {
+        // Tworzymy klasę .font-heading
+        heading: ['var(--font-special-elite)', 'sans-serif'],
+        // Tworzymy klasę .font-body
+        body: ['var(--font-courier-prime)', 'monospace'],
       },
     },
   },
