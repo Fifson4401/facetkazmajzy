@@ -1,6 +1,6 @@
 import { getBlogPostPageProps } from '@/api/pages/getBlogPostPageProps';
 import { isProductionEnvironment } from '@/core/analytics';
-import { Layout } from '@/core/components/Layout/Layout';
+import { Layout } from '@/components/layout/Layout/Layout';
 import PostAnswer from '@/core/components/PostAnswer/PostAnswer';
 import { PostContent } from '@/core/components/PostContent/PostContent';
 import PostHeader from '@/core/components/PostHeader/PostHeader';

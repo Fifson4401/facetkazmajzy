@@ -4,7 +4,7 @@ import ContactHero from '@/core/components/ContactHero/ContactHero';
 import ContactInfo from '@/core/components/ContactInfo/ContactInfo';
 import ContactLinks from '@/core/components/ContactLinks/ContactLinks';
 import ContactPetsSlider from '@/core/components/ContactPetsSlider/ContactPetsSlider';
-import { Layout } from '@/core/components/Layout/Layout';
+import { Layout } from '@/components/layout/Layout/Layout';
 import { Seo } from '@/core/components/SEO/SEO';
 import { notFound } from 'next/navigation';
 

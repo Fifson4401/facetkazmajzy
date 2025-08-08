@@ -7,12 +7,10 @@ import { Image } from '@heroui/image';
 import { Suspense } from 'react';
 
 export default async function NotFound() {
-  const { menu } = await getHeaderMenuProps();
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className="flex min-h-screen flex-col justify-between">
-        <Header menu={menu} />
         <main
           lang={'pl'}
           className="flex flex-1 flex-col items-center gap-6 overflow-hidden bg-background p-8 text-foreground light md:gap-10 md:px-14 md:py-8 xl:px-28"

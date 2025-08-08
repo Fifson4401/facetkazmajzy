@@ -6,7 +6,6 @@ import { PAPER_MAX_WIDTH } from '@/core/config/constants';
 
 const paperMaxWidth = PAPER_MAX_WIDTH;
 
-// ZMIANA: Przywrócono stałą DOT_SIZE dla łatwiejszej konfiguracji
 const DOT_SIZE = 4; // Rozmiar kropki w pikselach
 
 export const DotGridBackground = () => {
@@ -32,12 +31,10 @@ export const DotGridBackground = () => {
         className="grid h-full"
       >
         {Array.from({ length: numDots }).map((_, i) => (
-          // Używamy flexboxa do idealnego centrowania kropki w jej komórce
           <motion.div
             key={`dot-${i}`}
             className="flex h-8 w-8 items-center justify-center"
           >
-            {/* ZMIANA: Rozmiar kropki jest teraz kontrolowany przez stałą DOT_SIZE */}
             <div
               className="rounded-full bg-blue-950"
               style={{

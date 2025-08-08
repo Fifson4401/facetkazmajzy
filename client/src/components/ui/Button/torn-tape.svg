@@ -1,0 +1,27 @@
+<svg width="130" height="60" viewBox="0 0 130 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="rough-paper-short" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="2" result="light">
+        <feDistantLight azimuth="45" elevation="60"/>
+      </feDiffuseLighting>
+      <feComposite in="light" in2="SourceAlpha" operator="in" result="textured"/>
+      <feComposite in="SourceGraphic" in2="textured" operator="arithmetic" k1="1" k2="0" k3="0" k4="0"/>
+    </filter>
+  </defs>
+  <path d="M 10 20 
+           L 120 20
+           L 122 28
+           L 119 35
+           L 123 42
+           L 120 50
+           L 10 50
+           L 12 42
+           L 9 35
+           L 11 28
+           Z" 
+        fill="rgb(252, 231, 189)" 
+        stroke="rgb(255, 221, 126)" 
+        stroke-width="0.5"
+        style="filter: url(#rough-paper-short);"/>
+</svg>

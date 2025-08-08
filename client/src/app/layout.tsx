@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from './providers';
 import ErrorBoundary from '@/core/components/ErrorBoundries/ErrorBoundries';
-import { DotGridBackground } from '@/core/components/Background/DotGridBackground';
+import { DotGridBackground } from '@/components/layout/Background/DotGridBackground';
 import { specialElite, courierPrime } from '@/core/theme/fonts';
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default function RootLayout({
       >
         <div className="relative min-h-screen w-full bg-hero-background text-hero-foreground">
           <DotGridBackground />
-          <main className="relative z-10 mx-auto flex min-h-screen max-w-paper flex-col bg-graph-paper px-6 py-16 shadow-xl sm:px-12 md:py-24">
+          <main className="relative z-10 mx-auto flex min-h-screen max-w-paper flex-col bg-graph-paper shadow-xl">
             <ErrorBoundary>
               <Providers>{children}</Providers>
             </ErrorBoundary>

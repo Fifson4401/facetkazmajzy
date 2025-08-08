@@ -2,7 +2,6 @@ import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 import { heroui } from '@heroui/react';
 import { type PluginAPI } from 'tailwindcss/types/config';
-// ZMIANA: Importujemy naszą nową stałą
 import { PAPER_MAX_WIDTH } from './src/core/config/constants';
 
 const config: Config = {
@@ -18,12 +17,18 @@ const config: Config = {
       maxWidth: {
         paper: PAPER_MAX_WIDTH,
       },
-      // ZMIANA: Dodajemy nową sekcję fontFamily
       fontFamily: {
-        // Tworzymy klasę .font-heading
         heading: ['var(--font-special-elite)', 'sans-serif'],
-        // Tworzymy klasę .font-body
         body: ['var(--font-courier-prime)', 'monospace'],
+      },
+      // ROZWIĄZANIE: Definiujemy każdą wartość marginesu osobno.
+      // To jest "bezpieczniejsza" składnia, która unika problemu z Twoim narzędziem budującym.
+      spacing: {
+        'paper-margin': '3rem', // Domyślna wartość
+        'paper-margin-sm': '5rem',
+        'paper-margin-md': '6.5rem',
+        'paper-margin-lg': '8rem',
+        'paper-margin-2xl': '10rem',
       },
     },
   },
@@ -37,7 +42,7 @@ const config: Config = {
         light: {
           colors: {
             background: '#f8fafc',
-            foreground: '#1e293b',
+            foreground: '#000000',
             paper: '#ffffff',
             grid: '#e2e8f0',
             accent: '#ef4444',
@@ -54,59 +59,61 @@ const config: Config = {
         },
       },
     }),
-    plugin(function ({ addUtilities }) {
+    // ZMIANA: Plugin jest teraz dostosowany do nowej struktury spacing.
+    plugin(function ({ addUtilities, theme }: PluginAPI) {
       const paperStyles = {
         '.bg-graph-paper': {
           background: `
-            linear-gradient(#ef4444, #ef4444) no-repeat calc(100% - 3rem) center / 2px 100%,
-            linear-gradient(to right, #e2e8f0 1px, transparent 1px) repeat center / 0.75rem 0.75rem,
-            linear-gradient(to bottom, #e2e8f0 1px, transparent 1px) repeat center / 0.75rem 0.75rem,
-            #fdfdfd
+            linear-gradient(${theme('colors.accent')}, ${theme('colors.accent')}) no-repeat calc(100% - ${theme('spacing.paper-margin')}) center / 2px 100%,
+            linear-gradient(to right, ${theme('colors.grid')} 1px, transparent 1px) repeat center / 0.75rem 0.75rem,
+            linear-gradient(to bottom, ${theme('colors.grid')} 1px, transparent 1px) repeat center / 0.75rem 0.75rem,
+            ${theme('colors.paper')}
           `,
         },
         '@screen sm': {
           '.bg-graph-paper': {
             background: `
-              linear-gradient(#ef4444, #ef4444) no-repeat calc(100% - 5rem) center / 2px 100%,
-              linear-gradient(to right, #e2e8f0 1px, transparent 1px) repeat center / 0.85rem 0.85rem,
-              linear-gradient(to bottom, #e2e8f0 1px, transparent 1px) repeat center / 0.85rem 0.85rem,
-              #fdfdfd
+              linear-gradient(${theme('colors.accent')}, ${theme('colors.accent')}) no-repeat calc(100% - ${theme('spacing.paper-margin-sm')}) center / 2px 100%,
+              linear-gradient(to right, ${theme('colors.grid')} 1px, transparent 1px) repeat center / 0.85rem 0.85rem,
+              linear-gradient(to bottom, ${theme('colors.grid')} 1px, transparent 1px) repeat center / 0.85rem 0.85rem,
+              ${theme('colors.paper')}
             `,
           },
         },
         '@screen md': {
           '.bg-graph-paper': {
             background: `
-              linear-gradient(#ef4444, #ef4444) no-repeat calc(100% - 6.5rem) center / 2px 100%,
-              linear-gradient(to right, #e2e8f0 1px, transparent 1px) repeat center / 1rem 1rem,
-              linear-gradient(to bottom, #e2e8f0 1px, transparent 1px) repeat center / 1rem 1rem,
-              #fdfdfd
+              linear-gradient(${theme('colors.accent')}, ${theme('colors.accent')}) no-repeat calc(100% - ${theme('spacing.paper-margin-md')}) center / 2px 100%,
+              linear-gradient(to right, ${theme('colors.grid')} 1px, transparent 1px) repeat center / 1rem 1rem,
+              linear-gradient(to bottom, ${theme('colors.grid')} 1px, transparent 1px) repeat center / 1rem 1rem,
+              ${theme('colors.paper')}
             `,
           },
         },
         '@screen lg': {
-          '.bg-graph-paper': {
-            background: `
-              linear-gradient(#ef4444, #ef4444) no-repeat calc(100% - 8rem) center / 2px 100%,
-              linear-gradient(to right, #e2e8f0 1px, transparent 1px) repeat center / 1.2rem 1.2rem,
-              linear-gradient(to bottom, #e2e8f0 1px, transparent 1px) repeat center / 1.2rem 1.2rem,
-              #fdfdfd
-            `,
-          },
+            '.bg-graph-paper': {
+              background: `
+                linear-gradient(${theme('colors.accent')}, ${theme('colors.accent')}) no-repeat calc(100% - ${theme('spacing.paper-margin-lg')}) center / 2px 100%,
+                linear-gradient(to right, ${theme('colors.grid')} 1px, transparent 1px) repeat center / 1.2rem 1.2rem,
+                linear-gradient(to bottom, ${theme('colors.grid')} 1px, transparent 1px) repeat center / 1.2rem 1.2rem,
+                ${theme('colors.paper')}
+              `,
+            },
         },
         '@screen 2xl': {
-          '.bg-graph-paper': {
-            background: `
-              linear-gradient(#ef4444, #ef4444) no-repeat calc(100% - 10rem) center / 2px 100%,
-              linear-gradient(to right, #e2e8f0 1px, transparent 1px) repeat center / 1.5rem 1.5rem,
-              linear-gradient(to bottom, #e2e8f0 1px, transparent 1px) repeat center / 1.5rem 1.5rem,
-              #fdfdfd
-            `,
-          },
+            '.bg-graph-paper': {
+              background: `
+                linear-gradient(${theme('colors.accent')}, ${theme('colors.accent')}) no-repeat calc(100% - ${theme('spacing.paper-margin-2xl')}) center / 2px 100%,
+                linear-gradient(to right, ${theme('colors.grid')} 1px, transparent 1px) repeat center / 1.5rem 1.5rem,
+                linear-gradient(to bottom, ${theme('colors.grid')} 1px, transparent 1px) repeat center / 1.5rem 1.5rem,
+                ${theme('colors.paper')}
+              `,
+            },
         },
       };
       addUtilities(paperStyles);
     }),
   ],
 };
+
 export default config;

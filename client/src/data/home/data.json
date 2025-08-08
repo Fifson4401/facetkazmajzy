@@ -1,0 +1,139 @@
+{
+  "homePage": {
+    "sections": [
+      {
+        "type": "hero",
+        "title": "Matma nie musi boleć.",
+        "subtitle": "Baza zadań z rozwiązaniami, sztuczna inteligencja, która ogarnie zadanie ze zdjęcia i korepetycje, które ratują życie. Wszystko, czego potrzebujesz, żeby wreszcie odetchnąć z ulgą.",
+        "cta": [
+          {
+            "text": "Wrzuć zdjęcie",
+            "action": "/upload_image"
+          },
+          {
+            "text": "Sprawdź zadania",
+            "action": "/view_tasks"
+          }
+        ],
+        "images": [
+          {
+            "src": "image_0d03d1.png",
+            "alt": "Tytuł 'Matma nie musi boleć' na kartce w kratkę z doodlami."
+          }
+        ]
+      },
+      {
+        "type": "ai_solver",
+        "title": "Nie wiesz jak to zrobić? Wystarczy zdjęcie",
+        "content": "Zaciąłeś się nad zadaniem? Uczysz się, jak to policzyć, a nie tylko spisujesz bezmyślnie wynik? Zrób zdjęcie telefonem lub wpisz treść zadania, a nasze AI pokaże Ci rozwiązanie krok po kroku.",
+        "cta": {
+          "text": "AI Solver",
+          "action": "/ai_solver"
+        },
+        "images": [
+          {
+            "src": "image_0d0102.png",
+            "alt": "Biało-czarny kot opierający głowę na ramieniu osoby."
+          }
+        ]
+      },
+      {
+        "type": "exam_prep",
+        "title": "Zadania, które są na egzaminie",
+        "content": "Setki zadań z egzaminów ósmoklasisty, matur i naszych autorskich. Od podstawówki po liceum. Przećwicz, sprawdź rozwiązania i idź na test bez stresu. Do wielu zadań znajdziesz też YouTub'a z tłumaczeniem.",
+        "cta": {
+          "text": "Przejdź na YT",
+          "action": "open_youtube"
+        },
+        "images": [
+          {
+            "src": "image_0d03af.png",
+            "alt": "Biało-szary kot z przymrużonymi oczami."
+          }
+        ]
+      },
+      {
+        "type": "tutoring_offer",
+        "title": "Wiemy jak to jest",
+        "content": "Wiemy, że nasza baza zadań i sprytne AI to potężne wsparcie, ale czasami nic nie zastąpi prawdziwego nauczyciela. Jeśli czujesz, że potrzebne jest indywidualne podejście i ktoś, kto pomoże w zaprzyjaźnieniu się z Pitagorasem i Euklidesem, zapisz to na nasze korepetycje.",
+        "cta": {
+          "text": "Dzwonię od razu",
+          "action": "call_us"
+        },
+        "images": [
+          {
+            "src": "image_0cf949.png",
+            "alt": "Kobieta w różowej marynarce trzymająca książkę."
+          }
+        ]
+      },
+      {
+        "type": "how_we_do_it",
+        "title": "Jak to robimy?",
+        "points": [
+          {
+            "heading": "Tłumaczymy aż zrozumiesz:",
+            "items": [
+              "bez oceniania,",
+              "bez pośpiechu",
+              "i z głupimi pytaniami."
+            ]
+          },
+          {
+            "heading": "Realne wyniki:",
+            "items": [
+              "popraw oceny,",
+              "zdaj egzamin",
+              "i odzyskaj wiarę w siebie."
+            ]
+          }
+        ],
+        "cta": {
+          "text": "Umów się na lekcję",
+          "action": "/schedule_lesson"
+        },
+        "images": [
+          {
+            "src": "image_0cf969.png",
+            "alt": "Rysunki ludzików i kwiatków na kartce w kratkę."
+          }
+        ]
+      },
+      {
+        "type": "student_benefits",
+        "title": "Dobra, ale po co mi to?",
+        "benefits": [
+          {
+            "text": "Żeby matma przestała być lekcją grozy.",
+            "icon": "heart"
+          },
+          {
+            "text": "Żebyś wbił/a na lekcje i wreszcie wiedział/a, co się dzieje.",
+            "icon": "heart"
+          },
+          {
+            "text": "Żeby poczuć tę satysfakcję, gdy zadanie w końcu wyjdzie!",
+            "icon": "heart"
+          }
+        ],
+        "images": [
+          {
+            "src": "image_0cf904.png",
+            "alt": "Osoba z kotem na ramieniu."
+          }
+        ]
+      },
+      {
+        "type": "parent_section",
+        "title": "Chwila dla rodzica",
+        "content": "Z rodziną najlepiej na zdjęciach. Pamiętacie, jak to było uczyć się z rodzicami do sprawdzianu z matmy? No właśnie. Płacz pisk i zgrzytane zębami. Dlatego chętnie zdejmiemy z Was część tego obowiązku i pomożemy Waszemu dziecku poczuć się pewniej z liczbami, żeby próby hakowania e-dziennika nie były już potrzebne.",
+        "images": [
+          {
+            "src": "image_0cf925.png",
+            "alt": "Osoba z kotem i rysunek radiowozu."
+          }
+        ]
+      }
+    ]
+  }
+}
