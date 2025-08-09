@@ -1,0 +1,17 @@
+<svg viewBox="0 0 173 30" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="rough-paper-long-v3" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/>
+      <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="2" result="light">
+        <feDistantLight azimuth="45" elevation="60"/>
+      </feDiffuseLighting>
+      <feComposite in="light" in2="SourceAlpha" operator="in" result="textured"/>
+      <feComposite in="SourceGraphic" in2="textured" operator="arithmetic" k1="1" k2="0" k3="0" k4="0"/>
+    </filter>
+  </defs>
+  <path d="M 3 0 L 168 0 L 165 8 L 173 15 L 167 22 L 168 30 L 3 30 L 0 22 L 8 15 L 2 8 Z"
+        fill="rgb(252, 231, 189)" 
+        stroke="rgb(255, 221, 126)" 
+        stroke-width="0.5"
+        style="filter: url(#rough-paper-long-v3);"/>
+</svg>

@@ -1,5 +1,3 @@
-// src/components/Highlight.tsx
-
 import React from 'react';
 import { clsx } from 'clsx';
 
@@ -9,7 +7,7 @@ interface HighlightProps {
   color?: string;
 }
 
-export const Highlight = ({
+const Highlight = ({
   children,
   className,
   color = '#FF99CC', 

@@ -3,14 +3,15 @@ import Image from 'next/image';
 
 export type Doodle = {
   src: string;
-  width: number;
-  height: number;
+  width: number | string; 
+  height?: number | string; 
   top?: string | number;
   left?: string | number;
   right?: string | number;
   bottom?: string | number;
   rotate?: number;
   scale?: number;
+  aspectRatio?: string;
 };
 
 type DoodleContainerProps = {
@@ -38,6 +39,7 @@ const DoodleContainer: React.FC<DoodleContainerProps> = ({
             height: doodle.height,
             transform: `rotate(${doodle.rotate || 0}deg) scale(${doodle.scale || 1})`,
             pointerEvents: 'none',
+            aspectRatio: doodle.aspectRatio || 'auto',
           }}
         >
           <Image

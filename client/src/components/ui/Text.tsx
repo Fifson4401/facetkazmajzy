@@ -17,7 +17,7 @@ const sizeStyles: Record<TextSize, string> = {
   xl: 'text-xl lg:text-2xl',
 };
 
-export const Text = ({
+const Text = ({
   as: Component = 'p',
   size = 'base',
   className,
@@ -36,3 +36,5 @@ export const Text = ({
     </Component>
   );
 };
+
+export default Text;
