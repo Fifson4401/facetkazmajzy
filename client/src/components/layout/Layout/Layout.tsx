@@ -14,12 +14,14 @@ export const Layout: FC<LayoutProps> = ({ children }) => (
     <div className="flex min-h-screen flex-col">
       <ProgressBar />
       
-      <div className="flex-grow p-8 md:p-12 
+      <div className="relative flex-grow p-8 md:p-12 
         pr-paper-margin 
         sm:pr-paper-margin-sm 
         md:pr-paper-margin-md 
         lg:pr-paper-margin-lg 
-        2xl:pr-paper-margin-2xl"
+        2xl:pr-paper-margin-2xl 
+        overflow-hidden
+        "
       >
         {children}
       </div>

@@ -73,3 +73,90 @@
     @apply relative inline-flex items-center justify-center border-none bg-transparent font-heading text-lg text-neutral-800 transition-transform duration-150 ease-out hover:scale-105 active:scale-95 md:text-2xl lg:text-3xl;
   }
 }
+
+.doodle {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+
+  --rotate-base: var(--doodle-rotate-base, 0);
+  --rotate-sm: var(--doodle-rotate-sm, var(--rotate-base));
+  --rotate-md: var(--doodle-rotate-md, var(--rotate-sm, var(--rotate-base)));
+  --scale-base: var(--doodle-scale-base, 1);
+  --scale-sm: var(--doodle-scale-sm, var(--scale-base));
+  --scale-md: var(--doodle-scale-md, var(--scale-sm, var(--scale-base)));
+
+  width: var(--doodle-width-base);
+  height: var(--doodle-height-base);
+  top: var(--doodle-top-base);
+  right: var(--doodle-right-base);
+  bottom: var(--doodle-bottom-base);
+  left: var(--doodle-left-base);
+  transform: rotate(calc(var(--rotate-base) * 1deg)) scale(var(--scale-base));
+}
+
+@media (min-width: 640px) {
+  .doodle {
+    width: var(--doodle-width-sm, var(--doodle-width-base));
+    height: var(--doodle-height-sm, var(--doodle-height-base));
+    top: var(--doodle-top-sm, var(--doodle-top-base));
+    right: var(--doodle-right-sm, var(--doodle-right-base));
+    bottom: var(--doodle-bottom-sm, var(--doodle-bottom-base));
+    left: var(--doodle-left-sm, var(--doodle-left-base));
+    transform: rotate(calc(var(--rotate-sm) * 1deg)) scale(var(--scale-sm));
+  }
+}
+
+@media (min-width: 768px) {
+  .doodle {
+    width: var(--doodle-width-md, var(--doodle-width-sm, var(--doodle-width-base)));
+    height: var(--doodle-height-md, var(--doodle-height-sm, var(--doodle-height-base)));
+    top: var(--doodle-top-md, var(--doodle-top-sm, var(--doodle-top-base)));
+    right: var(--doodle-right-md, var(--doodle-right-sm, var(--doodle-right-base)));
+    bottom: var(--doodle-bottom-md, var(--doodle-bottom-sm, var(--doodle-bottom-base)));
+    left: var(--doodle-left-md, var(--doodle-left-sm, var(--doodle-left-base)));
+    transform: rotate(calc(var(--rotate-md) * 1deg)) scale(var(--scale-md));
+  }
+}
+
+@media (min-width: 1024px) {
+  .doodle {
+    width: var(--doodle-width-lg, var(--doodle-width-md, var(--doodle-width-sm, var(--doodle-width-base))));
+    height: var(--doodle-height-lg, var(--doodle-height-md, var(--doodle-height-sm, var(--doodle-height-base))));
+    top: var(--doodle-top-lg, var(--doodle-top-md, var(--doodle-top-sm, var(--doodle-top-base))));
+    right: var(--doodle-right-lg, var(--doodle-right-md, var(--doodle-right-sm, var(--doodle-right-base))));
+    bottom: var(--doodle-bottom-lg, var(--doodle-bottom-md, var(--doodle-bottom-sm, var(--doodle-bottom-base))));
+    left: var(--doodle-left-lg, var(--doodle-left-md, var(--doodle-left-sm, var(--doodle-left-base))));
+    transform: 
+      rotate(calc(var(--doodle-rotate-lg, var(--doodle-rotate-md, var(--doodle-rotate-sm, var(--doodle-rotate-base, 0)))) * 1deg)) 
+      scale(var(--doodle-scale-lg, var(--doodle-scale-md, var(--doodle-scale-sm, var(--doodle-scale-base, 1)))));
+  }
+}
+
+@media (min-width: 1280px) {
+  .doodle {
+    width: var(--doodle-width-xl, var(--doodle-width-lg, var(--doodle-width-md, var(--doodle-width-sm, var(--doodle-width-base)))));
+    height: var(--doodle-height-xl, var(--doodle-height-lg, var(--doodle-height-md, var(--doodle-height-sm, var(--doodle-height-base)))));
+    top: var(--doodle-top-xl, var(--doodle-top-lg, var(--doodle-top-md, var(--doodle-top-sm, var(--doodle-top-base)))));
+    right: var(--doodle-right-xl, var(--doodle-right-lg, var(--doodle-right-md, var(--doodle-right-sm, var(--doodle-right-base)))));
+    bottom: var(--doodle-bottom-xl, var(--doodle-bottom-lg, var(--doodle-bottom-md, var(--doodle-bottom-sm, var(--doodle-bottom-base)))));
+    left: var(--doodle-left-xl, var(--doodle-left-lg, var(--doodle-left-md, var(--doodle-left-sm, var(--doodle-left-base)))));
+    transform: 
+      rotate(calc(var(--doodle-rotate-xl, var(--doodle-rotate-lg, var(--doodle-rotate-md, var(--doodle-rotate-sm, var(--doodle-rotate-base, 0))))) * 1deg)) 
+      scale(var(--doodle-scale-xl, var(--doodle-scale-lg, var(--doodle-scale-md, var(--doodle-scale-sm, var(--doodle-scale-base, 1))))));
+  }
+}
+
+@media (min-width: 1536px) {
+  .doodle {
+    width: var(--doodle-width-2xl, var(--doodle-width-xl, var(--doodle-width-lg, var(--doodle-width-md, var(--doodle-width-sm, var(--doodle-width-base))))));
+    height: var(--doodle-height-2xl, var(--doodle-height-xl, var(--doodle-height-lg, var(--doodle-height-md, var(--doodle-height-sm, var(--doodle-height-base))))));
+    top: var(--doodle-top-2xl, var(--doodle-top-xl, var(--doodle-top-lg, var(--doodle-top-md, var(--doodle-top-sm, var(--doodle-top-base))))));
+    right: var(--doodle-right-2xl, var(--doodle-right-xl, var(--doodle-right-lg, var(--doodle-right-md, var(--doodle-right-sm, var(--doodle-right-base))))));
+    bottom: var(--doodle-bottom-2xl, var(--doodle-bottom-xl, var(--doodle-bottom-lg, var(--doodle-bottom-md, var(--doodle-bottom-sm, var(--doodle-bottom-base))))));
+    left: var(--doodle-left-2xl, var(--doodle-left-xl, var(--doodle-left-lg, var(--doodle-left-md, var(--doodle-left-sm, var(--doodle-left-base))))));
+    transform: 
+      rotate(calc(var(--doodle-rotate-2xl, var(--doodle-rotate-xl, var(--doodle-rotate-lg, var(--doodle-rotate-md, var(--doodle-rotate-sm, var(--doodle-rotate-base, 0)))))) * 1deg)) 
+      scale(var(--doodle-scale-2xl, var(--doodle-scale-xl, var(--doodle-scale-lg, var(--doodle-scale-md, var(--doodle-scale-sm, var(--doodle-scale-base, 1)))))));
+  }
+}

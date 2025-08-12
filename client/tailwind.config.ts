@@ -2,8 +2,8 @@ import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 import { heroui } from '@heroui/react';
 import { type PluginAPI } from 'tailwindcss/types/config';
-import { PAPER_MAX_WIDTH } from './src/core/config/constants';
-
+import { PAPER_MAX_WIDTH, PAPER_MARGIN } from './src/core/config/constants';
+// ROZWIĄZANIE
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -25,11 +25,11 @@ const config: Config = {
       // ROZWIĄZANIE: Definiujemy każdą wartość marginesu osobno.
       // To jest "bezpieczniejsza" składnia, która unika problemu z Twoim narzędziem budującym.
       spacing: {
-        'paper-margin': '3rem', // Domyślna wartość
-        'paper-margin-sm': '5rem',
-        'paper-margin-md': '6.5rem',
-        'paper-margin-lg': '8rem',
-        'paper-margin-2xl': '10rem',
+       'paper-margin': `${PAPER_MARGIN.base}rem`,
+        'paper-margin-sm': `${PAPER_MARGIN.sm}rem`,
+        'paper-margin-md': `${PAPER_MARGIN.md}rem`,
+        'paper-margin-lg': `${PAPER_MARGIN.lg}rem`,
+        'paper-margin-2xl': `${PAPER_MARGIN['2xl']}rem`,
       },
     },
   },
