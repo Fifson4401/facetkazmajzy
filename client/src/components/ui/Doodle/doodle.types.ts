@@ -3,6 +3,7 @@ export type ResponsiveValue = {
   sm?: string | number;
   md?: string | number;
   lg?: string | number;
+  xl?: string | number;
   '2xl'?: string | number;
 };
 
@@ -16,4 +17,5 @@ export type Doodle = {
   right?: string | ResponsiveValue;
   rotate?: number | ResponsiveValue;
   scale?: number | ResponsiveValue;
+  aspectRatio?: number;
 };
