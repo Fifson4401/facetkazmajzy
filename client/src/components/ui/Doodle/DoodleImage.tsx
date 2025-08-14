@@ -85,7 +85,7 @@ export const DoodleImage: FC<{ doodle: Doodle }> = ({ doodle }) => {
     <div className="doodle pointer-events-none" style={style}>
       <Image
         src={doodle.src}
-        alt="doodle-decoration"
+        alt=""
         width={imgWidth}
         height={imgHeight}
         priority
@@ -94,6 +94,7 @@ export const DoodleImage: FC<{ doodle: Doodle }> = ({ doodle }) => {
           height: '100%',
           objectFit: 'contain'
         }}
+        aria-hidden
       />
     </div>
   );

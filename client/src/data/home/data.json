@@ -55,14 +55,13 @@
         "type": "exam_prep",
         "title": "Zadania, które są na egzaminie",
         "content": [
-          { "type": "highlight", "content": "Setki zadań z egzaminów ósmoklasisty, matur i naszych autorskich." },
-          { "type": "text", "content": " Od podstawówki po liceum. " },
-          { "type": "highlight", "content": "Przećwicz, sprawdź rozwiązania" },
-          { "type": "text", "content": " i idź " },
-          { "type": "highlight", "content": "na test bez stresu" },
+          { "type": "highlight", "content": "Setki zadań " },
+          { "type": "text", "content": "z egzaminów ósmoklasisty, matur i naszych autorskich. Od podstawówki po liceum. " },
+          { "type": "highlight", "content": "Przećwicz," },
+          { "type": "text", "content": " sprawdź rozwiązania i idź na" },
+          { "type": "highlight", "content": " test bez stresu" },
           { "type": "text", "content": ". Do wielu zadań znajdziesz też YouTub'a " },
-          { "type": "highlight", "content": "z tłumaczeniem" },
-          { "type": "text", "content": "." }
+          { "type": "highlight", "content": "z tłumaczeniem." }
         ],
         "cta": [{
           "text": "Przejdź na YT",
@@ -70,8 +69,10 @@
         }],
         "images": [
           {
-            "src": "image_0d03af.png",
-            "alt": "Biało-szary kot z przymrużonymi oczami."
+            "src": "/assets/images/home/tosiek.webp",
+            "alt": "Biało-szary kot ze zdziwionymi oczami.",
+            "width": 1536,
+            "height": 2048
           }
         ]
       },

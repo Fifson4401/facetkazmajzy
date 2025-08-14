@@ -9,9 +9,9 @@
       <feComposite in="SourceGraphic" in2="textured" operator="arithmetic" k1="1" k2="0" k3="0" k4="0"/>
     </filter>
   </defs>
-  <path d="M 2 0 L 112 0 L 110 8 L 115 15 L 111 22 L 112 30 L 2 30 L 0 22 L 5 15 L 1 8 Z"
-        fill="rgb(252, 231, 189)" 
-        stroke="rgb(255, 221, 126)" 
+  <path d="M 2 0 L 112 0 L 111.5 4 L 113.5 8 L 111.5 12 L 113.5 15 L 111.5 18 L 113.5 22 L 111.5 26 L 112 30 L 2 30 L 2.5 26 L 0.5 22 L 2.5 18 L 0.5 15 L 2.5 12 L 0.5 8 L 2.5 4 Z"
+        fill="rgb(252, 231, 189)"
+        stroke="rgb(255, 221, 126)"
         stroke-width="0.5"
         style="filter: url(#rough-paper-short-v3);"/>
 </svg>

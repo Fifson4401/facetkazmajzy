@@ -7,7 +7,7 @@ import Header from '@/components/ui/Header';
 import DoodleContainer from '@/components/ui/Doodle/DoodleContainer';
 import { renderContent } from '@/utils/renderContent';
 import { isHeroSection } from './typeguards';
-import { AnySection } from './types';
+import { AnySection } from '../types';
 import { bottomButtonDoodles, topButtonDoodles } from './Doodles';
 
 const heroSectionData = homeData.homePage.sections.find(
@@ -39,7 +39,7 @@ const Hero = () => {
 
           <div className="flex w-full justify-end pr-6 md:pr-0">
             <DoodleContainer doodles={bottomButtonDoodles}>
-              <Button href={cta2.action}>{cta2.text}</Button>
+              <Button href={cta2.action} svgVariantIndex={2}>{cta2.text}</Button>
             </DoodleContainer>
           </div>
         </div>
@@ -47,8 +47,9 @@ const Hero = () => {
 
       <div className="hidden items-center justify-center md:flex">
         <div className="h-64 w-full rounded-lg bg-gray-200/50 p-4 text-center">
-          <p className="text-gray-500">Miejsce na element wizualny</p>
-        </div>
+          <p className="text-gray-500">Miejsce na element wizualny</p> 
+        </div>{//TODO: Replace with actual visual element, e.g., an image or video
+        }
       </div>
     </section>
   );
