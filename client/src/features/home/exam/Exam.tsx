@@ -9,7 +9,7 @@ import { renderContent } from '@/utils/renderContent';
 import { isExamSection } from './typeguards';
 import { AnySection } from '../types';
 import NextImage from '@/components/ui/Image/Image';
-import { bottomButtonDoodles, titleDoodles } from './Doodles';
+import { bottomButtonDoodles, imageDoodles, titleDoodles } from './Doodles';
 
 const examSectionData = homeData.homePage.sections.find(
   (section) => section.type === 'exam_prep'
@@ -28,8 +28,8 @@ const Exam = () => {
   } = examSectionData;
 
   return (
-    <section className="relative grid grid-cols-5 gap-x-4 pb-32 pt-14 md:grid-cols-3 md:gap-x-16 lg:pt-32">
-      <div className="col-span-3 flex flex-col items-center md:col-span-2 md:items-start md:text-left">
+    <section className="relative grid grid-cols-3 gap-x-4 pb-32 pt-14 md:grid-cols-3 md:gap-x-16 lg:pt-32">
+      <div className="col-span-2 flex flex-col items-center md:col-span-2 md:items-start md:text-left">
         <DoodleContainer doodles={titleDoodles}>
           <Header level={2} text={title} withHighlighter className="mb-4" />
         </DoodleContainer>
@@ -40,10 +40,17 @@ const Exam = () => {
           </DoodleContainer>
         </div>
       </div>
-      <div className="col-span-2 md:col-span-1 flex">
+      <div className="col-span-1 flex md:col-span-1">
         <div className="relative h-64 w-full rounded-lg">
           <div className="absolute -right-8 top-5 w-full min-w-[8rem] rotate-[-4deg]">
-            <NextImage {...image1} objectFit="contain" withBorder withShadow />
+            <DoodleContainer doodles={imageDoodles}>
+              <NextImage
+                {...image1}
+                objectFit="contain"
+                withBorder
+                withShadow
+              />
+            </DoodleContainer>
           </div>
         </div>
       </div>

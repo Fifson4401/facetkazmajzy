@@ -20,7 +20,7 @@ const NextImage = ({
   objectFit = 'cover', 
   withBorder = false, 
   withShadow = false,
-  borderColor = 'border-[#EDEFF0]'
+  borderColor = 'border-[#ffffff]'
 }: NextImageProps) => {
   const objectFitClasses = {
     cover: 'object-cover',
@@ -30,24 +30,29 @@ const NextImage = ({
     'scale-down': 'object-scale-down'
   };
 
+   const doubleShadowStyles = withShadow ? {
+    boxShadow: `
+      0 4px 6px -1px rgba(0, 0, 0, 0.4), 
+      0 2px 4px -1px rgba(0, 0, 0, 0.3),
+      0 10px 25px -3px rgba(0, 0, 0, 0.1),
+      0 20px 60px -5px rgba(0, 0, 0, 0.04)
+    `
+  } : {};
+
   return (
-    <div className={`
-      overflow-hidden w-full h-full
-      ${withBorder ? `
-        border-4 border-b-[20px]
-        sm:border-8 sm:border-b-[30px]
-        md:border-[10px] md:border-b-[40px]  
-        xl:border-[14px] xl:border-b-[50px]
-        ${borderColor}
-      ` : ''}
-      ${withShadow ? `
-        shadow-md
-        sm:shadow-lg
-        md:shadow-xl
-        lg:shadow-2xl
-        xl:shadow-3xl
-      ` : ''}
-    `}>
+    <div 
+      className={`
+        overflow-hidden w-full h-full
+        ${withBorder ? `
+          border-4 border-b-[20px]
+          sm:border-8 sm:border-b-[30px]
+          md:border-[10px] md:border-b-[40px]  
+          xl:border-[14px] xl:border-b-[50px]
+          ${borderColor}
+        ` : ''}
+      `}
+      style={doubleShadowStyles}
+    >
       <Image
         src={src}
         alt={alt}
