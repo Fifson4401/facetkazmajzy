@@ -77,28 +77,17 @@
 .doodle {
   position: absolute;
   pointer-events: none;
-  z-index: 1; /* Zmienione z -1 na 1, aby doodles były widoczne */
+  z-index: 1;
 
-  --rotate-base: var(--doodle-rotate-base, 0);
-  --rotate-sm: var(--doodle-rotate-sm, var(--rotate-base));
-  --rotate-md: var(--doodle-rotate-md, var(--rotate-sm));
-  --rotate-lg: var(--doodle-rotate-lg, var(--rotate-md));
-  --rotate-xl: var(--doodle-rotate-xl, var(--rotate-lg));
-  --scale-base: var(--doodle-scale-base, 1);
-  --scale-sm: var(--doodle-scale-sm, var(--scale-base));
-  --scale-md: var(--doodle-scale-md, var(--scale-sm));
-  --scale-lg: var(--doodle-scale-lg, var(--scale-md));
-  --scale-xl: var(--doodle-scale-xl, var(--scale-lg));
-
-  /* Domyślne wartości z 'unset' zamiast pustych wartości */
   width: var(--doodle-width-base, auto);
   height: var(--doodle-height-base, auto);
   top: var(--doodle-top-base, unset);
   right: var(--doodle-right-base, unset);
   bottom: var(--doodle-bottom-base, unset);
   left: var(--doodle-left-base, unset);
-  transform: rotate(calc(var(--rotate-base) * 1deg)) scale(var(--scale-base));
   aspect-ratio: var(--doodle-aspect-ratio, auto);
+
+  transform: rotate(calc(var(--doodle-rotate-base, 0) * 1deg)) scale(var(--doodle-scale-base, 1));
 }
 
 @media (min-width: 640px) {
@@ -109,7 +98,8 @@
     right: var(--doodle-right-sm, var(--doodle-right-base, unset));
     bottom: var(--doodle-bottom-sm, var(--doodle-bottom-base, unset));
     left: var(--doodle-left-sm, var(--doodle-left-base, unset));
-    transform: rotate(calc(var(--rotate-sm) * 1deg)) scale(var(--scale-sm));
+    
+    transform: rotate(calc(var(--doodle-rotate-sm, var(--doodle-rotate-base, 0)) * 1deg)) scale(var(--doodle-scale-sm, var(--doodle-scale-base, 1)));
   }
 }
 
@@ -121,7 +111,8 @@
     right: var(--doodle-right-md, var(--doodle-right-sm, var(--doodle-right-base, unset)));
     bottom: var(--doodle-bottom-md, var(--doodle-bottom-sm, var(--doodle-bottom-base, unset)));
     left: var(--doodle-left-md, var(--doodle-left-sm, var(--doodle-left-base, unset)));
-    transform: rotate(calc(var(--rotate-md) * 1deg)) scale(var(--scale-md));
+    
+    transform: rotate(calc(var(--doodle-rotate-md, var(--doodle-rotate-sm, var(--doodle-rotate-base, 0))) * 1deg)) scale(var(--doodle-scale-md, var(--doodle-scale-sm, var(--doodle-scale-base, 1))));
   }
 }
 
@@ -133,7 +124,8 @@
     right: var(--doodle-right-lg, var(--doodle-right-md, var(--doodle-right-sm, var(--doodle-right-base, unset))));
     bottom: var(--doodle-bottom-lg, var(--doodle-bottom-md, var(--doodle-bottom-sm, var(--doodle-bottom-base, unset))));
     left: var(--doodle-left-lg, var(--doodle-left-md, var(--doodle-left-sm, var(--doodle-left-base, unset))));
-    transform: rotate(calc(var(--rotate-lg) * 1deg)) scale(var(--scale-lg));
+    
+    transform: rotate(calc(var(--doodle-rotate-lg, var(--doodle-rotate-md, var(--doodle-rotate-sm, var(--doodle-rotate-base, 0)))) * 1deg)) scale(var(--doodle-scale-lg, var(--doodle-scale-md, var(--doodle-scale-sm, var(--doodle-scale-base, 1)))));
   }
 }
 
@@ -145,7 +137,8 @@
     right: var(--doodle-right-xl, var(--doodle-right-lg, var(--doodle-right-md, var(--doodle-right-sm, var(--doodle-right-base, unset)))));
     bottom: var(--doodle-bottom-xl, var(--doodle-bottom-lg, var(--doodle-bottom-md, var(--doodle-bottom-sm, var(--doodle-bottom-base, unset)))));
     left: var(--doodle-left-xl, var(--doodle-left-lg, var(--doodle-left-md, var(--doodle-left-sm, var(--doodle-left-base, unset)))));
-    transform: rotate(calc(var(--rotate-xl) * 1deg)) scale(var(--scale-xl));
+    
+    transform: rotate(calc(var(--doodle-rotate-xl, var(--doodle-rotate-lg, var(--doodle-rotate-md, var(--doodle-rotate-sm, var(--doodle-rotate-base, 0))))) * 1deg)) scale(var(--doodle-scale-xl, var(--doodle-scale-lg, var(--doodle-scale-md, var(--doodle-scale-sm, var(--doodle-scale-base, 1))))));
   }
 }
 
@@ -157,7 +150,7 @@
     right: var(--doodle-right-2xl, var(--doodle-right-xl, var(--doodle-right-lg, var(--doodle-right-md, var(--doodle-right-sm, var(--doodle-right-base, unset))))));
     bottom: var(--doodle-bottom-2xl, var(--doodle-bottom-xl, var(--doodle-bottom-lg, var(--doodle-bottom-md, var(--doodle-bottom-sm, var(--doodle-bottom-base, unset))))));
     left: var(--doodle-left-2xl, var(--doodle-left-xl, var(--doodle-left-lg, var(--doodle-left-md, var(--doodle-left-sm, var(--doodle-left-base, unset))))));
-    transform: rotate(calc(var(--doodle-rotate-2xl, var(--doodle-rotate-xl, var(--doodle-rotate-lg, var(--doodle-rotate-md, var(--doodle-rotate-sm, var(--doodle-rotate-base, 0)))))) * 1deg)) 
-               scale(var(--doodle-scale-2xl, var(--doodle-scale-xl, var(--doodle-scale-lg, var(--doodle-scale-md, var(--doodle-scale-sm, var(--doodle-scale-base, 1)))))));
+    
+    transform: rotate(calc(var(--doodle-rotate-2xl, var(--doodle-rotate-xl, var(--doodle-rotate-lg, var(--doodle-rotate-md, var(--doodle-rotate-sm, var(--doodle-rotate-base, 0)))))) * 1deg)) scale(var(--doodle-scale-2xl, var(--doodle-scale-xl, var(--doodle-scale-lg, var(--doodle-scale-md, var(--doodle-scale-sm, var(--doodle-scale-base, 1)))))));
   }
 }

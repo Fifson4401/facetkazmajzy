@@ -46,8 +46,10 @@
         }],
         "images": [
           {
-            "src": "image_0d0102.png",
-            "alt": "Biało-czarny kot opierający głowę na ramieniu osoby."
+            "src": "/assets/images/home/tosiek.webp",
+            "alt": "Biało-szary kot ze zdziwionymi oczami.",
+            "width": 1536,
+            "height": 2048
           }
         ]
       },

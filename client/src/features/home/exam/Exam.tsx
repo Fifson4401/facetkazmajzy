@@ -28,7 +28,7 @@ const Exam = () => {
   } = examSectionData;
 
   return (
-    <section className="relative grid grid-cols-3 gap-x-4 pb-32 pt-14 md:grid-cols-3 md:gap-x-16 lg:pt-32">
+    <section className="relative grid grid-cols-3 gap-x-4 pb-20 md:pb-32 lg:pb-44 xl:pb-56 pt-14 md:grid-cols-3 md:gap-x-16 lg:pt-32">
       <div className="col-span-2 flex flex-col items-center md:col-span-2 md:items-start md:text-left">
         <DoodleContainer doodles={titleDoodles}>
           <Header level={2} text={title} withHighlighter className="mb-4" />

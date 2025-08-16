@@ -16,14 +16,14 @@ export const bottomButtonDoodles: Doodle[] = [
     height: { base: '4rem', md: '6rem', lg: '7rem', xl: '8rem', '2xl': '9rem' }, 
     aspectRatio: 1, 
     bottom: { base: '-0.5rem', lg: '-1.5rem', xl: '-2rem' },
-    right: { base: '-12rem', md: '-15em', lg: '-20em', xl: '-23em' },
+    right: { base: '-10rem', md: '-15em', lg: '-20em', xl: '-23em' },
   },
   {
     src: '/assets/doodles/arrow-right-1.svg',
     width: { base: '4rem', md: '6rem', lg: '7rem' }, 
     aspectRatio: 2, 
     top: { base: '0rem', lg: '.5rem' },
-    right: { base: '-6rem', md: '-8rem', lg: '-10rem' },
+    right: { base: '-5rem', md: '-8rem', lg: '-10rem' },
   }
 ];
 

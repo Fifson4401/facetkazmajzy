@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import Image from 'next/image';
 import Highlight from '@/components/ui/Highlight';
+import BulletList from '@/components/ui/BulletList';
 
 type TextPart = {
   type: 'text' | 'highlight';
@@ -8,7 +8,7 @@ type TextPart = {
   color?: string;
 };
 
-type ListItem = {
+export type ListItem = {
   iconSrc: string;
   content: TextPart[];
 };
@@ -34,8 +34,9 @@ const renderTextParts = (parts: TextPart[]): ReactNode[] => {
   });
 };
 
-
-export const renderContent = (content: AnyContent[] | undefined): ReactNode[] => {
+export const renderContent = (
+  content: AnyContent[] | undefined
+): ReactNode[] => {
   if (!Array.isArray(content)) {
     return [];
   }
@@ -50,22 +51,9 @@ export const renderContent = (content: AnyContent[] | undefined): ReactNode[] =>
 
       case 'bulletList':
         return (
-          <ul key={key} className="list-none p-0 space-y-4">
-            {block.items.map((item, itemIndex) => (
-              <li key={itemIndex} className="flex items-start">
-                <Image
-                  src={item.iconSrc}
-                  alt="ikona punktu listy"
-                  width={20}
-                  height={20}
-                  className="w-5 h-5 mr-3 mt-1 flex-shrink-0"
-                />
-                <span className="flex-grow">
-                  {renderTextParts(item.content)}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <BulletList key={key} items={block.items}>
+            {(content) => renderTextParts(content)}
+          </BulletList>
         );
 
       default:
