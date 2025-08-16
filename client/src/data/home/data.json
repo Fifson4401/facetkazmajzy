@@ -139,7 +139,7 @@
             "type": "bulletList",
             "items": [
               {
-                "iconSrc": "/assets/icons/heart-bullet.svg",
+                "iconSrc": "/assets/doodles/heart-1.svg",
                 "content": [
                   { "type": "text", "content": "Żeby matma przestała być " },
                   { "type": "highlight", "content": "lekcją grozy" },
@@ -147,7 +147,7 @@
                 ]
               },
               {
-                "iconSrc": "/assets/icons/heart-bullet.svg",
+                "iconSrc": "/assets/doodles/heart-2.svg",
                 "content": [
                   { "type": "text", "content": "Żebyś wbił/a na lekcje i wreszcie wiedział/a, " },
                   { "type": "highlight", "content": "co się dzieje" },
@@ -155,7 +155,7 @@
                 ]
               },
               {
-                "iconSrc": "/assets/icons/heart-bullet.svg",
+                "iconSrc": "/assets/doodles/heart-3.svg",
                 "content": [
                   { "type": "text", "content": "Żeby poczuć tę satysfakcję, gdy zadanie " },
                   { "type": "highlight", "content": "w końcu wyjdzie" },
@@ -176,7 +176,7 @@
         ],
         "images": [
           {
-            "src": "image_0cf925.png",
+            "src": "/assets/images/home/tosiek.webp",
             "alt": "Osoba z kotem i rysunek radiowozu."
           }
         ]

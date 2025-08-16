@@ -26,7 +26,7 @@ const Solver = () => {
   } = sectionData;
 
   return (
-    <section className="relative pb-32">
+    <section className="relative pb-32 sm:pb-52 md:pb-20">
       {/* Desktop layout */}
       <div className="hidden md:grid md:grid-cols-2 md:gap-x-16 md:items-center">
         {/* Left column - Button */}

@@ -6,6 +6,8 @@ import { MarginDoodles } from '@/components/ui/Doodle/MarginDoodle';
 import { homeDoodles } from '@/features/home/Doodles';
 import Exam from '@/features/home/exam/Exam';
 import Solver from '@/features/home/solver/Solver';
+import Benefits from '@/features/home/benefits/Benefits';
+import Parent from '@/features/home/parent/Parent';
 
 export const revalidate = 3600;
 
@@ -17,6 +19,8 @@ export default async function Home() {
       <Hero />
       <Exam />
       <Solver />
+      <Benefits />
+      <Parent />
       <div className='pt-24'></div>
     </Layout>
   );

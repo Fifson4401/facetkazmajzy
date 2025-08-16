@@ -14,12 +14,12 @@ const BulletList: React.FC<BulletListProps> = ({ items, children }) => {
         <li key={itemIndex} className="flex items-start">
           <Image
             src={item.iconSrc}
-            alt="ikona punktu listy"
+            alt="bullet list icon"
             width={20}
             height={20}
-            className="w-5 h-5 mr-3 mt-1 flex-shrink-0"
+            className="w-5 h-6 mr-3 mt-1 flex-shrink-0"
           />
-          <span className="flex-grow">
+          <span className="flex-grow text-body-base">
             {children(item.content)}
           </span>
         </li>
