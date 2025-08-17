@@ -2,32 +2,11 @@ import { Doodle } from '@/components/ui/Doodle/doodle.types';
 
 export const titleDoodles: Doodle[] = [
   {
-    src: '/assets/doodles/exclamation-mark-2.svg',
-    width: { base: '1rem', sm: '3rem', lg: '5rem' },
-    aspectRatio: 1, 
-    top: { base: '-4rem', sm: '.5rem', lg: '0rem' },
-    right: { base: '75%', md: '-2rem', lg: '10rem' },
-  },
-  {
-    src: '/assets/doodles/exclamation-mark-3.svg',
+    src: '/assets/doodles/sun-1.svg',
     width: { base: '1.44rem', sm: '3rem', lg: '5rem' },
     aspectRatio: 1, 
-    top: { base: '-4rem', sm: '.5rem', lg: '0rem' },
-    right: { base: '50%', md: '-2rem', lg: '10rem' },
-  },
-  {
-    src: '/assets/doodles/exclamation-mark-1.svg',
-    width: { base: '1.7rem', sm: '3rem', lg: '5rem' },
-    aspectRatio: 1, 
-    top: { base: '-3.5rem', sm: '.5rem', lg: '0rem' },
-    right: { base: '20%', md: '-2rem', lg: '10rem' },
-  },
-  {
-    src: '/assets/doodles/car-1.svg',
-    width: { base: '6rem', sm: '3rem', lg: '5rem' },
-    aspectRatio: 2, 
-    top: { base: '100%', sm: '.5rem', lg: '0rem' },
-    right: { base: '32%', md: '-2rem', lg: '10rem' },
+    bottom: { base: '1rem', sm: '.5rem', lg: '0rem' },
+    right: { base: '0rem', md: '-2rem', lg: '10rem' },
   },
 ];
 

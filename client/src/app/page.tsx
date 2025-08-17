@@ -8,6 +8,7 @@ import Exam from '@/features/home/exam/Exam';
 import Solver from '@/features/home/solver/Solver';
 import Benefits from '@/features/home/benefits/Benefits';
 import Parent from '@/features/home/parent/Parent';
+import Tutoring from '@/features/home/tutoring/Tutoring';
 
 export const revalidate = 3600;
 
@@ -21,6 +22,7 @@ export default async function Home() {
       <Solver />
       <Benefits />
       <Parent />
+      <Tutoring />
       <div className='pt-24'></div>
     </Layout>
   );
