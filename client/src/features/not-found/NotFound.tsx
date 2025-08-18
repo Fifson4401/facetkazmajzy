@@ -1,35 +1,37 @@
 'use client';
 
 import { FC } from 'react';
-import { Box, Button, Center, Flex, Img, Text } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Image } from '@heroui/image';
 import DoodleContainer from '@/components/ui/Doodle/DoodleContainer';
+import Text from '@/components/ui/Text';
+import TapeButton from '@/components/ui/Button/TapeButton';
 import { doodles } from './Doodles';
 
 export const NotFound: FC = () => {
   return (
-    <Box position="relative" h="100vh" w="100vw" overflow="hidden">
+    <div className="relative h-screen w-screen overflow-hidden">
       <DoodleContainer doodles={doodles}>
-        <Center h="full">
-          <Flex direction="column" align="center" gap={5}>
-            <Img src="/404.webp" alt="404" w="full" maxW="500px" />
-            <Text
-              as="h1"
-              fontSize={{ base: '2xl', md: '4xl' }}
-              fontWeight={700}
-              textAlign="center"
-            >
+        <div className="flex h-full items-center justify-center">
+          <div className="flex flex-col items-center gap-5 p-4">
+            <Image
+              src="/404.webp"
+              alt="404"
+              width={500}
+              height={300}
+              className="max-w-full h-auto"
+            />
+            <Text as="h1" size="xl" className="text-center font-bold">
               Nie znaleziono strony
             </Text>
-            <Text fontSize={{ base: 'md', md: 'xl' }} textAlign="center">
+            <Text size="lg" className="text-center">
               Strona, której szukasz nie istnieje lub została przeniesiona.
             </Text>
-            <Button as={NextLink} href="/" variant="primary">
+            <TapeButton href="/" variant="large">
               Wróć na stronę główną
-            </Button>
-          </Flex>
-        </Center>
+            </TapeButton>
+          </div>
+        </div>
       </DoodleContainer>
-    </Box>
+    </div>
   );
 };
