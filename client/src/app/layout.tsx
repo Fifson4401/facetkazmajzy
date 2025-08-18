@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from './providers';
-import ErrorBoundary from '@/core/components/ErrorBoundries/ErrorBoundries';
+import ErrorBoundary from '@/features/error/ErrorBoundary';
 import { DotGridBackground } from '@/components/layout/Background/DotGridBackground';
 import { specialElite, courierPrime } from '@/core/theme/fonts';
 
