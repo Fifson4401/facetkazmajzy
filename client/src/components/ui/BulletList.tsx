@@ -9,7 +9,7 @@ type BulletListProps = {
 
 const BulletList: React.FC<BulletListProps> = ({ items, children }) => {
   return (
-    <ul className="list-none p-0 space-y-4">
+    <ul className="list-none space-y-4 pb-4">
       {items.map((item, itemIndex) => (
         <li key={itemIndex} className="flex items-start">
           <Image

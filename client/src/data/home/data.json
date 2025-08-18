@@ -5,45 +5,46 @@
         "type": "hero",
         "title": "Matma nie musi boleć.",
         "content": [
-          { "type": "text", "content": "Baza zadań " },
-          { "type": "highlight", "content": "z rozwiązaniami" },
-          { "type": "text", "content": ", sztuczna inteligencja, która ogarnie zadanie ze zdjęcia i korepetycje, " },
-          { "type": "highlight", "content": "które ratują życie" },
-          { "type": "text", "content": ". " },
-          { "type": "highlight", "content": "Wszystko, czego potrzebujesz" },
-          { "type": "text", "content": ", żeby wreszcie " },
-          { "type": "highlight", "content": "odetchnąć z ulgą" },
-          { "type": "text", "content": "." }
+          {
+            "type": "paragraph",
+            "content": [
+              { "type": "text", "content": "Baza zadań " },
+              { "type": "highlight", "content": "z rozwiązaniami" },
+              { "type": "text", "content": ", sztuczna inteligencja, która ogarnie zadanie ze zdjęcia i korepetycje, " },
+              { "type": "highlight", "content": "które ratują życie" },
+              { "type": "text", "content": ". " },
+              { "type": "highlight", "content": "Wszystko, czego potrzebujesz" },
+              { "type": "text", "content": ", żeby wreszcie " },
+              { "type": "highlight", "content": "odetchnąć z ulgą" },
+              { "type": "text", "content": "." }
+            ]
+          }
         ],
         "cta": [
-          {
-            "text": "Wrzuć zdjęcie",
-            "action": "/upload_image"
-          },
-          {
-            "text": "Sprawdź zadania",
-            "action": "/view_tasks"
-          }
+          { "text": "Wrzuć zdjęcie", "action": "/upload_image" },
+          { "text": "Sprawdź zadania", "action": "/view_tasks" }
         ]
       },
       {
         "type": "ai_solver",
         "title": "Nie wiesz jak to zrobić? Wystarczy zdjęcie",
         "content": [
-          { "type": "text", "content": "Zaciąłeś się nad zadaniem? " },
-          { "type": "highlight", "content": "Uczysz się" },
-          { "type": "text", "content": ", jak to policzyć, a nie tylko spisujesz " },
-          { "type": "highlight", "content": "bezmyślnie wynik" },
-          { "type": "text", "content": "? Zrób zdjęcie telefonem lub wpisz treść zadania, a nasze AI " },
-          { "type": "highlight", "content": "pokaże Ci" },
-          { "type": "text", "content": " " },
-          { "type": "highlight", "content": "rozwiązanie krok po kroku" },
-          { "type": "text", "content": "." }
+          {
+            "type": "paragraph",
+            "content": [
+              { "type": "text", "content": "Zaciąłeś się nad zadaniem? " },
+              { "type": "highlight", "content": "Uczysz się" },
+              { "type": "text", "content": ", jak to policzyć, a nie tylko spisujesz " },
+              { "type": "highlight", "content": "bezmyślnie wynik" },
+              { "type": "text", "content": "? Zrób zdjęcie telefonem lub wpisz treść zadania, a nasze AI " },
+              { "type": "highlight", "content": "pokaże Ci" },
+              { "type": "text", "content": " " },
+              { "type": "highlight", "content": "rozwiązanie krok po kroku" },
+              { "type": "text", "content": "." }
+            ]
+          }
         ],
-        "cta": [{
-          "text": "AI Solver",
-          "action": "/ai_solver"
-        }],
+        "cta": [{ "text": "AI Solver", "action": "/ai_solver" }],
         "images": [
           {
             "src": "/assets/images/home/tosiek.webp",
@@ -57,18 +58,20 @@
         "type": "exam_prep",
         "title": "Zadania, które są na egzaminie",
         "content": [
-          { "type": "highlight", "content": "Setki zadań " },
-          { "type": "text", "content": "z egzaminów ósmoklasisty, matur i naszych autorskich. Od podstawówki po liceum. " },
-          { "type": "highlight", "content": "Przećwicz," },
-          { "type": "text", "content": " sprawdź rozwiązania i idź na" },
-          { "type": "highlight", "content": " test bez stresu" },
-          { "type": "text", "content": ". Do wielu zadań znajdziesz też YouTub'a " },
-          { "type": "highlight", "content": "z tłumaczeniem." }
+          {
+            "type": "paragraph",
+            "content": [
+              { "type": "highlight", "content": "Setki zadań " },
+              { "type": "text", "content": "z egzaminów ósmoklasisty, matur i naszych autorskich. Od podstawówki po liceum. " },
+              { "type": "highlight", "content": "Przećwicz," },
+              { "type": "text", "content": " sprawdź rozwiązania i idź na" },
+              { "type": "highlight", "content": " test bez stresu" },
+              { "type": "text", "content": ". Do wielu zadań znajdziesz też YouTub'a " },
+              { "type": "highlight", "content": "z tłumaczeniem." }
+            ]
+          }
         ],
-        "cta": [{
-          "text": "Przejdź na YT",
-          "action": "open_youtube"
-        }],
+        "cta": [{ "text": "Przejdź na YT", "action": "open_youtube" }],
         "images": [
           {
             "src": "/assets/images/home/tosiek.webp",
@@ -82,16 +85,18 @@
         "type": "tutoring_offer",
         "title": "Wiemy jak to jest",
         "content": [
-          { "type": "text", "content": "Wiemy, że nasza baza zadań i sprytne AI to potężne wsparcie, ale czasami nic nie zastąpi " },
-          { "type": "highlight", "content": "prawdziwego nauczyciela" },
-          { "type": "text", "content": ". Jeśli czujesz, że potrzebne jest indywidualne podejście i ktoś, kto pomoże w zaprzyjaźnieniu się z Pitagorasem i Euklidesem, zapisz to na " },
-          { "type": "highlight", "content": "nasze korepetycje" },
-          { "type": "text", "content": "." }
+          {
+            "type": "paragraph",
+            "content": [
+              { "type": "text", "content": "Wiemy, że nasza baza zadań i sprytne AI to potężne wsparcie, ale czasami nic nie zastąpi " },
+              { "type": "highlight", "content": "prawdziwego nauczyciela" },
+              { "type": "text", "content": ". Jeśli czujesz, że potrzebne jest indywidualne podejście i ktoś, kto pomoże w zaprzyjaźnieniu się z Pitagorasem i Euklidesem, zapisz to na " },
+              { "type": "highlight", "content": "nasze korepetycje" },
+              { "type": "text", "content": "." }
+            ]
+          }
         ],
-        "cta": [{
-          "text": "Dzwonię od razu",
-          "action": "call_us"
-        }],
+        "cta": [{ "text": "Dzwonię od razu", "action": "call_us" }],
         "images": [
           {
             "src": "/assets/images/home/tosiek.webp",
@@ -102,34 +107,33 @@
       {
         "type": "how_we_do_it",
         "title": "Jak to robimy?",
-        "points": [
+        "content": [
           {
-            "heading": "Tłumaczymy aż zrozumiesz:",
+            "type": "paragraph",
+            "content": [{ "type": "text", "content": "Tłumaczymy aż zrozumiesz:" }]
+          },
+          {
+            "type": "bulletList",
             "items": [
-              "bez oceniania,",
-              "bez pośpiechu",
-              "i z głupimi pytaniami."
+              { "iconSrc": "/assets/doodles/star-1.svg", "content": [{ "type": "text", "content": "bez oceniania," }] },
+              { "iconSrc": "/assets/doodles/star-2.svg", "content": [{ "type": "text", "content": "bez pośpiechu" }] },
+              { "iconSrc": "/assets/doodles/star-3.svg", "content": [{ "type": "text", "content": "i z głupimi pytaniami." }] }
             ]
           },
           {
-            "heading": "Realne wyniki:",
+            "type": "paragraph",
+            "content": [{ "type": "text", "content": "Realne wyniki:" }]
+          },
+          {
+            "type": "bulletList",
             "items": [
-              "popraw oceny,",
-              "zdaj egzamin",
-              "i odzyskaj wiarę w siebie."
+              { "iconSrc": "/assets/doodles/star-1.svg", "content": [{ "type": "text", "content": "popraw oceny," }] },
+              { "iconSrc": "/assets/doodles/star-2.svg", "content": [{ "type": "text", "content": "zdaj egzamin" }] },
+              { "iconSrc": "/assets/doodles/star-3.svg", "content": [{ "type": "text", "content": "i odzyskaj wiarę w siebie." }] }
             ]
           }
         ],
-        "cta": [{
-          "text": "Umów się na lekcję",
-          "action": "/schedule_lesson"
-        }],
-        "images": [
-          {
-            "src": "image_0cf969.png",
-            "alt": "Rysunki ludzików i kwiatków na kartce w kratkę."
-          }
-        ]
+        "cta": [{ "text": "Umów się na lekcję", "action": "/schedule_lesson" }]
       },
       {
         "type": "student_benefits",
@@ -170,9 +174,14 @@
         "type": "parent_section",
         "title": "Chwila dla rodzica",
         "content": [
-          { "type": "text", "content": "Z rodziną najlepiej na zdjęciach. Pamiętacie, jak to było uczyć się z rodzicami do sprawdzianu z matmy? No właśnie. Płacz pisk i zgrzytane zębami. Dlatego chętnie zdejmiemy z Was część tego obowiązku i " },
-          { "type": "highlight", "content": "pomożemy Waszemu dziecku poczuć się pewniej z liczbami" },
-          { "type": "text", "content": ", żeby próby hakowania e-dziennika nie były już potrzebne." }
+          {
+            "type": "paragraph",
+            "content": [
+              { "type": "text", "content": "Z rodziną najlepiej na zdjęciach. Pamiętacie, jak to było uczyć się z rodzicami do sprawdzianu z matmy? No właśnie. Płacz pisk i zgrzytane zębami. Dlatego chętnie zdejmiemy z Was część tego obowiązku i " },
+              { "type": "highlight", "content": "pomożemy Waszemu dziecku poczuć się pewniej z liczbami" },
+              { "type": "text", "content": ", żeby próby hakowania e-dziennika nie były już potrzebne." }
+            ]
+          }
         ],
         "images": [
           {

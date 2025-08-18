@@ -1,8 +1,6 @@
 import React from 'react';
-
 import homeData from '@/data/home/data.json';
 import Button from '@/components/ui/Button/TapeButton';
-import Text from '@/components/ui/Text';
 import Header from '@/components/ui/Header';
 import DoodleContainer from '@/components/ui/Doodle/DoodleContainer';
 import { renderContent } from '@/utils/renderContent';
@@ -24,22 +22,24 @@ const Tutoring = () => {
     title,
     content,
     images: [image1],
+    cta: [cta1],
   } = tutorSectionData;
 
   return (
-    <section className="">
-      {/* Pierwszy wiersz - dwie kolumny */}
+    <section className="pb-10">
       <div className="grid grid-cols-4 items-center gap-4">
-        {/* Kolumna z obrazem */}
         <div className="col-span-3">
           <DoodleContainer doodles={titleDoodles}>
             <Header level={2} text={title} withHighlighter />
           </DoodleContainer>
-        <Text>{renderContent(content)}</Text>
-
+          <div>{renderContent(content)}</div>
+          <div className="mt-11 flex w-full flex-col items-center gap-6">
+            <DoodleContainer doodles={imageDoodles}>
+              <Button href={cta1.action}>{cta1.text}</Button>
+            </DoodleContainer>
+          </div>
         </div>
 
-        {/* Kolumna z tytułem */}
         <div className="col-span-1 flex items-center justify-center">
           <div className="relative">
             <DoodleContainer doodles={imageDoodles}>
@@ -52,10 +52,6 @@ const Tutoring = () => {
             </DoodleContainer>
           </div>
         </div>
-      </div>
-
-      {/* Content poniżej */}
-      <div className="sm:pl-[30%]">
       </div>
     </section>
   );

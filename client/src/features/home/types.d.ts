@@ -8,8 +8,8 @@ export interface CtaType {
 export interface ImageType {
   src: string;
   alt: string;
-  width?: number; 
-  height?: number; 
+  width?: number;
+  height?: number;
 }
 
 export interface HeroSectionType {
@@ -46,12 +46,8 @@ export interface TutoringOfferSectionType {
 export interface HowWeDoItSectionType {
   type: 'how_we_do_it';
   title: string;
-  points: {
-    heading: string;
-    items: string[];
-  }[];
+  content: ContentPart[];
   cta: CtaType[];
-  images: ImageType[];
 }
 
 export interface StudentBenefitsSectionType {

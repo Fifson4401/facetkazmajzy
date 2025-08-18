@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Highlight from '@/components/ui/Highlight';
 import BulletList from '@/components/ui/BulletList';
+import Text from '@/components/ui/Text';
 
 type TextPart = {
   type: 'text' | 'highlight';
@@ -13,12 +14,17 @@ export type ListItem = {
   content: TextPart[];
 };
 
+type ParagraphBlock = {
+  type: 'paragraph';
+  content: TextPart[];
+};
+
 type BulletListBlock = {
   type: 'bulletList';
   items: ListItem[];
 };
 
-type AnyContent = TextPart | BulletListBlock;
+type AnyContent = ParagraphBlock | BulletListBlock;
 
 const renderTextParts = (parts: TextPart[]): ReactNode[] => {
   return parts.map((part, index) => {
@@ -45,9 +51,8 @@ export const renderContent = (
     const key = `content_block_${index}`;
 
     switch (block.type) {
-      case 'text':
-      case 'highlight':
-        return renderTextParts([block]);
+      case 'paragraph':
+        return <Text key={key}>{renderTextParts(block.content)}</Text>;
 
       case 'bulletList':
         return (

@@ -9,6 +9,7 @@ import Solver from '@/features/home/solver/Solver';
 import Benefits from '@/features/home/benefits/Benefits';
 import Parent from '@/features/home/parent/Parent';
 import Tutoring from '@/features/home/tutoring/Tutoring';
+import HowWeDoIt from '@/features/home/howWeDoIt/HowWeDoIt';
 
 export const revalidate = 3600;
 
@@ -23,6 +24,7 @@ export default async function Home() {
       <Benefits />
       <Parent />
       <Tutoring />
+      <HowWeDoIt />
       <div className='pt-24'></div>
     </Layout>
   );
