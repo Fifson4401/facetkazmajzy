@@ -56,11 +56,6 @@ jobs:
         with:
           node-version: "20.x"
 
-      - name: Configure npm for FreeBSD target
-        run: |
-          echo "npm_config_platform=freebsd" >> $GITHUB_ENV
-          echo "npm_config_arch=x64" >> $GITHUB_ENV
-
       - name: Cache npm dependencies and .next/cache
         uses: actions/cache@v4
         with:
@@ -71,7 +66,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-client-node-
 
-      - name: Install all dependencies for build
+      - name: Install dependencies
         working-directory: client
         run: npm ci
 
@@ -81,10 +76,6 @@ jobs:
         env:
           API_HOST: ${{ secrets.API_HOST }}
           NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
-
-      - name: Install production-only dependencies
-        working-directory: client
-        run: npm ci --omit=dev --ignore-scripts
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -100,8 +91,14 @@ jobs:
           rsync -avz --delete \
           --exclude='.husky' \
           --exclude='.gitignore' \
+          --exclude='node_modules' \
           --exclude='.env*' \
+          --exclude='next-env.d.ts' \
+          --exclude='postcss.config.mjs' \
+          --exclude='tailwind.config.ts' \
+          --exclude='.eslintrc.json' \
           --exclude='README.md' \
+          --exclude='tsconfig.json' \
           --exclude='tmp' \
           ./client/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/
 
@@ -113,14 +110,9 @@ jobs:
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'bash ~/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/deployment.sh'
 
-  build-deploy-server:
-    name: Deploy & Build Server (Backend) to MyDevil
+  build-server:
+    name: Build & Test Server (Backend)
     runs-on: ubuntu-latest
-    environment: production
-    env:
-      API_HOST: ${{ secrets.API_HOST }}
-      NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
-      API_TOKEN: ${{ secrets.API_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -130,11 +122,6 @@ jobs:
         with:
           node-version: "20.x"
 
-      - name: Configure npm for FreeBSD target
-        run: |
-          echo "npm_config_platform=freebsd" >> $GITHUB_ENV
-          echo "npm_config_arch=x64" >> $GITHUB_ENV
-
       - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
@@ -143,11 +130,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-server-node-
 
-      - name: Install all dependencies for build
+      - name: Install dependencies
         working-directory: server
         run: npm ci
 
-      - name: Build server
+      - name: Build server (test compilation)
         working-directory: server
         run: npm run build
         env:
@@ -155,9 +142,18 @@ jobs:
           NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
 
-      - name: Install production-only dependencies
-        working-directory: server
-        run: npm ci --omit=dev --ignore-scripts
+  deploy-server:
+    name: Deploy Server (Backend) to MyDevil
+    runs-on: ubuntu-latest
+    environment: production
+    needs: build-server
+    env:
+      API_HOST: ${{ secrets.API_HOST }}
+      NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
+      API_TOKEN: ${{ secrets.API_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -167,20 +163,29 @@ jobs:
       - name: Add remote server to known hosts
         run: |
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Clean server directory
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd ~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/ && rm -rf build .cache'
       
-      - name: Deploy to MyDevil
+      - name: Deploy source code to MyDevil
         run: |
           rsync -avz --delete \
           --exclude='.gitignore' \
           --exclude='.env*' \
           --exclude='README.md' \
           --exclude='tmp' \
+          --exclude='node_modules' \
+          --exclude='build' \
+          --exclude='.cache' \
+          --exclude='types' \
+          --exclude='tsconfig.json' \
           ./server/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/
 
       - name: Create .env file on server
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo "${{ secrets.SERVER_ENV }}" | base64 -d > ~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/.env'
 
-      - name: Run deployment script on server
+      - name: Build and deploy on server
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'bash ~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/deployment.sh'
