@@ -39,43 +39,13 @@ jobs:
         run: npm run lint
 
   build-deploy-client:
-    name: Deploy & Build Client (Frontend) to MyDevil
+    name: Deploy Client (Frontend) to MyDevil
     runs-on: ubuntu-latest
     environment: production
     needs: lint-client
-    env:
-      API_HOST: ${{ secrets.API_HOST }}
-      NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
-      API_TOKEN: ${{ secrets.API_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20.x"
-
-      - name: Cache npm dependencies and .next/cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            client/node_modules
-            client/.next/cache
-          key: ${{ runner.os }}-client-node-${{ hashFiles('client/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-client-node-
-
-      - name: Install dependencies
-        working-directory: client
-        run: npm ci
-
-      - name: Build client
-        working-directory: client
-        run: npm run build
-        env:
-          API_HOST: ${{ secrets.API_HOST }}
-          NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -86,20 +56,14 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to MyDevil
+      - name: Deploy source code to MyDevil
         run: |
           rsync -avz --delete \
-          --exclude='.husky' \
-          --exclude='.gitignore' \
           --exclude='node_modules' \
+          --exclude='.next' \
+          --exclude='.git' \
+          --exclude='.github' \
           --exclude='.env*' \
-          --exclude='next-env.d.ts' \
-          --exclude='postcss.config.mjs' \
-          --exclude='tailwind.config.ts' \
-          --exclude='.eslintrc.json' \
-          --exclude='README.md' \
-          --exclude='tsconfig.json' \
-          --exclude='tmp' \
           ./client/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/
 
       - name: Create .env file on server
@@ -110,47 +74,10 @@ jobs:
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'bash ~/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/deployment.sh'
 
-  build-server:
-    name: Build & Test Server (Backend)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20.x"
-
-      - name: Cache npm dependencies
-        uses: actions/cache@v4
-        with:
-          path: server/node_modules
-          key: ${{ runner.os }}-server-node-${{ hashFiles('server/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-server-node-
-
-      - name: Install dependencies
-        working-directory: server
-        run: npm ci
-
-      - name: Build server (test compilation)
-        working-directory: server
-        run: npm run build
-        env:
-          API_HOST: ${{ secrets.API_HOST }}
-          NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
-          API_TOKEN: ${{ secrets.API_TOKEN }}
-
-  deploy-server:
+  build-deploy-server:
     name: Deploy Server (Backend) to MyDevil
     runs-on: ubuntu-latest
     environment: production
-    needs: build-server
-    env:
-      API_HOST: ${{ secrets.API_HOST }}
-      NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
-      API_TOKEN: ${{ secrets.API_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -163,29 +90,20 @@ jobs:
       - name: Add remote server to known hosts
         run: |
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Clean server directory
-        run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd ~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/ && rm -rf build .cache'
       
       - name: Deploy source code to MyDevil
         run: |
           rsync -avz --delete \
-          --exclude='.gitignore' \
-          --exclude='.env*' \
-          --exclude='README.md' \
-          --exclude='tmp' \
           --exclude='node_modules' \
-          --exclude='build' \
-          --exclude='.cache' \
-          --exclude='types' \
-          --exclude='tsconfig.json' \
+          --exclude='.git' \
+          --exclude='.github' \
+          --exclude='.env*' \
           ./server/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/
 
       - name: Create .env file on server
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo "${{ secrets.SERVER_ENV }}" | base64 -d > ~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/.env'
 
-      - name: Build and deploy on server
+      - name: Run deployment script on server
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'bash ~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/deployment.sh'
