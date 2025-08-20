@@ -66,7 +66,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-client-node-
 
-      - name: Install dependencies
+      - name: Install all dependencies for build
         working-directory: client
         run: npm ci
 
@@ -77,6 +77,11 @@ jobs:
           API_HOST: ${{ secrets.API_HOST }}
           NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
 
+      # --- NOWY KROK ---
+      - name: Install production-only dependencies
+        working-directory: client
+        run: npm ci --omit=dev
+
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -86,19 +91,14 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
+      # --- POPRAWIONY KROK ---
       - name: Deploy to MyDevil
         run: |
-          rsync -avz \
+          rsync -avz --delete \
           --exclude='.husky' \
           --exclude='.gitignore' \
-          --exclude='node_modules' \
           --exclude='.env*' \
-          --exclude='next-env.d.ts' \
-          --exclude='postcss.config.mjs' \
-          --exclude='tailwind.config.ts' \
-          --exclude='.eslintrc.json' \
           --exclude='README.md' \
-          --exclude='tsconfig.json' \
           --exclude='tmp' \
           ./client/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_USER }}/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/
 
@@ -127,17 +127,15 @@ jobs:
         with:
           node-version: "20.x"
 
-      - name: Cache npm dependencies and .next/cache
+      - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
-          path: |
-            server/node_modules
-            server/.next/cache
+          path: server/node_modules
           key: ${{ runner.os }}-server-node-${{ hashFiles('server/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-server-node-
 
-      - name: Install dependencies
+      - name: Install all dependencies for build
         working-directory: server
         run: npm ci
 
@@ -149,30 +147,27 @@ jobs:
           NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
 
+      # --- NOWY KROK ---
+      - name: Install production-only dependencies
+        working-directory: server
+        run: npm ci --omit=dev
+
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      
 
       - name: Add remote server to known hosts
         run: |
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Clean up old artifacts on server
-        run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/ && rm -rf .cache build'
-      
+      # --- POPRAWIONY KROK ---
       - name: Deploy to MyDevil
         run: |
-          rsync -avz \
-          --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
-          --exclude='node_modules' \
+          rsync -avz --delete \
           --exclude='.gitignore' \
           --exclude='.env*' \
-          --exclude='types' \
           --exclude='README.md' \
-          --exclude='tsconfig.json' \
           --exclude='tmp' \
           ./server/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_USER }}/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/
 
