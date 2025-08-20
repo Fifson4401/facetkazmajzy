@@ -166,6 +166,7 @@ jobs:
       - name: Deploy to MyDevil
         run: |
           rsync -avz \
+          --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
           --exclude='node_modules' \
           --exclude='.gitignore' \
           --exclude='.env*' \
