@@ -1,4 +1,4 @@
-module.exports = ({ env }) => ({
+export default ({ env }) => ({
   connection: {
     client: env('DATABASE_CLIENT', 'postgres'),
     connection: {
@@ -7,7 +7,7 @@ module.exports = ({ env }) => ({
       database: env('DATABASE_NAME', 'strapi'),
       user: env('DATABASE_USERNAME', 'strapi'),
       password: env('DATABASE_PASSWORD', 'strapi'),
-      ssl: false,
+      ssl: env.bool('DATABASE_SSL', false), // Użycie env.bool() jest bezpieczniejsze
     },
     debug: false,
   },
