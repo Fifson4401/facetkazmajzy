@@ -56,6 +56,11 @@ jobs:
         with:
           node-version: "20.x"
 
+      - name: Configure npm for FreeBSD target
+        run: |
+          npm config set platform freebsd
+          npm config set arch x64
+
       - name: Cache npm dependencies and .next/cache
         uses: actions/cache@v4
         with:
@@ -124,6 +129,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
+
+      - name: Configure npm for FreeBSD target
+        run: |
+          npm config set platform freebsd
+          npm config set arch x64
 
       - name: Cache npm dependencies
         uses: actions/cache@v4
