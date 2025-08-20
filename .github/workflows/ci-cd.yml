@@ -58,8 +58,8 @@ jobs:
 
       - name: Configure npm for FreeBSD target
         run: |
-          npm config set platform freebsd
-          npm config set arch x64
+          echo "npm_config_platform=freebsd" >> $GITHUB_ENV
+          echo "npm_config_arch=x64" >> $GITHUB_ENV
 
       - name: Cache npm dependencies and .next/cache
         uses: actions/cache@v4
@@ -132,8 +132,8 @@ jobs:
 
       - name: Configure npm for FreeBSD target
         run: |
-          npm config set platform freebsd
-          npm config set arch x64
+          echo "npm_config_platform=freebsd" >> $GITHUB_ENV
+          echo "npm_config_arch=x64" >> $GITHUB_ENV
 
       - name: Cache npm dependencies
         uses: actions/cache@v4
