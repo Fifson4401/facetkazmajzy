@@ -77,10 +77,9 @@ jobs:
           API_HOST: ${{ secrets.API_HOST }}
           NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
 
-      # --- NOWY KROK ---
       - name: Install production-only dependencies
         working-directory: client
-        run: npm ci --omit=dev
+        run: npm ci --omit=dev --ignore-scripts
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -91,7 +90,6 @@ jobs:
         run: |
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      # --- POPRAWIONY KROK ---
       - name: Deploy to MyDevil
         run: |
           rsync -avz --delete \
@@ -100,15 +98,15 @@ jobs:
           --exclude='.env*' \
           --exclude='README.md' \
           --exclude='tmp' \
-          ./client/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_USER }}/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/
+          ./client/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/
 
       - name: Create .env file on server
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo ${{ secrets.CLIENT_ENV }} | base64 -d > domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/.env.local'
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo "${{ secrets.CLIENT_ENV }}" | base64 -d > ~/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/.env.local'
 
       - name: Run deployment script on server
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'bash domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/deployment.sh'
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'bash ~/domains/${{ vars.FRONTEND_DOMAIN }}/public_nodejs/deployment.sh'
 
   build-deploy-server:
     name: Deploy & Build Server (Backend) to MyDevil
@@ -147,10 +145,9 @@ jobs:
           NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
           API_TOKEN: ${{ secrets.API_TOKEN }}
 
-      # --- NOWY KROK ---
       - name: Install production-only dependencies
         working-directory: server
-        run: npm ci --omit=dev
+        run: npm ci --omit=dev --ignore-scripts
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -160,8 +157,7 @@ jobs:
       - name: Add remote server to known hosts
         run: |
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-      # --- POPRAWIONY KROK ---
+      
       - name: Deploy to MyDevil
         run: |
           rsync -avz --delete \
@@ -169,12 +165,12 @@ jobs:
           --exclude='.env*' \
           --exclude='README.md' \
           --exclude='tmp' \
-          ./server/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/usr/home/${{ secrets.SSH_USER }}/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/
+          ./server/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/
 
       - name: Create .env file on server
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo ${{ secrets.SERVER_ENV }} | base64 -d > domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/.env'
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo "${{ secrets.SERVER_ENV }}" | base64 -d > ~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/.env'
 
       - name: Run deployment script on server
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'bash domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/deployment.sh'
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'bash ~/domains/${{ vars.SERVER_DOMAIN }}/public_nodejs/deployment.sh'
