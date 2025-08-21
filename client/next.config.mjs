@@ -7,18 +7,14 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: process.env.NODE_ENV === 'production' ? 'https' : 'http',
-        hostname: process.env.NODE_ENV === 'production'
-          ? 'api.facetkazmajzy.pl'
-          : 'localhost',
+        protocol: 'http',
+        hostname: 'api.facetkazmajzy.pl',
+        port: '',
+        pathname: '/uploads/**', // Allows any image from the /uploads/ path
       },
-      {
-        protocol: 'https',
-        hostname: '**.fbcdn.net'
-      }
     ],
     deviceSizes: [320, 375, 575, 768, 1000, 1200, 1999],
-    minimumCacheTTL: 86400000 // 1 day
+    minimumCacheTTL: 86400000, // 1 day
   },
 };
 
