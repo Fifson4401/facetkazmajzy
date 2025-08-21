@@ -39,13 +39,36 @@ jobs:
         run: npm run lint
 
   build-deploy-client:
-    name: Deploy Client (Frontend) to MyDevil
+    name: Deploy & Build Client (Frontend) to MyDevil
     runs-on: ubuntu-latest
     environment: production
     needs: lint-client
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+
+      - name: Cache npm dependencies and .next/cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            client/node_modules
+            client/.next/cache
+          key: ${{ runner.os }}-client-node-${{ hashFiles('client/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-client-node-
+
+      - name: Install dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Build client
+        working-directory: client
+        run: npm run build
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -60,7 +83,6 @@ jobs:
         run: |
           rsync -avz --delete \
           --exclude='node_modules' \
-          --exclude='.next' \
           --exclude='.git' \
           --exclude='.github' \
           --exclude='.env*' \

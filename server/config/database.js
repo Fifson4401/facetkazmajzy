@@ -1,8 +1,4 @@
 module.exports = ({ env }) => {
-  console.log('Loading database config...');
-  console.log('DATABASE_CLIENT:', env('DATABASE_CLIENT'));
-  console.log('DATABASE_HOST:', env('DATABASE_HOST'));
-  
   const config = {
     connection: {
       client: env('DATABASE_CLIENT', 'postgres'),
