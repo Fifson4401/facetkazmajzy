@@ -39,7 +39,7 @@ const Solver = () => {
         {/* Right column - Text content */}
         <div className="text-center">
           <Header level={2} text={title} withHighlighter className="mb-4" />
-          <Text>{renderContent(content)}</Text>
+          {renderContent(content)}
         </div>
       </div>
 
@@ -47,7 +47,7 @@ const Solver = () => {
       <div className="md:hidden">
         <div className="mb-8 text-center pl-4">
           <Header level={2} text={title} withHighlighter className="mb-4" />
-          <Text className='text-right mb-6'>{renderContent(content)}</Text>
+          <span className='text-right mb-6'>{renderContent(content)}</span>
         </div>
         
         <div className="flex justify-center">

@@ -2,7 +2,6 @@ import React from 'react';
 
 import homeData from '@/data/home/data.json';
 import Button from '@/components/ui/Button/TapeButton';
-import Text from '@/components/ui/Text';
 import Header from '@/components/ui/Header';
 import DoodleContainer from '@/components/ui/Doodle/DoodleContainer';
 import { renderContent } from '@/utils/renderContent';
@@ -28,12 +27,12 @@ const Exam = () => {
   } = examSectionData;
 
   return (
-    <section className="relative grid grid-cols-3 gap-x-4 pb-20 md:pb-32 lg:pb-44 xl:pb-56 pt-14 md:grid-cols-3 md:gap-x-16 lg:pt-32">
+    <section className="relative grid grid-cols-3 gap-x-4 pb-20 pt-14 md:grid-cols-3 md:gap-x-16 md:pb-32 lg:pb-44 lg:pt-32 xl:pb-56">
       <div className="col-span-2 flex flex-col items-center md:col-span-2 md:items-start md:text-left">
         <DoodleContainer doodles={titleDoodles}>
           <Header level={2} text={title} withHighlighter className="mb-4" />
         </DoodleContainer>
-        <Text>{renderContent(content)}</Text>
+        {renderContent(content)}
         <div className="mt-11 flex w-full flex-col items-start gap-6">
           <DoodleContainer doodles={bottomButtonDoodles}>
             <Button href={cta1.action}>{cta1.text}</Button>

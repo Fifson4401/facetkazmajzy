@@ -62,6 +62,7 @@ export const renderContent = (
         );
 
       default:
+        console.warn(`Nieobsługiwany typ bloku: "${JSON.stringify(block)}". Nie zostanie on wyrenderowany.`);
         return null;
     }
   });

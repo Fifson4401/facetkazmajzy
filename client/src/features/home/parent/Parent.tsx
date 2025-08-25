@@ -53,7 +53,7 @@ const Parent = () => {
 
       {/* Content poniżej */}
       <div className="sm:pl-[30%]">
-        <Text>{renderContent(content)}</Text>
+        {renderContent(content)}
       </div>
     </section>
   );

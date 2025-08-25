@@ -2,7 +2,6 @@ import React from 'react';
 
 import homeData from '@/data/home/data.json';
 import Button from '@/components/ui/Button/TapeButton';
-import Text from '@/components/ui/Text';
 import Header from '@/components/ui/Header';
 import DoodleContainer from '@/components/ui/Doodle/DoodleContainer';
 import { renderContent } from '@/utils/renderContent';
@@ -28,9 +27,9 @@ const Hero = () => {
   return (
     <section className="grid grid-cols-1 items-center gap-x-16 md:grid-cols-2">
       <div className="flex flex-col items-center text-center md:items-start md:text-left">
-          <Header level={1} text={title} withHighlighter className="mb-4" />
+        <Header level={1} text={title} withHighlighter className="mb-4" />
 
-          <Text>{renderContent(content)}</Text>
+        {renderContent(content)}
 
         <div className="mt-11 flex w-full flex-col items-start gap-6">
           <DoodleContainer doodles={topButtonDoodles}>
@@ -39,7 +38,9 @@ const Hero = () => {
 
           <div className="flex w-full justify-end pr-6 md:pr-0">
             <DoodleContainer doodles={bottomButtonDoodles}>
-              <Button href={cta2.action} svgVariantIndex={2}>{cta2.text}</Button>
+              <Button href={cta2.action} svgVariantIndex={2}>
+                {cta2.text}
+              </Button>
             </DoodleContainer>
           </div>
         </div>
@@ -47,8 +48,10 @@ const Hero = () => {
 
       <div className="hidden items-center justify-center md:flex">
         <div className="h-64 w-full rounded-lg bg-gray-200/50 p-4 text-center">
-          <p className="text-gray-500">Miejsce na element wizualny</p> 
-        </div>{//TODO: Replace with actual visual element, e.g., an image or video
+          <p className="text-gray-500">Miejsce na element wizualny</p>
+        </div>
+        {
+          //TODO: Replace with actual visual element, e.g., an image or video
         }
       </div>
     </section>
